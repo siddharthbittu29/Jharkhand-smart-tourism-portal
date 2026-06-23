@@ -1,0 +1,243 @@
+ <%
+/* Safe defaults so EJS never throws ReferenceError when t/lang are missing */
+var t = (typeof t !== 'undefined' && t) || {
+  sitemap: "Sitemap",
+  skip: "Skip To Main Content",
+  access: "Accessibility",
+  about: "About Us",
+  contact: "Contact Us",
+  reservations: "JTDC Reservations",
+  helpline: "Tourism Helpline"
+};
+var lang = (typeof lang !== 'undefined' && lang) || 'en';
+%>
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jharkhand Tourism Development Corporation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { font-family: "Segoe UI", Arial, sans-serif; background-color:#F5F0E1; }
+    .top-bar { background-color: #004d40; color: #fff; font-size: 14px; padding: 5px 0; }
+    .top-bar a { color: #ffeb3b; text-decoration: none; margin-left: 10px; }
+    .navbar { background-color: #00695c; }
+    .navbar-brand img { height: 55px; }
+    .announcement { background-color: #fff3cd; color: #333; padding: 8px 10px; font-size: 14px; overflow: hidden; white-space: nowrap; }
+    .announcement span { display: inline-block; padding-left: 100%; animation: scroll 35s linear infinite; }
+    @keyframes scroll { 0% { transform: translateX(0%); } 100% { transform: translateX(-100%); } }
+    .section-title { color: #004d40; margin-top: 40px; margin-bottom: 25px; text-align: center; text-transform: uppercase; font-weight: 600; }
+    .tour-card img { height: 220px; object-fit: cover; }
+    .tour-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .tour-card:hover { transform: scale(1.03); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
+    footer { background-color: #004d40; color: #fff; padding: 25px 0; font-size: 14px; }
+    footer a { color: #ffeb3b; text-decoration: none; }
+    .cta-row { display:flex; gap:12px; justify-content:center; margin: 10px 0 30px; }
+  </style>
+</head>
+<body>
+
+ <!-- 🔝 Top Bar (resilient to missing t/lang) -->
+<div class="top-bar text-center px-2">
+  <a href="/sitemap.xml"><%= (t && t.sitemap) || "Sitemap" %></a> |
+  <a href="#main"><%= (t && t.skip) || "Skip To Main Content" %></a> |
+
+  <form action="/lang" method="POST" style="display:inline;">
+    <select name="lang" onchange="this.form.submit()">
+      <option value="en" <%= (lang==='en') ? 'selected' : '' %>>English</option>
+      <option value="hi" <%= (lang==='hi') ? 'selected' : '' %>>हिन्दी</option>
+    </select>
+  </form>
+
+  &nbsp; | <%= (t && t.reservations) || "JTDC Reservations" %>:
+  <a href="tel:06512438866">0651-2438866</a> / <a href="tel:2438002">2438002</a> |
+  <%= (t && t.helpline) || "Tourism Helpline" %>: <a href="tel:1364">1364</a>
+
+  <span class="float-end me-3">
+    <a href="/accessibility"><%= (t && t.access) || "Accessibility" %></a> -
+    <a href="/about"><%= (t && t.about) || "About Us" %></a> -
+    <a href="/contact"><%= (t && t.contact) || "Contact Us" %></a>
+  </span>
+</div>
+
+  <!-- 📢 Announcements -->
+  <div class="announcement">
+    <span>
+      📢 Circular - Updated Tariff for JTDC Hotels | Tender - Eco Resort at Netarhat | 
+      Jharkhand Monsoon on a Plate | Patratu Valley Ropeway Project | 
+      Jharkhand – India’s Green Tourism Pioneer | Trek to Lodh Falls - Winter 2025
+    </span>
+  </div>
+
+  <!-- <div class="d-flex gap-3 justify-content-center mt-4">
+  <a href="/places" class="home-btn">Explore Places</a>
+  <a href="/listings" class="home-btn">View Listings</a>
+
+</div> -->
+
+
+  <!-- 🏞️ Discover Jharkhand Section -->
+<section class="container py-5 text-center">
+  <h1 class="fw-bold">Welcome to Jharkhand Tourism</h1>
+  <p class="text-muted mb-4">
+    Explore culture, heritage, nature & smart experiences.
+  </p>
+  <a href="/smart-tourism" class="btn btn-lg btn-primary smart-cta">
+    Explore Smart Tourism
+  </a>
+</section>
+
+<div class="container mt-5" id="main">
+  <h2 class="section-title text-center mb-4">DISCOVER JHARKHAND</h2>
+
+  <div class="row g-4">
+
+    <!-- 🌊 Lodh Falls -->
+    <div class="col-md-4">
+      <div class="card tour-card">
+        <img
+          src="/images/discover/lodh-falls.jpg"
+          class="card-img-top"
+          alt="Lodh Falls"
+          loading="lazy"
+        >
+        <div class="card-body">
+          <h5 class="card-title">Lodh Falls</h5>
+          <p class="card-text">
+            One of Jharkhand’s tallest and most scenic waterfalls surrounded by dense forest.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🌲 Betla National Park -->
+    <div class="col-md-4">
+      <div class="card tour-card">
+        <img
+          src="/images/discover/betla.jpg"
+          class="card-img-top"
+          alt="Betla National Park"
+          loading="lazy"
+        >
+        <div class="card-body">
+          <h5 class="card-title">Betla National Park</h5>
+          <p class="card-text">
+            A wildlife lover’s paradise — explore sal forests, elephants and scenic beauty.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🏞️ Patratu Valley -->
+    <div class="col-md-4">
+      <div class="card tour-card">
+        <img
+          src="/images/discover/patratu.jpg"
+          class="card-img-top"
+          alt="Patratu Valley"
+          loading="lazy"
+        >
+        <div class="card-body">
+          <h5 class="card-title">Patratu Valley</h5>
+          <p class="card-text">
+            A breathtaking drive through winding roads with panoramic views of the valley.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- 🌤️ What to See -->
+<div class="container mt-5">
+  <h2 class="section-title text-center mb-4">WHAT TO SEE</h2>
+
+  <div class="row g-4">
+
+    <!-- 🛕 Temples & Heritage -->
+    <div class="col-md-3">
+      <div class="card tour-card">
+        <img src="/images/what-to-see/temple.jpg" class="card-img-top" alt="Temples & Heritage">
+        <div class="card-body text-center">
+          <h6>Temples & Heritage</h6>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🌲 Nature & Wildlife -->
+    <div class="col-md-3">
+      <div class="card tour-card">
+        <img src="/images/what-to-see/wildlife.jpg" class="card-img-top" alt="Nature & Wildlife">
+        <div class="card-body text-center">
+          <h6>Nature & Wildlife</h6>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🧗 Adventure & Trekking -->
+    <div class="col-md-3">
+      <div class="card tour-card">
+        <img src="/images/what-to-see/adventure.jpg" class="card-img-top" alt="Adventure & Trekking">
+        <div class="card-body text-center">
+          <h6>Adventure & Trekking</h6>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🎉 Festivals & Culture -->
+    <div class="col-md-3">
+      <div class="card tour-card">
+        <img src="/images/what-to-see/festival.jpg" class="card-img-top" alt="Festivals & Culture">
+        <div class="card-body text-center">
+          <h6>Festivals & Culture</h6>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- 📰 Latest Updates -->
+  <div class="container mt-5 mb-5">
+    <h2 class="section-title">Latest Updates</h2>
+    <div class="list-group">
+      <a href="#" class="list-group-item list-group-item-action">📅 Deepotsav 2025 lights up Ranchi and Deoghar with festive fervour - Oct 27, 2025</a>
+      <a href="#" class="list-group-item list-group-item-action">🌍 Jharkhand Tourism showcases at ITB Asia 2025 - Oct 18, 2025</a>
+      <a href="#" class="list-group-item list-group-item-action">🗺️ Roadmap for Eco Tourism in Jharkhand unveiled - Oct 15, 2025</a>
+      <a href="#" class="list-group-item list-group-item-action">🎉 Winter Carnival 2025 announced at Netarhat - Oct 10, 2025</a>
+    </div>
+  </div>
+
+  <!-- ⚙️ Footer -->
+  <footer class="text-center" style="background-color:#3E8E41; color:white; padding:20px 0; margin-top:40px;">
+    <p>Website Last Updated on: November 7, 2025</p>
+    <p>Visitor Count: 2,830,682</p>
+    <p>Website Information Manager: Mr. Siddharth Chaturvedi | itmanager@jharkhandtourism.com</p>
+    <p>© 2025 All Rights Reserved | Developed & Maintained by Department of IT, Government of Jharkhand
+</p>
+  </footer>
+
+  
+<!-- Smart Tourism button -->
+<!-- <a href="/smart-tourism" class="smart-tourism-btn">Explore Smart Tourism</a> -->
+
+
+
+
+
+<style>
+  .smart-cta { transition: transform .15s ease, box-shadow .15s ease; }
+  .smart-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(13,110,253,.35); }
+</style>
+
+
+
+</body>
+</html>
+
+
+<!-- ------------------------------ -->

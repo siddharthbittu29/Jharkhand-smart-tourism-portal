@@ -1,0 +1,37 @@
+
+<% if (mode === 'show') { %>
+<article class="detail">
+<img src="<%= listing.image || 'https://placehold.co/800x500' %>" alt="<%= listing.title %>">
+<div>
+<h1><%= listing.title %></h1>
+<p class="muted"><%= listing.location %> — <strong>₹<%= listing.price %></strong></p>
+<p><%= listing.description || 'No description provided.' %></p>
+<div class="actions">
+<a class="btn" href="/listings/<%= listing._id %>/edit">Edit</a>
+<form method="POST" action="/listings/<%= listing._id %>?_method=DELETE" onsubmit="return confirm('Delete this listing?');">
+<button class="btn danger" type="submit">Delete</button>
+</form>
+</div>
+</div>
+</article>
+<% } %>
+
+
+<% if (mode === 'new' || mode === 'edit') { %>
+<h1><%= mode === 'new' ? 'Create Listing' : 'Edit Listing' %></h1>
+<form method="POST" action="<%= mode === 'new' ? '/listings' : ('/listings/' + listing._id + '?_method=PUT') %>">
+<label>Title<input name="title" value="<%= listing.title || '' %>" required></label>
+<label>Location<input name="location" value="<%= listing.location || '' %>" required></label>
+<label>Price<input name="price" type="number" min="0" step="1" value="<%= listing.price || '' %>" required></label>
+<label>Image URL<input name="image" value="<%= listing.image || '' %>"></label>
+<label>Description<textarea name="description" rows="5"><%= listing.description || '' %></textarea></label>
+<label>Category
+<select name="category">
+<% ['Adventure','Pilgrimage','Nature','City','Heritage','Other'].forEach(c => { %>
+<option value="<%= c %>" <%= listing.category === c ? 'selected' : '' %>><%= c %></option>
+<% }) %>
+</select>
+</label>
+<button class="btn" type="submit"><%= mode === 'new' ? 'Create' : 'Update' %></button>
+</form>
+<% } %>

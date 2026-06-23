@@ -1,0 +1,83 @@
+<%- include('./partials/nav') %>
+
+
+
+
+<section class="py-4">
+  <div class="container">
+
+    <h1 class="display-6 fw-semibold mb-2">Smart Tourism Platform – Key Features</h1>
+    <p class="text-muted mb-4">
+      A unified digital ecosystem designed to make travel planning, discovery, booking, and support seamless across Jharkhand.
+    </p>
+
+    <!-- Features Grid -->
+    <div class="row g-4">
+
+      <% [
+        ["Destination Discovery","Browse curated lists, map-based search, filters for heritage, eco, cultural, spiritual & adventure tourism.","bi-map"],
+        ["Smart Travel Pass","Buy a single pass for multiple destinations/events. Digital QR code for access and discounts.","bi-qr-code-scan"],
+        ["Online Bookings","Hotels, Homestays, Events, Guides & Transfers — all in one streamlined booking interface.","bi-credit-card-2-front"],
+        ["Local Experiences","Authentic local experiences, nature walks, artisan visits, trekking routes & cultural performances.","bi-people"],
+        ["Real-time Alerts","Weather, road conditions, festival schedules, crowd density & safety notifications.","bi-bell"],
+        ["Multilingual Support","Full platform available in English + Hindi + regional guidance voice prompts.","bi-translate"],
+        ["SOS & Helpdesk","One-tap emergency support, verified operators, lost assistance, grievance tracking.","bi-shield-check"],
+        ["UGC & Reviews","Travelers share photos, stories, ratings. Builds trust and increases engagement.","bi-stars"]
+      ].forEach(([title,desc,icon]) => { %>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="feature-card p-4 h-100 shadow-sm">
+          <div class="icon-badge mb-3">
+            <i class="bi <%= icon %>"></i>
+          </div>
+          <h5 class="fw-semibold mb-2"><%= title %></h5>
+          <p class="mb-0 text-muted"><%= desc %></p>
+        </div>
+      </div>
+
+      <% }) %>
+
+    </div>
+
+    <!-- CTA Navigation -->
+    <div class="text-center mt-5">
+      <a href="/smart-tourism/objectives" class="btn btn-outline-primary me-2">← Back to Slide 3</a>
+      <a href="/smart-tourism/features" class="btn btn-primary">Current Slide ✓</a>
+    </div>
+
+  </div>
+</section>
+
+<%- include('../partials/scripts') %>
+
+<style>
+  .feature-card {
+    border-radius: 16px;
+    background: linear-gradient(135deg, #ffffff, #f9fafc);
+    transition: all .25s ease;
+  }
+  .feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,.15);
+  }
+  .icon-badge {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e9f4ff;
+    color: #007bff;
+    font-size: 1.6rem;
+  }
+</style>
+
+
+<div class="text-center mt-5">
+  <a href="/smart-tourism/objectives" class="btn btn-outline-primary me-2">← Back to Slide 2</a>
+  <a href="/smart-tourism/journey" class="btn btn-primary">Next: Slide 5 – User Journey →</a>
+</div>
+
+<link rel="stylesheet" href="/smart/css/slide7-arvr.css">
+<script src="/smart/js/slide7-arvr.js" defer></script>

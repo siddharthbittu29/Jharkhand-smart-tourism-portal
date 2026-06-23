@@ -1,0 +1,246 @@
+/* General Styling */
+body {
+  background-color: #F5F0E1; /* light greenish background for nature feel */
+  color: #2d3748; /* dark text for contrast */
+}
+
+/* Header Section - Hero Section */
+.hero {
+  background-color: #c6f6d5; /* light green gradient */
+  color: #2f855a; /* dark green for text */
+  padding: 80px 20px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+/* Grid Layout for Listings */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+/* Card Styling */
+.card {
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px solid #edf2f7; /* subtle border */
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 15px;
+  background-color: #e6fffa; /* subtle light green background */
+}
+
+.card-body h3 {
+  font-size: 22px;
+  color: #2f855a;
+  margin-bottom: 8px;
+}
+
+.card-body p {
+  font-size: 14px;
+  color: #4a5568;
+}
+
+.card-body .eco-tag {
+  background-color: #2f855a; /* green eco tag */
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+/* Filter Section */
+.filters {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.filters select,
+.filters input {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+}
+
+.filters button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  background-color: #38a169; /* eco-green button */
+  color: white;
+  border: none;
+}
+
+.filters button:hover {
+  background-color: #2f855a;
+}
+
+/* Footer Styling */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #e6f4ea;
+  color: #2f855a;
+}
+
+.muted {
+  color: #4a5568;
+}
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #38a169;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+
+
+.navbar {
+  background: linear-gradient(90deg, #0b5726 0%, #0b6d39 100%);
+}
+
+.navbar .brand-logo {
+  height: 58px;
+  padding: 3px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.28);
+}
+.footer {
+  letter-spacing: 0.3px;
+  line-height: 1.45;
+}
+.footer span {
+  letter-spacing: 0.2px;
+}
+.footer a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+.footer a:hover {
+  color: #e0e0e0;
+}
+.btn:hover {
+  background-color: #2f855a;
+}
+.btn:active {
+  background-color: #276749;
+}
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.5);
+}
+.btn-secondary {
+  background-color: #4a5568;
+}
+.btn-secondary:hover {
+  background-color: #2d3748;
+}
+.hotel-card:hover {
+  transform: translateY(-4px);
+  transition: 0.3s;
+  box-shadow: 0px 6px 16px rgba(0,0,0,0.2);
+}
+.hotel-card {
+  transition: 0.3s;
+} 
+
+
+/* Smart Tourism minimal tweaks */
+.timeline, .timeline-flow { scroll-margin-top: 80px; }
+
+
+
+/* Slide switch hover */
+.btn-outline-primary {
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.btn-outline-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(13,110,253,.25);
+}
+
+/* Smart Tourism button on home page */.smart-tourism-btn {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 50px;
+  background: #0d6efd;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  border: 2px solid transparent;
+}
+
+.smart-tourism-btn:hover {
+  background: #ffffff;
+  color: #0d6efd;
+  border-color: #0d6efd;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(13, 110, 253, 0.35);
+}
+
+/* smart tourism style  */
+.home-btn {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 50px;
+  border: #0b6d39;
+  background: #0d6efd;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  border: 2px solid transparent;
+  transition: all .25s ease;
+}
+
+.home-btn:hover {
+  background: #ffffff;
+  color: #0d6efd;
+    border: #0b6d39;
+  border-color: #0dfd6d;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(13, 110, 253, 0.35);
+}
+
+.tour-card {
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tour-card img {
+  height: 220px;
+  object-fit: cover;
+}
+
+.tour-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}

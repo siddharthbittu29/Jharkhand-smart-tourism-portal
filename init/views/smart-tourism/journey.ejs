@@ -1,0 +1,86 @@
+<%- include('./partials/nav') %>
+
+
+<section class="py-4">
+  <div class="container">
+
+    <h1 class="display-6 fw-semibold mb-2">Tourist Journey Overview</h1>
+    <p class="text-muted mb-4">
+      How a visitor interacts with the Smart Tourism platform from first awareness to experience sharing.
+    </p>
+
+    <div class="timeline-flow">
+
+      <% [
+        ["Discover Destinations", "User discovers Jharkhand tourism via website, social media, campaigns, or referrals.", "bi-search"],
+        ["Plan the Trip", "User reads details, checks photos, compares places, navigates maps, and creates a wishlist.", "bi-list-check"],
+        ["Book Experiences", "User books hotels, homestays, transport, guides, and festival/event passes.", "bi-ticket-perforated"],
+        ["Travel & Navigate", "User arrives and follows QR trail guides, local directions, and smart signage prompts.", "bi-geo-alt"],
+        ["Experience & Support", "User enjoys the visit with access to real-time help, SOS, and local service providers.", "bi-heart"],
+        ["Share & Review", "User uploads photos, shares stories, rates services, and recommends destinations.", "bi-share"]
+      ].forEach(([title,desc,icon]) => { %>
+
+        <div class="flow-step d-flex align-items-start gap-3 mb-4">
+          <div class="flow-icon">
+            <i class="bi <%= icon %>"></i>
+          </div>
+          <div>
+            <h5 class="fw-semibold mb-1"><%= title %></h5>
+            <p class="text-muted mb-0"><%= desc %></p>
+          </div>
+        </div>
+
+      <% }) %>
+
+    </div>
+
+
+// Next to Slide 6 button
+   <div class="text-center mt-5">
+  <a href="/smart-tourism/features" class="btn btn-outline-primary me-2">← Back to Slide 4</a>
+  <a href="/smart-tourism/architecture" class="btn btn-primary">Go to Slide 6 →</a>
+</div>
+
+
+  </div>
+</section>
+
+<%- include('../partials/scripts') %>
+
+<style>
+  .timeline-flow {
+    border-left: 3px solid #0d6efd;
+    padding-left: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .flow-step {
+    position: relative;
+  }
+
+  .flow-step::before {
+    content: "";
+    position: absolute;
+    left: -1.64rem;
+    top: 0.5rem;
+    width: 12px;
+    height: 12px;
+    background: #0d6efd;
+    border-radius: 50%;
+  }
+
+  .flow-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #e8f1ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0d6efd;
+    font-size: 1.5rem;
+  }
+</style>
+
+
+

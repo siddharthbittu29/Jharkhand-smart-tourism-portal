@@ -1,0 +1,26 @@
+<nav class="bg-light border-bottom">
+  <div class="container py-2 d-flex flex-wrap gap-2">
+    <%
+      const base = '/smart-tourism';
+      const links = [
+        ['Overview', ''],
+        ['Objectives', '/objectives'],
+        ['Features', '/features'],
+        ['User Journey', '/journey'],
+        ['Architecture', '/architecture'],
+        ['Core Features', '/core-features']   // ✅ SLIDE 7 ADDED HERE
+      ];
+    %>
+
+    <% links.forEach(([label, suffix]) => {
+         const href = base + suffix;
+         const active =
+           currentPath === href ? 'btn-primary' : 'btn-outline-primary';
+    %>
+      <a class="btn btn-sm <%= active %>" href="<%= href %>">
+        <%= label %>
+      </a>
+    <% }) %>
+  </div>
+</nav>
+

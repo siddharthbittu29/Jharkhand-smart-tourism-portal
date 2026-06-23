@@ -1,0 +1,19 @@
+<section class="container py-5">
+  <h1 class="mb-3">Gallery</h1>
+  <p class="lead text-muted">Visual journey through landscapes, culture, and heritage of Jharkhand.</p>
+
+  <div class="row row-cols-2 row-cols-md-4 g-3 mt-2">
+    <% const images = [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200",
+      "https://images.unsplash.com/photo-1499346030926-9a72daac6c63?q=80&w=1200",
+      "https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=1200",
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200"
+    ]; %>
+
+    <% images.forEach(src => { %>
+      <div class="col">
+        <img src="<%= src %>" class="img-fluid rounded shadow-sm" alt="">
+      </div>
+    <% }) %>
+  </div>
+</section>

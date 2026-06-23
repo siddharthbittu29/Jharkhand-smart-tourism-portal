@@ -1,0 +1,17 @@
+
+<h1>Tour Packages</h1>
+<div class="grid">
+<% listings.forEach(l => { %>
+<a class="card" href="/listings/<%= l._id %>">
+<img src="<%= l.image || 'https://placehold.co/600x400' %>" alt="<%= l.title %>">
+<div class="card-body">
+<h3><%= l.title %></h3>
+<p><%= l.location %></p>
+<strong>₹<%= l.price %></strong>
+</div>
+</a>
+<% }) %>
+<% if (listings.length === 0) { %>
+<p>No listings yet. <a href="/listings/new">Create one</a>.</p>
+<% } %>
+</div>

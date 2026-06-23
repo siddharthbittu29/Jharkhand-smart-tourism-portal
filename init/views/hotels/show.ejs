@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title><%= hotel.name %> — Hotels Jharkhand</title>
+  <meta name="description" content="<%= hotel.name %> in <%= hotel.district %>">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="/css/hotels.css">
+</head>
+<body>
+<main class="container single-hotel">
+  <nav class="breadcrumb"><a href="/">Home</a> › <a href="/hotels">Hotels</a> › <span><%= hotel.name %></span></nav>
+
+  <header class="hero" style="background-image:url('<%= hotel.image %>')">
+    <div class="hero-inner">
+      <h1><%= hotel.name %></h1>
+      <p class="muted"><%= hotel.address %> • <span class="badge"><%= hotel.rating %> ★</span></p>
+    </div>
+  </header>
+
+  <section class="details">
+    <div class="left">
+      <h2>Overview</h2>
+      <p><strong>Starting price:</strong> ₹ <%= hotel.price_from %> / night</p>
+      <p><strong>Availability:</strong> <%= hotel.availability %></p>
+      <h3>Room types</h3>
+      <ul class="room-types">
+        <% hotel.room_types.forEach(rt => { %><li><%= rt %></li><% }) %>
+      </ul>
+
+      <h3>Amenities</h3>
+      <ul class="amenities">
+        <% hotel.amenities.forEach(a => { %><li><%= a %></li><% }) %>
+      </ul>
+
+      <h3>Booking</h3>
+      <form id="bookingForm" class="booking-form">
+        <label>Check-in <input type="date" name="checkin" required></label>
+        <label>Check-out <input type="date" name="checkout" required></label>
+        <label>Rooms <input type="number" name="rooms" min="1" value="1"></label>
+        <label>Adults <input type="number" name="adults" min="1" value="2"></label>
+        <label>Children <input type="number" name="children" min="0" value="0"></label>
+        <button class="btn primary">Book (UI only)</button>
+      </form>
+    </div>
+
+    <aside class="right">
+      <div class="card glass">
+        <h4>Contact</h4>
+        <p><strong>Phone:</strong> <%= hotel.phone %></p>
+        <p><a href="<%= hotel.map %>" target="_blank">Open in Google Maps</a></p>
+      </div>
+
+      <div class="card glass">
+        <h4>Nearby Hotels</h4>
+        <% if (!nearby || nearby.length === 0) { %><p>No nearby hotels.</p><% } else { %>
+          <ul>
+          <% nearby.forEach(n => { %>
+            <li><a href="/hotels/<%= n.id %>"><%= n.name %></a> <small class="muted">• <%= n.price_from ? 'from ₹' + n.price_from : '' %></small></li>
+          <% }) %>
+          </ul>
+        <% } %>
+      </div>
+    </aside>
+  </section>
+</main>
+
+<script src="/js/hotels.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,263 @@
+
+// init/models/place.js -------------------------------------------\\
+const mongoose = require('mongoose');
+
+const ecoSchema = new mongoose.Schema({
+  ecoScore: { type: Number, min: 0, max: 100, required: true },
+  litterIndex: { type: Number, min: 0, max: 100, default: 0 },
+  communityOwned: { type: Boolean, default: false },
+  guidelines: [{ type: String }]
+}, { _id: false });
+
+const placeSchema = new mongoose.Schema({
+  name: { type: String, required: true, trim: true },
+  district: { type: String, required: true, trim: true },
+  category: {
+    type: String,
+    enum: [
+      'Waterfall','National Park','Temple','Heritage','Viewpoint',
+      'Lake','Museum','Festival','City','Other'
+    ],
+    default: 'Other'
+  },
+  description: { type: String, trim: true },
+  image: { type: String, trim: true },
+  tags: [{ type: String, trim: true }],
+  bestSeason: [{ type: String, trim: true }],
+  difficulty: { type: String, enum: ['Easy','Moderate','Hard'], default: 'Easy' },
+  timeRequiredHrs: { type: Number, min: 0 },
+  entryFeeINR: { type: Number, min: 0 },
+  eco: { type: ecoSchema, required: true }
+}, { timestamps: true });
+
+
+
+
+module.exports = mongoose.model('Place', placeSchema);
+
+
+
+
+// init/routes/places.js -------------------------------------------\\
+const express = require('express');
+// const router = express.Router();
+const Place = require('../models/place');
+
+// Route to display places with filters
+router.get('/', async (req, res, next) => {
+  try {
+    const { q, district, category, ecoMin, tag } = req.query;
+    const filter = {};
+
+    // Build query filters
+    if (q && q.trim()) {
+      const rx = new RegExp(q.trim(), 'i');
+      filter.$or = [
+        { name: rx },
+        { district: rx },
+        { category: rx },
+        { tags: rx },
+        { description: rx }
+      ];
+    }
+
+    if (district) filter.district = district;
+    if (category) filter.category = category;
+    if (tag) filter.tags = tag;
+    if (ecoMin) filter['eco.ecoScore'] = { $gte: Number(ecoMin) };
+
+    // Get filtered places
+    const places = await Place.find(filter).sort({ 'eco.ecoScore': -1, createdAt: -1 });
+
+    // Pass places data to the view
+    res.render('places/index', { places, query: req.query });
+  } catch (e) {
+    next(e);
+  }
+});
+
+module.exports = router;
+
+
+
+
+
+
+// 
+// init/seed/places_seed.js
+const fs = require('fs');
+const path = require('path');
+
+const outDir = path.join(__dirname, '..', 'data');
+if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+
+const places = [
+  // 25 sample entries — truncated here for brevity, full block below
+  {
+    "place_id": "p001",
+    "name": "Netarhat Hills",
+    "district": "Latehar",
+    "category": "Hill",
+    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays and small eateries provide authentic cuisine and lodging experiences. Respect local regulations in fragile areas and follow low-impact travel practices.",
+    "opening_hours": "Sunrise–Sunset",
+    "entry_fees": "Free",
+    "best_time": "Oct–Feb",
+    "coordinates": { "lat": 23.6360, "lng": 84.4810 },
+    "average_rating": 4.7,
+    "popularity_index": 92,
+    "images": [
+      "/smart/places/images/netarhat-1.jpg",
+      "/smart/places/images/netarhat-2.jpg",
+      "/smart/places/images/netarhat-3.jpg"
+    ]
+  },
+  // ... add 24 more similar objects (p002..p025)
+];
+
+// For demonstration I'll clone entries to make 25 items
+// Duplicate with different ids if the array is shorter
+while (places.length < 25) {
+  const i = places.length + 1;
+  const copy = Object.assign({}, places[0]);
+  copy.place_id = 'p' + String(i).padStart(3,'0');
+  copy.name = `Sample Place ${i}`;
+  copy.district = ['Ranchi','Palamu','Hazaribagh','Deoghar'][i % 4];
+  copy.category = ['Waterfall','Temple','Wildlife','Historical','Cave'][i % 5];
+  copy.coordinates = { lat: 23.6 + i*0.02, lng: 85.0 + i*0.03 };
+  copy.images = [
+    `/smart/places/images/placeholder-${(i%5)+1}.jpg`,
+    `/smart/places/images/placeholder-${(i%5)+2}.jpg`
+  ];
+  places.push(copy);
+}
+
+fs.writeFileSync(path.join(outDir, 'places.json'), JSON.stringify(places, null, 2), 'utf8');
+console.log('Seed written to init/data/places.json —', places.length, 'places');
+
+
+
+
+
+// init/views/places/index.ejs
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Jharkhand</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="/" class="brand">JK Tourism</a>
+    <div class="nav-links">
+      <a href="/places">Explore Places</a>
+      <a href="/listings">Listings</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- Page Content -->
+    <h1>Explore Jharkhand</h1>
+
+    <form class="filters" method="get" action="/places">
+      <input type="text" name="q" value="<%= query.q %>" placeholder="Search places..." />
+
+      <select name="district">
+        <option value="">All Districts</option>
+        <% ['Ranchi', 'Latehar', 'Hazaribagh', 'Deoghar', 'Giridih'].forEach(d => { %>
+          <option value="<%= d %>" <%= query.district === d ? 'selected' : '' %>><%= d %></option>
+        <% }) %>
+      </select>
+
+      <select name="category">
+        <option value="">All Categories</option>
+        <% ['Waterfall', 'National Park', 'Temple', 'Heritage', 'Viewpoint'].forEach(c => { %>
+          <option value="<%= c %>" <%= query.category === c ? 'selected' : '' %>><%= c %></option>
+        <% }) %>
+      </select>
+
+      <select name="ecoMin">
+        <option value="">Eco Score</option>
+        <% [50, 60, 70, 80, 90].forEach(s => { %>
+          <option value="<%= s %>" <%= String(query.ecoMin) === String(s) ? 'selected' : '' %>>≥ <%= s %></option>
+        <% }) %>
+      </select>
+
+      <button class="btn" type="submit">Apply</button>
+      <a class="btn" href="/places">Clear</a>
+    </form>
+
+    <p class="muted" style="margin:6px 0;"><%= places.length %> result(s)</p>
+
+    <div class="grid">
+      <% places.forEach(p => { %>
+        <a class="card" href="/places/<%= p._id %>">
+          <img src="<%= p.image || 'https://placehold.co/600x400' %>" alt="<%= p.name %>">
+          <div class="card-body">
+            <h3><%= p.name %></h3>
+            <p><%= p.district %> • <%= p.category %></p>
+            <p class="muted">Eco Score: <strong><%= p.eco?.ecoScore %></strong></p>
+            <div>
+              <% (p.tags || []).slice(0, 3).forEach(t => { %>
+                <span class="eco-tag"><%= t %></span>
+              <% }) %>
+            </div>
+          </div>
+        </a>
+      <% }) %>
+      <% if (!places.length) { %>
+        <p>No results. Try clearing filters.</p>
+      <% } %>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 JK Tourism. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>
+
+
+
+
+
+
+// init/views/places/show.ejs
+<a href="/places">← Back</a>
+<article class="detail">
+  <img src="<%= place.image || 'https://placehold.co/800x500' %>" alt="<%= place.name %>">
+  <div>
+    <h1><%= place.name %></h1>
+    <p class="muted"><%= place.district %> • <%= place.category %> • Eco Score <strong><%= place.eco?.ecoScore %></strong></p>
+    <p><%= place.description %></p>
+
+    <% if (place.eco?.guidelines?.length) { %>
+      <h3>Responsible Travel</h3>
+      <ul>
+        <% place.eco.guidelines.forEach(g => { %>
+          <li><%= g %></li>
+        <% }) %>
+      </ul>
+    <% } %>
+
+    <div class="actions">
+      <% if (place.contact?.whatsapp) { %>
+        <a class="btn" href="https://wa.me/<%= place.contact.whatsapp.replace(/\D/g,'') %>?text=Hi!%20I%20want%20to%20know%20more%20about%20<%= encodeURIComponent(place.name) %>" target="_blank">Enquire on WhatsApp</a>
+      <% } %>
+      <% if (place.contact?.website) { %>
+        <a class="btn" href="<%= place.contact.website %>" target="_blank">Official Site</a>
+      <% } %>
+    </div>
+
+    <h3>Good to Know</h3>
+    <ul>
+      <% if (place.bestSeason?.length) { %><li><strong>Best Season:</strong> <%= place.bestSeason.join(', ') %></li><% } %>
+      <% if (place.timeRequiredHrs) { %><li><strong>Time Required:</strong> <%= place.timeRequiredHrs %> hrs</li><% } %>
+      <% if (place.entryFeeINR) { %><li><strong>Entry Fee:</strong> ₹<%= place.entryFeeINR %></li><% } %>
+      <li><strong>Accessibility:</strong> Wheelchair <%= place.accessibility?.wheelchair? '✔':'✘' %>, Public Transport <%= place.accessibility?.publicTransport? '✔':'✘' %></li>
+    </ul>
+  </div>
+</article>

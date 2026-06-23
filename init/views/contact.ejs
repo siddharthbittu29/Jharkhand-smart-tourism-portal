@@ -1,0 +1,339 @@
+<%
+/* Safe defaults so EJS never throws */
+var t = (typeof t !== 'undefined' && t) || {
+  sitemap: "Sitemap", skip: "Skip To Main Content", access: "Accessibility",
+  about: "About Us", contact: "Contact Us", reservations: "JTDC Reservations", helpline: "Tourism Helpline"
+};
+var lang = (typeof lang !== 'undefined' && lang) || 'en';
+%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Contact Us | Jharkhand Tourism Development Corporation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body{font-family:"Segoe UI",Arial,sans-serif;background:#F5F0E1}
+    .top-bar{background:#004d40;color:#fff;font-size:14px;padding:6px 0}.top-bar a{color:#ffeb3b;text-decoration:none}
+    .navbar{background:#00695c}.navbar-brand img{height:55px}
+    .section-title{color:#004d40;text-transform:uppercase;font-weight:600;margin:32px 0 16px;text-align:center}
+    .card h5{color:#004d40}
+    .contact-link a{ text-decoration:none }
+    .sticky-help{position:fixed;bottom:16px;right:16px;z-index:1000}
+    .badge-tier{border-radius:999px}
+    footer{background:#004d40;color:#fff;padding:25px 0;font-size:14px;margin-top:32px}
+    footer a{color:#ffeb3b}
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar text-center px-2">
+    <a href="/sitemap.xml"><%= t.sitemap %></a> | <a href="#main"><%= t.skip %></a> |
+    <form action="/lang" method="POST" style="display:inline;">
+      <select name="lang" onchange="this.form.submit()">
+        <option value="en" <%= lang==='en'?'selected':'' %>>English</option>
+        <option value="hi" <%= lang==='hi'?'selected':'' %>>हिन्दी</option>
+      </select>
+    </form>
+    &nbsp; | <%= t.reservations %>: <a href="tel:06512438866">0651-2438866</a> / <a href="tel:2438002">2438002</a> |
+    <%= t.helpline %>: <a href="tel:1364">1364</a>
+    <span class="float-end me-3">
+      <a href="/accessibility"><%= t.access %></a> - <a href="/"><%= "Home" %></a> - <a href="/about"><%= t.about %></a>
+    </span>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-dark">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="/"><img src="data:image/jpeg;base64,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" alt="JTDC Logo"><span class="fw-bold">JK Tourism</span></a>
+      <div class="d-flex gap-2">
+        <a href="/places" class="btn btn-light btn-sm">Places</a>
+        <a href="/listings" class="btn btn-outline-light btn-sm">Listing</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" id="main">
+    <h1 class="section-title">Contact Jharkhand Tourism</h1>
+
+    <!-- Quick Helplines -->
+    <div class="row g-3">
+      <div class="col-md-3">
+        <div class="card shadow-sm h-100">
+          <div class="card-body contact-link">
+            <h5>Tourism Helpline</h5>
+            <p class="mb-1">All-India Tourist Helpline</p>
+            <a href="tel:1364" class="btn btn-success btn-sm">Call 1364</a>
+            <div class="small text-muted mt-2">24×7 | English, Hindi & regional support</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card shadow-sm h-100">
+          <div class="card-body contact-link">
+            <h5>Emergency</h5>
+            <p class="mb-1">Police / Fire / Ambulance</p>
+            <a href="tel:112" class="btn btn-danger btn-sm">Call 112</a>
+            <div class="small text-muted mt-2">Nationwide Emergency Number (India)</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card shadow-sm h-100">
+          <div class="card-body contact-link">
+            <h5>JTDC Reservations</h5>
+            <p class="mb-1">Hotels & Tourist Lodges</p>
+            <a href="tel:06512438866" class="btn btn-outline-success btn-sm">0651-2438866</a>
+            <a href="tel:2438002" class="btn btn-outline-success btn-sm ms-1">2438002</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card shadow-sm h-100">
+          <div class="card-body contact-link">
+            <h5>WhatsApp Assistance</h5>
+            <p class="mb-1">Chat with a tourism agent</p>
+            <a href="https://wa.me/919876543210?text=Hello%20Jharkhand%20Tourism" class="btn btn-outline-secondary btn-sm">Open WhatsApp</a>
+            <div class="small text-muted mt-2">Mon–Sat, 9:00–18:00 IST</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Offices & Counters -->
+    <h2 class="section-title">Tourist Information Offices</h2>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100">
+          <img class="card-img-top" src="https://images.unsplash.com/photo-1520975922323-8b3a2c5f7f3a?w=1200&q=80" alt="Ranchi office">
+          <div class="card-body">
+            <h5>Head Office — Ranchi</h5>
+            <p class="mb-1">Jharkhand Tourism Development Corporation, Ranchi, Jharkhand</p>
+            <p class="mb-1"><a href="tel:+916512438866">+91 651 2438866</a> | <a href="mailto:itmanager@jharkhandtourism.com">itmanager@jharkhandtourism.com</a></p>
+            <div class="small text-muted">Hours: Mon–Sat 10:00–17:30 IST</div>
+          </div>
+          <div class="ratio ratio-16x9">
+            <iframe src="https://maps.google.com/maps?q=Ranchi%20Jharkhand&t=&z=12&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100">
+          <img class="card-img-top" src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?w=1200&q=80" alt="Deoghar counter">
+          <div class="card-body">
+            <h5>Deoghar Tourist Counter</h5>
+            <p class="mb-1">Near Baidyanath Dham area, Deoghar</p>
+            <p class="mb-1"><a href="tel:+919999999999">+91 99999 99999</a> | <a href="mailto:deoghar@jharkhandtourism.com">deoghar@jharkhandtourism.com</a></p>
+            <div class="small text-muted">Peak season desk during festivals</div>
+          </div>
+          <div class="ratio ratio-16x9">
+            <iframe src="https://maps.google.com/maps?q=Deoghar%20Jharkhand&t=&z=12&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100">
+          <img class="card-img-top" src="https://images.unsplash.com/photo-1517832207067-4db24a2ae47c?w=1200&q=80" alt="Netarhat help desk">
+          <div class="card-body">
+            <h5>Netarhat Help Desk</h5>
+            <p class="mb-1">Near Sunrise Point, Netarhat</p>
+            <p class="mb-1"><a href="tel:+918888888888">+91 88888 88888</a> | <a href="mailto:netarhat@jharkhandtourism.com">netarhat@jharkhandtourism.com</a></p>
+            <div class="small text-muted">Seasonal trekking guidance</div>
+          </div>
+          <div class="ratio ratio-16x9">
+            <iframe src="https://maps.google.com/maps?q=Netarhat%20Jharkhand&t=&z=12&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Domestic & International Travel Help -->
+    <h2 class="section-title">Travel Assistance</h2>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <h5>Domestic Visitors</h5>
+            <ul class="mb-0">
+              <li>Nearest major airport: <strong>Ranchi (IXR)</strong></li>
+              <li>Major railheads: <strong>Ranchi, Dhanbad, Jamshedpur (Tatanagar), Deoghar</strong></li>
+              <li>Emergency: <a href="tel:112">112</a> | Ambulance: <a href="tel:108">108</a> | Police: <a href="tel:100">100</a></li>
+              <li>State bus info: <a href="#">Transport Dept</a> | Taxi apps available in major cities</li>
+              <li>Best season: Post-monsoon to winter (Oct–Feb)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <h5>International Visitors</h5>
+            <ul class="mb-0">
+              <li>Visa & e-Visa: <a href="https://indianvisaonline.gov.in" target="_blank" rel="noopener">Official portal</a></li>
+              <li>Nearest international gateways: Kolkata (CCU), Delhi (DEL), Mumbai (BOM)</li>
+              <li>Foreigners Regional Registration: Check FRRO guidelines if applicable</li>
+              <li>Embassy/Consulate: Contact your country’s mission in Delhi/Kolkata</li>
+              <li>Emergency: <a href="tel:112">112</a> | Tourist Helpline: <a href="tel:1364">1364</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feedback CTA -->
+    <div class="text-center my-4">
+      <button class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#feedbackModal">Give Feedback & Unlock Reward</button>
+      <div id="rewardBanner" class="mt-3" style="display:none;">
+        <span class="badge bg-success badge-tier" id="rewardTier"></span>
+        <span class="ms-2 fw-bold" id="rewardCode"></span>
+        <div class="small text-muted">Show this code at JTDC counters / partner desks (pilot).</div>
+      </div>
+    </div>
+
+    <!-- Feedback Modal -->
+    <div class="modal fade" id="feedbackModal" tabindex="-1">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <form id="feedbackForm">
+            <div class="modal-header">
+              <h5 class="modal-title">Share Your Feedback</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Name*</label>
+                  <input name="name" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Nationality</label>
+                  <input name="nationality" class="form-control" placeholder="India / Country">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Email</label>
+                  <input type="email" name="email" class="form-control">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Phone</label>
+                  <input name="phone" class="form-control">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Category</label>
+                  <select name="category" class="form-select">
+                    <option>General</option>
+                    <option>Place</option>
+                    <option>Transport</option>
+                    <option>Hotel/Lodge</option>
+                    <option>Food</option>
+                    <option>Safety</option>
+                    <option>Website</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Rating (1–5)*</label>
+                  <input type="number" min="1" max="5" step="1" name="rating" class="form-control" required>
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Message*</label>
+                  <textarea name="message" class="form-control" rows="4" required></textarea>
+                </div>
+              </div>
+              <div class="small text-muted mt-2">By submitting, you agree to fair use of your feedback to improve services.</div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+              <button class="btn btn-success" type="submit">Submit & Get Reward</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Extras -->
+    <div class="row g-3 my-3">
+      <div class="col-md-6">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <h5>FAQs (Quick)</h5>
+            <ul class="mb-0">
+              <li>Best time to visit? <strong>Oct–Feb</strong>.</li>
+              <li>Is mobile connectivity good? Major towns: good; forests: patchy.</li>
+              <li>Do I need permits? Most places: no; protected areas: follow park rules.</li>
+              <li>How to reach waterfalls? Local taxis or state buses; check seasonal flow.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card shadow-sm h-100">
+  <div class="card-body">
+    <h5>Downloads</h5>
+    <ul class="mb-0">
+      <li><a href="/downloads/guide" download>Tourist Guide (PDF)</a></li>
+      <li><a href="/downloads/festival-calendar" download>Festival Calendar (PDF)</a></li>
+      <li><a href="/downloads/trek-checklist" download>Safety & Trek Checklist (PDF)</a></li>
+    </ul>
+    <div class="small text-muted mt-2">Tip: Add real PDFs in <code>init/public/downloads/</code> with matching names to override the auto-generated ones.</div>
+  </div>
+</div>
+
+    </div>
+
+  </div><!-- /container -->
+
+  <div class="sticky-help">
+    <a href="tel:1364" class="btn btn-success btn-lg">Need Help? Call 1364</a>
+  </div>
+
+  <footer class="text-center">
+    <p>Website Last Updated on: November 7, 2025</p>
+    <p>Visitor Count: 2,830,682</p>
+    <p>Website Information Manager: Mr. Siddharth Chaturvedi | itmanager@jharkhandtourism.com</p>
+    <p>© 2025 All Rights Reserved | Developed and Maintained by Jharkhand Electronics Limited</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // AJAX submit feedback, show reward
+    const form = document.getElementById('feedbackForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      try {
+        const r = await fetch('/feedback', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const json = await r.json();
+        if (json.ok) {
+          const tier = json.rewardTier || 'BRONZE';
+          document.getElementById('rewardTier').textContent = tier + ' Reward';
+          document.getElementById('rewardCode').textContent = json.rewardCode;
+          document.getElementById('rewardBanner').style.display = 'block';
+
+          // badge color
+          const badge = document.getElementById('rewardTier');
+          badge.classList.remove('bg-success','bg-secondary','bg-warning','bg-dark');
+          if (tier === 'GOLD') badge.classList.add('bg-warning');
+          else if (tier === 'SILVER') badge.classList.add('bg-secondary');
+          else badge.classList.add('bg-success');
+
+          // close modal
+          const modal = bootstrap.Modal.getInstance(document.getElementById('feedbackModal'));
+          modal.hide();
+          form.reset();
+          alert('Thank you! Your reward code: ' + json.rewardCode);
+        } else {
+          alert('Could not submit feedback: ' + (json.error || 'Unknown error'));
+        }
+      } catch (err) {
+        alert('Network error. Please try again.');
+      }
+    });
+  </script>
+</body>
+</html>

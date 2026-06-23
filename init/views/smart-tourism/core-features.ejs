@@ -1,0 +1,258 @@
+<%- include('./partials/nav') %>
+<link rel="stylesheet" href="/css/core-features.css">
+
+<!-- Slide 7: Core Features -->
+<link rel="stylesheet" href="/smart/core-features.css">
+
+<main class="slide frame-16x9" aria-labelledby="slide-title">
+  <!-- Background photo -->
+  <div class="bg-photo" role="img" aria-label="Jharkhand landscape background"></div>
+  <div class="overlay"></div>
+
+  <header class="slide-header">
+    <h1 id="slide-title">Core Features</h1>
+    <p class="caption">Key features to deliver sustainable, immersive and community-centric tourism.</p>
+  </header>
+
+  <!-- GRID: 2 × 3 -->
+  <section class="feature-grid" aria-label="Core feature list">
+    <!-- Card 1: AI Trip Recommender -->
+    <!-- Speaker note: Personalization via preferences + seasons drives suggested itineraries. -->
+    <article class="card" data-card="ai" aria-labelledby="ai-title">
+      <button class="card-trigger" aria-expanded="false" aria-controls="ai-panel">
+        <img class="icon" src="/smart/icons/ai.svg" alt="" aria-hidden="true" />
+        <div class="card-text">
+          <h2 id="ai-title">AI Trip Recommender</h2>
+          <p>Personalized itineraries using preferences &amp; seasonal data.</p>
+        </div>
+        <span class="micro-anim" aria-hidden="true"></span>
+      </button>
+      <div class="card-panel" id="ai-panel" role="region" aria-label="AI Trip Recommender demo">
+        <div class="demo ai-demo">
+          <ul class="itinerary" id="itinerary-list" aria-live="polite"></ul>
+          <div class="demo-actions">
+            <button class="btn" id="regen-itinerary" type="button" aria-label="Regenerate itinerary">Regenerate</button>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 2: Interactive Smart Map -->
+    <!-- Speaker note: Explore eco/cultural sites and plan routes with simple zoom UI. -->
+    <article class="card" data-card="map" aria-labelledby="map-title">
+      <button class="card-trigger" aria-expanded="false" aria-controls="map-panel">
+        <img class="icon" src="/smart/icons/map.svg" alt="" aria-hidden="true" />
+        <div class="card-text">
+          <h2 id="map-title">Interactive Smart Map</h2>
+          <p>Geo-tagged eco &amp; cultural sites with route planning.</p>
+        </div>
+        <span class="micro-anim" aria-hidden="true"></span>
+      </button>
+      <div class="card-panel" id="map-panel" role="region" aria-label="Interactive map demo">
+        <div class="demo map-demo">
+          <div class="map-shell" aria-label="Map placeholder">
+            <div class="map-viewport" id="mapViewport">
+              <div class="tile-grid"></div>
+              <div class="map-pin" style="left:60%;top:45%;" aria-hidden="true"></div>
+              <div class="map-pin" style="left:35%;top:60%;" aria-hidden="true"></div>
+            </div>
+            <div class="map-controls" role="group" aria-label="Map zoom controls">
+              <button class="btn icon" id="zoomIn" type="button" aria-label="Zoom in">+</button>
+              <button class="btn icon" id="zoomOut" type="button" aria-label="Zoom out">−</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 3: Cultural Hub -->
+    <!-- Speaker note: Festivals, tribal stories, and artisan marketplace connect visitors to living culture. -->
+    <article class="card" data-card="culture" aria-labelledby="culture-title">
+      <button class="card-trigger" aria-expanded="false" aria-controls="culture-panel">
+        <img class="icon" src="/smart/icons/culture.svg" alt="" aria-hidden="true" />
+        <div class="card-text">
+          <h2 id="culture-title">Cultural Hub</h2>
+          <p>Festival calendar, tribal stories, artisan marketplace.</p>
+        </div>
+        <span class="micro-anim" aria-hidden="true"></span>
+      </button>
+      <div class="card-panel" id="culture-panel" role="region" aria-label="Cultural hub demo">
+        <div class="demo culture-demo">
+          <label for="monthSelect" class="label">Select month:</label>
+          <select id="monthSelect" class="select" aria-label="Select festival month">
+            <option value="1">January</option><option value="2">February</option><option value="3">March</option>
+            <option value="4">April</option><option value="5">May</option><option value="6">June</option>
+            <option value="7">July</option><option value="8">August</option><option value="9">September</option>
+            <option value="10">October</option><option value="11">November</option><option value="12">December</option>
+          </select>
+          <ul id="festivalList" class="list" aria-live="polite"></ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 4: EcoScore Tracker -->
+    <!-- Speaker note: Show measurable sustainability with clear guidance. -->
+    <article class="card" data-card="eco" aria-labelledby="eco-title">
+      <button class="card-trigger" aria-expanded="false" aria-controls="eco-panel">
+        <img class="icon" src="/smart/icons/leaf.svg" alt="" aria-hidden="true" />
+        <div class="card-text">
+          <h2 id="eco-title">EcoScore Tracker</h2>
+          <p>Sustainability meter &amp; low-impact suggestions.</p>
+        </div>
+        <span class="micro-anim" aria-hidden="true"></span>
+      </button>
+      <div class="card-panel" id="eco-panel" role="region" aria-label="EcoScore demo">
+        <div class="demo eco-demo">
+          <div class="meter" aria-label="EcoScore meter">
+            <div class="meter-fill" id="ecoFill" style="width:0%"></div>
+          </div>
+          <div class="eco-readout">
+            <span id="ecoScore" aria-live="polite">—</span>/100
+          </div>
+          <div class="demo-actions">
+            <button class="btn" id="calcEco" type="button" aria-label="Calculate EcoScore">Calculate</button>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 5: AR/VR Heritage View -->
+    <!-- Speaker note: Safely preview fragile sites and inspire responsible visits. -->
+    <!-- ======== CARD 5: AR/VR Heritage View (updated) ======== -->
+<article class="card" data-card="arvr" aria-labelledby="arvr-title">
+  <button class="card-trigger arvr-trigger" aria-expanded="false" aria-controls="arvr-panel">
+    <img class="icon" src="/icons/vr.svg" alt="" aria-hidden="true" />
+    <div class="card-text">
+      <h2 id="arvr-title">AR/VR Heritage View</h2>
+      <p>Virtual previews for remote or fragile sites.</p>
+    </div>
+    <span class="micro-anim" aria-hidden="true"></span>
+  </button>
+
+  <div class="card-panel" id="arvr-panel" role="region" aria-label="AR/VR preview demo">
+    <div class="demo arvr-demo" aria-describedby="arvr-note">
+      <!-- Inline mini preview with subtle parallax -->
+      <div class="arvr-mini" role="img"
+           aria-label="Preview of Jharkhand site in 360 degrees">
+        <div class="arvr-mini-bg" data-parallax
+             style="background-image:url('/images/arvr/netarhat.jpg');"></div>
+        <div class="arvr-mini-overlay">
+          <button class="btn arvr-open" type="button"
+                  aria-label="Open 360 degree viewer" title="Open 360° viewer">
+            <span class="icon360" aria-hidden="true"></span>
+            Experience Jharkhand in 360°
+          </button>
+        </div>
+      </div>
+      <p id="arvr-note" class="hint">Click to open a 360° day/night preview with narration.</p>
+    </div>
+  </div>
+</article>
+
+<!-- ======== AR/VR MODAL (place once per page) ======== -->
+ <!-- AR/VR Heritage View — DEMO (replace the old demo inside this card) -->
+<div class="demo arvr-demo">
+  <button id="vrOpenBtn" class="btn vr-open" type="button"
+          aria-haspopup="dialog"
+          aria-controls="vrModal"
+          aria-label="Open 360 degree heritage preview">
+    Experience Jharkhand in 360°
+  </button>
+  <p class="hint">Click to open a 360° day/night preview with narration.</p>
+</div>
+
+<!-- Lightbox / Modal (place this ONCE near the bottom of the page, before </main>) -->
+<div id="vrModal" class="vr-modal" role="dialog" aria-modal="true" aria-labelledby="vrTitle" hidden>
+  <div class="vr-backdrop" data-close="1"></div>
+  <div class="vr-dialog" role="document">
+    <header class="vr-header">
+      <h3 id="vrTitle">Jharkhand Heritage — 360° Preview</h3>
+      <button class="vr-close" id="vrCloseBtn" aria-label="Close viewer">✕</button>
+    </header>
+
+    <div class="vr-stage-wrap">
+      <!-- panorama stage; background panned by dragging -->
+      <div id="vrStage" class="vr-stage"
+           role="img"
+           aria-label="Panoramic preview of Netarhat Hills"
+           data-src="/smart/images/netarhat-360.jpg">
+        <div class="vr-360badge" aria-hidden="true">360°</div>
+        <div class="vr-loader" aria-hidden="true">Loading VR preview…</div>
+        <div class="vr-hint" aria-hidden="true">Drag left/right • Scroll to zoom</div>
+      </div>
+    </div>
+
+    <div class="vr-controls" role="group" aria-label="VR controls">
+      <button class="btn small" id="vrDay"  type="button" aria-pressed="true">Day View</button>
+      <button class="btn small" id="vrNight" type="button" aria-pressed="false">Night View</button>
+      <button class="btn small" id="vrNarration" type="button" aria-label="Play cultural narration">Cultural Narration</button>
+      <audio id="vrAudio" preload="auto">
+        <source src="/smart/audio/narration.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+    <!-- Card 6: Tourist–Local Connect -->
+    <!-- Speaker note: Trust & safety—verified guides/homestays with moderated chat. -->
+    <article class="card" data-card="connect" aria-labelledby="connect-title">
+      <button class="card-trigger" aria-expanded="false" aria-controls="connect-panel">
+        <img class="icon" src="/smart/icons/connect.svg" alt="" aria-hidden="true" />
+        <div class="card-text">
+          <h2 id="connect-title">Tourist–Local Connect</h2>
+          <p>Verified guides, homestays &amp; chat support.</p>
+        </div>
+        <span class="micro-anim" aria-hidden="true"></span>
+      </button>
+      <div class="card-panel" id="connect-panel" role="region" aria-label="Tourist–Local connect demo">
+        <div class="demo connect-demo">
+          <label for="connectSearch" class="label">Find:</label>
+          <input id="connectSearch" class="input" type="search" placeholder="e.g., birding guide, homestay, Palamu" aria-label="Search guides and homestays">
+          <ul id="connectList" class="list" aria-live="polite"></ul>
+        </div>
+      </div>
+    </article>
+  </section>
+</main>
+
+<script defer src="/smart/core-features.js"></script>
+
+
+<script src="/js/core-features.js" defer></script>
+<link rel="stylesheet" href="/smart/css/slide7.css">
+<script src="/smart/js/slide7.js" defer></script>
+
+<button id="vrOpenBtn" class="btn btn-accent" type="button" aria-haspopup="dialog" aria-controls="vrModal" aria-expanded="false">
+  Experience Jharkhand in 360°
+</button>
+
+
+<!-- Slide 7: AR/VR Modal -->
+<div id="vrModal" class="vr-modal" role="dialog" aria-modal="true" aria-label="Jharkhand 360 preview" hidden data-close="1">
+  <div class="vr-dialog">
+    <button id="vrCloseBtn" class="vr-close" aria-label="Close 360 preview" data-close="1">×</button>
+
+    <div class="vr-stage-wrap">
+      <div id="vrStage" class="vr-stage" 
+           data-src="/smart/images/netarhat-360.jpg" 
+           aria-label="360 degree panorama viewer"
+           role="img">
+        <div class="vr-loader" aria-hidden="true">Loading VR preview…</div>
+        <div class="vr-badge" aria-hidden="true">360°</div>
+      </div>
+    </div>
+
+    <div class="vr-controls" role="group" aria-label="View options">
+      <button id="vrDay"   class="vr-btn active"  type="button" aria-pressed="true">Day View</button>
+      <button id="vrNight" class="vr-btn"         type="button" aria-pressed="false">Night View</button>
+      <button id="vrNarration" class="vr-btn"     type="button">Cultural Narration</button>
+      <audio id="vrAudio" preload="none">
+        <source src="/smart/audio/narration.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </div>
+</div>

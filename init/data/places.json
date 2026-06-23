@@ -1,0 +1,530 @@
+[
+  {
+    "place_id": "p001",
+    "name": "Netarhat Hills",
+    "district": "Latehar",
+    "category": "Hill",
+    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
+    "opening_hours": "Sunrise–Sunset",
+    "entry_fees": "Free",
+    "best_time": "Oct–Feb",
+    "coordinates": {
+      "lat": 23.636,
+      "lng": 84.481
+    },
+    "average_rating": 4.7,
+    "popularity_index": 92,
+    "images": [
+      "/smart/places/images/netarhat-1.jpg",
+      "/smart/places/images/netarhat-2.jpg",
+      "/smart/places/images/netarhat-3.jpg"
+    ]
+  },
+  {
+    "place_id": "p002",
+    "name": "Deoghar Shrine 2",
+    "district": "Hazaribagh",
+    "category": "Waterfall",
+    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
+    "opening_hours": "9:00–17:00",
+    "entry_fees": "Free",
+    "best_time": "Oct–Mar",
+    "coordinates": {
+      "lat": 23.64,
+      "lng": 84.54
+    },
+    "average_rating": 3.8,
+    "popularity_index": 77,
+    "images": [
+      "/smart/places/images/placeholder-3.jpg",
+      "/smart/places/images/placeholder-4.jpg",
+      "/smart/places/images/placeholder-5.jpg"
+    ]
+  },
+  {
+    "place_id": "p003",
+    "name": "Palamu Fort 3",
+    "district": "Deoghar",
+    "category": "Temple",
+    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
+    "opening_hours": "9:00–17:00",
+    "entry_fees": "₹50",
+    "best_time": "Oct–Mar",
+    "coordinates": {
+      "lat": 23.66,
+      "lng": 84.57000000000001
+    },
+    "average_rating": 4.3,
+    "popularity_index": 60,
+    "images": [
+      "/smart/places/images/placeholder-4.jpg",
+      "/smart/places/images/placeholder-5.jpg",
+      "/smart/places/images/placeholder-6.jpg"
+    ]
+  },
+  {
+    "place_id": "p004",
+    "name": "Parasnath 4",
+    "district": "Ranchi",
+    "category": "Historical",
+    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
+    "opening_hours": "9:00–17:00",
+    "entry_fees": "Free",
+    "best_time": "Oct–Mar",
+    "coordinates": {
+      "lat": 23.68,
+      "lng": 84.60000000000001
+    },
+    "average_rating": 4,
+    "popularity_index": 58,
+    "images": [
+      "/smart/places/images/placeholder-5.jpg",
+      "/smart/places/images/placeholder-6.jpg",
+      "/smart/places/images/placeholder-7.jpg"
+    ]
+  },
+  {
+    "place_id": "p005",
+    "name": "Betla 5",
+    "district": "Latehar",
+    "category": "Hill",
+    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
+    "opening_hours": "9:00–17:00",
+    "entry_fees": "Free",
+    "best_time": "Oct–Mar",
+    "coordinates": {
+      "lat": 23.700000000000003,
+      "lng": 84.63000000000001
+    },
+    "average_rating": 3.8,
+    "popularity_index": 48,
+    "images": [
+      "/smart/places/images/placeholder-1.jpg",
+      "/smart/places/images/placeholder-2.jpg",
+      "/smart/places/images/placeholder-3.jpg"
+    ]
+  },
+  {
+    "place_id": "p006",
+    "name": "Hundru Falls 6",
+    "district": "Palamu",
+    "category": "Wildlife",
+    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
+    "opening_hours": "9:00–17:00",
+    "entry_fees": "₹50",
+    "best_time": "Oct–Mar",
+    "coordinates": {
+      "lat": 23.720000000000002,
+      "lng": 84.66000000000001
+    },
+    "average_rating": 4.7,
+    "popularity_index": 93,
+    "images": [
+      "/smart/places/images/placeholder-2.jpg",
+      "/smart/places/images/placeholder-3.jpg",
+      "/smart/places/images/placeholder-4.jpg"
+    ]
+  },
+  {
+    "place_id": "p007",
+    "name": "Deoghar Shrine 7",
+    "district": "Hazaribagh",
+    "category": "Waterfall",
+    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
+    "opening_hours": "9:00–17:00",
+    "entry_fees": "Free",
+    "best_time": "Oct–Mar",
+    "coordinates": {
+      "lat": 23.740000000000002,
+      "lng": 84.69
+    },
+    "average_rating": 3.6,
+    "popularity_index": 84,
+    "images": [
+      "/smart/places/images/placeholder-3.jpg",
+      "/smart/places/images/placeholder-4.jpg",
+      "/smart/places/images/placeholder-5.jpg"
+    ]
+  },
+  {
+    "place_id": "p008",
+    "name": "Palamu Fort 8",
+    "district": "Deoghar",
+    "category": "Temple",
+    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
+    "opening_hours": "9:00–17:00",
+    "entry_fees": "Free",
+    "best_time": "Oct–Mar",
+    "coordinates": {
+      "lat": 23.76,
+      "lng": 84.72
+    },
+    "average_rating": 3.7,
+    "popularity_index": 79,
+    "images": [
+      "/smart/places/images/placeholder-4.jpg",
+      "/smart/places/images/placeholder-5.jpg",
+      "/smart/places/images/placeholder-6.jpg"
+    ]
+  },
+  {
+    "place_id": "p009",
+    "name": "Parasnath 9",
+    "district": "Ranchi",
+    "category": "Historical",
+    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
+    "opening_hours": "9:00–17:00",
+    "entry_fees": "₹50",
+    "best_time": "Oct–Mar",
+    "coordinates": {
+      "lat": 23.78,
+      "lng": 84.75
+    },
+    "average_rating": 4.5,
+    "popularity_index": 44,
+    "images": [
+      "/smart/places/images/placeholder-5.jpg",
+      "/smart/places/images/placeholder-6.jpg",
+      "/smart/places/images/placeholder-7.jpg"
+    ]
+  },
+  {
+    "place_id": "p010",
+    "name": "Betla 10",
+    "district": "Latehar",
+    "category": "Hill",
+    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
+    "opening_hours": "9:00–17:00",
+    "entry_fees": "Free",
+    "best_time": "Oct–Mar",
+    "coordinates": {
+      "lat": 23.8,
+      "lng": 84.78
+    },
+    "average_rating": 4.9,
+    "popularity_index": 48,
+    "images": [
+      "/smart/places/images/placeholder-1.jpg",
+      "/smart/places/images/placeholder-2.jpg",
+      "/smart/places/images/placeholder-3.jpg"
+    ]
+  },
+  {
+    "place_id": "p011",
+    "name": "Hundru Falls 11",
+    "district": "Palamu",
+    "category": "Wildlife",
+    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
+    "opening_hours": "9:00–17:00",
+    "entry_fees": "Free",
+    "best_time": "Oct–Mar",
+    "coordinates": {
+      "lat": 23.82,
+      "lng": 84.81
+    },
+    "average_rating": 4.7,
+    "popularity_index": 56,
+    "images": [
+      "/smart/places/images/placeholder-2.jpg",
+      "/smart/places/images/placeholder-3.jpg",
+      "/smart/places/images/placeholder-4.jpg"
+    ]
+  },
+  {
+    "place_id": "p012",
+    "name": "Deoghar Shrine 12",
+    "district": "Hazaribagh",
+    "category": "Waterfall",
+    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
+    "opening_hours": "9:00–17:00",
+    "entry_fees": "₹50",
+    "best_time": "Oct–Mar",
+    "coordinates": {
+      "lat": 23.84,
+      "lng": 84.84
+    },
+    "average_rating": 4.4,
+    "popularity_index": 50,
+    "images": [
+      "/smart/places/images/placeholder-3.jpg",
+      "/smart/places/images/placeholder-4.jpg",
+      "/smart/places/images/placeholder-5.jpg"
+    ]
+  },
+  {
+    "place_id": "p013",
+    "name": "Palamu Fort 13",
+    "district": "Deoghar",
+    "category": "Temple",
+    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
+    "opening_hours": "9:00–17:00",
+    "entry_fees": "Free",
+    "best_time": "Oct–Mar",
+    "coordinates": {
+      "lat": 23.860000000000003,
+      "lng": 84.87
+    },
+    "average_rating": 3.9,
+    "popularity_index": 46,
+    "images": [
+      "/smart/places/images/placeholder-4.jpg",
+      "/smart/places/images/placeholder-5.jpg",
+      "/smart/places/images/placeholder-6.jpg"
+    ]
+  },
+  {
+    "place_id": "p014",
+    "name": "Parasnath 14",
+    "district": "Ranchi",
+    "category": "Historical",
+    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
+    "opening_hours": "9:00–17:00",
+    "entry_fees": "Free",
+    "best_time": "Oct–Mar",
+    "coordinates": {
+      "lat": 23.880000000000003,
+      "lng": 84.9
+    },
+    "average_rating": 3.9,
+    "popularity_index": 49,
+    "images": [
+      "/smart/places/images/placeholder-5.jpg",
+      "/smart/places/images/placeholder-6.jpg",
+      "/smart/places/images/placeholder-7.jpg"
+    ]
+  },
+  {
+    "place_id": "p015",
+    "name": "Betla 15",
+    "district": "Latehar",
+    "category": "Hill",
+    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
+    "opening_hours": "9:00–17:00",
+    "entry_fees": "₹50",
+    "best_time": "Oct–Mar",
+    "coordinates": {
+      "lat": 23.900000000000002,
+      "lng": 84.93
+    },
+    "average_rating": 4.3,
+    "popularity_index": 57,
+    "images": [
+      "/smart/places/images/placeholder-1.jpg",
+      "/smart/places/images/placeholder-2.jpg",
+      "/smart/places/images/placeholder-3.jpg"
+    ]
+  },
+  {
+    "place_id": "p016",
+    "name": "Hundru Falls 16",
+    "district": "Palamu",
+    "category": "Wildlife",
+    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
+    "opening_hours": "9:00–17:00",
+    "entry_fees": "Free",
+    "best_time": "Oct–Mar",
+    "coordinates": {
+      "lat": 23.92,
+      "lng": 84.96000000000001
+    },
+    "average_rating": 4.8,
+    "popularity_index": 40,
+    "images": [
+      "/smart/places/images/placeholder-2.jpg",
+      "/smart/places/images/placeholder-3.jpg",
+      "/smart/places/images/placeholder-4.jpg"
+    ]
+  },
+  {
+    "place_id": "p017",
+    "name": "Deoghar Shrine 17",
+    "district": "Hazaribagh",
+    "category": "Waterfall",
+    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
+    "opening_hours": "9:00–17:00",
+    "entry_fees": "Free",
+    "best_time": "Oct–Mar",
+    "coordinates": {
+      "lat": 23.94,
+      "lng": 84.99000000000001
+    },
+    "average_rating": 4.7,
+    "popularity_index": 57,
+    "images": [
+      "/smart/places/images/placeholder-3.jpg",
+      "/smart/places/images/placeholder-4.jpg",
+      "/smart/places/images/placeholder-5.jpg"
+    ]
+  },
+  {
+    "place_id": "p018",
+    "name": "Palamu Fort 18",
+    "district": "Deoghar",
+    "category": "Temple",
+    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
+    "opening_hours": "9:00–17:00",
+    "entry_fees": "₹50",
+    "best_time": "Oct–Mar",
+    "coordinates": {
+      "lat": 23.96,
+      "lng": 85.02000000000001
+    },
+    "average_rating": 3.5,
+    "popularity_index": 54,
+    "images": [
+      "/smart/places/images/placeholder-4.jpg",
+      "/smart/places/images/placeholder-5.jpg",
+      "/smart/places/images/placeholder-6.jpg"
+    ]
+  },
+  {
+    "place_id": "p019",
+    "name": "Parasnath 19",
+    "district": "Ranchi",
+    "category": "Historical",
+    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
+    "opening_hours": "9:00–17:00",
+    "entry_fees": "Free",
+    "best_time": "Oct–Mar",
+    "coordinates": {
+      "lat": 23.98,
+      "lng": 85.05
+    },
+    "average_rating": 4.4,
+    "popularity_index": 71,
+    "images": [
+      "/smart/places/images/placeholder-5.jpg",
+      "/smart/places/images/placeholder-6.jpg",
+      "/smart/places/images/placeholder-7.jpg"
+    ]
+  },
+  {
+    "place_id": "p020",
+    "name": "Betla 20",
+    "district": "Latehar",
+    "category": "Hill",
+    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
+    "opening_hours": "9:00–17:00",
+    "entry_fees": "Free",
+    "best_time": "Oct–Mar",
+    "coordinates": {
+      "lat": 24,
+      "lng": 85.08
+    },
+    "average_rating": 4,
+    "popularity_index": 75,
+    "images": [
+      "/smart/places/images/placeholder-1.jpg",
+      "/smart/places/images/placeholder-2.jpg",
+      "/smart/places/images/placeholder-3.jpg"
+    ]
+  },
+  {
+    "place_id": "p021",
+    "name": "Hundru Falls 21",
+    "district": "Palamu",
+    "category": "Wildlife",
+    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
+    "opening_hours": "9:00–17:00",
+    "entry_fees": "₹50",
+    "best_time": "Oct–Mar",
+    "coordinates": {
+      "lat": 24.020000000000003,
+      "lng": 85.11
+    },
+    "average_rating": 4.2,
+    "popularity_index": 70,
+    "images": [
+      "/smart/places/images/placeholder-2.jpg",
+      "/smart/places/images/placeholder-3.jpg",
+      "/smart/places/images/placeholder-4.jpg"
+    ]
+  },
+  {
+    "place_id": "p022",
+    "name": "Deoghar Shrine 22",
+    "district": "Hazaribagh",
+    "category": "Waterfall",
+    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
+    "opening_hours": "9:00–17:00",
+    "entry_fees": "Free",
+    "best_time": "Oct–Mar",
+    "coordinates": {
+      "lat": 24.040000000000003,
+      "lng": 85.14
+    },
+    "average_rating": 4.5,
+    "popularity_index": 95,
+    "images": [
+      "/smart/places/images/placeholder-3.jpg",
+      "/smart/places/images/placeholder-4.jpg",
+      "/smart/places/images/placeholder-5.jpg"
+    ]
+  },
+  {
+    "place_id": "p023",
+    "name": "Palamu Fort 23",
+    "district": "Deoghar",
+    "category": "Temple",
+    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
+    "opening_hours": "9:00–17:00",
+    "entry_fees": "Free",
+    "best_time": "Oct–Mar",
+    "coordinates": {
+      "lat": 24.060000000000002,
+      "lng": 85.17
+    },
+    "average_rating": 4.8,
+    "popularity_index": 52,
+    "images": [
+      "/smart/places/images/placeholder-4.jpg",
+      "/smart/places/images/placeholder-5.jpg",
+      "/smart/places/images/placeholder-6.jpg"
+    ]
+  },
+  {
+    "place_id": "p024",
+    "name": "Parasnath 24",
+    "district": "Ranchi",
+    "category": "Historical",
+    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
+    "opening_hours": "9:00–17:00",
+    "entry_fees": "₹50",
+    "best_time": "Oct–Mar",
+    "coordinates": {
+      "lat": 24.080000000000002,
+      "lng": 85.2
+    },
+    "average_rating": 4.8,
+    "popularity_index": 71,
+    "images": [
+      "/smart/places/images/placeholder-5.jpg",
+      "/smart/places/images/placeholder-6.jpg",
+      "/smart/places/images/placeholder-7.jpg"
+    ]
+  },
+  {
+    "place_id": "p025",
+    "name": "Betla 25",
+    "district": "Latehar",
+    "category": "Hill",
+    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
+    "opening_hours": "9:00–17:00",
+    "entry_fees": "Free",
+    "best_time": "Oct–Mar",
+    "coordinates": {
+      "lat": 24.1,
+      "lng": 85.23
+    },
+    "average_rating": 4.5,
+    "popularity_index": 52,
+    "images": [
+      "/smart/places/images/placeholder-1.jpg",
+      "/smart/places/images/placeholder-2.jpg",
+      "/smart/places/images/placeholder-3.jpg"
+    ]
+  }
+]
+
+
+

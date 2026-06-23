@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Book Hotels — Jharkhand</title>
+  <meta name="description" content="Find and book hotels across Jharkhand.">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="/css/hotels.css">
+</head>
+<body>
+<% hotels = hotels || []; page = page || 1; totalPages = totalPages || 1; total = total || hotels.length; %>
+
+<main class="container">
+  <h1>Book Hotels</h1>
+  <p class="muted">Find and book government-operated and partner hotels across Jharkhand.</p>
+
+  <section class="searchpanel glass">
+    <div class="row">
+      <input id="hotelSearch" placeholder="Search by hotel name or address" value="<%= q || '' %>">
+      <select id="filterDistrict">
+        <option value="">All Districts</option>
+        <% (districts || []).forEach(function(d){ %>
+          <option value="<%= d %>" <%= (selectedDistrict===d) ? 'selected' : '' %>><%= d %></option>
+        <% }) %>
+      </select>
+      <select id="filterAvailability">
+        <option value="">Any Availability</option>
+        <option value="Available" <%= (selectedAvailability==='Available') ? 'selected' : '' %>>Available</option>
+        <option value="Few Rooms Left" <%= (selectedAvailability==='Few Rooms Left') ? 'selected' : '' %>>Few Rooms Left</option>
+        <option value="Sold Out" <%= (selectedAvailability==='Sold Out') ? 'selected' : '' %>>Sold Out</option>
+      </select>
+      <button id="doFilter" class="btn">Search</button>
+    </div>
+  </section>
+
+  <section id="hotels-grid" class="grid">
+    <% if (!hotels || hotels.length===0) { %>
+      <div class="empty">No hotels found.</div>
+    <% } else { %>
+      <% hotels.forEach(function(h){ %>
+        <article class="hotel-card glass" data-id="<%= h.id %>">
+ <div class="media">
+  <img
+    src="<%= h.image ? h.image : '/images/placeholder-hotel.jpg' %>"
+    alt="<%= h.name %>"
+    onerror="this.onerror=null; this.src='/images/placeholder-hotel.jpg'; this.classList.add('img-broken');"
+    style="width:100%;height:100%;object-fit:cover;display:block"
+    data-original="<%= h.image %>"
+  />
+</div>
+         <div class="body">
+            <h3><%= h.name %></h3>
+            <div class="meta"><span class="badge"><%= h.rating %> ★</span> <span class="muted">• <%= h.district %></span></div>
+            <p class="addr"><%= h.address %></p>
+            <div class="card-footer">
+              <div class="price">₹ <strong><%= h.price_from %></strong> / night</div>
+              <div>
+                <a class="btn small" href="/hotels/<%= h.id %>">View Details</a>
+                <button class="btn small ghost fav" data-id="<%= h.id %>">♡</button>
+              </div>
+            </div>
+          </div>
+        </article>
+      <% }) %>
+    <% } %>
+  </section>
+
+  <nav class="pagination">
+    <% if (page>1) { %>
+      <a class="page" href="/hotels?page=<%= page-1 %>">&larr; Prev</a>
+    <% } else { %><span class="page disabled">&larr; Prev</span><% } %>
+    <span class="page-info">Page <%= page %> of <%= totalPages %> — <%= total %> hotels</span>
+    <% if (page<totalPages) { %><a class="page" href="/hotels?page=<%= page+1 %>">Next &rarr;</a><% } else { %><span class="page disabled">Next &rarr;</span><% } %>
+  </nav>
+</main>
+
+<script src="/js/hotels.js" defer></script>
+</body>
+</html>

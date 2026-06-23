@@ -1,0 +1,10 @@
+<div class="card shadow-soft h-100 card-hover">
+  <div class="card-img-wrap gallery-trigger" data-bs-toggle="modal" data-bs-target="#galleryModal" data-img="<%= item.image %>" data-title="<%= item.title %>">
+    <img src="<%= item.image %>" class="card-img-top" alt="<%= item.title %>">
+    <% if (item.tag) { %><span class="badge badge-float"><%= item.tag %></span><% } %>
+  </div>
+  <div class="card-body">
+    <h6 class="card-title mb-1"><%= item.title %></h6>
+    <p class="text-muted small mb-0"><%= item.caption %></p>
+  </div>
+</div>

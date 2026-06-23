@@ -1,0 +1,58 @@
+/* === Slide 7 AR/VR styles (eco palette) === */
+:root{
+  --clr-deep:#1B4332; --clr-green:#2D6A4F; --clr-mint:#95D5B2; --clr-beige:#F5F0E1; --clr-white:#fff;
+  --shadow-lg:0 24px 48px rgb(0 0 0 / 20%); --radius:16px; --t:280ms cubic-bezier(.2,.8,.2,1);
+}
+
+/* Mini preview with parallax & 360 icon */
+.arvr-mini{position:relative; height:220px; border-radius:14px; overflow:hidden; border:1px solid rgb(27 67 50 / 20%); background:#e9efe9;}
+.arvr-mini-bg{position:absolute; inset:0; background-size:cover; background-position:center; transform:scale(1.05);}
+.arvr-mini-overlay{position:absolute; inset:0; display:grid; place-items:center; background:linear-gradient(180deg, rgb(0 0 0 / 0), rgb(0 0 0 / .25));}
+.arvr-open{display:inline-flex; align-items:center; gap:.6rem; background:var(--clr-green); color:#fff; box-shadow:0 10px 22px rgb(45 106 79 / 25%);}
+.icon360{width:22px; height:22px; display:inline-block; border-radius:50%;
+  background: radial-gradient(circle at 35% 35%, var(--clr-mint), var(--clr-green));
+}
+@media (prefers-reduced-motion:no-preference){
+  .arvr-mini:hover .arvr-mini-bg{transition:transform var(--t); transform:scale(1.1);}
+  .icon360{animation:pulse 1.8s ease-in-out infinite;}
+  @keyframes pulse{0%{transform:scale(1);filter:brightness(1)}50%{transform:scale(1.12);filter:brightness(1.1)}100%{transform:scale(1)}}
+}
+
+/* Modal shell */
+.arvr-modal{position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:1000;}
+.arvr-modal[aria-hidden="false"]{display:flex;}
+.arvr-modal__scrim{position:absolute; inset:0; background:rgb(5 15 12 / 55%); opacity:0;}
+.arvr-modal[aria-hidden="false"] .arvr-modal__scrim{opacity:1; transition:opacity var(--t);}
+.arvr-modal__panel{position:relative; width:min(1080px, 92vw); background:var(--clr-beige); border-radius:20px; box-shadow:var(--shadow-lg); overflow:hidden; transform:translateY(12px); opacity:0;}
+.arvr-modal[aria-hidden="false"] .arvr-modal__panel{opacity:1; transform:translateY(0); transition:transform var(--t), opacity var(--t);}
+.arvr-modal__header{display:flex; justify-content:space-between; align-items:center; padding:12px 16px; background:linear-gradient(180deg, var(--clr-deep), #214c3a); color:#fff;}
+.btn.ghost{background:transparent;color:#fff;border:1px solid rgb(255 255 255 / 35%);border-radius:10px;padding:.35rem .65rem}
+.btn.ghost:hover{background:rgb(255 255 255 / 12%)}
+
+/* Stage + HUD */
+.arvr-stage{position:relative; background:#0f2019;}
+.arvr-canvas{height:min(62vh, 520px); background-size:cover; background-position:center; filter:brightness(1) saturate(1.05);}
+.arvr-overlay-hud{position:absolute; top:12px; right:12px;}
+.icon360.ring{width:30px; height:30px; border-radius:999px; box-shadow:0 0 0 3px rgb(149 213 178 / 65%) inset;}
+
+/* Controls */
+.arvr-controls{display:flex; gap:.5rem; justify-content:flex-end; padding:12px 16px; background:#f3efe3; border-top:1px solid rgb(27 67 50 / 12%);}
+.arvr-controls .btn[aria-pressed="true"]{background:var(--clr-deep);}
+
+/* Day/Night visual states */
+.arvr-stage.day .arvr-canvas{filter:brightness(1) saturate(1.05);}
+.arvr-stage.night .arvr-canvas{filter:brightness(.55) sepia(.05) hue-rotate(180deg) saturate(.9);}
+.arvr-stage.night::after{content:""; position:absolute; inset:0; pointer-events:none; background:
+  radial-gradient(600px 300px at 80% 15%, rgb(149 213 178 / 12%), transparent 60%),
+  radial-gradient(800px 400px at 20% 85%, rgb(27 67 50 / 18%), transparent 60%);}
+
+/* Loader */
+.arvr-loader{position:absolute; inset:0; display:grid; place-items:center; background:rgb(0 0 0 / 30%); color:#fff; opacity:0; pointer-events:none;}
+.arvr-modal.loading .arvr-loader{opacity:1; pointer-events:auto;}
+.spinner{width:44px; height:44px; border-radius:50%; border:4px solid rgb(255 255 255 / 35%); border-top-color:#fff; animation:spin 1s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Reduced motion */
+@media (prefers-reduced-motion:reduce){
+  .arvr-modal__panel, .arvr-modal__scrim, .arvr-mini-bg, .icon360, .spinner{animation:none !important; transition:none !important;}
+}

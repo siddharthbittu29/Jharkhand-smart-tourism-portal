@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Explore Jharkhand — Top Tourist Places</title>
+  <meta name="description" content="Explore top tourist places in Jharkhand: waterfalls, temples, wildlife, heritage and hills." />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/css/places.css">
+</head>
+<body>
+<%
+// defensive defaults
+places = Array.isArray(places) ? places : [];
+categories = Array.isArray(categories) ? categories : [];
+districts = Array.isArray(districts) ? districts : [];
+page = page || 1;
+totalPages = totalPages || 1;
+total = total || places.length;
+q = q || '';
+selectedCategory = selectedCategory || 'all';
+%>
+
+<main class="container">
+  <section class="hero glass">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <img src="/images/jharkhand_tourism_logo_final.png" alt="Jharkhand Tourism" class="hero-logo">
+        <h1>Explore Jharkhand</h1>
+        <p class="muted">Discover waterfalls, temples, wildlife, heritage and hill escapes across Jharkhand.</p>
+        <a class="btn primary" href="#places-grid">Explore Top Places</a>
+      </div>
+      <div class="hero-right">
+        <!-- visually rich image on right (keeps slide 7 feel) -->
+       <div class="hero-image">
+  <img src="<%= (places[0] && places[0].image) || '/images/placeholder.jpg' %>" alt="Jharkhand hero">
+</div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="controls">
+    <div class="searchbar">
+      <input id="liveSearch" type="search" placeholder="Search by name, district or category..." value="<%= q %>">
+      <select id="filterCategory">
+        <option value="all">All Categories</option>
+        <% categories.forEach(function(c){ %>
+          <option value="<%= c %>" <%= selectedCategory===c ? 'selected' : '' %>><%= c %></option>
+        <% }) %>
+      </select>
+      <select id="filterDistrict">
+        <option value="all">All Districts</option>
+        <% districts.forEach(function(d){ %>
+          <option value="<%= d %>"><%= d %></option>
+        <% }) %>
+      </select>
+      <a id="serverSearch" class="btn" href="/places?page=1&category=<%= encodeURIComponent(selectedCategory) %>&q=">Search</a>
+    </div>
+
+    <div class="category-row" aria-hidden="false">
+      <button class="chip" data-cat="all">All</button>
+      <% ['Adventure','Heritage','Hills','Lakes','Temple','Waterfall','Wildlife'].forEach(function(cc){ %>
+        <button class="chip" data-cat="<%= cc %>"><%= cc %></button>
+      <% }) %>
+    </div>
+  </section>
+
+  <section id="places-grid" class="grid-section">
+    <div id="grid" class="grid">
+      <% if (!places || places.length === 0) { %>
+        <div class="empty">No places found (server: <%= total %>).</div>
+      <% } else { %>
+        <% places.forEach(function(p){ %>
+          <article class="place-card glass" data-id="<%= p.place_id %>" data-name="<%= p.name %>" data-district="<%= p.district %>" data-category="<%= p.category %>">
+          <div class="card-media">
+              <img src="<%= p.image %>" alt="<%= p.name %>">
+                  </div>
+
+            <div class="card-body">
+              <div class="meta">
+                <span class="badge"><%= p.category %></span>
+                <span class="muted">• <%= p.district %></span>
+              </div>
+              <h3 class="title"><%= p.name %></h3>
+              <p class="desc"><%= p.short_desc %></p>
+              <div class="card-actions">
+                <a class="btn small primary" href="/places/<%= p.place_id %>">View Details</a>
+                <button class="btn small ghost bookmark" data-id="<%= p.place_id %>">Bookmark</button>
+              </div>
+            </div>
+          </article>
+        <% }) %>
+      <% } %>
+    </div>
+
+    <nav class="pagination">
+      <% if (page > 1) { %>
+        <a class="page" href="/places?page=<%= page-1 %>&category=<%= encodeURIComponent(selectedCategory) %>">&larr; Prev</a>
+      <% } else { %>
+        <span class="page disabled">&larr; Prev</span>
+      <% } %>
+      <span class="page-info">Page <%= page %> of <%= totalPages %> — <%= total %> places</span>
+      <% if (page < totalPages) { %>
+        <a class="page" href="/places?page=<%= page+1 %>&category=<%= encodeURIComponent(selectedCategory) %>">Next &rarr;</a>
+      <% } else { %>
+        <span class="page disabled">Next &rarr;</span>
+      <% } %>
+    </nav>
+  </section>
+</main>
+
+<script src="/js/places.js" defer></script>
+<script>
+  // update server search link q param live
+  document.addEventListener('DOMContentLoaded', function(){
+    const s = document.getElementById('liveSearch');
+    const link = document.getElementById('serverSearch');
+    s?.addEventListener('input', ()=> {
+      link.href = '/places?page=1&category=' + encodeURIComponent(document.getElementById('filterCategory').value) + '&q=' + encodeURIComponent(s.value);
+    });
+    document.querySelectorAll('.chip').forEach(b=>{
+      b.addEventListener('click', ()=> {
+        // simulate click to filter client-side
+        const cat = b.dataset.cat;
+        document.getElementById('filterCategory').value = cat;
+        // also run client side filter
+        window.applyClientFilter();
+      });
+    });
+  });
+</script>
+</body>
+</html>

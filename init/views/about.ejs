@@ -1,0 +1,232 @@
+<%
+/* Safe defaults so EJS never throws if t/lang are missing */
+var t = (typeof t !== 'undefined' && t) || {
+  sitemap: "Sitemap",
+  skip: "Skip To Main Content",
+  access: "Accessibility",
+  about: "About Us",
+  contact: "Contact Us",
+  reservations: "JTDC Reservations",
+  helpline: "Tourism Helpline"
+};
+var lang = (typeof lang !== 'undefined' && lang) || 'en';
+%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>About Jharkhand | Jharkhand Tourism Development Corporation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { font-family: "Segoe UI", Arial, sans-serif; background:#f8f9fa; }
+    .top-bar { background:#004d40; color:#fff; font-size:14px; padding:6px 0; }
+    .top-bar a { color:#ffeb3b; text-decoration:none; }
+    .navbar { background:#00695c; }
+    .navbar-brand img { height:55px; }
+    .hero {
+      background: linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.55)),
+        url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=1600&q=80') center/cover no-repeat;
+      color:#fff; padding:70px 0; text-align:center;
+    }
+    .hero h1 { font-weight:700; letter-spacing:0.5px; }
+    .section-title { color:#004d40; text-transform:uppercase; font-weight:600; margin:40px 0 20px; text-align:center; }
+    .card-img-top { height:220px; object-fit:cover; }
+    .pill { display:inline-block; background:#e8f5e9; color:#1b5e20; border-radius:999px; padding:6px 12px; font-size:12px; margin-right:6px; }
+    .timeline { position:relative; margin: 0; padding: 0 0 0 28px; }
+    .timeline::before { content:""; position:absolute; left:12px; top:0; bottom:0; width:2px; background:#cfd8dc; }
+    .timeline-item { position:relative; margin-bottom:16px; }
+    .timeline-item::before { content:""; position:absolute; left:-2px; top:4px; width:10px; height:10px; background:#00695c; border-radius:50%; }
+    footer { background:#004d40; color:#fff; padding:25px 0; font-size:14px; margin-top:40px; }
+    footer a{ color:#ffeb3b; }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar text-center px-2">
+    <a href="/sitemap.xml"><%= t.sitemap %></a> |
+    <a href="#main"><%= t.skip %></a> |
+    <form action="/lang" method="POST" style="display:inline;">
+      <select name="lang" onchange="this.form.submit()">
+        <option value="en" <%= lang==='en'?'selected':'' %>>English</option>
+        <option value="hi" <%= lang==='hi'?'selected':'' %>>हिन्दी</option>
+      </select>
+    </form>
+    &nbsp; | <%= t.reservations %>: 
+    <a href="tel:06512438866">0651-2438866</a> / <a href="tel:2438002">2438002</a> |
+    <%= t.helpline %>: <a href="tel:1364">1364</a>
+    <span class="float-end me-3">
+      <a href="/accessibility"><%= t.access %></a> - <a href="/"><%= "Home" %></a> - <a href="/contact"><%= t.contact %></a>
+    </span>
+  </div>
+
+  <!-- Navbar (brand takes you Home) -->
+  <nav class="navbar navbar-dark">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+        <img src="https://upload.wikimedia.org/wikipedia/en/8/8c/Goa_Tourism_Logo.png" alt="JTDC Logo">
+        <span class="fw-bold">JK Tourism</span>
+      </a>
+      <div class="d-flex gap-2">
+        <a href="/places" class="btn btn-light btn-sm">Places</a>
+        <a href="/listings" class="btn btn-outline-light btn-sm">Listing</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="main">
+    <div class="container">
+      <h1 class="display-5 mb-2">About Jharkhand</h1>
+      <p class="lead mb-0">“The Land of Forests” — rivers, waterfalls, sal groves, sacred shrines, vibrant tribal culture, and ancient history.</p>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <div class="container">
+    <div class="row align-items-center g-4 mt-4">
+      <div class="col-lg-7">
+        <p class="mb-2">
+          Jharkhand, carved out of Bihar on <strong>15 November 2000</strong>, is a mosaic of lush forests, rolling plateaus, and red-soil valleys.
+          It is home to soaring waterfalls like <em>Lodh</em> and <em>Hundru</em>, serene valleys such as <em>Patratu</em>, and wilderness treasures including
+          <em>Betla National Park</em>. With rich mineral resources and over two dozen indigenous communities, Jharkhand blends nature, culture, and tradition.
+        </p>
+        <div class="mb-2">
+          <span class="pill">Waterfalls</span>
+          <span class="pill">Wildlife</span>
+          <span class="pill">Tribal Heritage</span>
+          <span class="pill">Sacred Shrines</span>
+          <span class="pill">Adventure</span>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <img class="img-fluid rounded shadow" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80" alt="Jharkhand waterfall scenic view">
+      </div>
+    </div>
+  </div>
+
+  <!-- Beauty of Jharkhand: Cards -->
+  <div class="container">
+    <h2 class="section-title">Beauty of Jharkhand</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img src="https://images.unsplash.com/photo-1499346030926-9a72daac6c63?w=1200&q=80" class="card-img-top" alt="Patratu Valley panorama">
+          <div class="card-body">
+            <h5 class="card-title">Valleys & Scenic Drives</h5>
+            <p class="card-text">Winding mountain roads and panoramic viewpoints — Patratu Valley offers sunrise-to-sunset vistas perfect for road trips and photography.</p>
+            <a href="/places?q=valley" class="btn btn-success btn-sm">Explore Valleys</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&q=80" class="card-img-top" alt="Sal forest in soft light">
+          <div class="card-body">
+            <h5 class="card-title">Forests & Wildlife</h5>
+            <p class="card-text">Sal forests, elephants, deer, and birds thrive in reserves like Betla National Park — tranquil trails and authentic jungle experiences.</p>
+            <a href="/places?q=park" class="btn btn-success btn-sm">Explore Parks</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img src="https://images.unsplash.com/photo-1558981001-5864b32511c8?w=1200&q=80" class="card-img-top" alt="Temple architecture detail">
+          <div class="card-body">
+            <h5 class="card-title">Sacred & Heritage</h5>
+            <p class="card-text">From the revered Baidyanath Dham at Deoghar to ancient forts and temples, Jharkhand’s spiritual routes span centuries.</p>
+            <a href="/places?q=temple" class="btn btn-success btn-sm">Explore Heritage</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Culture & Experiences -->
+  <div class="container">
+    <h2 class="section-title">Culture & Experiences</h2>
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Tribal Arts, Music & Festivals</h5>
+            <p class="card-text">
+              The state’s identity is shaped by vibrant tribal communities — Santhal, Munda, Ho, Oraon, and more —
+              celebrated through soulful music, dance forms like <em>Chhau</em>, and intricate crafts. Local haats
+              and seasonal festivals showcase a living heritage.
+            </p>
+            <a href="/places?q=festival" class="btn btn-outline-success btn-sm">Festivals</a>
+            <a href="/places?q=craft" class="btn btn-outline-success btn-sm">Crafts</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Adventure & Nature Trails</h5>
+            <p class="card-text">
+              Trek to Lodh Falls, hike forest trails, camp under starry skies, or enjoy serene boating at lakes.
+              The best season spans post-monsoon to winter for clear skies and pleasant weather.
+            </p>
+            <a href="/places?q=trek" class="btn btn-outline-success btn-sm">Treks</a>
+            <a href="/places?q=waterfall" class="btn btn-outline-success btn-sm">Waterfalls</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- History of Jharkhand -->
+  <div class="container">
+    <h2 class="section-title">History of Jharkhand</h2>
+    <div class="row g-4">
+      <div class="col-md-7">
+        <ul class="timeline">
+          <li class="timeline-item">
+            <h6 class="mb-1">Ancient & Early Medieval Period</h6>
+            <p class="mb-2">Archaeological finds indicate settlements across the Chotanagpur plateau. The region’s forests and mineral-rich land nurtured distinct indigenous cultures.</p>
+          </li>
+          <li class="timeline-item">
+            <h6 class="mb-1">Medieval Era</h6>
+            <p class="mb-2">Local chieftaincies and forts emerged; trade routes linked forests and plains. Sacred sites grew around rivers and hills.</p>
+          </li>
+          <li class="timeline-item">
+            <h6 class="mb-1">Colonial Period & Uprisings</h6>
+            <p class="mb-2">Tribal resistance against exploitative systems marked the era — including significant movements led by community leaders across the plateau.</p>
+          </li>
+          <li class="timeline-item">
+            <h6 class="mb-1">Statehood Movement</h6>
+            <p class="mb-2">20th-century social and cultural mobilizations advocated a separate identity for the “land of forests.”</p>
+          </li>
+          <li class="timeline-item">
+            <h6 class="mb-1">15 November 2000 — State Formation</h6>
+            <p class="mb-0">Jharkhand became India’s 28th state, with Ranchi as the capital — catalyzing focused development of tourism, heritage, and ecology.</p>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-5">
+        <img class="img-fluid rounded shadow mb-3" src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=1200&q=80" alt="Dense forest landscape in Jharkhand">
+        <img class="img-fluid rounded shadow" src="https://images.unsplash.com/photo-1592595896551-12b371d546d4?w=1200&q=80" alt="Green meadow and hills of Jharkhand">
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="container my-4">
+    <div class="d-flex flex-wrap gap-2 justify-content-center">
+      <a href="/places" class="btn btn-success btn-lg">Explore Places</a>
+      <a href="/listings" class="btn btn-outline-success btn-lg">View Listings</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-center">
+    <p>Website Last Updated on: November 7, 2025</p>
+    <p>Visitor Count: 2,830,682</p>
+    <p>Website Information Manager: Mr. Siddharth Chaturvedi | itmanager@jharkhandtourism.com</p>
+    <p>© 2025 All Rights Reserved | Developed and Maintained by Jharkhand Electronics Limited</p>
+  </footer>
+
+</body>
+</html>

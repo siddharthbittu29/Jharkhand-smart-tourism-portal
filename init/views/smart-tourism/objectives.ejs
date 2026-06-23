@@ -1,0 +1,95 @@
+<%- include('./partials/nav') %>
+
+
+
+
+<section class="my-4">
+  <h1 class="h3 fw-bold mb-3">Objectives & Government Vision</h1>
+  <p class="text-muted mb-4">
+    Building a smart, inclusive, and sustainable tourism ecosystem for Jharkhand—powered by digital services, green practices, and community-led growth.
+  </p>
+
+  <!-- Objectives -->
+  <div class="row g-3">
+    <% [
+      ["1 Digital First","Unified portal for discovery, bookings, payments, and feedback across destinations and experiences."],
+      ["2 Sustainable Growth","Eco-certifications, waste & water management, and carbon-conscious itineraries at key sites."],
+      ["3 Inclusive Tourism","SHGs & local artisans integrated into value chains; accessibility-first design for all travelers."],
+      ["4 Smart Ops","IoT-based footfall, dynamic pricing pilots, and command dashboards for decision-making."],
+      ["5 Safety & Trust","Verified operators, SOS integrations, and grievance redressal with SLA tracking."],
+      ["6 Brand Jharkhand","Always-on campaigns, UGC drives, and creator partnerships to amplify reach."]
+    ].forEach(([t,d]) => { %>
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title mb-2"><%= t %></h5>
+            <p class="mb-0"><%= d %></p>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+
+  <!-- Government Vision -->
+  <div class="mt-5">
+    <h2 class="h4 fw-semibold mb-3">Government Vision (3-Year Horizon)</h2>
+    <div class="timeline">
+      <% [
+        ["Year 1: Foundation","Unified portal MVP, core destination pages, online booking for 30% inventory, pilot digital pass."],
+        ["Year 2: Scale","80% inventory online, artisan marketplace, smart signage/QR trails, accessibility audits completed."],
+        ["Year 3: Optimize","Command dashboard, dynamic pricing pilots, multi-lingual concierge bot, green certification program."]
+      ].forEach(([h, d]) => { %>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h6 class="mb-1"><%= h %></h6>
+            <p class="mb-0"><%= d %></p>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+
+  <!-- KPIs -->
+  <div class="row g-3 mt-4">
+    <% [
+      ["3.0","Mn Annual Visitors", true],
+      ["80","% Inventory Online", false],
+      ["25","Green Sites", false],
+      ["4.6","Avg Rating", true]
+    ].forEach(([v,l,isFloat]) => { %>
+      <div class="col-6 col-md-3">
+        <div class="kpi">
+          <div class="kpi-value" data-target="<%= v %>" data-float="<%= isFloat %>">0</div>
+          <div class="kpi-label"><%= l %></div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</section>
+
+<%- include('../partials/scripts') %>
+
+<script>
+  document.querySelectorAll('.kpi-value').forEach(el => {
+    const target = parseFloat(el.getAttribute('data-target'));
+    const isFloat = el.getAttribute('data-float') === 'true';
+    const duration = 1200, start = performance.now();
+    (function tick(now){
+      const p = Math.min((now - start) / duration, 1);
+      const val = target * p;
+      el.textContent = isFloat ? val.toFixed(1) : Math.floor(val).toString();
+      if (p < 1) requestAnimationFrame(tick);
+    })(start);
+  });
+</script>
+
+<style>
+  .timeline { position: relative; padding-left: 1.25rem; }
+  .timeline::before { content:''; position:absolute; left:8px; top:0; bottom:0; width:2px; background:#e5e7eb; }
+  .timeline-item { position:relative; padding-left:1rem; margin-bottom:1rem; }
+  .timeline-dot { position:absolute; left:0; top:4px; width:12px; height:12px; border-radius:50%; background:#0d6efd; }
+  .kpi { background:#f8f9fa; border:1px solid #e9ecef; border-radius:.75rem; padding:1rem; text-align:center; }
+  .kpi-value { font-size:1.6rem; font-weight:700; line-height:1; }
+  .kpi-label { font-size:.9rem; color:#6c757d; margin-top:.25rem; }
+</style>

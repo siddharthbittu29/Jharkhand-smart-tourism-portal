@@ -1,0 +1,33 @@
+/* init/public/css/hotels.css — append this */
+.hotel-card { display: flex; gap: 18px; align-items: stretch; }
+.hotel-card .media {
+  width: 36%;
+  min-width: 180px;
+  max-width: 320px;
+  height: 220px;           /* fixed visual height for media column */
+  overflow: hidden;
+  border-radius: 12px;     /* match card radius */
+  flex: 0 0 auto;
+  box-shadow: none;
+  background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.2));
+}
+.hotel-card .media img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;       /* cover keeps aspect ratio and fills block */
+  transition: transform .35s ease;
+}
+.hotel-card .media img.img-broken {
+  opacity: 0.95;           /* visible placeholder when broken */
+  object-fit: contain;
+  background: #f1f1f1;
+  padding: 18px;
+}
+.hotel-card:hover .media img { transform: scale(1.03); }
+
+/* ensure the body region occupies remaining space */
+.hotel-card .body {
+  flex: 1 1 auto;
+  min-width: 200px;
+}

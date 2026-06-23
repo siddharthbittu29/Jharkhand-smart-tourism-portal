@@ -1,0 +1,43 @@
+<!-- init/views/book-hotels/index.ejs -->
+<section class="container py-5">
+  <h1 class="mb-3">Book Hotels</h1>
+  <p class="lead text-muted">Find and book government-operated and partner hotels across Jharkhand.</p>
+
+  <!-- This form sends users to /hotels (the hotels listing router handles search/filter params) -->
+  <form class="row g-3 mt-4 bg-light p-4 rounded shadow-sm"
+        action="/hotels"
+        method="get">
+    <div class="col-md-4">
+      <label class="form-label">Destination</label>
+      <!-- `destination` will be mapped to q or district on /hotels side -->
+      <input name="q" class="form-control" placeholder="Ranchi / Netarhat / Deoghar">
+    </div>
+
+    <div class="col-md-2">
+      <label class="form-label">Check-in</label>
+      <input type="date" name="checkin" class="form-control">
+    </div>
+
+    <div class="col-md-2">
+      <label class="form-label">Check-out</label>
+      <input type="date" name="checkout" class="form-control">
+    </div>
+
+    <div class="col-md-2">
+      <label class="form-label">Rooms</label>
+      <select name="rooms" class="form-control">
+        <option value="1">1 room</option>
+        <option value="2">2 rooms</option>
+        <option value="3">3 rooms</option>
+      </select>
+    </div>
+
+    <div class="col-md-2 d-flex align-items-end">
+      <button class="btn btn-success w-100" type="submit">Search</button>
+    </div>
+  </form>
+
+  <div class="alert alert-info mt-4">
+    Hotel booking integration (payments/reservations) coming soon — search and view details works now.
+  </div>
+</section>

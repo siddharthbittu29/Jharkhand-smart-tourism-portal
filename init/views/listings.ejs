@@ -1,0 +1,187 @@
+<%
+var t = (typeof t !== 'undefined' && t) || {
+  sitemap: "Sitemap", skip: "Skip To Main Content", access: "Accessibility",
+  about: "About Us", contact: "Contact Us", reservations: "JTDC Reservations", helpline: "Tourism Helpline"
+};
+var lang = (typeof lang !== 'undefined' && lang) || 'en';
+function qp(overrides) {
+  const obj = Object.assign({}, filters || {}, { page: undefined }, overrides || {});
+  const params = new URLSearchParams();
+  for (const k in obj) if (obj[k]) params.set(k, obj[k]);
+  return '?' + params.toString();
+}
+%>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Listings | Jharkhand Tourism</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body{font-family:"Segoe UI",Arial,sans-serif;background:#f8f9fa}
+    .top-bar{background:#004d40;color:#fff;font-size:14px;padding:6px 0}.top-bar a{color:#ffeb3b;text-decoration:none}
+    .navbar{background:#00695c}.navbar-brand img{height:55px}
+    .section-title{color:#004d40;text-transform:uppercase;font-weight:600;margin:24px 0 12px;text-align:center}
+    .card-title{margin-bottom:.25rem}
+    .muted{color:#666;font-size:13px}
+    .pagination .active > .page-link{background:#00695c;border-color:#00695c}
+  </style>
+</head>
+
+<body>
+
+<!-- Top Bar -->
+<div class="top-bar text-center px-2">
+  <a href="/sitemap.xml"><%= t.sitemap %></a> | <a href="#main"><%= t.skip %></a> |
+  <form action="/lang" method="POST" style="display:inline;">
+    <select name="lang" onchange="this.form.submit()">
+      <option value="en" <%= lang==='en'?'selected':'' %>>English</option>
+      <option value="hi" <%= lang==='hi'?'selected':'' %>>हिन्दी</option>
+    </select>
+  </form>
+  &nbsp; | <%= t.reservations %>: 0651-2438866 / 2438002 | <%= t.helpline %>: <a href="tel:1364">1364</a>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-dark">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+      <img src="https://upload.wikimedia.org/wikipedia/en/8/8c/Goa_Tourism_Logo.png">
+      <span class="fw-bold">JK Tourism</span>
+    </a>
+    <div class="d-flex gap-2">
+      <a href="/places" class="btn btn-light btn-sm">Places</a>
+      <a href="/listings" class="btn btn-outline-light btn-sm">Listing</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container" id="main">
+  <h1 class="section-title">All Listings</h1>
+
+  <!-- Filters -->
+  <form class="row g-2 align-items-end mb-3" method="GET" action="/listings">
+    <div class="col-md-4">
+      <label class="form-label">Search</label>
+      <input type="search" name="q" class="form-control" placeholder="E.g., waterfall, temple" value="<%= filters.q || '' %>">
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">Sort</label>
+      <select name="sort" class="form-select">
+        <option value="name" <%= filters.sort==='name'?'selected':'' %>>Name</option>
+        <option value="recent" <%= filters.sort==='recent'?'selected':'' %>>Recent</option>
+        <option value="popular" <%= filters.sort==='popular'?'selected':'' %>>Popular</option>
+        <option value="rating" <%= filters.sort==='rating'?'selected':'' %>>Top Rated</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label class="form-label">Min Rating</label>
+      <input type="number" name="minRating" class="form-control" min="0" max="5" step="0.5" value="<%= filters.minRating || '' %>">
+    </div>
+    <div class="col-md-2">
+      <label class="form-label">Per Page</label>
+      <select name="limit" class="form-select">
+        <% [6,9,12,24,48].forEach(L => { %>
+          <option value="<%= L %>" <%= (pagination.limit==L)?'selected':'' %>><%= L %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="col-md-1 d-grid">
+      <button class="btn btn-success">Apply</button>
+    </div>
+  </form>
+
+  <!-- Listings Grid -->
+  <div class="row g-3">
+    <% if (!places || !places.length) { %>
+      <div class="col-12"><div class="alert alert-warning">No listings found.</div></div>
+    <% } %>
+
+    <% places.forEach(p => { %>
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title"><%= p.name %></h5>
+            <div class="muted mb-2">
+              <%= p.category || 'Place' %> • <%= p.district || 'Jharkhand' %> • ⭐ <%= (p.rating || 0).toFixed(1) %>
+            </div>
+            <p class="card-text"><%= (p.description || '').slice(0,110) %><%= (p.description||'').length>110?'…':'' %></p>
+
+            <div class="d-flex flex-wrap gap-2">
+
+              <% if (p.slug) { %>
+                <a class="btn btn-success btn-sm" href="/places/<%= p.slug %>">View Details</a>
+              <% } %>
+
+              <a class="btn btn-outline-success btn-sm" href="/places?<%= new URLSearchParams({ q: p.category || '' }).toString() %>">More like this</a>
+              <a class="btn btn-outline-secondary btn-sm" href="tel:1364">Call Helpline</a>
+
+              <!-- 👍 LIKE BUTTON -->
+              <button type="button" class="btn btn-outline-primary btn-sm like-btn" data-id="<%= p._id %>">
+                👍 Like <span class="like-count">15,000</span>
+              </button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+
+  <!-- Pagination -->
+  <nav class="mt-3">
+    <ul class="pagination justify-content-center">
+      <li class="page-item <%= pagination.hasPrev?'':'disabled' %>"><a class="page-link" href="<%= qp({page:1}) %>">First</a></li>
+      <li class="page-item <%= pagination.hasPrev?'':'disabled' %>"><a class="page-link" href="<%= qp({page:pagination.page-1}) %>">Prev</a></li>
+      <% const start=Math.max(1,pagination.page-2),end=Math.min(pagination.totalPages,pagination.page+2); for(let i=start;i<=end;i++){ %>
+        <li class="page-item <%= i===pagination.page?'active':'' %>"><a class="page-link" href="<%= qp({page:i}) %>"><%= i %></a></li>
+      <% } %>
+      <li class="page-item <%= pagination.hasNext?'':'disabled' %>"><a class="page-link" href="<%= qp({page:pagination.page+1}) %>">Next</a></li>
+      <li class="page-item <%= pagination.hasNext?'':'disabled' %>"><a class="page-link" href="<%= qp({page:pagination.totalPages}) %>">Last</a></li>
+    </ul>
+  </nav>
+</div>
+
+<footer class="text-center mt-4" style="background:#004d40;color:#fff;padding:16px 0;">
+  <small>Helpline: 1364 • JTDC Reservations: 0651-2438866 / 2438002</small>
+</footer>
+
+<script>
+  const fmt = new Intl.NumberFormat('en-IN');
+
+  async function preloadLikes() {
+    const btns = [...document.querySelectorAll('.like-btn')];
+    if (!btns.length) return;
+
+    const ids = btns.map(b=>b.dataset.id).join(',');
+    const res = await fetch('/likes?ids='+encodeURIComponent(ids));
+    const data = await res.json();
+    if(!data.ok) return;
+
+    btns.forEach(b=>{
+      const count = data.counts[b.dataset.id] || 15000;
+      b.querySelector('.like-count').textContent = fmt.format(count);
+      b.dataset.count = count;
+    });
+  }
+
+  async function handleLike(e) {
+    const b = e.currentTarget;
+    const id = b.dataset.id;
+    const r = await fetch('/likes/'+id, {method:'POST'});
+    const j = await r.json();
+    if(j.ok){
+      b.dataset.count = j.count;
+      b.querySelector('.like-count').textContent = fmt.format(j.count);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    preloadLikes();
+    document.querySelectorAll('.like-btn').forEach(b=>b.addEventListener('click',handleLike));
+  });
+</script>
+
+</body>
+</html>

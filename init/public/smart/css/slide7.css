@@ -1,0 +1,60 @@
+/* Slide 7 – AR/VR modal + controls (eco palette) */
+:root{
+  --deep:#1B4332; --green:#2D6A4F; --mint:#95D5B2; --beige:#F5F0E1;
+}
+.vr-modal[hidden]{ display:none !important; }
+.vr-modal{
+  position:fixed; inset:0; background:rgb(0 0 0 / 55%);
+  display:grid; place-items:center; z-index:1050;
+  animation:fadeIn .18s ease;
+}
+@keyframes fadeIn{ from{opacity:0} to{opacity:1} }
+
+.vr-dialog{
+  width:min(960px, 94vw); background:var(--beige);
+  border-radius:16px; box-shadow:0 24px 60px rgb(0 0 0 / 35%);
+  border:1px solid rgb(27 67 50 / 18%); overflow:hidden; position:relative;
+}
+.vr-close{
+  position:absolute; top:10px; right:10px;
+  width:36px; height:36px; border-radius:10px; border:none; cursor:pointer;
+  background:var(--green); color:#fff; font-size:20px; line-height:1;
+  box-shadow:0 8px 18px rgb(45 106 79 / 30%);
+}
+.vr-stage-wrap{ background:#0b1d16; }
+.vr-stage{
+  height:min(520px, 60vh);
+  background:#11231c center/auto 110% no-repeat;
+  cursor:grab; position:relative;
+  transition:filter .25s ease;
+}
+.vr-stage.is-night{ filter:brightness(.7) hue-rotate(-10deg) saturate(.9); }
+
+.vr-loader{
+  position:absolute; inset:auto 12px 12px; color:#fff; font-weight:600;
+  background:rgb(0 0 0 / 45%); padding:6px 10px; border-radius:10px;
+}
+.vr-badge{
+  position:absolute; top:10px; left:10px;
+  width:44px; height:44px; border-radius:999px;
+  display:grid; place-items:center; color:#0b1d16;
+  background: radial-gradient(circle at 30% 30%, var(--mint), var(--green));
+  box-shadow:0 6px 14px rgb(0 0 0 / 25%);
+}
+.vr-controls{
+  display:flex; gap:10px; padding:12px; justify-content:flex-end; background:#fff;
+  border-top:1px solid rgb(27 67 50 / 12%);
+}
+.vr-btn{
+  border:none; border-radius:12px; padding:10px 14px; font-weight:700;
+  background:var(--green); color:#fff; cursor:pointer;
+  box-shadow:0 8px 18px rgb(45 106 79 / 25%);
+}
+.vr-btn.active{ background:var(--deep); }
+.vr-btn:focus-visible{ outline:3px solid var(--mint); outline-offset:2px; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion:reduce){
+  .vr-modal{ animation:none; }
+  .vr-stage{ transition:none; }
+}

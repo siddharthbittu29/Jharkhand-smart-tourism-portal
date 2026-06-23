@@ -1,0 +1,20 @@
+<%
+// helper: mark current tab active
+const ACTIVE = (p) => (currentPath === p ? 'active' : '');
+%>
+
+<div class="container mt-3">
+  <div class="btn-group flex-wrap gap-2">
+    <a href="/smart-tourism" class="btn btn-outline-primary <%= ACTIVE('/smart-tourism') %>">Overview</a>
+    <a href="/smart-tourism/objectives" class="btn btn-outline-primary <%= ACTIVE('/smart-tourism/objectives') %>">Objectives</a>
+    <a href="/smart-tourism/features" class="btn btn-outline-primary <%= ACTIVE('/smart-tourism/features') %>">Features</a>
+    <a href="/smart-tourism/journey" class="btn btn-outline-primary <%= ACTIVE('/smart-tourism/journey') %>">User Journey</a>
+    <a href="/smart-tourism/architecture" class="btn btn-outline-primary <%= ACTIVE('/smart-tourism/architecture') %>">Architecture</a>
+  </div>
+</div>
+
+<style>
+  .btn-group .btn { transition: transform .15s ease, box-shadow .15s ease; }
+  .btn-group .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.12); }
+  .btn-group .btn.active { color: #fff; background-color: #0d6efd; border-color: #0d6efd; }
+</style>

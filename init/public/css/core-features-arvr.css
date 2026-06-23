@@ -1,0 +1,76 @@
+/* Eco palette */
+:root{
+  --deep:#1B4332; --green:#2D6A4F; --mint:#95D5B2; --beige:#F5F0E1;
+}
+
+/* AR/VR card preview */
+.arvr-preview{
+  position:relative; height:220px; border-radius:14px; overflow:hidden;
+  background:url("/smart/images/netarhat.jpg") center/cover no-repeat;
+  box-shadow:0 8px 22px rgb(0 0 0/18%);
+  transform:translateZ(0);
+}
+.arvr-preview::after{ /* subtle darken for contrast */
+  content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgb(0 0 0/18%), rgb(0 0 0/28%));
+}
+.arvr-open{
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  background:var(--green); color:#fff; font-weight:700; padding:.9rem 1.2rem; border-radius:999px;
+  box-shadow:0 10px 24px rgb(45 106 79/35%);
+}
+.arvr-open:hover{ background:#245c45; }
+
+/* 360 badge on pano surface */
+.badge-360{
+  position:absolute; right:12px; top:12px; z-index:2;
+  background:rgb(149 213 178/92%); color:#083; font-weight:800;
+  padding:.25rem .5rem; border-radius:999px; letter-spacing:.5px;
+}
+
+/* Modal */
+.vr-modal[hidden]{ display:none; }
+.vr-modal{ position:fixed; inset:0; z-index:1000; }
+.vr-backdrop{ position:absolute; inset:0; background:rgb(0 0 0 / 55%); opacity:0; }
+.vr-dialog{
+  position:relative; margin:4vh auto 0; width:min(1100px,92vw);
+  background:var(--beige); border-radius:18px; overflow:hidden;
+  box-shadow:0 30px 70px rgb(0 0 0/40%); opacity:0; transform:translateY(12px);
+}
+.vr-header{ display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:linear-gradient(180deg, #163, #1B4332); color:#fff; }
+.vr-close{ width:40px; height:40px; border-radius:12px; background:#fff; color:#123; font-size:20px; }
+
+.pano{
+  position:relative; height:58vh; min-height:360px; background:#000;
+  background-image:var(--pano-url);
+  background-size:var(--pano-zoom, 120% ) auto;
+  background-repeat:repeat-x;
+  background-position: var(--pano-x, 50%) center;
+  cursor:grab;
+}
+.pano.dragging{ cursor:grabbing; }
+.vr-toolbar{ display:flex; gap:.6rem; padding:.8rem; background:#faf7ee; border-top:1px solid rgb(0 0 0/08%); }
+.vr-toggle[aria-pressed="true"]{ background:var(--deep); }
+.vr-audio[aria-pressed="true"]{ box-shadow:0 0 0 3px var(--mint) inset; }
+
+/* Day/Night visual */
+.pano.night{ filter:brightness(.65) contrast(1.05) hue-rotate(-10deg) saturate(.9); }
+.pano.day{ filter:none; }
+
+/* Loader */
+.vr-loader{
+  position:absolute; inset:0; display:grid; place-items:center; background:linear-gradient(180deg, rgb(0 0 0/25%), transparent);
+}
+.vr-loader::after{
+  content:"Loading VR preview…"; color:#fff; font-weight:600; text-shadow:0 2px 8px rgb(0 0 0/65%);
+}
+
+/* Enter animation (motion-safe) */
+@media (prefers-reduced-motion:no-preference){
+  .vr-modal.show .vr-backdrop{ animation:fade .24s ease forwards; }
+  .vr-modal.show .vr-dialog{ animation:pop .24s ease forwards; }
+  @keyframes fade{ to{ opacity:1 } }
+  @keyframes pop{ to{ opacity:1; transform:none } }
+}
+
+/* Screen-reader only helper */
+.sr-only{ position:absolute !important; width:1px;height:1px;padding:0;margin:-1px; overflow:hidden;clip:rect(0,0,0,0);border:0; }
