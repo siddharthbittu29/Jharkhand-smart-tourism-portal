@@ -1,0 +1,115 @@
+<div class="container py-5">
+
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card shadow-lg border-0">
+                <div class="card-body">
+
+                    <h2 class="fw-bold text-success">
+                        Welcome, <%= user.email %>
+                    </h2>
+
+                    <p class="text-muted">
+                        Smart Tourism Dashboard
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <div class="card shadow h-100">
+                <div class="card-body">
+
+                    <h4>👤 Profile</h4>
+
+                    <hr>
+
+                    <p>
+                        <strong>Email:</strong><br>
+                        <%= user.email %>
+                    </p>
+
+                    <p>
+                        <strong>Role:</strong><br>
+                        <%= user.role %>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow h-100">
+                <div class="card-body">
+
+                    <h4>🌿 Eco Score</h4>
+
+                    <hr>
+
+                    <h1 class="text-success">
+                        82
+                    </h1>
+
+                    <p>
+                        Eco Friendly Traveller
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow h-100">
+                <div class="card-body">
+
+                    <h4>🏆 Tourist Badge</h4>
+
+                    <hr>
+
+                    <h5 class="text-warning">
+                        Explorer Level
+                    </h5>
+
+                    <p>
+                        Visited 12 destinations
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row mt-5 g-4">
+
+        <div class="col-md-3">
+            <a href="/places" class="btn btn-success w-100 py-3">
+                Explore Places
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <a href="/hotels" class="btn btn-primary w-100 py-3">
+                Book Hotels
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <a href="/festivals" class="btn btn-warning w-100 py-3">
+                Festivals
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <a href="/auth/logout" class="btn btn-danger w-100 py-3">
+                Logout
+            </a>
+        </div>
+
+    </div>
+
+</div>

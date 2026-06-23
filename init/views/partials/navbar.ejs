@@ -1,41 +1,89 @@
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#4CAF50;">
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm" style="background:#1b5e20;">
   <div class="container">
+
     <a class="navbar-brand d-flex align-items-center gap-2" href="/">
-      <img class="brand-logo" src="/images/jharkhand_tourism_logo_final.png" alt="Jharkhand Tourism" alt="Jharkhand Tourism" style="height:55px; background:#fff; border-radius:8px; padding:4px;">
-      <span class="text-light fw-bold">Jharkhand Tourism</span>
+      <img
+        src="/images/jharkhand_tourism_logo_final.png"
+        alt="Jharkhand Tourism"
+        style="height:55px;background:#fff;border-radius:8px;padding:4px;"
+      >
+      <div>
+        <div class="fw-bold">Jharkhand Tourism</div>
+        <small class="text-light opacity-75">
+          Explore • Experience • Discover
+        </small>
+      </div>
     </a>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
-      aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mainNav"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="mainNav">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link <%= currentPath==='/'?'active':'' %>" href="/">Home</a></li>
-        <li class="nav-item"><a class="nav-link <%= currentPath.startsWith('/places')?'active':'' %>" href="/places">Places</a></li>
-        <li class="nav-item"><a class="nav-link <%= currentPath.startsWith('/book-hotels')?'active':'' %>" href="/book-hotels">Book Hotels</a></li>
-        <li class="nav-item"><a class="nav-link <%= currentPath.startsWith('/festivals')?'active':'' %>" href="/festivals">Festivals</a></li>
-        <li class="nav-item"><a class="nav-link <%= currentPath.startsWith('/gallery')?'active':'' %>" href="/gallery">Gallery</a></li>
-        <li class="nav-item"><a class="nav-link <%= currentPath.startsWith('/contact')?'active':'' %>" href="/contact">Contact Us</a></li>
+
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+
+        <li class="nav-item">
+          <a class="nav-link <%= currentPath==='/'?'active':'' %>" href="/">
+            Home
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link <%= currentPath.startsWith('/places')?'active':'' %>" href="/places">
+            Places
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link <%= currentPath.startsWith('/book-hotels')?'active':'' %>" href="/book-hotels">
+            Hotels
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link <%= currentPath.startsWith('/festivals')?'active':'' %>" href="/festivals">
+            Festivals
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link <%= currentPath.startsWith('/gallery')?'active':'' %>" href="/gallery">
+            Gallery
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link <%= currentPath.startsWith('/smart-tourism')?'active':'' %>" href="/smart-tourism">
+            Smart Tourism
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link <%= currentPath.startsWith('/contact')?'active':'' %>" href="/contact">
+            Contact
+          </a>
+        </li>
+
+        <li class="nav-item ms-lg-3">
+          <a href="/auth/login" class="btn btn-outline-light btn-sm">
+            Login
+          </a>
+        </li>
+
+        <li class="nav-item ms-lg-2">
+          <a href="/auth/register" class="btn btn-warning btn-sm">
+            Register
+          </a>
+        </li>
+
       </ul>
+
     </div>
   </div>
 </nav>
-
-
-<!-- <li class="nav-item"><a class="nav-link <%= currentPath.startsWith('/smart-tourism')?'active':'' %>" href="/smart-tourism">Smart Tourism</a></li> -->
-
-
-<!-- objective -->
-<!-- <li class="nav-item">
-  <a class="nav-link" href="/smart-tourism/objectives">Objectives</a>
-</li>
-
-< Feature -->
- <!-- <li class="nav-item">
-  <a class="nav-link" href="/smart-tourism/features">Features</a>
-</li> -->
-
-
-

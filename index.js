@@ -104,8 +104,10 @@ tryMount("/places", "./init/routes/places");
 tryMount("/feedback", "./init/routes/feedback");
 tryMount("/downloads", "./init/routes/downloads");
 tryMount("/likes", "./init/routes/likes");
+tryMount("/auth", "./init/routes/auth");
 tryMount("/smart-tourism", "./init/routes/smart-tourism");
 tryMount("/hotels", "./init/routes/hotels");
+tryMount("/dashboard", "./init/routes/dashboard");
 
 
 
@@ -225,17 +227,9 @@ app.get("/health", (req, res) => res.json({ ok: true }));
 
 
 
-const placesRouter = require('./init/routes/places');
-app.use('/places', placesRouter);
-
-app.use('/places', require('./init/routes/places'));
 const mongoose = require('mongoose');
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/jk_tourism';
 mongoose.connect(MONGO_URI).then(()=>console.log('Mongo connected')).catch(err=>console.error(err));
-
-// -------------------- HOTELS ROUTER ---------------------
-app.use('/hotels', require('./init/routes/hotels'));
-
 
 // -------------------- 404 (LAST) -----------------------
 app.use((req, res) => {

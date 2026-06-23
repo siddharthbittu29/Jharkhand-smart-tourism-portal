@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Explore Jharkhand — Top Tourist Places</title>
-  <meta name="description" content="Explore top tourist places in Jharkhand: waterfalls, temples, wildlife, heritage and hills." />
+<title>Jharkhand Tourism Explorer | Discover Nature, Heritage & Adventure</title>  <meta name="description" content="Explore top tourist places in Jharkhand: waterfalls, temples, wildlife, heritage and hills." />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link rel="stylesheet" href="/css/places.css">
 </head>
@@ -26,15 +25,32 @@ selectedCategory = selectedCategory || 'all';
       <div class="hero-left">
         <img src="/images/jharkhand_tourism_logo_final.png" alt="Jharkhand Tourism" class="hero-logo">
         <h1>Explore Jharkhand</h1>
-        <p class="muted">Discover waterfalls, temples, wildlife, heritage and hill escapes across Jharkhand.</p>
-        <a class="btn primary" href="#places-grid">Explore Top Places</a>
+            <p class="muted">
+            Explore waterfalls, wildlife sanctuaries, spiritual circuits, eco-tourism trails and cultural heritage destinations across Jharkhand.
+            </p>        <a class="btn primary" href="#places-grid">Explore Top Places</a>
       </div>
       <div class="hero-right">
         <!-- visually rich image on right (keeps slide 7 feel) -->
        <div class="hero-image">
-  <img src="<%= (places[0] && places[0].image) || '/images/placeholder.jpg' %>" alt="Jharkhand hero">
-</div>
+           <img src="/images/discover/patratu.jpg" alt="Patratu Valley">
+       </div>
 
+<div class="hero-stats">
+  <div class="stat-card">
+    <h3><%= total %></h3>
+    <p>Destinations</p>
+  </div>
+
+  <div class="stat-card">
+    <h3><%= districts.length %></h3>
+    <p>Districts</p>
+  </div>
+
+  <div class="stat-card">
+    <h3><%= categories.length %></h3>
+    <p>Experiences</p>
+  </div>
+</div>
       </div>
     </div>
   </section>
@@ -59,7 +75,7 @@ selectedCategory = selectedCategory || 'all';
 
     <div class="category-row" aria-hidden="false">
       <button class="chip" data-cat="all">All</button>
-      <% ['Adventure','Heritage','Hills','Lakes','Temple','Waterfall','Wildlife'].forEach(function(cc){ %>
+      <% ['Adventure','Historical','Hill','Lake','Temple','Waterfall','Wildlife'].forEach(function(cc){ %>
         <button class="chip" data-cat="<%= cc %>"><%= cc %></button>
       <% }) %>
     </div>
