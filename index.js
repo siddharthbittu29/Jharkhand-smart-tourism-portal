@@ -109,7 +109,7 @@ tryMount("/smart-tourism", "./init/routes/smart-tourism");
 tryMount("/hotels", "./init/routes/hotels");
 tryMount("/dashboard", "./init/routes/dashboard");
 tryMount("/wishlist", "./init/routes/wishlist");
-
+tryMount("/planner", "./init/routes/planner");
 
 
 // -------------------- BASIC PAGES ----------------------

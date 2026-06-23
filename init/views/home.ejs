@@ -18,6 +18,7 @@ var lang = (typeof lang !== 'undefined' && lang) || 'en';
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jharkhand Tourism Development Corporation</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/home.css">
   <style>
     body { font-family: "Segoe UI", Arial, sans-serif; background-color:#F5F0E1; }
     .top-bar { background-color: #004d40; color: #fff; font-size: 14px; padding: 5px 0; }
@@ -76,16 +77,87 @@ var lang = (typeof lang !== 'undefined' && lang) || 'en';
 
 </div> -->
 
+ <!-- 🏞️ Discover Jharkhand Section -->
+    <section class="container py-5 text-center hero-section">
 
-  <!-- 🏞️ Discover Jharkhand Section -->
-<section class="container py-5 text-center">
-  <h1 class="fw-bold">Welcome to Jharkhand Tourism</h1>
-  <p class="text-muted mb-4">
-    Explore culture, heritage, nature & smart experiences.
-  </p>
-  <a href="/smart-tourism" class="btn btn-lg btn-primary smart-cta">
-    Explore Smart Tourism
-  </a>
+  <div class="hero-overlay">
+
+    <h1 class="fw-bold display-4 text-white">
+      Smart Tourism Portal of Jharkhand
+    </h1>
+
+    <p class="lead text-white mb-5">
+      Discover waterfalls, wildlife, temples, festivals and AI-powered travel experiences.
+    </p>
+
+  </div>
+
+  <!-- AI SMART PLANNER -->
+  <div class="ai-planner-card">
+
+    <h2>🤖 AI Smart Trip Planner</h2>
+
+    <p>
+      Plan your Jharkhand journey instantly
+    </p>
+
+    <form action="/planner" method="POST">
+
+      <div class="row g-3">
+
+        <div class="col-md-5">
+        <input
+            type="text"
+            class="form-control"
+            name="destination"
+            placeholder="Family trip to waterfalls"
+            required
+          >
+        </div>
+
+        <div class="col-md-2">
+          <input
+            type="number"
+            class="form-control"
+            name="days"
+            min="1"
+            max="15"
+            placeholder="Days"
+            required
+          >
+        </div>
+
+        <div class="col-md-3">
+          <input
+            type="number"
+            class="form-control"
+            name="budget"
+            placeholder="Budget ₹"
+            required
+          >
+        </div>
+
+        <div class="col-md-2">
+          <button
+            type="submit"
+            class="btn btn-success w-100"
+          >
+            Generate
+          </button>
+        </div>
+
+      </div>
+
+    </form>
+
+  </div>
+
+  <div class="mt-4">
+    <a href="/smart-tourism" class="btn btn-lg btn-primary smart-cta">
+      Explore Smart Tourism
+    </a>
+  </div>
+
 </section>
 
 <div class="container mt-5" id="main">
@@ -232,6 +304,7 @@ var lang = (typeof lang !== 'undefined' && lang) || 'en';
 <style>
   .smart-cta { transition: transform .15s ease, box-shadow .15s ease; }
   .smart-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(13,110,253,.35); }
+  
 </style>
 
 

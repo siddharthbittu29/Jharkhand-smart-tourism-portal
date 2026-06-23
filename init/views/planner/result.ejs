@@ -1,0 +1,98 @@
+<div class="container py-5">
+
+    <h1 class="text-success mb-4">
+        AI Smart Travel Plan
+    </h1>
+
+    <div class="card shadow p-4 mb-4">
+
+        <h4>Trip Summary</h4>
+
+        <p>
+            <strong>Destination:</strong>
+            <%= destination %>
+        </p>
+
+        <p>
+            <strong>Days:</strong>
+            <%= tripDays %>
+        </p>
+
+        <p>
+            <strong>Budget:</strong>
+            ₹ <%= tripBudget %>
+        </p>
+
+        <p>
+            <strong>Eco Score:</strong>
+            🌱 <%= ecoScore %>/100
+        </p>
+
+    </div>
+
+    <h3 class="mb-4">
+        Recommended Itinerary
+    </h3>
+
+    <div class="row">
+
+        <% itinerary.forEach(item => { %>
+
+        <div class="col-md-4 mb-4">
+
+            <div class="card shadow h-100">
+
+                <img
+                    src="<%= item.image %>"
+                    class="card-img-top"
+                    style="height:220px;object-fit:cover;"
+                >
+
+                <div class="card-body">
+
+                    <h5>
+                        Day <%= item.day %>
+                    </h5>
+
+                    <h4 class="text-success">
+                        <%= item.place %>
+                    </h4>
+
+                    <p>
+                        Estimated Cost:
+                        ₹ <%= item.cost %>
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <% }) %>
+
+    </div>
+
+    <div class="card shadow p-4 mt-4">
+
+        <h4>
+            Travel Tips
+        </h4>
+
+        <ul>
+            <li>Carry water bottles.</li>
+            <li>Book hotels in advance.</li>
+            <li>Best season: October to February.</li>
+            <li>Respect local culture and nature.</li>
+        </ul>
+
+    </div>
+
+    <a
+        href="/"
+        class="btn btn-success mt-4"
+    >
+        Back To Home
+    </a>
+
+</div>

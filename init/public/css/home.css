@@ -1,0 +1,84 @@
+/* ==========================================
+   AI SMART TRIP PLANNER
+========================================== */
+
+.ai-planner-card{
+    background:#ffffff;
+    padding:35px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.12);
+    max-width:1100px;
+    margin:auto;
+    border-top:5px solid #198754;
+}
+
+.ai-planner-card h2{
+    color:#0f5132;
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.ai-planner-card p{
+    color:#666;
+    margin-bottom:25px;
+}
+
+.ai-planner-card input{
+    height:55px;
+    border-radius:12px;
+}
+
+.ai-planner-card button{
+    height:55px;
+    border-radius:12px;
+    font-weight:600;
+}
+
+/* ==========================================
+   SMART TOURISM BUTTON
+========================================== */
+
+.smart-cta{
+    transition:all .25s ease;
+}
+
+.smart-cta:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+}
+
+.hero-section{
+    background:
+      linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
+      url('/images/discover/patratu.jpg');
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    min-height: 700px;
+
+    padding: 120px 40px;
+
+    border-radius: 25px;
+
+    color: white;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+.hero-section h1{
+    color:white;
+    font-size:4rem;
+    font-weight:800;
+}
+.hero-section p{
+    color:#f5f5f5 !important;
+    font-size:1.3rem;
+}
+.ai-planner-card p{
+    color:#555 !important;
+    font-size:18px;
+    font-weight:500;
+}
