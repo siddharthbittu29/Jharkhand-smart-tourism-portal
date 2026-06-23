@@ -73,6 +73,75 @@
 
     </div>
 
+    <!-- HOTEL RECOMMENDATIONS -->
+
+<div class="card shadow p-4 mb-4">
+
+    <h3 class="text-primary mb-4">
+        🏨 Recommended Hotels
+    </h3>
+
+    <div class="row">
+
+        <% hotelRecommendations.forEach(rec => { %>
+
+            <% if(rec.hotel){ %>
+
+                <div class="col-md-4 mb-4">
+
+                    <div class="card h-100 shadow-sm">
+
+                        <img
+                            src="<%= rec.hotel.image %>"
+                            class="card-img-top"
+                            style="height:220px;object-fit:cover;"
+                        >
+
+                        <div class="card-body">
+
+                            <h5>
+                                <%= rec.hotel.name %>
+                            </h5>
+
+                            <p class="text-muted">
+                                <%= rec.hotel.district %>
+                            </p>
+
+                            <p>
+                                ⭐ <%= rec.hotel.rating %>
+                            </p>
+
+                            <p>
+                                Starting From
+                                ₹<%= rec.hotel.price_from %>
+                            </p>
+
+                            <p>
+                                <%= rec.hotel.availability %>
+                            </p>
+
+                            <a
+                                href="<%= rec.hotel.map %>"
+                                target="_blank"
+                                class="btn btn-success"
+                            >
+                                View Location
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            <% } %>
+
+        <% }) %>
+
+    </div>
+
+</div>
+
     <div class="card shadow p-4 mt-4">
 
         <h4>
