@@ -108,6 +108,7 @@ tryMount("/auth", "./init/routes/auth");
 tryMount("/smart-tourism", "./init/routes/smart-tourism");
 tryMount("/hotels", "./init/routes/hotels");
 tryMount("/dashboard", "./init/routes/dashboard");
+tryMount("/wishlist", "./init/routes/wishlist");
 
 
 

@@ -25,9 +25,29 @@
       <p><%= place.long_desc || place.short_desc %></p>
 
       <div class="buttons">
-        <a class="btn primary" href="<%= place.google_map %>" target="_blank">Plan Visit</a>
-        <button class="btn ghost bookmark" data-id="<%= place.place_id %>">Bookmark</button>
-        <button class="btn" id="shareBtn">Share</button>
+
+            <a
+              class="btn primary"
+              href="<%= place.google_map %>"
+              target="_blank"
+            >
+              Plan Visit
+            </a>
+
+            <button
+              class="btn ghost"
+              id="wishlistBtn"
+            >
+              ❤️ Save To Wishlist
+            </button>
+
+            <button
+              class="btn"
+              id="shareBtn"
+            >
+              Share
+            </button>
+
       </div>
 
       <h3>Location</h3>
@@ -91,6 +111,36 @@
     <p class="muted">No nearby hotels found.</p>
   <% } %>
 </section>
+
+
+
+<script>
+document
+.getElementById("wishlistBtn")
+?.addEventListener("click", async () => {
+
+  const response = await fetch("/wishlist/add", {
+    method: "POST",
+
+    headers: {
+      "Content-Type": "application/json"
+    },
+
+    body: JSON.stringify({
+      placeId: "<%= place.place_id %>",
+      placeName: "<%= place.name %>",
+      district: "<%= place.district %>",
+      image: "<%= place.image %>"
+    })
+  });
+
+  const data = await response.json();
+
+  if(data.success){
+    alert("Added to Wishlist ❤️");
+  }
+});
+</script>
 
 
 </body>
