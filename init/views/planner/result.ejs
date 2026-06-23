@@ -1,4 +1,6 @@
+<link rel="stylesheet" href="/css/planner.css">
 <div class="container py-5">
+
 
     <h1 class="text-success mb-4">
         AI Smart Travel Plan
@@ -140,9 +142,84 @@
 
     </div>
 
-</div>
+<div class="card shadow-lg border-0 mt-5">
 
-    <div class="card shadow p-4 mt-4">
+    <div class="card-header bg-success text-white text-center py-3">
+        <h2 class="mb-0">
+            💰 AI Cost Analysis Report
+        </h2>
+    </div>
+
+    <div class="card-body p-4">
+
+        <div class="row text-center g-4">
+
+            <div class="col-md-3">
+                <div class="card border-primary h-100">
+                    <div class="card-body">
+                        <h5>🏨 Hotel Cost</h5>
+                        <h3 class="text-primary">
+                            ₹ <%= hotelCost %>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card border-warning h-100">
+                    <div class="card-body">
+                        <h5>🍽 Food Cost</h5>
+                        <h3 class="text-warning">
+                            ₹ <%= foodCost %>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card border-info h-100">
+                    <div class="card-body">
+                        <h5>🚗 Transport</h5>
+                        <h3 class="text-info">
+                            ₹ <%= transportCost %>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card border-success h-100">
+                    <div class="card-body">
+                        <h5>💵 Total Cost</h5>
+                        <h3 class="text-success">
+                            ₹ <%= totalCost %>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <hr class="my-4">
+
+        <div class="text-center">
+
+            <h3 class="<%= budgetStatus.includes('Within') ? 'text-success' : 'text-danger' %>">
+
+                <%= budgetStatus %>
+
+            </h3>
+
+            <p class="text-muted">
+                Budget Provided: ₹ <%= tripBudget %>
+            </p>
+
+        </div>
+
+    </div>
+
+</div>    
+<div class="card shadow p-4 mt-4">
 
         <h4>
             Travel Tips

@@ -1,0 +1,16 @@
+.card:hover{
+    transform: translateY(-5px);
+    transition: 0.3s;
+}
+
+.card{
+    transition: 0.3s;
+}
+
+.card-header{
+    border-radius: 12px 12px 0 0 !important;
+}
+
+.ai-report{
+    border-radius:20px;
+}

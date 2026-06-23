@@ -108,6 +108,27 @@ router.post("/", (req, res) => {
     const ecoScore =
         Math.floor(Math.random() * 20) + 80;
 
+        // COST CALCULATOR
+
+            const hotelCost = itinerary.reduce(
+                (sum, item) => sum + item.cost,
+                0
+            );
+
+            const foodCost = tripDays * 800;
+
+            const transportCost = tripDays * 1000;
+
+            const totalCost =
+                hotelCost +
+                foodCost +
+                transportCost;
+
+            const budgetStatus =
+                totalCost <= tripBudget
+                    ? "Within Budget ✅"
+                    : "Budget Exceeded ❌";
+
     // HOTEL RECOMMENDATIONS
 
     const hotelRecommendations = itinerary.map(item => {
@@ -124,14 +145,20 @@ router.post("/", (req, res) => {
     });
 
     res.render("planner/result", {
-        title: "AI Travel Plan",
-        destination,
-        tripDays,
-        tripBudget,
-        itinerary,
-        ecoScore,
-        hotelRecommendations
-    });
+    title: "AI Travel Plan",
+    destination,
+    tripDays,
+    tripBudget,
+    itinerary,
+    ecoScore,
+    hotelRecommendations,
+
+    hotelCost,
+    foodCost,
+    transportCost,
+    totalCost,
+    budgetStatus
+});
 
 });
 
