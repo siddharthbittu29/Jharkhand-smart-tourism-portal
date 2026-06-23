@@ -93,9 +93,11 @@ function tryMount(mountPath, relPathFromRoot) {
     const router = require(relPathFromRoot);
     app.use(mountPath, router);
     console.log(`✅ Mounted ${mountPath} from ${relPathFromRoot}`);
-  } catch (e) {
-    console.warn(`ℹ️ Router not found for ${mountPath} (${relPathFromRoot}); skipping`);
-  }
+  } 
+  catch (e) {
+  console.error("MOUNT ERROR:");
+  console.error(e);
+}
 }
 
 // Mount once — DO NOT duplicate variable names
@@ -110,6 +112,7 @@ tryMount("/hotels", "./init/routes/hotels");
 tryMount("/dashboard", "./init/routes/dashboard");
 tryMount("/wishlist", "./init/routes/wishlist");
 tryMount("/planner", "./init/routes/planner");
+tryMount("/pdf", "./init/routes/pdf");
 
 
 // -------------------- BASIC PAGES ----------------------

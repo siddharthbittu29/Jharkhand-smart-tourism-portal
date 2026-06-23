@@ -18,7 +18,8 @@
     "method-override": "^3.0.0",
     "mongoose": "^8.19.3",
     "morgan": "^1.10.0",
-    "pdfkit": "^0.17.2"
+    "pdfkit": "^0.17.2",
+    "puppeteer": "^25.2.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"
