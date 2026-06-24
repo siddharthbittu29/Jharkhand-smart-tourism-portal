@@ -233,7 +233,22 @@
         </ul>
 
     </div>
+         
 
+    <a
+    href="/pdf?destination=<%= destination %>
+    &days=<%= tripDays %>
+    &budget=<%= tripBudget %>
+    &ecoScore=<%= ecoScore %>
+    &hotelCost=<%= hotelCost %>
+    &foodCost=<%= foodCost %>
+    &transportCost=<%= transportCost %>
+    &totalCost=<%= totalCost %>
+    &budgetStatus=<%= encodeURIComponent(budgetStatus) %>"
+    class="btn btn-danger mt-4 me-2"
+>
+    📄 Download AI Report
+</a>
     <a
         href="/"
         class="btn btn-success mt-4"
