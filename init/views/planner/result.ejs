@@ -5,6 +5,75 @@
     <h1 class="text-success mb-4">
         AI Smart Travel Plan
     </h1>
+    <!-- ========================= -->
+<!-- TRIP OVERVIEW DASHBOARD -->
+<!-- ========================= -->
+
+<div class="card shadow-lg border-0 mb-4">
+
+    <div class="card-header bg-success text-white">
+
+        <h3 class="mb-0">
+            🧳 Trip Overview Dashboard
+        </h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="row text-center">
+
+            <div class="col-md-3 mb-3">
+                <h6 class="text-muted">📍 Destination</h6>
+                <h5><%= destination %></h5>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <h6 class="text-muted">📅 Duration</h6>
+                <h5><%= tripDays %> Days</h5>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <h6 class="text-muted">🌱 Eco Score</h6>
+                <h5><%= ecoScore %>/100</h5>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <h6 class="text-muted">💰 Budget</h6>
+                <h5>₹ <%= tripBudget %></h5>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="row text-center">
+
+            <div class="col-md-3 mb-3">
+                <h6 class="text-muted">💵 Estimated Cost</h6>
+                <h5>₹ <%= totalCost %></h5>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <h6 class="text-muted">🏨 Hotels</h6>
+                <h5><%= hotelRecommendations.length %></h5>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <h6 class="text-muted">🚗 Transport</h6>
+                <h5>₹ <%= transportCost %></h5>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <h6 class="text-muted">🍽 Food</h6>
+                <h5>₹ <%= foodCost %></h5>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
     <div class="card shadow p-4 mb-4">
 
@@ -35,6 +104,57 @@
     <h3 class="mb-4">
         Recommended Itinerary
     </h3>
+    <div class="card shadow-sm border-0 mb-4">
+
+    <div class="card-header bg-success text-white">
+
+        <h4 class="mb-0">
+            🗺️ Journey Timeline
+        </h4>
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
+
+            <% itinerary.forEach((item,index)=>{ %>
+
+                <div class="text-center">
+
+                    <div class="rounded-circle bg-success text-white d-flex justify-content-center align-items-center"
+                         style="width:55px;height:55px;margin:auto;">
+
+                        <strong>
+                            <%= item.day %>
+                        </strong>
+
+                    </div>
+
+                    <p class="mt-2 fw-bold">
+
+                        <%= item.place %>
+
+                    </p>
+
+                </div>
+
+                <% if(index < itinerary.length-1){ %>
+
+                    <div
+                        class="flex-grow-1 mx-2"
+                        style="height:4px;background:#198754;">
+                    </div>
+
+                <% } %>
+
+            <% }) %>
+
+        </div>
+
+    </div>
+
+</div>
 
     <div class="row">
 
@@ -219,20 +339,289 @@
     </div>
 
 </div>    
-<div class="card shadow p-4 mt-4">
+<div class="row mt-4">
 
-        <h4>
-            Travel Tips
+    <!-- Destination Highlights -->
+
+    <div class="col-lg-6 mb-4">
+
+        <div class="card shadow h-100">
+
+            <div class="card-header bg-success text-white">
+
+                <h5 class="mb-0">
+                    🌟 Destination Highlights
+                </h5>
+
+            </div>
+
+            <div class="card-body">
+
+                <ul class="list-group list-group-flush">
+
+                    <% destinationHighlights.forEach(item => { %>
+
+                        <li class="list-group-item">
+
+                            ✅ <%= item %>
+
+                        </li>
+
+                    <% }) %>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- AI Recommendation -->
+
+    <div class="col-lg-6 mb-4">
+
+        <div class="card shadow h-100 border-success">
+
+            <div class="card-header bg-primary text-white">
+
+                <h5 class="mb-0">
+
+                    🤖 AI Recommendation
+
+                </h5>
+
+            </div>
+
+            <div class="card-body">
+
+                <p class="mb-3">
+
+                    <%= aiRecommendation %>
+
+                </p>
+
+                <div class="alert alert-success mb-0">
+
+                    <strong>Eco Score:</strong>
+
+                    <%= ecoScore %>/100
+
+                </div>
+
+            </div>
+
+        </div>
+        
+
+    </div>
+
+</div>
+<!-- Weather & Best Time -->
+
+<div class="card shadow border-info mb-4">
+
+    <div class="card-header bg-info text-white">
+
+        <h4 class="mb-0">
+            🌤 Weather & Best Time
         </h4>
 
-        <ul>
-            <li>Carry water bottles.</li>
-            <li>Book hotels in advance.</li>
-            <li>Best season: October to February.</li>
-            <li>Respect local culture and nature.</li>
+    </div>
+
+    <div class="card-body">
+
+        <div class="row">
+
+            <div class="col-md-4">
+
+                <h6 class="text-muted">
+                    Current Season
+                </h6>
+
+                <h5>
+                    <%= weatherInfo.season %>
+                </h5>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <h6 class="text-muted">
+                    Temperature
+                </h6>
+
+                <h5>
+                    <%= weatherInfo.temperature %>
+                </h5>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <h6 class="text-muted">
+                    Best Time
+                </h6>
+
+                <h5>
+                    <%= weatherInfo.bestTime %>
+                </h5>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <p class="mb-0">
+
+            <strong>Travel Advice:</strong>
+
+            <%= weatherInfo.advice %>
+
+        </p>
+
+    </div>
+
+</div>
+<!-- AI Trip Insights -->
+
+<div class="card shadow border-dark mb-4">
+
+    <div class="card-header bg-dark text-white">
+
+        <h4 class="mb-0">
+            📊 AI Trip Insights
+        </h4>
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="row">
+
+            <div class="col-md-4 mb-3">
+
+                <strong>Difficulty</strong><br>
+
+                <%= tripInsights.difficulty %>
+
+            </div>
+
+            <div class="col-md-4 mb-3">
+
+                <strong>Adventure</strong><br>
+
+                <%= tripInsights.adventure %>
+
+            </div>
+
+            <div class="col-md-4 mb-3">
+
+                <strong>Photography</strong><br>
+
+                <%= tripInsights.photography %>
+
+            </div>
+
+            <div class="col-md-4 mb-3">
+
+                <strong>Walking Distance</strong><br>
+
+                <%= tripInsights.walkingDistance %>
+
+            </div>
+
+            <div class="col-md-4 mb-3">
+
+                <strong>Carbon Footprint</strong><br>
+
+                <%= tripInsights.carbonFootprint %>
+
+            </div>
+
+            <div class="col-md-4 mb-3">
+
+                <strong>Suitable For</strong><br>
+
+                <%= tripInsights.suitableFor %>
+
+            </div>
+
+            <div class="col-md-4 mb-3">
+
+                <strong>Connectivity</strong><br>
+
+                <%= tripInsights.connectivity %>
+
+            </div>
+
+            <div class="col-md-4 mb-3">
+
+                <strong>Mobile Network</strong><br>
+
+                <%= tripInsights.mobileNetwork %>
+
+            </div>
+
+            <div class="col-md-4 mb-3">
+
+                <strong>Crowd Level</strong><br>
+
+                <%= tripInsights.crowdLevel %>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="alert alert-secondary mb-0">
+
+            <strong>Overall Comfort Score:</strong>
+
+            <%= tripInsights.comfortScore %>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Dynamic Travel Tips -->
+
+<div class="card shadow mt-4">
+
+    <div class="card-header bg-warning">
+
+        <h5 class="mb-0">
+
+            🧳 Smart Travel Tips
+
+        </h5>
+
+    </div>
+
+    <div class="card-body">
+
+        <ul class="list-group list-group-flush">
+
+            <% travelTips.forEach(tip => { %>
+
+                <li class="list-group-item">
+
+                    💡 <%= tip %>
+
+                </li>
+
+            <% }) %>
+
         </ul>
 
     </div>
+
+</div>
          
 
     <a
