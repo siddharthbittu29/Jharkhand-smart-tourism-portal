@@ -1,0 +1,139 @@
+<!-- ========================================= -->
+<!-- AI HOTEL RECOMMENDATIONS -->
+<!-- ========================================= -->
+
+<section class="hotel-section">
+
+    <div class="section-heading">
+
+        <span class="section-badge">
+
+            🏨 Stay Recommendations
+
+        </span>
+
+        <h2>
+
+            AI Recommended Hotels
+
+        </h2>
+
+        <p>
+
+            Best hotels selected according to your destination and itinerary.
+
+        </p>
+
+    </div>
+
+    <div class="hotel-grid">
+
+        <% hotelRecommendations.forEach((item)=>{ 
+
+            const hotel = item.hotel;
+
+        %>
+
+        <div class="hotel-card">
+
+            <div class="hotel-image">
+
+                <img
+
+                    src="<%= hotel.image %>"
+
+                    alt="<%= hotel.name %>"
+
+                >
+
+                <div class="hotel-rating">
+
+                    ⭐ <%= hotel.rating %>
+
+                </div>
+
+            </div>
+
+            <div class="hotel-body">
+
+                <h3>
+
+                    <%= hotel.name %>
+
+                </h3>
+
+                <p>
+
+                    📍 Near
+
+                    <strong>
+
+                        <%= item.place %>
+
+                    </strong>
+
+                </p>
+
+                <p>
+
+                    <%= hotel.address %>
+
+                </p>
+
+                <div class="hotel-features">
+
+                    <% hotel.amenities.slice(0,4).forEach(feature=>{ %>
+
+                        <span>
+
+                            <%= feature %>
+
+                        </span>
+
+                    <% }) %>
+
+                </div>
+
+                <div class="hotel-footer">
+
+                    <div>
+
+                        <small>
+
+                            Starting From
+
+                        </small>
+
+                        <h4>
+
+                            ₹<%= hotel.price_from %>
+
+                        </h4>
+
+                    </div>
+
+                    <a
+
+                        href="<%= hotel.map %>"
+
+                        target="_blank"
+
+                        class="hotel-book-btn"
+
+                    >
+
+                        View
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <% }) %>
+
+    </div>
+
+</section>

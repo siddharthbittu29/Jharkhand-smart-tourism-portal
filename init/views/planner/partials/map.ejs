@@ -1,0 +1,137 @@
+<!-- ========================================= -->
+<!-- INTERACTIVE TRIP MAP -->
+<!-- ========================================= -->
+
+<section class="map-section">
+
+    <div class="section-heading">
+
+        <span class="section-badge">
+
+            🗺 Smart Navigation
+
+        </span>
+
+        <h2>
+
+            Interactive Trip Map
+
+        </h2>
+
+        <p>
+
+            Visualize your destination, nearby hotels and planned journey.
+
+        </p>
+
+    </div>
+
+    <div class="map-layout">
+
+        <!-- LEFT PANEL -->
+
+        <div class="map-info">
+
+            <div class="map-info-card">
+
+                <h3>
+
+                    📍 Destination
+
+                </h3>
+
+                <h4>
+
+                    <%= destination %>
+
+                </h4>
+
+            </div>
+
+            <div class="map-info-card">
+
+                <h3>
+
+                    📅 Duration
+
+                </h3>
+
+                <h4>
+
+                    <%= tripDays %> Days
+
+                </h4>
+
+            </div>
+
+            <div class="map-info-card">
+
+                <h3>
+
+                    🏨 Hotels
+
+                </h3>
+
+                <h4>
+
+                    <%= hotelRecommendations.length %>
+
+                </h4>
+
+            </div>
+
+            <div class="map-info-card">
+
+                <h3>
+
+                    🌱 Eco Score
+
+                </h3>
+
+                <h4>
+
+                    <%= ecoScore %>/100
+
+                </h4>
+
+            </div>
+
+            <div class="map-info-card">
+
+                <h3>
+
+                    💰 Estimated Cost
+
+                </h3>
+
+                <h4>
+
+                    ₹<%= totalCost.toLocaleString() %>
+
+                </h4>
+
+            </div>
+
+        </div>
+
+        <!-- MAP -->
+
+        <div class="map-container">
+
+            <div id="tripMap"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<link
+rel="stylesheet"
+href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+<script
+src="https://unpkg.com/leaflet/dist/leaflet.js">
+</script>
+
+<script src="/js/map.js"></script>

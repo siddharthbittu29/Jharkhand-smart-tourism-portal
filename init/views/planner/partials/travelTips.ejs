@@ -1,0 +1,84 @@
+<!-- ========================================= -->
+<!-- SMART TRAVEL TIPS -->
+<!-- ========================================= -->
+
+<section class="tips-section">
+
+    <div class="section-heading">
+
+        <span class="section-badge">
+
+            💡 Smart Travel Guide
+
+        </span>
+
+        <h2>
+
+            AI Travel Tips
+
+        </h2>
+
+        <p>
+
+            Important recommendations to make your journey safer,
+            smarter and more enjoyable.
+
+        </p>
+
+    </div>
+
+    <div class="tips-grid">
+
+        <% travelTips.forEach((tip,index)=>{ %>
+
+            <div class="tip-card">
+
+                <div class="tip-icon">
+
+                    <% if(index % 5 === 0){ %>
+
+                        🚗
+
+                    <% } else if(index % 5 === 1){ %>
+
+                        🌱
+
+                    <% } else if(index % 5 === 2){ %>
+
+                        📸
+
+                    <% } else if(index % 5 === 3){ %>
+
+                        🍴
+
+                    <% } else { %>
+
+                        ⚠️
+
+                    <% } %>
+
+                </div>
+
+                <div class="tip-content">
+
+                    <h3>
+
+                        Travel Tip <%= index+1 %>
+
+                    </h3>
+
+                    <p>
+
+                        <%= tip %>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        <% }) %>
+
+    </div>
+
+</section>

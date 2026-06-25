@@ -1,0 +1,177 @@
+<!-- ========================================= -->
+<!-- WEATHER & TRAVEL INTELLIGENCE -->
+<!-- ========================================= -->
+
+<section class="weather-section">
+
+    <div class="section-heading">
+
+        <span class="section-badge">
+
+            🌤 AI Travel Intelligence
+
+        </span>
+
+        <h2>
+
+            Weather & Travel Insights
+
+        </h2>
+
+        <p>
+
+            Live travel intelligence generated for your destination.
+
+        </p>
+
+    </div>
+
+    <div class="weather-grid">
+
+        <!-- WEATHER -->
+
+        <div class="weather-card">
+
+            <div class="weather-icon">
+
+                ☀️
+
+            </div>
+
+            <h3>
+
+                <%= weatherInfo.condition || "Pleasant" %>
+
+            </h3>
+
+            <p>
+
+                Current Weather
+
+            </p>
+
+        </div>
+
+        <!-- BEST SEASON -->
+
+        <div class="weather-card">
+
+            <div class="weather-icon">
+
+                🌳
+
+            </div>
+
+            <h3>
+
+                <%= tripInsights.bestSeason || "October - March" %>
+
+            </h3>
+
+            <p>
+
+                Best Season
+
+            </p>
+
+        </div>
+
+        <!-- TRANSPORT -->
+
+        <div class="weather-card">
+
+            <div class="weather-icon">
+
+                🚗
+
+            </div>
+
+            <h3>
+
+                <%= tripInsights.recommendedTransport %>
+
+            </h3>
+
+            <p>
+
+                Recommended Transport
+
+            </p>
+
+        </div>
+
+        <!-- CROWD -->
+
+        <div class="weather-card">
+
+            <div class="weather-icon">
+
+                👥
+
+            </div>
+
+            <h3>
+
+                <%= tripInsights.crowdLevel || "Moderate" %>
+
+            </h3>
+
+            <p>
+
+                Crowd Level
+
+            </p>
+
+        </div>
+
+        <!-- DIFFICULTY -->
+
+        <div class="weather-card">
+
+            <div class="weather-icon">
+
+                🥾
+
+            </div>
+
+            <h3>
+
+                <%= tripInsights.travelDifficulty || "Easy" %>
+
+            </h3>
+
+            <p>
+
+                Travel Difficulty
+
+            </p>
+
+        </div>
+
+        <!-- ECO -->
+
+        <div class="weather-card">
+
+            <div class="weather-icon">
+
+                🌱
+
+            </div>
+
+            <h3>
+
+                <%= ecoScore %>/100
+
+            </h3>
+
+            <p>
+
+                Sustainability Score
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>

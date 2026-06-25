@@ -1,0 +1,145 @@
+<link rel="stylesheet" href="/css/chatbot.css">
+
+<div class="container-fluid py-5">
+
+    <div class="chat-wrapper shadow-lg">
+
+        <!-- ================= HEADER ================= -->
+
+        <div class="chat-header">
+
+            <div class="d-flex align-items-center">
+
+                <div class="bot-avatar">
+
+                    🤖
+
+                </div>
+
+                <div class="ms-3">
+
+                    <h3 class="mb-1">
+
+                        Jharkhand AI Tourism Assistant
+
+                    </h3>
+
+                    <small>
+
+                        Online • Smart Tourism Platform
+
+                    </small>
+
+                </div>
+
+            </div>
+
+            <div>
+
+                <button
+                    id="clearChat"
+                    class="btn btn-outline-light btn-sm">
+
+                    🗑 Clear
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- ================= CHAT ================= -->
+
+        <div id="chat-box">
+
+            <div class="bot-message">
+
+                <h5>
+
+                    👋 Welcome!
+
+                </h5>
+
+                <p>
+
+                    I can help you plan your complete Jharkhand trip.
+
+                </p>
+
+                <div class="feature-grid">
+
+                    <div class="feature-chip">🗺 Tourist Places</div>
+
+                    <div class="feature-chip">🏨 Hotels</div>
+
+                    <div class="feature-chip">🍛 Local Food</div>
+
+                    <div class="feature-chip">🎉 Festivals</div>
+
+                    <div class="feature-chip">🚗 Transport</div>
+
+                    <div class="feature-chip">📅 AI Trip Planner</div>
+
+                    <div class="feature-chip">🌿 Eco Tourism</div>
+
+                    <div class="feature-chip">📍 Hidden Gems</div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ================= QUICK QUESTIONS ================= -->
+
+        <div class="quick-questions">
+
+            <button class="quick-btn">🏞 Waterfalls</button>
+
+            <button class="quick-btn">🏨 Hotels</button>
+
+            <button class="quick-btn">🍛 Local Food</button>
+
+            <button class="quick-btn">🎉 Festivals</button>
+
+            <button class="quick-btn">🦁 Wildlife</button>
+
+            <button class="quick-btn">📍 Ranchi</button>
+
+            <button class="quick-btn">🧳 Plan My Trip</button>
+
+            <button class="quick-btn">🌄 Best Places</button>
+
+        </div>
+
+        <!-- ================= INPUT ================= -->
+
+        <div class="chat-input-area">
+
+            <input
+
+                id="userMessage"
+
+                class="form-control"
+
+                placeholder="Ask about destinations, hotels, weather, food, festivals..."
+
+            >
+
+            <button
+
+                id="sendBtn"
+
+                class="btn btn-success">
+
+                ➤
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="/js/chatbot.js"></script>

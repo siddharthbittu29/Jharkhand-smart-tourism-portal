@@ -1,0 +1,175 @@
+<!-- ========================================= -->
+<!-- TRIP ACTION CENTER -->
+<!-- ========================================= -->
+
+<section class="action-section">
+
+    <div class="section-heading">
+
+        <span class="section-badge">
+
+            📄 Trip Action Center
+
+        </span>
+
+        <h2>
+
+            Export & Manage Your Trip
+
+        </h2>
+
+        <p>
+
+            Save, share or download your AI generated travel plan.
+
+        </p>
+
+    </div>
+
+    <div class="action-grid">
+
+        <!-- PDF -->
+
+        <a
+
+            href="/pdf?destination=<%= destination %>&days=<%= tripDays %>&budget=<%= tripBudget %>&ecoScore=<%= ecoScore %>&hotelCost=<%= hotelCost %>&foodCost=<%= foodCost %>&transportCost=<%= transportCost %>&totalCost=<%= totalCost %>&budgetStatus=<%= encodeURIComponent(budgetStatus) %>"
+
+            class="action-card">
+
+            <div class="action-icon">
+
+                📄
+
+            </div>
+
+            <h3>
+
+                Download Report
+
+            </h3>
+
+            <p>
+
+                Generate your premium AI travel report in PDF format.
+
+            </p>
+
+        </a>
+
+        <!-- PRINT -->
+
+        <button
+
+            onclick="window.print()"
+
+            class="action-card action-button">
+
+            <div class="action-icon">
+
+                🖨
+
+            </div>
+
+            <h3>
+
+                Print Planner
+
+            </h3>
+
+            <p>
+
+                Print the complete itinerary.
+
+            </p>
+
+        </button>
+
+        <!-- SHARE -->
+
+        <button
+
+            onclick="shareTrip()"
+
+            class="action-card action-button">
+
+            <div class="action-icon">
+
+                📤
+
+            </div>
+
+            <h3>
+
+                Share Trip
+
+            </h3>
+
+            <p>
+
+                Share your AI generated itinerary.
+
+            </p>
+
+        </button>
+
+        <!-- HOME -->
+
+        <a
+
+            href="/"
+
+            class="action-card">
+
+            <div class="action-icon">
+
+                🏠
+
+            </div>
+
+            <h3>
+
+                Back Home
+
+            </h3>
+
+            <p>
+
+                Return to Smart Tourism homepage.
+
+            </p>
+
+        </a>
+
+    </div>
+
+</section>
+
+<script>
+
+function shareTrip(){
+
+    if(navigator.share){
+
+        navigator.share({
+
+            title:"AI Smart Tourism Planner",
+
+            text:"Check out my AI generated Jharkhand travel itinerary!",
+
+            url:window.location.href
+
+        });
+
+    }
+
+    else{
+
+        navigator.clipboard.writeText(window.location.href);
+
+        alert("Trip link copied to clipboard.");
+
+    }
+
+}
+
+</script>

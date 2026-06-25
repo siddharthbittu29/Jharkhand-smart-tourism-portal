@@ -1,0 +1,199 @@
+<!-- ========================================= -->
+<!-- AI SMART PACKING ASSISTANT -->
+<!-- ========================================= -->
+
+<section class="packing-section">
+
+    <div class="section-heading">
+
+        <span class="section-badge">
+
+            🎒 AI Packing Assistant
+
+        </span>
+
+        <h2>
+
+            Smart Packing Checklist
+
+        </h2>
+
+        <p>
+
+            AI generated essentials for a comfortable and hassle-free journey.
+
+        </p>
+
+    </div>
+
+    <div class="packing-container">
+
+        <!-- Essential Items -->
+
+        <div class="packing-category">
+
+            <h3>
+
+                🎒 Essential Items
+
+            </h3>
+
+            <div class="packing-items">
+
+                <% (packingList || []).forEach(item=>{ %>
+
+                    <label class="packing-item">
+
+                        <input type="checkbox">
+
+                        <span>
+
+                            <%= item %>
+
+                        </span>
+
+                    </label>
+
+                <% }) %>
+
+            </div>
+
+        </div>
+
+        <!-- Documents -->
+
+        <div class="packing-category">
+
+            <h3>
+
+                📄 Documents
+
+            </h3>
+
+            <label class="packing-item">
+
+                <input type="checkbox">
+
+                Government ID
+
+            </label>
+
+            <label class="packing-item">
+
+                <input type="checkbox">
+
+                Hotel Booking
+
+            </label>
+
+            <label class="packing-item">
+
+                <input type="checkbox">
+
+                Train / Flight Ticket
+
+            </label>
+
+            <label class="packing-item">
+
+                <input type="checkbox">
+
+                Emergency Contacts
+
+            </label>
+
+        </div>
+
+        <!-- Electronics -->
+
+        <div class="packing-category">
+
+            <h3>
+
+                📱 Electronics
+
+            </h3>
+
+            <label class="packing-item">
+
+                <input type="checkbox">
+
+                Mobile Phone
+
+            </label>
+
+            <label class="packing-item">
+
+                <input type="checkbox">
+
+                Power Bank
+
+            </label>
+
+            <label class="packing-item">
+
+                <input type="checkbox">
+
+                Camera
+
+            </label>
+
+            <label class="packing-item">
+
+                <input type="checkbox">
+
+                Chargers
+
+            </label>
+
+        </div>
+
+        <!-- Clothing -->
+
+        <div class="packing-category">
+
+            <h3>
+
+                👕
+
+                Clothing
+
+            </h3>
+
+            <label class="packing-item">
+
+                <input type="checkbox">
+
+                Comfortable Shoes
+
+            </label>
+
+            <label class="packing-item">
+
+                <input type="checkbox">
+
+                Light Jacket
+
+            </label>
+
+            <label class="packing-item">
+
+                <input type="checkbox">
+
+                Raincoat / Umbrella
+
+            </label>
+
+            <label class="packing-item">
+
+                <input type="checkbox">
+
+                Sunglasses
+
+            </label>
+
+        </div>
+
+    </div>
+
+</section>

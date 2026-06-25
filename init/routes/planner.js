@@ -1,456 +1,242 @@
 const express = require("express");
 const router = express.Router();
+
+const {
+    generateAITrip
+} = require("../services/aiPlannerService");
+
 const {
     generateItinerary
 } = require("../services/itineraryService");
 
-const hotels = require("../models/hotels");
+const {
+    calculateTripCost
+} = require("../services/costService");
 
-router.post("/", (req, res) => {
+const {
+    recommendHotels
+} = require("../services/hotelService");
 
-    const { destination, days, budget } = req.body;
+const {
+    getWeatherInfo
+} = require("../services/weatherService");
+
+const {
+    generateAIRecommendation
+} = require("../services/aiRecommendationService");
+
+const {
+    getTravelTips
+} = require("../services/travelTipsService");
+
+const {
+    getDestinationHighlights
+} = require("../services/destinationHighlightsService");
+
+const {
+    getTripInsights
+} = require("../services/tripInsightsService");
+
+router.post("/", async (req, res) => {
+
+    const {
+        destination,
+        days,
+        budget
+    } = req.body;
 
     const tripDays = parseInt(days);
     const tripBudget = parseInt(budget);
-// Generate itinerary
-   const itinerary = generateItinerary(destination);
+
+    // =========================================
+    // ITINERARY
+    // =========================================
+
+    const itinerary =
+        generateItinerary(destination);
+
+    // =========================================
+    // ECO SCORE
+    // =========================================
 
     const ecoScore =
         Math.floor(Math.random() * 20) + 80;
 
-        // COST CALCULATOR
+    // =========================================
+    // COST ANALYSIS
+    // =========================================
 
-            const hotelCost = itinerary.reduce(
-                (sum, item) => sum + item.cost,
-                0
-            );
+    const {
 
-            const foodCost = tripDays * 800;
+        hotelCost,
 
-            const transportCost = tripDays * 1000;
+        foodCost,
 
-            const totalCost =
-                hotelCost +
-                foodCost +
-                transportCost;
+        transportCost,
 
-            const budgetStatus =
-                totalCost <= tripBudget
-                    ? "Within Budget ✅"
-                    : "Budget Exceeded ❌";
+        totalCost,
 
-           let aiRecommendation = "";
+        budgetStatus
 
-if (ecoScore >= 95) {
+    } = calculateTripCost(
 
-    aiRecommendation =
-        "Excellent eco-friendly itinerary with minimal environmental impact.";
+        itinerary,
 
-}
-else if (ecoScore >= 85) {
+        tripDays,
 
-    aiRecommendation =
-        "Balanced trip with strong sustainability and tourism experience.";
+        tripBudget
 
-}
-else {
+    );
 
-    aiRecommendation =
-        "Consider eco-friendly transport and accommodations to improve sustainability.";
-
-}         
-// ===============================
-// ECO INTELLIGENCE
-// ===============================
-
-const budgetPercentage = Math.min(
-    Math.round((totalCost / tripBudget) * 100),
-    100
-);
-
-let carbonImpact = "";
-let travelDifficulty = "";
-let bestSeason = "";
-let crowdLevel = "";
-let weather = "";
-let recommendedStay = `${tripDays} Days`;
-
-if (
-    destination &&
-    destination.toLowerCase().includes("waterfall")
-) {
-
-    carbonImpact = "Low";
-    travelDifficulty = "Moderate";
-    bestSeason = "October - February";
-    crowdLevel = "Low";
-    weather = "Pleasant";
-
-}
-else if (
-    destination &&
-    destination.toLowerCase().includes("wildlife")
-) {
-
-    carbonImpact = "Medium";
-    travelDifficulty = "Easy";
-    bestSeason = "November - March";
-    crowdLevel = "Medium";
-    weather = "Cool";
-
-}
-else {
-
-    carbonImpact = "Low";
-    travelDifficulty = "Easy";
-    bestSeason = "All Year";
-    crowdLevel = "Moderate";
-    weather = "Pleasant";
-
-}
-
-
-
+    // =========================================
     // HOTEL RECOMMENDATIONS
-            const hotelRecommendations = itinerary.map(item => {
+    // =========================================
 
-    const districtHotels = hotels.filter(
-        h => h.district === item.hotelDistrict
-    );
+ 
+ const hotelRecommendations = recommendHotels(itinerary);
 
-    districtHotels.sort(
-        (a, b) =>
-            b.rating - a.rating
-    );
+console.log("========== HOTELS ==========");
+console.dir(hotelRecommendations, { depth: null });
+console.log("============================");
 
-    let recommendedHotel;
+    // =========================================
+    // WEATHER
+    // =========================================
 
-    if (tripBudget <= 10000) {
+    const weatherInfo =
+        getWeatherInfo(destination);
 
-        recommendedHotel =
-            districtHotels.find(
-                h => h.price_from <= 3000
-            ) || districtHotels[0];
+    // =========================================
+    // AI RECOMMENDATION
+    // =========================================
 
-    }
+    let aiRecommendation =
+        generateAIRecommendation(
 
-    else if (tripBudget <= 20000) {
+            ecoScore,
 
-        recommendedHotel =
-            districtHotels.find(
-                h => h.price_from <= 5000
-            ) || districtHotels[0];
+            budgetStatus
 
-    }
+        );
 
-    else {
+    // =========================================
+    // TRAVEL TIPS
+    // =========================================
 
-        recommendedHotel =
-            districtHotels[0];
+    let travelTips =
+        getTravelTips(destination);
 
-    }
+    // =========================================
+    // DESTINATION HIGHLIGHTS
+    // =========================================
 
-    return {
-        place: item.place,
-        hotel: recommendedHotel
-    };
+    let destinationHighlights =
+        getDestinationHighlights(destination);
 
-});
-let travelTips = [];
+
+
+
+        let packingList = [
+
+    "Comfortable Shoes",
+
+    "Water Bottle",
+
+    "Camera",
+
+    "Power Bank",
+
+    "Sunscreen",
+
+    "Light Jacket"
+
+];
+
+    // =========================================
+    // AI TRIP INSIGHTS
+    // =========================================
+
+    const tripInsights =
+        getTripInsights(destination);
+
 // =========================================
-// DESTINATION HIGHLIGHTS
-// =========================================
-
-let destinationHighlights = [];
-
-if (
-    destination &&
-    destination.toLowerCase().includes("waterfall")
-) {
-
-    destinationHighlights = [
-        "Hundru Falls",
-        "Dassam Falls",
-        "Lodh Falls",
-        "Jonha Falls",
-        "Nature Photography",
-        "Scenic Valleys"
-    ];
-
-}
-else if (
-    destination &&
-    destination.toLowerCase().includes("wildlife")
-) {
-
-    destinationHighlights = [
-        "Betla National Park",
-        "Dalma Wildlife Sanctuary",
-        "Jungle Safari",
-        "Bird Watching",
-        "Nature Trails",
-        "Forest Adventure"
-    ];
-
-}
-else {
-
-    destinationHighlights = [
-        "Netarhat",
-        "Patratu Valley",
-        "Deoghar",
-        "Tribal Culture",
-        "Local Cuisine",
-        "Eco Tourism"
-    ];
-
-}
-
-if (
-    destination &&
-    destination.toLowerCase().includes("waterfall")
-) {
-
-    travelTips = [
-        "Wear non-slip shoes near waterfalls",
-        "Carry rain protection and extra clothes",
-        "Avoid slippery rocks and cliff edges",
-        "Keep drinking water with you"
-    ];
-
-}
-else if (
-    destination &&
-    destination.toLowerCase().includes("wildlife")
-) {
-
-    travelTips = [
-        "Do not feed wild animals",
-        "Carry binoculars and camera",
-        "Follow forest department guidelines",
-        "Avoid making loud noises"
-    ];
-
-}
-else {
-
-    travelTips = [
-        "Book hotels in advance",
-        "Carry identification documents",
-        "Respect local traditions",
-        "Keep emergency contacts handy"
-    ];
-
-}
-
-// ========================================
-// WEATHER INFORMATION
-// ========================================
-
-let weatherInfo = {
-
-    season: "Winter",
-
-    temperature: "26°C",
-
-    condition: "Pleasant",
-
-    humidity: "65%",
-
-    rainfall: "15%",
-
-    bestTime: "October - February",
-
-    advice:
-        "Pleasant weather for sightseeing and outdoor activities.",
-
-    packing: [
-        "Light Jacket",
-        "Water Bottle",
-        "Comfortable Shoes"
-    ]
-
-};
-
-if (
-    destination &&
-    destination.toLowerCase().includes("waterfall")
-) {
-
-   weatherInfo = {
-
-    season: "Post Monsoon",
-
-    temperature: "24°C",
-
-    condition: "Cool & Pleasant",
-
-    humidity: "72%",
-
-    rainfall: "20%",
-
-    bestTime: "October - February",
-
-    advice:
-        "Best season to visit waterfalls. Wear non-slip shoes and carry a rain jacket.",
-
-    packing: [
-        "Trekking Shoes",
-        "Rain Jacket",
-        "Water Bottle"
-    ]
-
-};
-
-}
-// =========================================
-// AI TRIP INSIGHTS
+// GEMINI AI
 // =========================================
 
-let tripInsights = {
+const aiData =
+    await generateAITrip({
 
-    difficulty: "Easy",
+        destination,
 
-    adventure: "★★★★☆",
+        days: tripDays,
 
-    photography: "★★★★★",
+        budget: tripBudget
 
-    walkingDistance: "18 km",
+    });
 
-    carbonFootprint: "Low 🌱",
+if (aiData) {
 
-    suitableFor: "Families, Couples",
+    if (aiData.recommendation)
+        aiRecommendation =
+            aiData.recommendation;
 
-    connectivity: "Good",
+    if (aiData.travelTips)
+        travelTips =
+            aiData.travelTips;
 
-    mobileNetwork: "Jio, Airtel",
+    if (aiData.destinationHighlights)
+        destinationHighlights =
+            aiData.destinationHighlights;
 
-    crowdLevel: "Moderate",
-
-    comfortScore: "9.2 / 10"
-
-};
-
-if (
-    destination &&
-    destination.toLowerCase().includes("waterfall")
-) {
-
-    tripInsights = {
-
-        difficulty: "Moderate",
-
-        adventure: "★★★★★",
-
-        photography: "★★★★★",
-
-        walkingDistance: "21 km",
-
-        carbonFootprint: "Very Low 🌱",
-
-        suitableFor: "Adventure Lovers",
-
-        connectivity: "Average",
-
-        mobileNetwork: "Jio, Airtel",
-
-        crowdLevel: "Low",
-
-        comfortScore: "8.8 / 10"
-
-    };
+    if (aiData.packingList)
+        packingList =
+            aiData.packingList;
 
 }
 
-else if (
-    destination &&
-    destination.toLowerCase().includes("wildlife")
-) {
+    // =========================================
+    // RENDER RESULT PAGE
+    // =========================================
 
-    tripInsights = {
+    res.render("planner/result", {
 
-        difficulty: "Easy",
+        title: "AI Travel Plan",
 
-        adventure: "★★★★☆",
+        destination,
 
-        photography: "★★★★☆",
+        tripDays,
 
-        walkingDistance: "12 km",
+        tripBudget,
 
-        carbonFootprint: "Low 🌱",
+        itinerary,
 
-        suitableFor: "Families & Nature Lovers",
+        ecoScore,
 
-        connectivity: "Good",
+        hotelRecommendations,
 
-        mobileNetwork: "Jio, Airtel, BSNL",
+        weatherInfo,
 
-        crowdLevel: "Medium",
+        aiRecommendation,
 
-        comfortScore: "9.4 / 10"
+        travelTips,
 
-    };
+        destinationHighlights,
 
-}
+        tripInsights,
 
-else if (
-    destination &&
-    destination.toLowerCase().includes("wildlife")
-) {
+        hotelCost,
 
-   weatherInfo = {
+        foodCost,
 
-    season: "Winter",
+        transportCost,
 
-    temperature: "29°C",
+        totalCost,
 
-    condition: "Sunny",
+        budgetStatus,
 
-    humidity: "58%",
+        packingList,
 
-    rainfall: "10%",
-
-    bestTime: "November - March",
-
-    advice:
-        "Morning safaris are recommended. Carry water, a cap, and sunscreen.",
-
-    packing: [
-        "Cap",
-        "Sunglasses",
-        "Water Bottle"
-    ]
-
-};
-
-}
-
-console.log("travelTips =", travelTips);
-console.log("aiRecommendation =", aiRecommendation);
-
-
-res.render("planner/result", {
-    title: "AI Travel Plan",
-    destination,
-    tripDays,
-    tripBudget,
-    itinerary,
-    ecoScore,
-
-    hotelRecommendations,
-    aiRecommendation,
-    travelTips,
-    destinationHighlights,
-
-    weatherInfo,
-    tripInsights,
-
-    hotelCost,
-    foodCost,
-    transportCost,
-    totalCost,
-    budgetStatus
-});
+    });
 
 });
 

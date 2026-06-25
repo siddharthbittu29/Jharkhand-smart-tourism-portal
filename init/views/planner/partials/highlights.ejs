@@ -1,0 +1,85 @@
+<!-- ========================================= -->
+<!-- DESTINATION HIGHLIGHTS -->
+<!-- ========================================= -->
+
+<section class="highlights-section">
+
+    <div class="section-heading">
+
+        <span class="section-badge">
+
+            📍 Explore More
+
+        </span>
+
+        <h2>
+
+            Destination Highlights
+
+        </h2>
+
+        <p>
+
+            Discover the most beautiful attractions recommended for your journey.
+
+        </p>
+
+    </div>
+
+    <div class="highlights-grid">
+
+        <% destinationHighlights.forEach((item,index)=>{ %>
+
+            <div class="highlight-card">
+
+                <div class="highlight-number">
+
+                    <%= index+1 %>
+
+                </div>
+
+                <div class="highlight-content">
+
+                    <h3>
+
+                        ⭐ Highlight <%= index+1 %>
+
+                    </h3>
+
+                    <p>
+
+                        <%= item %>
+
+                    </p>
+
+                    <div class="highlight-tags">
+
+                        <span>
+
+                            🌿 Nature
+
+                        </span>
+
+                        <span>
+
+                            📸 Photography
+
+                        </span>
+
+                        <span>
+
+                            🤖 AI Pick
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        <% }) %>
+
+    </div>
+
+</section>

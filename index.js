@@ -7,6 +7,7 @@
 // - Keeps existing routers in init/routes/* if present (optional mounts)
 // =======================================================
 
+require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
@@ -112,6 +113,7 @@ tryMount("/hotels", "./init/routes/hotels");
 tryMount("/dashboard", "./init/routes/dashboard");
 tryMount("/wishlist", "./init/routes/wishlist");
 tryMount("/planner", "./init/routes/planner");
+tryMount("/chatbot", "./init/routes/chatbot");
 tryMount("/pdf", "./init/routes/pdf");
 
 

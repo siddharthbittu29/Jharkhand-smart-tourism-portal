@@ -1,0 +1,230 @@
+<!-- ========================================= -->
+<!-- AI TRAVEL INSIGHTS -->
+<!-- ========================================= -->
+
+<section class="insights-section">
+
+    <div class="section-heading">
+
+        <span class="section-badge">
+
+            📊 AI Travel Intelligence
+
+        </span>
+
+        <h2>
+
+            Trip Insights Dashboard
+
+        </h2>
+
+        <p>
+
+            AI generated analytics to help you better understand your trip.
+
+        </p>
+
+    </div>
+
+    <!-- Comfort Score -->
+
+    <div class="comfort-card">
+
+        <div class="comfort-circle">
+
+            <span>
+
+                <%= tripInsights.comfortScore || "90%" %>
+
+            </span>
+
+        </div>
+
+        <div class="comfort-info">
+
+            <h3>
+
+                Overall Comfort Score
+
+            </h3>
+
+            <p>
+
+                Based on accessibility, weather, travel duration,
+                accommodation quality and AI travel analysis.
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Analytics -->
+
+    <div class="insight-grid">
+
+        <div class="insight-card">
+
+            🥾
+
+            <h4>
+
+                Difficulty
+
+            </h4>
+
+            <p>
+
+                <%= tripInsights.difficulty || "Easy" %>
+
+            </p>
+
+        </div>
+
+        <div class="insight-card">
+
+            📸
+
+            <h4>
+
+                Photography
+
+            </h4>
+
+            <p>
+
+                <%= tripInsights.photography || "Excellent" %>
+
+            </p>
+
+        </div>
+
+        <div class="insight-card">
+
+            🌱
+
+            <h4>
+
+                Carbon Footprint
+
+            </h4>
+
+            <p>
+
+                <%= tripInsights.carbonFootprint || "Low" %>
+
+            </p>
+
+        </div>
+
+        <div class="insight-card">
+
+            🚶
+
+            <h4>
+
+                Walking Distance
+
+            </h4>
+
+            <p>
+
+                <%= tripInsights.walkingDistance || "Moderate" %>
+
+            </p>
+
+        </div>
+
+        <div class="insight-card">
+
+            📶
+
+            <h4>
+
+                Mobile Network
+
+            </h4>
+
+            <p>
+
+                <%= tripInsights.mobileNetwork || "Good" %>
+
+            </p>
+
+        </div>
+
+        <div class="insight-card">
+
+            🎯
+
+            <h4>
+
+                Suitable For
+
+            </h4>
+
+            <p>
+
+                <%= tripInsights.suitableFor || "Everyone" %>
+
+            </p>
+
+        </div>
+
+        <div class="insight-card">
+
+            🧭
+
+            <h4>
+
+                Adventure Level
+
+            </h4>
+
+            <p>
+
+                <%= tripInsights.adventure || "Medium" %>
+
+            </p>
+
+        </div>
+
+        <div class="insight-card">
+
+            📡
+
+            <h4>
+
+                Connectivity
+
+            </h4>
+
+            <p>
+
+                <%= tripInsights.connectivity || "Good" %>
+
+            </p>
+
+        </div>
+
+        <div class="insight-card">
+
+            👥
+
+            <h4>
+
+                Crowd Level
+
+            </h4>
+
+            <p>
+
+                <%= tripInsights.crowdLevel || "Moderate" %>
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>

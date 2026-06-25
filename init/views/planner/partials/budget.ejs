@@ -1,0 +1,160 @@
+<!-- ========================================= -->
+<!-- BUDGET ANALYTICS -->
+<!-- ========================================= -->
+
+<section class="budget-section">
+
+    <div class="section-heading">
+
+        <span class="section-badge">
+            💰 Budget Analytics
+        </span>
+
+        <h2>
+            Smart Expense Analysis
+        </h2>
+
+        <p>
+            AI generated financial overview of your complete trip.
+        </p>
+
+    </div>
+
+    <div class="budget-dashboard">
+
+        <!-- LEFT -->
+
+        <div class="budget-summary">
+
+            <h3>
+
+                Total Trip Cost
+
+            </h3>
+
+            <h1>
+
+                ₹ <%= totalCost.toLocaleString() %>
+
+            </h1>
+
+            <div class="budget-status">
+
+                <span class="<%= budgetStatus.includes('Within') ? 'budget-good' : 'budget-danger' %>">
+
+                    <%= budgetStatus %>
+
+                </span>
+
+            </div>
+
+            <hr>
+
+            <div class="budget-progress">
+
+                <div class="progress">
+
+                    <div
+                        class="progress-bar bg-success"
+                        style="width:<%= Math.min((totalCost/tripBudget)*100,100) %>%">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <small>
+
+                Budget Utilization :
+                <strong>
+
+                    <%= Math.round((totalCost/tripBudget)*100) %>%
+
+                </strong>
+
+            </small>
+
+        </div>
+
+        <!-- RIGHT -->
+
+        <div class="budget-breakdown">
+
+            <div class="expense-card">
+
+                <span>🏨</span>
+
+                <div>
+
+                    <h4>Hotels</h4>
+
+                    <p>
+
+                        ₹ <%= hotelCost.toLocaleString() %>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="expense-card">
+
+                <span>🍽</span>
+
+                <div>
+
+                    <h4>Food</h4>
+
+                    <p>
+
+                        ₹ <%= foodCost.toLocaleString() %>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="expense-card">
+
+                <span>🚗</span>
+
+                <div>
+
+                    <h4>Transport</h4>
+
+                    <p>
+
+                        ₹ <%= transportCost.toLocaleString() %>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="expense-card">
+
+                <span>💵</span>
+
+                <div>
+
+                    <h4>Remaining Budget</h4>
+
+                    <p>
+
+                        ₹ <%= Math.max(tripBudget-totalCost,0).toLocaleString() %>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

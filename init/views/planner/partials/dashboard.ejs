@@ -1,0 +1,201 @@
+<!-- ========================================= -->
+<!-- TRIP ANALYTICS DASHBOARD -->
+<!-- ========================================= -->
+
+<section class="planner-dashboard">
+
+    <div class="dashboard-card">
+
+        <div class="dashboard-icon">
+            🌱
+        </div>
+
+        <div class="dashboard-content">
+
+            <h3>
+
+                <%= ecoScore %>/100
+
+            </h3>
+
+            <p>
+
+                Eco Score
+
+            </p>
+
+            <div class="progress">
+
+                <div
+                    class="progress-bar bg-success"
+                    style="width:<%= ecoScore %>%">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="dashboard-card">
+
+        <div class="dashboard-icon">
+
+            💰
+
+        </div>
+
+        <div class="dashboard-content">
+
+            <h3>
+
+                ₹<%= totalCost.toLocaleString() %>
+
+            </h3>
+
+            <p>
+
+                Estimated Cost
+
+            </p>
+
+            <small class="<%= budgetStatus.includes('Within') ? 'text-success':'text-danger' %>">
+
+                <%= budgetStatus %>
+
+            </small>
+
+        </div>
+
+    </div>
+
+    <div class="dashboard-card">
+
+        <div class="dashboard-icon">
+
+            🏨
+
+        </div>
+
+        <div class="dashboard-content">
+
+            <h3>
+
+                <%= hotelRecommendations.length %>
+
+            </h3>
+
+            <p>
+
+                Hotels Available
+
+            </p>
+
+            <small>
+
+                AI Recommended
+
+            </small>
+
+        </div>
+
+    </div>
+
+    <div class="dashboard-card">
+
+        <div class="dashboard-icon">
+
+            🚗
+
+        </div>
+
+        <div class="dashboard-content">
+
+            <h3>
+
+                ₹<%= transportCost.toLocaleString() %>
+
+            </h3>
+
+            <p>
+
+                Transport
+
+            </p>
+
+            <small>
+
+                <%= tripInsights.recommendedTransport %>
+
+            </small>
+
+        </div>
+
+    </div>
+
+    <div class="dashboard-card">
+
+        <div class="dashboard-icon">
+
+            🍽
+
+        </div>
+
+        <div class="dashboard-content">
+
+            <h3>
+
+                ₹<%= foodCost.toLocaleString() %>
+
+            </h3>
+
+            <p>
+
+                Food
+
+            </p>
+
+            <small>
+
+                Local Cuisine
+
+            </small>
+
+        </div>
+
+    </div>
+
+    <div class="dashboard-card">
+
+        <div class="dashboard-icon">
+
+            📅
+
+        </div>
+
+        <div class="dashboard-content">
+
+            <h3>
+
+                <%= tripDays %>
+
+            </h3>
+
+            <p>
+
+                Travel Days
+
+            </p>
+
+            <small>
+
+                Complete Plan
+
+            </small>
+
+        </div>
+
+    </div>
+
+</section>

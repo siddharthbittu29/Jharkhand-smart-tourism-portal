@@ -1,0 +1,109 @@
+<!-- ========================================= -->
+<!-- PREMIUM HERO -->
+<!-- ========================================= -->
+
+<section class="planner-hero">
+
+    <div class="planner-overlay">
+
+        <div class="planner-left">
+
+            <span class="planner-badge">
+
+                ✨ AI Powered Smart Tourism
+
+            </span>
+
+            <h1>
+
+                <%= destination %>
+
+            </h1>
+
+            <p>
+
+                Your personalized AI-generated travel itinerary for Jharkhand with
+                optimized routes, budget planning, eco-friendly suggestions,
+                hotel recommendations and intelligent travel insights.
+
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="/" class="hero-btn">
+
+                    🏠 Home
+
+                </a>
+
+                <a href="#timeline" class="hero-btn hero-btn-light">
+
+                    🗺 View Journey
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="planner-right">
+
+            <div class="hero-stat">
+
+                <span class="hero-icon">
+
+                    📅
+
+                </span>
+
+                <h2>
+
+                    <%= tripDays %>
+
+                </h2>
+
+                <p>Travel Days</p>
+
+            </div>
+
+            <div class="hero-stat">
+
+                <span class="hero-icon">
+
+                    💰
+
+                </span>
+
+                <h2>
+
+                    ₹<%= tripBudget.toLocaleString() %>
+
+                </h2>
+
+                <p>Budget</p>
+
+            </div>
+
+            <div class="hero-stat">
+
+                <span class="hero-icon">
+
+                    🌱
+
+                </span>
+
+                <h2>
+
+                    <%= ecoScore %>
+
+                </h2>
+
+                <p>Eco Score</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
