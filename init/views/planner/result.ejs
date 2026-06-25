@@ -637,12 +637,52 @@
     class="btn btn-danger mt-4 me-2"
 >
     📄 Download AI Report
+
 </a>
+
+
+<!-- ========================= -->
+<!-- INTERACTIVE MAP -->
+<!-- ========================= -->
+
+<div class="card shadow mt-5">
+
+    <div class="card-header bg-success text-white">
+
+        <h3 class="mb-0">
+            🗺 Interactive Trip Map
+        </h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <div
+            id="tripMap"
+            style="
+                height:500px;
+                width:100%;
+                border-radius:12px;
+            ">
+        </div>
+
+    </div>
+
+</div>
     <a
         href="/"
         class="btn btn-success mt-4"
     >
         Back To Home
     </a>
+    <link
+rel="stylesheet"
+href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+<script
+src="https://unpkg.com/leaflet/dist/leaflet.js">
+</script>
+
+<script src="/js/map.js"></script>
 
 </div>
