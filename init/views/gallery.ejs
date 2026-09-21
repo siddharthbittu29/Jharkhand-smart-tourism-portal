@@ -1,14 +1,2167 @@
-<section class="container py-4" >
-  <h1 class="mb-3">Gallery</h1>
-  <p class="text-muted">A glimpse of waterfalls, wildlife, and heritage sites.</p>
+<main
+  class="jt-gallery-page"
+  aria-labelledby="galleryPageTitle"
+>
 
-  <div class="row g-3" >
-    <div class="col-6 col-md-4 col-lg-3">
-      <img class="img-fluid rounded shadow-sm" src="/images/gallery/1.jpg" alt="Gallery image">
+  <style>
+    /* ============================================================
+       JHARKHAND TOURISM — VISUAL GALLERY
+    ============================================================ */
+
+    .jt-gallery-page {
+      --jt-deep: #0d3928;
+      --jt-green: #236044;
+      --jt-green-2: #2f7a56;
+      --jt-mint: #b6dfc4;
+      --jt-cream: #f7f3e8;
+      --jt-ink: #19342a;
+      --jt-muted: #687870;
+      --jt-line: rgba(18,60,43,0.11);
+      --jt-soft: #eef6f0;
+
+      width:
+        100%;
+
+      color:
+        var(--jt-ink);
+
+      background:
+        linear-gradient(
+          180deg,
+          #ffffff 0%,
+          #f7f9f6 100%
+        );
+    }
+
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+
+    .jt-gallery-hero {
+      position:
+        relative;
+
+      overflow:
+        hidden;
+
+      background:
+        linear-gradient(
+          100deg,
+          rgba(8,35,24,0.96),
+          rgba(14,63,43,0.75)
+        ),
+        url("/images/betla-national-park.jpg")
+        center / cover no-repeat;
+    }
+
+
+    .jt-gallery-hero-inner {
+      width:
+        min(1240px, calc(100% - 40px));
+
+      margin:
+        0 auto;
+
+      padding:
+        58px 0 52px;
+    }
+
+
+    .jt-gallery-eyebrow {
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        8px;
+
+      padding:
+        8px 11px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.18);
+
+      border-radius:
+        999px;
+
+      background:
+        rgba(255,255,255,0.07);
+
+      color:
+        #eaf5ed;
+
+      font-size:
+        9px;
+
+      font-weight:
+        900;
+
+      letter-spacing:
+        0.13em;
+
+      text-transform:
+        uppercase;
+    }
+
+
+    .jt-gallery-eyebrow i {
+      color:
+        var(--jt-mint);
+    }
+
+
+    .jt-gallery-hero h1 {
+      max-width:
+        790px;
+
+      margin:
+        16px 0 0;
+
+      color:
+        #ffffff;
+
+      font-size:
+        clamp(38px, 5.6vw, 64px);
+
+      line-height:
+        1.0;
+
+      font-weight:
+        900;
+
+      letter-spacing:
+        -0.045em;
+    }
+
+
+    .jt-gallery-hero p {
+      max-width:
+        720px;
+
+      margin:
+        16px 0 0;
+
+      color:
+        rgba(255,255,255,0.76);
+
+      font-size:
+        14px;
+
+      line-height:
+        1.7;
+    }
+
+
+    .jt-gallery-hero-meta {
+      display:
+        flex;
+
+      flex-wrap:
+        wrap;
+
+      gap:
+        8px;
+
+      margin-top:
+        21px;
+    }
+
+
+    .jt-gallery-hero-meta span {
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        6px;
+
+      padding:
+        7px 9px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.12);
+
+      border-radius:
+        9px;
+
+      background:
+        rgba(255,255,255,0.06);
+
+      color:
+        rgba(255,255,255,0.72);
+
+      font-size:
+        9px;
+
+      font-weight:
+        700;
+    }
+
+
+    .jt-gallery-hero-meta i {
+      color:
+        var(--jt-mint);
+    }
+
+
+    /* ============================================================
+       CONTENT
+    ============================================================ */
+
+    .jt-gallery-shell {
+      width:
+        min(1240px, calc(100% - 40px));
+
+      margin:
+        0 auto;
+
+      padding:
+        58px 0 76px;
+    }
+
+
+    .jt-gallery-head {
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        flex-end;
+
+      gap:
+        20px;
+
+      margin-bottom:
+        23px;
+    }
+
+
+    .jt-gallery-kicker {
+      color:
+        var(--jt-green);
+
+      font-size:
+        9px;
+
+      font-weight:
+        900;
+
+      letter-spacing:
+        0.13em;
+
+      text-transform:
+        uppercase;
+    }
+
+
+    .jt-gallery-head h2 {
+      margin:
+        5px 0 0;
+
+      color:
+        var(--jt-deep);
+
+      font-size:
+        clamp(27px, 3.5vw, 38px);
+
+      line-height:
+        1.05;
+
+      font-weight:
+        900;
+
+      letter-spacing:
+        -0.035em;
+    }
+
+
+    .jt-gallery-head p {
+      max-width:
+        520px;
+
+      margin:
+        8px 0 0;
+
+      color:
+        var(--jt-muted);
+
+      font-size:
+        11px;
+
+      line-height:
+        1.65;
+    }
+
+
+    .jt-gallery-count {
+      flex:
+        0 0 auto;
+
+      padding:
+        8px 10px;
+
+      border:
+        1px solid
+        rgba(35,96,68,0.10);
+
+      border-radius:
+        999px;
+
+      background:
+        #edf6ef;
+
+      color:
+        var(--jt-green);
+
+      font-size:
+        9px;
+
+      font-weight:
+        900;
+
+      white-space:
+        nowrap;
+    }
+
+
+    /* ============================================================
+       FILTER BAR
+    ============================================================ */
+
+    .jt-gallery-filterbar {
+      display:
+        flex;
+
+      flex-wrap:
+        wrap;
+
+      gap:
+        7px;
+
+      margin-bottom:
+        16px;
+    }
+
+
+    .jt-gallery-filter {
+      min-height:
+        36px;
+
+      padding:
+        8px 11px;
+
+      border:
+        1px solid
+        rgba(35,96,68,0.10);
+
+      border-radius:
+        10px;
+
+      background:
+        #ffffff;
+
+      color:
+        #63756d;
+
+      font:
+        inherit;
+
+      font-size:
+        9px;
+
+      font-weight:
+        900;
+
+      cursor:
+        pointer;
+    }
+
+
+    .jt-gallery-filter.active,
+    .jt-gallery-filter:hover {
+      border-color:
+        rgba(35,96,68,0.18);
+
+      background:
+        #edf6ef;
+
+      color:
+        var(--jt-green);
+    }
+
+
+    /* ============================================================
+       GALLERY GRID
+    ============================================================ */
+
+    .jt-gallery-grid {
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+      gap:
+        12px;
+    }
+
+
+    .jt-gallery-card {
+      position:
+        relative;
+
+      overflow:
+        hidden;
+
+      min-height:
+        265px;
+
+      border:
+        1px solid
+        var(--jt-line);
+
+      border-radius:
+        17px;
+
+      background:
+        #e6ece7;
+
+      cursor:
+        pointer;
+
+      box-shadow:
+        0 11px 27px
+        rgba(13,57,40,0.07);
+
+      transition:
+        transform 180ms ease,
+        box-shadow 180ms ease;
+    }
+
+
+    .jt-gallery-card:hover {
+      transform:
+        translateY(-4px);
+
+      box-shadow:
+        0 18px 36px
+        rgba(13,57,40,0.13);
+    }
+
+
+    .jt-gallery-card.featured {
+      grid-column:
+        span 2;
+
+      grid-row:
+        span 2;
+
+      min-height:
+        545px;
+    }
+
+
+    .jt-gallery-card img {
+      width:
+        100%;
+
+      height:
+        100%;
+
+      min-height:
+        265px;
+
+      display:
+        block;
+
+      object-fit:
+        cover;
+
+      transition:
+        transform 350ms ease;
+    }
+
+
+    .jt-gallery-card.featured img {
+      min-height:
+        545px;
+    }
+
+
+    .jt-gallery-card:hover img {
+      transform:
+        scale(1.045);
+    }
+
+
+    .jt-gallery-card::after {
+      content:
+        "";
+
+      position:
+        absolute;
+
+      inset:
+        0;
+
+      background:
+        linear-gradient(
+          180deg,
+          transparent 46%,
+          rgba(4,22,14,0.76) 100%
+        );
+
+      pointer-events:
+        none;
+    }
+
+
+    .jt-gallery-card-content {
+      position:
+        absolute;
+
+      left:
+        14px;
+
+      right:
+        14px;
+
+      bottom:
+        14px;
+
+      z-index:
+        2;
+
+      color:
+        #ffffff;
+    }
+
+
+    .jt-gallery-card-tag {
+      display:
+        inline-flex;
+
+      padding:
+        5px 7px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.15);
+
+      border-radius:
+        999px;
+
+      background:
+        rgba(4,26,17,0.66);
+
+      color:
+        #d7eee0;
+
+      backdrop-filter:
+        blur(6px);
+
+      font-size:
+        8px;
+
+      font-weight:
+        900;
+
+      letter-spacing:
+        0.06em;
+
+      text-transform:
+        uppercase;
+    }
+
+
+    .jt-gallery-card-content h3 {
+      margin:
+        7px 0 0;
+
+      color:
+        #ffffff;
+
+      font-size:
+        15px;
+
+      line-height:
+        1.15;
+
+      font-weight:
+        900;
+    }
+
+
+    .jt-gallery-card-content p {
+      margin:
+        4px 0 0;
+
+      color:
+        rgba(255,255,255,0.72);
+
+      font-size:
+        9px;
+
+      line-height:
+        1.45;
+    }
+
+
+    .jt-gallery-open-icon {
+      position:
+        absolute;
+
+      top:
+        12px;
+
+      right:
+        12px;
+
+      z-index:
+        3;
+
+      width:
+        34px;
+
+      height:
+        34px;
+
+      display:
+        grid;
+
+      place-items:
+        center;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.16);
+
+      border-radius:
+        10px;
+
+      background:
+        rgba(4,25,16,0.58);
+
+      color:
+        #ffffff;
+
+      backdrop-filter:
+        blur(7px);
+
+      font-size:
+        11px;
+    }
+
+
+    /* ============================================================
+       HIDDEN FILTER ITEMS
+    ============================================================ */
+
+    .jt-gallery-card.is-hidden {
+      display:
+        none;
+    }
+
+
+    /* ============================================================
+       LIGHTBOX
+    ============================================================ */
+
+    .jt-gallery-lightbox[hidden] {
+      display:
+        none !important;
+    }
+
+
+    .jt-gallery-lightbox {
+      position:
+        fixed;
+
+      inset:
+        0;
+
+      z-index:
+        9999;
+
+      display:
+        grid;
+
+      place-items:
+        center;
+
+      padding:
+        20px;
+
+      background:
+        rgba(3,17,11,0.91);
+
+      backdrop-filter:
+        blur(8px);
+    }
+
+
+    .jt-gallery-lightbox-inner {
+      position:
+        relative;
+
+      width:
+        min(1050px, 96vw);
+
+      max-height:
+        92vh;
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      overflow:
+        hidden;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.11);
+
+      border-radius:
+        20px;
+
+      background:
+        #071810;
+
+      box-shadow:
+        0 35px 100px
+        rgba(0,0,0,0.45);
+    }
+
+
+    .jt-gallery-lightbox-image {
+      width:
+        100%;
+
+      max-height:
+        76vh;
+
+      object-fit:
+        contain;
+
+      display:
+        block;
+
+      background:
+        #04120c;
+    }
+
+
+    .jt-gallery-lightbox-bottom {
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        15px;
+
+      padding:
+        14px 16px;
+
+      background:
+        #092b1c;
+    }
+
+
+    .jt-gallery-lightbox-title {
+      margin:
+        0;
+
+      color:
+        #ffffff;
+
+      font-size:
+        16px;
+
+      font-weight:
+        900;
+    }
+
+
+    .jt-gallery-lightbox-category {
+      margin:
+        3px 0 0;
+
+      color:
+        rgba(255,255,255,0.58);
+
+      font-size:
+        9px;
+    }
+
+
+    .jt-gallery-lightbox-close {
+      flex:
+        0 0 auto;
+
+      width:
+        40px;
+
+      height:
+        40px;
+
+      display:
+        grid;
+
+      place-items:
+        center;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.14);
+
+      border-radius:
+        11px;
+
+      background:
+        rgba(255,255,255,0.07);
+
+      color:
+        #ffffff;
+
+      cursor:
+        pointer;
+    }
+
+
+    /* ============================================================
+       CTA
+    ============================================================ */
+
+    .jt-gallery-cta {
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        20px;
+
+      margin-top:
+        45px;
+
+      padding:
+        23px 25px;
+
+      border:
+        1px solid
+        rgba(35,96,68,0.09);
+
+      border-radius:
+        20px;
+
+      background:
+        #edf5ef;
+    }
+
+
+    .jt-gallery-cta h2 {
+      margin:
+        0;
+
+      color:
+        var(--jt-deep);
+
+      font-size:
+        22px;
+
+      font-weight:
+        900;
+    }
+
+
+    .jt-gallery-cta p {
+      margin:
+        5px 0 0;
+
+      color:
+        var(--jt-muted);
+
+      font-size:
+        10px;
+
+      line-height:
+        1.5;
+    }
+
+
+    .jt-gallery-cta a {
+      flex:
+        0 0 auto;
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        8px;
+
+      min-height:
+        41px;
+
+      padding:
+        10px 13px;
+
+      border-radius:
+        11px;
+
+      background:
+        var(--jt-green);
+
+      color:
+        #ffffff;
+
+      text-decoration:
+        none;
+
+      font-size:
+        10px;
+
+      font-weight:
+        900;
+    }
+
+
+    .jt-gallery-cta a:hover {
+      background:
+        var(--jt-green-2);
+
+      color:
+        #ffffff;
+
+      text-decoration:
+        none;
+    }
+
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+
+    @media (max-width: 1050px) {
+
+      .jt-gallery-grid {
+        grid-template-columns:
+          repeat(3, minmax(0,1fr));
+      }
+
+    }
+
+
+    @media (max-width: 760px) {
+
+      .jt-gallery-shell,
+      .jt-gallery-hero-inner {
+        width:
+          min(100% - 22px, 1240px);
+      }
+
+
+      .jt-gallery-grid {
+        grid-template-columns:
+          repeat(2, minmax(0,1fr));
+      }
+
+
+      .jt-gallery-card.featured {
+        grid-column:
+          span 2;
+      }
+
+
+      .jt-gallery-head,
+      .jt-gallery-cta {
+        align-items:
+          flex-start;
+
+        flex-direction:
+          column;
+      }
+
+
+      .jt-gallery-cta a {
+        width:
+          100%;
+
+        justify-content:
+          center;
+      }
+
+    }
+
+
+    @media (max-width: 470px) {
+
+      .jt-gallery-grid {
+        grid-template-columns:
+          1fr;
+      }
+
+
+      .jt-gallery-card,
+      .jt-gallery-card.featured {
+        grid-column:
+          span 1;
+
+        grid-row:
+          span 1;
+
+        min-height:
+          300px;
+      }
+
+
+      .jt-gallery-card img,
+      .jt-gallery-card.featured img {
+        min-height:
+          300px;
+      }
+
+    }
+
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .jt-gallery-card,
+      .jt-gallery-card img {
+        transition:
+          none !important;
+      }
+
+    }
+  </style>
+
+
+  <!-- ==========================================================
+       HERO
+  =========================================================== -->
+
+  <section class="jt-gallery-hero">
+
+    <div class="jt-gallery-hero-inner">
+
+      <span class="jt-gallery-eyebrow">
+
+        <i
+          class="fa-solid fa-images"
+          aria-hidden="true"
+        ></i>
+
+        Jharkhand Visual Gallery
+
+      </span>
+
+
+      <h1 id="galleryPageTitle">
+        See the places
+        before you visit.
+      </h1>
+
+
+      <p>
+        A visual collection of Jharkhand’s waterfalls,
+        forests, heritage landmarks, temples, lakes and
+        cultural landscapes.
+      </p>
+
+
+      <div class="jt-gallery-hero-meta">
+
+        <span>
+          <i
+            class="fa-solid fa-camera"
+            aria-hidden="true"
+          ></i>
+
+          Destination photography
+        </span>
+
+        <span>
+          <i
+            class="fa-solid fa-expand"
+            aria-hidden="true"
+          ></i>
+
+          Fullscreen viewing
+        </span>
+
+        <span>
+          <i
+            class="fa-solid fa-location-dot"
+            aria-hidden="true"
+          ></i>
+
+          Explore destinations
+        </span>
+
+      </div>
+
     </div>
-    <div class="col-6 col-md-4 col-lg-3">
-      <img class="img-fluid rounded shadow-sm" src="/images/gallery/2.jpg" alt="Gallery image">
+
+  </section>
+
+
+  <div class="jt-gallery-shell">
+
+    <!-- ========================================================
+         HEADER
+    ========================================================= -->
+
+    <div class="jt-gallery-head">
+
+      <div>
+
+        <div class="jt-gallery-kicker">
+          Visual collection
+        </div>
+
+        <h2>
+          Discover Jharkhand visually.
+        </h2>
+
+        <p>
+          Browse distinct destination photographs and open any
+          image for a larger view.
+        </p>
+
+      </div>
+
+
+      <span
+        class="jt-gallery-count"
+        id="jtGalleryCount"
+      >
+        12 photographs
+      </span>
+
     </div>
-    <!-- Add more tiles as needed -->
+
+
+    <!-- ========================================================
+         FILTERS
+    ========================================================= -->
+
+    <div
+      class="jt-gallery-filterbar"
+      role="toolbar"
+      aria-label="Gallery filters"
+    >
+
+      <button
+        type="button"
+        class="jt-gallery-filter active"
+        data-filter="all"
+      >
+        All
+      </button>
+
+      <button
+        type="button"
+        class="jt-gallery-filter"
+        data-filter="nature"
+      >
+        Nature
+      </button>
+
+      <button
+        type="button"
+        class="jt-gallery-filter"
+        data-filter="waterfall"
+      >
+        Waterfalls
+      </button>
+
+      <button
+        type="button"
+        class="jt-gallery-filter"
+        data-filter="heritage"
+      >
+        Heritage
+      </button>
+
+      <button
+        type="button"
+        class="jt-gallery-filter"
+        data-filter="culture"
+      >
+        Culture
+      </button>
+
+    </div>
+
+
+    <!-- ========================================================
+         GALLERY
+    ========================================================= -->
+
+    <section
+      class="jt-gallery-grid"
+      id="jtGalleryGrid"
+      aria-label="Jharkhand destination photographs"
+    >
+
+      <!-- 01 -->
+
+      <button
+        type="button"
+        class="jt-gallery-card featured"
+        data-category="nature"
+        data-title="Netarhat"
+        data-description="Hill landscapes and panoramic viewpoints."
+        data-image="/images/netarhat.jpg"
+        aria-label="Open Netarhat photograph"
+      >
+
+        <img
+          src="/images/netarhat.jpg"
+          alt="Netarhat hill landscape"
+          loading="eager"
+        >
+
+        <span class="jt-gallery-open-icon">
+          <i
+            class="fa-solid fa-expand"
+            aria-hidden="true"
+          ></i>
+        </span>
+
+
+        <span class="jt-gallery-card-content">
+
+          <span class="jt-gallery-card-tag">
+            Nature
+          </span>
+
+          <h3>
+            Netarhat
+          </h3>
+
+          <p>
+            Hill landscapes and panoramic viewpoints.
+          </p>
+
+        </span>
+
+      </button>
+
+
+      <!-- 02 -->
+
+      <button
+        type="button"
+        class="jt-gallery-card"
+        data-category="waterfall"
+        data-title="Hundru Falls"
+        data-description="A dramatic waterfall surrounded by rocky forest terrain."
+        data-image="/images/hundru-falls.jpg"
+        aria-label="Open Hundru Falls photograph"
+      >
+
+        <img
+          src="/images/hundru-falls.jpg"
+          alt="Hundru Falls"
+          loading="lazy"
+        >
+
+        <span class="jt-gallery-open-icon">
+          <i
+            class="fa-solid fa-expand"
+            aria-hidden="true"
+          ></i>
+        </span>
+
+        <span class="jt-gallery-card-content">
+
+          <span class="jt-gallery-card-tag">
+            Waterfall
+          </span>
+
+          <h3>
+            Hundru Falls
+          </h3>
+
+          <p>
+            Rocky terrain and cascading water.
+          </p>
+
+        </span>
+
+      </button>
+
+
+      <!-- 03 -->
+
+      <button
+        type="button"
+        class="jt-gallery-card"
+        data-category="nature"
+        data-title="Betla National Park"
+        data-description="Forest landscapes and wildlife surroundings."
+        data-image="/images/betla-national-park.jpg"
+        aria-label="Open Betla National Park photograph"
+      >
+
+        <img
+          src="/images/betla-national-park.jpg"
+          alt="Betla National Park"
+          loading="lazy"
+        >
+
+        <span class="jt-gallery-open-icon">
+          <i
+            class="fa-solid fa-expand"
+            aria-hidden="true"
+          ></i>
+        </span>
+
+        <span class="jt-gallery-card-content">
+
+          <span class="jt-gallery-card-tag">
+            Nature
+          </span>
+
+          <h3>
+            Betla National Park
+          </h3>
+
+          <p>
+            Forest landscapes and wildlife surroundings.
+          </p>
+
+        </span>
+
+      </button>
+
+
+      <!-- 04 -->
+
+      <button
+        type="button"
+        class="jt-gallery-card"
+        data-category="heritage"
+        data-title="Baidyanath Dham, Deoghar"
+        data-description="A major heritage and pilgrimage destination."
+        data-image="/images/baidyanath-dham-deoghar.jpg"
+        aria-label="Open Baidyanath Dham photograph"
+      >
+
+        <img
+          src="/images/baidyanath-dham-deoghar.jpg"
+          alt="Baidyanath Dham in Deoghar"
+          loading="lazy"
+        >
+
+        <span class="jt-gallery-open-icon">
+          <i
+            class="fa-solid fa-expand"
+            aria-hidden="true"
+          ></i>
+        </span>
+
+        <span class="jt-gallery-card-content">
+
+          <span class="jt-gallery-card-tag">
+            Heritage
+          </span>
+
+          <h3>
+            Baidyanath Dham
+          </h3>
+
+          <p>
+            Heritage and pilgrimage in Deoghar.
+          </p>
+
+        </span>
+
+      </button>
+
+
+      <!-- 05 -->
+
+      <button
+        type="button"
+        class="jt-gallery-card"
+        data-category="nature"
+        data-title="Hazaribagh National Park"
+        data-description="Forested landscapes and wildlife-rich surroundings."
+        data-image="/images/hazaribagh-national-park.jpg"
+        aria-label="Open Hazaribagh National Park photograph"
+      >
+
+        <img
+          src="/images/hazaribagh-national-park.jpg"
+          alt="Hazaribagh National Park landscape"
+          loading="lazy"
+        >
+
+        <span class="jt-gallery-open-icon">
+          <i
+            class="fa-solid fa-expand"
+            aria-hidden="true"
+          ></i>
+        </span>
+
+        <span class="jt-gallery-card-content">
+
+          <span class="jt-gallery-card-tag">
+            Nature
+          </span>
+
+          <h3>
+            Hazaribagh National Park
+          </h3>
+
+          <p>
+            Forests, open landscapes and wildlife.
+          </p>
+
+        </span>
+
+      </button>
+
+
+      <!-- 06 -->
+
+      <button
+        type="button"
+        class="jt-gallery-card"
+        data-category="waterfall"
+        data-title="Dassam Falls"
+        data-description="A powerful cascade framed by rugged forest scenery."
+        data-image="/images/dassam-falls.jpg"
+        aria-label="Open Dassam Falls photograph"
+      >
+
+        <img
+          src="/images/dassam-falls.jpg"
+          alt="Dassam Falls"
+          loading="lazy"
+        >
+
+        <span class="jt-gallery-open-icon">
+          <i
+            class="fa-solid fa-expand"
+            aria-hidden="true"
+          ></i>
+        </span>
+
+        <span class="jt-gallery-card-content">
+
+          <span class="jt-gallery-card-tag">
+            Waterfall
+          </span>
+
+          <h3>
+            Dassam Falls
+          </h3>
+
+          <p>
+            Cascade, cliffs and green surroundings.
+          </p>
+
+        </span>
+
+      </button>
+
+
+      <!-- 07 -->
+
+      <button
+        type="button"
+        class="jt-gallery-card"
+        data-category="heritage"
+        data-title="Parasnath Hill"
+        data-description="Mountain landscape connected to a major pilgrimage route."
+        data-image="/images/parasnath-hill.jpg"
+        aria-label="Open Parasnath Hill photograph"
+      >
+
+        <img
+          src="/images/parasnath-hill.jpg"
+          alt="Parasnath Hill"
+          loading="lazy"
+        >
+
+        <span class="jt-gallery-open-icon">
+          <i
+            class="fa-solid fa-expand"
+            aria-hidden="true"
+          ></i>
+        </span>
+
+        <span class="jt-gallery-card-content">
+
+          <span class="jt-gallery-card-tag">
+            Heritage
+          </span>
+
+          <h3>
+            Parasnath Hill
+          </h3>
+
+          <p>
+            Mountain terrain and pilgrimage heritage.
+          </p>
+
+        </span>
+
+      </button>
+
+
+      <!-- 08 -->
+
+      <button
+        type="button"
+        class="jt-gallery-card"
+        data-category="culture"
+        data-title="Rajrappa Temple"
+        data-description="A distinctive cultural destination beside the river."
+        data-image="/images/rajrappa-temple.jpg"
+        aria-label="Open Rajrappa Temple photograph"
+      >
+
+        <img
+          src="/images/rajrappa-temple.jpg"
+          alt="Rajrappa Temple"
+          loading="lazy"
+        >
+
+        <span class="jt-gallery-open-icon">
+          <i
+            class="fa-solid fa-expand"
+            aria-hidden="true"
+          ></i>
+        </span>
+
+        <span class="jt-gallery-card-content">
+
+          <span class="jt-gallery-card-tag">
+            Culture
+          </span>
+
+          <h3>
+            Rajrappa Temple
+          </h3>
+
+          <p>
+            Temple heritage and riverside surroundings.
+          </p>
+
+        </span>
+
+      </button>
+
+
+      <!-- 09 -->
+
+      <button
+        type="button"
+        class="jt-gallery-card"
+        data-category="nature"
+        data-title="Kanke Dam"
+        data-description="An open waterfront landscape close to Ranchi."
+        data-image="/images/kanke-dam.jpg"
+        aria-label="Open Kanke Dam photograph"
+      >
+
+        <img
+          src="/images/kanke-dam.jpg"
+          alt="Kanke Dam"
+          loading="lazy"
+        >
+
+        <span class="jt-gallery-open-icon">
+          <i
+            class="fa-solid fa-expand"
+            aria-hidden="true"
+          ></i>
+        </span>
+
+        <span class="jt-gallery-card-content">
+
+          <span class="jt-gallery-card-tag">
+            Nature
+          </span>
+
+          <h3>
+            Kanke Dam
+          </h3>
+
+          <p>
+            Waterfront scenery and open landscapes.
+          </p>
+
+        </span>
+
+      </button>
+
+
+      <!-- 10 -->
+
+      <button
+        type="button"
+        class="jt-gallery-card"
+        data-category="heritage"
+        data-title="Ranchi Rock Garden"
+        data-description="Landscaped rock formations and outdoor spaces."
+        data-image="/images/ranchi-rock-garden.jpg"
+        aria-label="Open Ranchi Rock Garden photograph"
+      >
+
+        <img
+          src="/images/ranchi-rock-garden.jpg"
+          alt="Ranchi Rock Garden"
+          loading="lazy"
+        >
+
+        <span class="jt-gallery-open-icon">
+          <i
+            class="fa-solid fa-expand"
+            aria-hidden="true"
+          ></i>
+        </span>
+
+        <span class="jt-gallery-card-content">
+
+          <span class="jt-gallery-card-tag">
+            Heritage
+          </span>
+
+          <h3>
+            Ranchi Rock Garden
+          </h3>
+
+          <p>
+            Sculpted rock spaces and city recreation.
+          </p>
+
+        </span>
+
+      </button>
+
+
+      <!-- 11 -->
+
+      <button
+        type="button"
+        class="jt-gallery-card"
+        data-category="culture"
+        data-title="Khunti Tribal Villages"
+        data-description="Community, crafts and living cultural traditions."
+        data-image="/images/khunti-tribal-villages.jpg"
+        aria-label="Open Khunti Tribal Villages photograph"
+      >
+
+        <img
+          src="/images/khunti-tribal-villages.jpg"
+          alt="Khunti tribal villages"
+          loading="lazy"
+        >
+
+        <span class="jt-gallery-open-icon">
+          <i
+            class="fa-solid fa-expand"
+            aria-hidden="true"
+          ></i>
+        </span>
+
+        <span class="jt-gallery-card-content">
+
+          <span class="jt-gallery-card-tag">
+            Culture
+          </span>
+
+          <h3>
+            Khunti Tribal Villages
+          </h3>
+
+          <p>
+            Community, crafts and cultural traditions.
+          </p>
+
+        </span>
+
+      </button>
+
+
+      <!-- 12 -->
+
+      <button
+        type="button"
+        class="jt-gallery-card"
+        data-category="heritage"
+        data-title="Ranchi City Heritage Walk"
+        data-description="Urban heritage and historic city landmarks."
+        data-image="/images/ranchi-city-heritage-walk.jpg"
+        aria-label="Open Ranchi City Heritage Walk photograph"
+      >
+
+        <img
+          src="/images/ranchi-city-heritage-walk.jpg"
+          alt="Ranchi city heritage walk"
+          loading="lazy"
+        >
+
+        <span class="jt-gallery-open-icon">
+          <i
+            class="fa-solid fa-expand"
+            aria-hidden="true"
+          ></i>
+        </span>
+
+        <span class="jt-gallery-card-content">
+
+          <span class="jt-gallery-card-tag">
+            Heritage
+          </span>
+
+          <h3>
+            Ranchi Heritage Walk
+          </h3>
+
+          <p>
+            Historic landmarks across the city.
+          </p>
+
+        </span>
+
+      </button>
+
+    </section>
+
+
+    <!-- ========================================================
+         CTA
+    ========================================================= -->
+
+    <section class="jt-gallery-cta">
+
+      <div>
+
+        <h2>
+          Ready to explore these places?
+        </h2>
+
+        <p>
+          Open the destination catalogue to discover more places,
+          details and travel options.
+        </p>
+
+      </div>
+
+
+      <a href="/places">
+
+        Explore destinations
+
+        <i
+          class="fa-solid fa-arrow-right"
+          aria-hidden="true"
+        ></i>
+
+      </a>
+
+    </section>
+
   </div>
-</section>
+
+
+  <!-- ==========================================================
+       LIGHTBOX
+  =========================================================== -->
+
+  <div
+    class="jt-gallery-lightbox"
+    id="jtGalleryLightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="jtGalleryLightboxTitle"
+    hidden
+  >
+
+    <div class="jt-gallery-lightbox-inner">
+
+      <button
+        type="button"
+        class="jt-gallery-lightbox-close"
+        id="jtGalleryLightboxClose"
+        aria-label="Close image viewer"
+      >
+        <i
+          class="fa-solid fa-xmark"
+          aria-hidden="true"
+        ></i>
+      </button>
+
+
+      <img
+        id="jtGalleryLightboxImage"
+        class="jt-gallery-lightbox-image"
+        src=""
+        alt=""
+      >
+
+
+      <div class="jt-gallery-lightbox-bottom">
+
+        <div>
+
+          <h2
+            id="jtGalleryLightboxTitle"
+            class="jt-gallery-lightbox-title"
+          >
+            Destination
+          </h2>
+
+          <p
+            id="jtGalleryLightboxCategory"
+            class="jt-gallery-lightbox-category"
+          >
+            Jharkhand Tourism
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================================
+       GALLERY JAVASCRIPT
+  =========================================================== -->
+
+  <script>
+    (() => {
+
+      "use strict";
+
+
+      const cards =
+        Array.from(
+          document.querySelectorAll(
+            ".jt-gallery-card"
+          )
+        );
+
+
+      const filters =
+        Array.from(
+          document.querySelectorAll(
+            ".jt-gallery-filter"
+          )
+        );
+
+
+      const count =
+        document.getElementById(
+          "jtGalleryCount"
+        );
+
+
+      const lightbox =
+        document.getElementById(
+          "jtGalleryLightbox"
+        );
+
+
+      const lightboxImage =
+        document.getElementById(
+          "jtGalleryLightboxImage"
+        );
+
+
+      const lightboxTitle =
+        document.getElementById(
+          "jtGalleryLightboxTitle"
+        );
+
+
+      const lightboxCategory =
+        document.getElementById(
+          "jtGalleryLightboxCategory"
+        );
+
+
+      const lightboxClose =
+        document.getElementById(
+          "jtGalleryLightboxClose"
+        );
+
+
+      let previousFocus =
+        null;
+
+
+      /* ==========================================================
+         UPDATE COUNT
+      ========================================================== */
+
+      const updateCount =
+        () => {
+
+          const visible =
+            cards.filter(
+              (card) =>
+                !card.classList.contains(
+                  "is-hidden"
+                )
+            ).length;
+
+
+          if (count) {
+
+            count.textContent =
+              `${visible} photograph${visible === 1 ? "" : "s"}`;
+
+          }
+
+        };
+
+
+      /* ==========================================================
+         FILTER
+      ========================================================== */
+
+      filters.forEach(
+        (filterButton) => {
+
+          filterButton.addEventListener(
+            "click",
+            () => {
+
+              const selected =
+                filterButton.dataset.filter;
+
+
+              filters.forEach(
+                (button) => {
+
+                  button.classList.toggle(
+                    "active",
+                    button === filterButton
+                  );
+
+                }
+              );
+
+
+              cards.forEach(
+                (card) => {
+
+                  const category =
+                    card.dataset.category;
+
+
+                  const shouldShow =
+                    selected === "all" ||
+                    category === selected;
+
+
+                  card.classList.toggle(
+                    "is-hidden",
+                    !shouldShow
+                  );
+
+                }
+              );
+
+
+              updateCount();
+
+            }
+          );
+
+        }
+      );
+
+
+      /* ==========================================================
+         OPEN LIGHTBOX
+      ========================================================== */
+
+      const openLightbox =
+        (card) => {
+
+          const image =
+            card.dataset.image;
+
+
+          const title =
+            card.dataset.title ||
+            "Jharkhand destination";
+
+
+          const description =
+            card.dataset.description ||
+            "Jharkhand Tourism";
+
+
+          if (!image) {
+            return;
+          }
+
+
+          previousFocus =
+            document.activeElement;
+
+
+          lightboxImage.src =
+            image;
+
+
+          lightboxImage.alt =
+            title;
+
+
+          lightboxTitle.textContent =
+            title;
+
+
+          lightboxCategory.textContent =
+            description;
+
+
+          lightbox.hidden =
+            false;
+
+
+          document.body.style.overflow =
+            "hidden";
+
+
+          lightboxClose.focus();
+
+        };
+
+
+      cards.forEach(
+        (card) => {
+
+          card.addEventListener(
+            "click",
+            () => {
+              openLightbox(
+                card
+              );
+            }
+          );
+
+        }
+      );
+
+
+      /* ==========================================================
+         CLOSE LIGHTBOX
+      ========================================================== */
+
+      const closeLightbox =
+        () => {
+
+          lightbox.hidden =
+            true;
+
+
+          document.body.style.overflow =
+            "";
+
+
+          lightboxImage.src =
+            "";
+
+
+          if (
+            previousFocus &&
+            typeof previousFocus.focus ===
+              "function"
+          ) {
+
+            previousFocus.focus();
+
+          }
+
+        };
+
+
+      lightboxClose?.addEventListener(
+        "click",
+        closeLightbox
+      );
+
+
+      lightbox?.addEventListener(
+        "click",
+        (event) => {
+
+          if (
+            event.target ===
+            lightbox
+          ) {
+
+            closeLightbox();
+
+          }
+
+        }
+      );
+
+
+      document.addEventListener(
+        "keydown",
+        (event) => {
+
+          if (
+            lightbox.hidden
+          ) {
+            return;
+          }
+
+
+          if (
+            event.key ===
+            "Escape"
+          ) {
+
+            closeLightbox();
+
+          }
+
+        }
+      );
+
+
+      updateCount();
+
+    })();
+  </script>
+
+</main>

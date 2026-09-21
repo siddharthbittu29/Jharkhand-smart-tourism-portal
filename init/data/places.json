@@ -1,530 +1,452 @@
 [
   {
     "place_id": "p001",
-    "name": "Netarhat Hills",
+    "name": "Netarhat",
     "district": "Latehar",
     "category": "Hill",
-    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
-    "opening_hours": "Sunrise–Sunset",
-    "entry_fees": "Free",
-    "best_time": "Oct–Feb",
-    "coordinates": {
-      "lat": 23.636,
-      "lng": 84.481
-    },
-    "average_rating": 4.7,
-    "popularity_index": 92,
+    "description": "Netarhat is a cool hill plateau famous for spectacular sunrises, pine forests and tranquil viewpoints. Great for photography, short hikes and homestays.",
     "images": [
-      "/smart/places/images/netarhat-1.jpg",
-      "/smart/places/images/netarhat-2.jpg",
-      "/smart/places/images/netarhat-3.jpg"
-    ]
+      {
+        "url": "/smart/images/netarhat-360.png",
+        "caption": "Netarhat"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
   },
   {
     "place_id": "p002",
-    "name": "Deoghar Shrine 2",
-    "district": "Hazaribagh",
+    "name": "Hundru Falls",
+    "district": "Ranchi",
     "category": "Waterfall",
-    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
-    "opening_hours": "9:00–17:00",
-    "entry_fees": "Free",
-    "best_time": "Oct–Mar",
-    "coordinates": {
-      "lat": 23.64,
-      "lng": 84.54
-    },
-    "average_rating": 3.8,
-    "popularity_index": 77,
+    "description": "Hundru Falls plunges from a rocky hill into the Subarnarekha river and is popular for monsoon views and picnic outings.",
     "images": [
-      "/smart/places/images/placeholder-3.jpg",
-      "/smart/places/images/placeholder-4.jpg",
-      "/smart/places/images/placeholder-5.jpg"
-    ]
+      {
+        "url": "/smart/images/Hundru-360.png",
+        "caption": "Hundru Falls"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
   },
   {
     "place_id": "p003",
-    "name": "Palamu Fort 3",
-    "district": "Deoghar",
-    "category": "Temple",
-    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
-    "opening_hours": "9:00–17:00",
-    "entry_fees": "₹50",
-    "best_time": "Oct–Mar",
-    "coordinates": {
-      "lat": 23.66,
-      "lng": 84.57000000000001
-    },
-    "average_rating": 4.3,
-    "popularity_index": 60,
+    "name": "Betla National Park",
+    "district": "Palamu",
+    "category": "Wildlife",
+    "description": "Betla National Park includes sal forests, meadows and wildlife such as deer, elephants and many birds. Safari drives are available.",
     "images": [
-      "/smart/places/images/placeholder-4.jpg",
-      "/smart/places/images/placeholder-5.jpg",
-      "/smart/places/images/placeholder-6.jpg"
-    ]
+      {
+        "url": "/smart/images/national-park-360.png",
+        "caption": "Betla National Park"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
   },
   {
     "place_id": "p004",
-    "name": "Parasnath 4",
-    "district": "Ranchi",
-    "category": "Historical",
-    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
-    "opening_hours": "9:00–17:00",
-    "entry_fees": "Free",
-    "best_time": "Oct–Mar",
-    "coordinates": {
-      "lat": 23.68,
-      "lng": 84.60000000000001
-    },
-    "average_rating": 4,
-    "popularity_index": 58,
+    "name": "Parasnath Hill",
+    "district": "Giridih",
+    "category": "Temple",
+    "description": "Parasnath is the highest mountain in Jharkhand and an important Jain pilgrimage site with ancient temples and panoramic treks.",
     "images": [
-      "/smart/places/images/placeholder-5.jpg",
-      "/smart/places/images/placeholder-6.jpg",
-      "/smart/places/images/placeholder-7.jpg"
-    ]
+      {
+        "url": "/images/what-to-see/temple.jpg",
+        "caption": "Parasnath Hill"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
   },
   {
     "place_id": "p005",
-    "name": "Betla 5",
-    "district": "Latehar",
-    "category": "Hill",
-    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
-    "opening_hours": "9:00–17:00",
-    "entry_fees": "Free",
-    "best_time": "Oct–Mar",
-    "coordinates": {
-      "lat": 23.700000000000003,
-      "lng": 84.63000000000001
-    },
-    "average_rating": 3.8,
-    "popularity_index": 48,
+    "name": "Baidyanath Dham (Deoghar)",
+    "district": "Deoghar",
+    "category": "Temple",
+    "description": "Baidyanath Dham attracts pilgrims year-round, and the town comes alive during the Shravani Mela.",
     "images": [
-      "/smart/places/images/placeholder-1.jpg",
-      "/smart/places/images/placeholder-2.jpg",
-      "/smart/places/images/placeholder-3.jpg"
-    ]
+      {
+        "url": "/smart/images/deoghar-360.png",
+        "caption": "Baidyanath Dham (Deoghar)"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
   },
   {
     "place_id": "p006",
-    "name": "Hundru Falls 6",
-    "district": "Palamu",
-    "category": "Wildlife",
-    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
-    "opening_hours": "9:00–17:00",
-    "entry_fees": "₹50",
-    "best_time": "Oct–Mar",
-    "coordinates": {
-      "lat": 23.720000000000002,
-      "lng": 84.66000000000001
-    },
-    "average_rating": 4.7,
-    "popularity_index": 93,
+    "name": "Palamu Forts",
+    "district": "Garhwa",
+    "category": "Fort",
+    "description": "Palamu Fort features ramparts and gateways and offers rugged landscape and historic viewpoints.",
     "images": [
-      "/smart/places/images/placeholder-2.jpg",
-      "/smart/places/images/placeholder-3.jpg",
-      "/smart/places/images/placeholder-4.jpg"
-    ]
+      {
+        "url": "/images/what-to-see/adventure.jpg",
+        "caption": "Palamu Forts"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
   },
   {
     "place_id": "p007",
-    "name": "Deoghar Shrine 7",
-    "district": "Hazaribagh",
+    "name": "Jonha Falls (Shiv Ganga)",
+    "district": "Chatra",
     "category": "Waterfall",
-    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
-    "opening_hours": "9:00–17:00",
-    "entry_fees": "Free",
-    "best_time": "Oct–Mar",
-    "coordinates": {
-      "lat": 23.740000000000002,
-      "lng": 84.69
-    },
-    "average_rating": 3.6,
-    "popularity_index": 84,
+    "description": "Jonha Falls offers a scenic cascade and a cool pool area, popular for photography and picnics.",
     "images": [
-      "/smart/places/images/placeholder-3.jpg",
-      "/smart/places/images/placeholder-4.jpg",
-      "/smart/places/images/placeholder-5.jpg"
-    ]
+      {
+        "url": "/images/discover/lodh-falls.jpg",
+        "caption": "Jonha Falls (Shiv Ganga)"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
   },
   {
     "place_id": "p008",
-    "name": "Palamu Fort 8",
-    "district": "Deoghar",
-    "category": "Temple",
-    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
-    "opening_hours": "9:00–17:00",
-    "entry_fees": "Free",
-    "best_time": "Oct–Mar",
-    "coordinates": {
-      "lat": 23.76,
-      "lng": 84.72
-    },
-    "average_rating": 3.7,
-    "popularity_index": 79,
+    "name": "Hazaribagh National Park",
+    "district": "Hazaribagh",
+    "category": "Wildlife",
+    "description": "Hazaribagh NP features dry deciduous forests and wildlife like deer and many birds — good for walks and birdwatching.",
     "images": [
-      "/smart/places/images/placeholder-4.jpg",
-      "/smart/places/images/placeholder-5.jpg",
-      "/smart/places/images/placeholder-6.jpg"
-    ]
+      {
+        "url": "/smart/images/hazaribagh-360.png",
+        "caption": "Hazaribagh National Park"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
   },
   {
     "place_id": "p009",
-    "name": "Parasnath 9",
+    "name": "Jagannath Temple, Ranchi",
     "district": "Ranchi",
-    "category": "Historical",
-    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
-    "opening_hours": "9:00–17:00",
-    "entry_fees": "₹50",
-    "best_time": "Oct–Mar",
-    "coordinates": {
-      "lat": 23.78,
-      "lng": 84.75
-    },
-    "average_rating": 4.5,
-    "popularity_index": 44,
+    "category": "Temple",
+    "description": "Jagannath Temple is modeled after Puri’s architecture and hosts frequent festivals and community events.",
     "images": [
-      "/smart/places/images/placeholder-5.jpg",
-      "/smart/places/images/placeholder-6.jpg",
-      "/smart/places/images/placeholder-7.jpg"
-    ]
+      {
+        "url": "/images/what-to-see/temple.jpg",
+        "caption": "Jagannath Temple, Ranchi"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
   },
   {
     "place_id": "p010",
-    "name": "Betla 10",
-    "district": "Latehar",
-    "category": "Hill",
-    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
-    "opening_hours": "9:00–17:00",
-    "entry_fees": "Free",
-    "best_time": "Oct–Mar",
-    "coordinates": {
-      "lat": 23.8,
-      "lng": 84.78
-    },
-    "average_rating": 4.9,
-    "popularity_index": 48,
+    "name": "Ranchi Lake (Harina Lake)",
+    "district": "Ranchi",
+    "category": "Lake",
+    "description": "Ranchi Lake offers boating and evening promenades — a local family spot with easy access to eateries.",
     "images": [
-      "/smart/places/images/placeholder-1.jpg",
-      "/smart/places/images/placeholder-2.jpg",
-      "/smart/places/images/placeholder-3.jpg"
-    ]
+      {
+        "url": "/images/discover/patratu.jpg",
+        "caption": "Ranchi Lake (Harina Lake)"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
   },
   {
     "place_id": "p011",
-    "name": "Hundru Falls 11",
-    "district": "Palamu",
-    "category": "Wildlife",
-    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
-    "opening_hours": "9:00–17:00",
-    "entry_fees": "Free",
-    "best_time": "Oct–Mar",
-    "coordinates": {
-      "lat": 23.82,
-      "lng": 84.81
-    },
-    "average_rating": 4.7,
-    "popularity_index": 56,
+    "name": "Tagore Hill",
+    "district": "Ranchi",
+    "category": "Hill",
+    "description": "Tagore Hill was a retreat for Rabindranath Tagore and offers viewpoints and garden spaces.",
     "images": [
-      "/smart/places/images/placeholder-2.jpg",
-      "/smart/places/images/placeholder-3.jpg",
-      "/smart/places/images/placeholder-4.jpg"
-    ]
+      {
+        "url": "/smart/images/netarhat.jpg",
+        "caption": "Tagore Hill"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
   },
   {
     "place_id": "p012",
-    "name": "Deoghar Shrine 12",
-    "district": "Hazaribagh",
-    "category": "Waterfall",
-    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
-    "opening_hours": "9:00–17:00",
-    "entry_fees": "₹50",
-    "best_time": "Oct–Mar",
-    "coordinates": {
-      "lat": 23.84,
-      "lng": 84.84
-    },
-    "average_rating": 4.4,
-    "popularity_index": 50,
+    "name": "Betla Palace & Museum",
+    "district": "Palamu",
+    "category": "Historical",
+    "description": "Betla Palace reflects historical architecture and hosts a small museum showcasing regional artifacts.",
     "images": [
-      "/smart/places/images/placeholder-3.jpg",
-      "/smart/places/images/placeholder-4.jpg",
-      "/smart/places/images/placeholder-5.jpg"
-    ]
+      {
+        "url": "/images/what-to-see/temple.jpg",
+        "caption": "Betla Palace & Museum"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
   },
   {
     "place_id": "p013",
-    "name": "Palamu Fort 13",
-    "district": "Deoghar",
-    "category": "Temple",
-    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
-    "opening_hours": "9:00–17:00",
-    "entry_fees": "Free",
-    "best_time": "Oct–Mar",
-    "coordinates": {
-      "lat": 23.860000000000003,
-      "lng": 84.87
-    },
-    "average_rating": 3.9,
-    "popularity_index": 46,
+    "name": "Dassam Falls",
+    "district": "Ranchi",
+    "category": "Waterfall",
+    "description": "Dassam Falls is near Ranchi with interesting rock formations; enjoyable during and after rains.",
     "images": [
-      "/smart/places/images/placeholder-4.jpg",
-      "/smart/places/images/placeholder-5.jpg",
-      "/smart/places/images/placeholder-6.jpg"
-    ]
+      {
+        "url": "/images/discover/lodh-falls.jpg",
+        "caption": "Dassam Falls"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
   },
   {
     "place_id": "p014",
-    "name": "Parasnath 14",
+    "name": "Kanke Dam",
     "district": "Ranchi",
-    "category": "Historical",
-    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
-    "opening_hours": "9:00–17:00",
-    "entry_fees": "Free",
-    "best_time": "Oct–Mar",
-    "coordinates": {
-      "lat": 23.880000000000003,
-      "lng": 84.9
-    },
-    "average_rating": 3.9,
-    "popularity_index": 49,
+    "category": "Lake",
+    "description": "Kanke Dam has pathways and boating; a convenient spot for morning walks and family picnics.",
     "images": [
-      "/smart/places/images/placeholder-5.jpg",
-      "/smart/places/images/placeholder-6.jpg",
-      "/smart/places/images/placeholder-7.jpg"
-    ]
+      {
+        "url": "/smart/images/patratu-360.png",
+        "caption": "Kanke Dam"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
   },
   {
     "place_id": "p015",
-    "name": "Betla 15",
-    "district": "Latehar",
-    "category": "Hill",
-    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
-    "opening_hours": "9:00–17:00",
-    "entry_fees": "₹50",
-    "best_time": "Oct–Mar",
-    "coordinates": {
-      "lat": 23.900000000000002,
-      "lng": 84.93
-    },
-    "average_rating": 4.3,
-    "popularity_index": 57,
+    "name": "Porahat Ruins",
+    "district": "Singhbhum",
+    "category": "Historical",
+    "description": "Porahat features ruins that reflect regional history and is an offbeat destination for heritage lovers.",
     "images": [
-      "/smart/places/images/placeholder-1.jpg",
-      "/smart/places/images/placeholder-2.jpg",
-      "/smart/places/images/placeholder-3.jpg"
-    ]
+      {
+        "url": "/images/what-to-see/adventure.jpg",
+        "caption": "Porahat Ruins"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
   },
   {
     "place_id": "p016",
-    "name": "Hundru Falls 16",
-    "district": "Palamu",
-    "category": "Wildlife",
-    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
-    "opening_hours": "9:00–17:00",
-    "entry_fees": "Free",
-    "best_time": "Oct–Mar",
-    "coordinates": {
-      "lat": 23.92,
-      "lng": 84.96000000000001
-    },
-    "average_rating": 4.8,
-    "popularity_index": 40,
+    "name": "Sita Falls",
+    "district": "Gumla",
+    "category": "Waterfall",
+    "description": "Sita Falls is quieter and ideal for offbeat travelers wanting to explore natural waterfalls.",
     "images": [
-      "/smart/places/images/placeholder-2.jpg",
-      "/smart/places/images/placeholder-3.jpg",
-      "/smart/places/images/placeholder-4.jpg"
-    ]
+      {
+        "url": "/images/discover/lodh-falls.jpg",
+        "caption": "Sita Falls"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
   },
   {
     "place_id": "p017",
-    "name": "Deoghar Shrine 17",
-    "district": "Hazaribagh",
-    "category": "Waterfall",
-    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
-    "opening_hours": "9:00–17:00",
-    "entry_fees": "Free",
-    "best_time": "Oct–Mar",
-    "coordinates": {
-      "lat": 23.94,
-      "lng": 84.99000000000001
-    },
-    "average_rating": 4.7,
-    "popularity_index": 57,
+    "name": "Rajrappa Temple",
+    "district": "Ramgarh",
+    "category": "Temple",
+    "description": "Rajrappa offers a spiritual atmosphere and scenic river views alongside temple rituals.",
     "images": [
-      "/smart/places/images/placeholder-3.jpg",
-      "/smart/places/images/placeholder-4.jpg",
-      "/smart/places/images/placeholder-5.jpg"
-    ]
+      {
+        "url": "/images/what-to-see/temple.jpg",
+        "caption": "Rajrappa Temple"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
   },
   {
     "place_id": "p018",
-    "name": "Palamu Fort 18",
-    "district": "Deoghar",
-    "category": "Temple",
-    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
-    "opening_hours": "9:00–17:00",
-    "entry_fees": "₹50",
-    "best_time": "Oct–Mar",
-    "coordinates": {
-      "lat": 23.96,
-      "lng": 85.02000000000001
-    },
-    "average_rating": 3.5,
-    "popularity_index": 54,
+    "name": "Gonda Dam & Park",
+    "district": "Hazaribagh",
+    "category": "Lake",
+    "description": "Gonda Dam Park has lawns, boating options and is family-friendly near Hazaribagh town.",
     "images": [
-      "/smart/places/images/placeholder-4.jpg",
-      "/smart/places/images/placeholder-5.jpg",
-      "/smart/places/images/placeholder-6.jpg"
-    ]
+      {
+        "url": "/images/discover/patratu.jpg",
+        "caption": "Gonda Dam & Park"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
   },
   {
     "place_id": "p019",
-    "name": "Parasnath 19",
-    "district": "Ranchi",
+    "name": "Gomoh Railway Heritage",
+    "district": "Dhanbad",
     "category": "Historical",
-    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
-    "opening_hours": "9:00–17:00",
-    "entry_fees": "Free",
-    "best_time": "Oct–Mar",
-    "coordinates": {
-      "lat": 23.98,
-      "lng": 85.05
-    },
-    "average_rating": 4.4,
-    "popularity_index": 71,
+    "description": "Gomoh is tied to India’s railway and coal history and is interesting for industrial heritage enthusiasts.",
     "images": [
-      "/smart/places/images/placeholder-5.jpg",
-      "/smart/places/images/placeholder-6.jpg",
-      "/smart/places/images/placeholder-7.jpg"
-    ]
+      {
+        "url": "/images/what-to-see/adventure.jpg",
+        "caption": "Gomoh Railway Heritage"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
   },
   {
     "place_id": "p020",
-    "name": "Betla 20",
-    "district": "Latehar",
-    "category": "Hill",
-    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
-    "opening_hours": "9:00–17:00",
-    "entry_fees": "Free",
-    "best_time": "Oct–Mar",
-    "coordinates": {
-      "lat": 24,
-      "lng": 85.08
-    },
-    "average_rating": 4,
-    "popularity_index": 75,
+    "name": "Ranchi Rock Garden",
+    "district": "Ranchi",
+    "category": "Historical",
+    "description": "Ranchi Rock Garden has landscaped rock formations and sculptures — a pleasant urban park for families.",
     "images": [
-      "/smart/places/images/placeholder-1.jpg",
-      "/smart/places/images/placeholder-2.jpg",
-      "/smart/places/images/placeholder-3.jpg"
-    ]
+      {
+        "url": "/images/what-to-see/adventure.jpg",
+        "caption": "Ranchi Rock Garden"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
   },
   {
     "place_id": "p021",
-    "name": "Hundru Falls 21",
-    "district": "Palamu",
+    "name": "Dhurwa Zoological Park",
+    "district": "Ranchi",
     "category": "Wildlife",
-    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
-    "opening_hours": "9:00–17:00",
-    "entry_fees": "₹50",
-    "best_time": "Oct–Mar",
-    "coordinates": {
-      "lat": 24.020000000000003,
-      "lng": 85.11
-    },
-    "average_rating": 4.2,
-    "popularity_index": 70,
+    "description": "Dhurwa Zoo is a local educational zoo with animal exhibits and conservation messages for visitors.",
     "images": [
-      "/smart/places/images/placeholder-2.jpg",
-      "/smart/places/images/placeholder-3.jpg",
-      "/smart/places/images/placeholder-4.jpg"
-    ]
+      {
+        "url": "/images/what-to-see/wildlife.jpg",
+        "caption": "Dhurwa Zoological Park"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
   },
   {
     "place_id": "p022",
-    "name": "Deoghar Shrine 22",
-    "district": "Hazaribagh",
-    "category": "Waterfall",
-    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
-    "opening_hours": "9:00–17:00",
-    "entry_fees": "Free",
-    "best_time": "Oct–Mar",
-    "coordinates": {
-      "lat": 24.040000000000003,
-      "lng": 85.14
-    },
-    "average_rating": 4.5,
-    "popularity_index": 95,
+    "name": "Harmu Lake & Park",
+    "district": "Ranchi",
+    "category": "Lake",
+    "description": "Harmu Lake is an urban retreat for strolling, exercise and evenings near Ranchi’s central areas.",
     "images": [
-      "/smart/places/images/placeholder-3.jpg",
-      "/smart/places/images/placeholder-4.jpg",
-      "/smart/places/images/placeholder-5.jpg"
-    ]
+      {
+        "url": "/images/discover/patratu.jpg",
+        "caption": "Harmu Lake & Park"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
   },
   {
     "place_id": "p023",
-    "name": "Palamu Fort 23",
-    "district": "Deoghar",
-    "category": "Temple",
-    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
-    "opening_hours": "9:00–17:00",
-    "entry_fees": "Free",
-    "best_time": "Oct–Mar",
-    "coordinates": {
-      "lat": 24.060000000000002,
-      "lng": 85.17
-    },
-    "average_rating": 4.8,
-    "popularity_index": 52,
+    "name": "Khunti Tribal Villages",
+    "district": "Khunti",
+    "category": "Other",
+    "description": "Khunti and nearby villages showcase tribal culture, traditional crafts and community tourism experiences.",
     "images": [
-      "/smart/places/images/placeholder-4.jpg",
-      "/smart/places/images/placeholder-5.jpg",
-      "/smart/places/images/placeholder-6.jpg"
-    ]
+      {
+        "url": "/images/what-to-see/festival.jpg",
+        "caption": "Khunti Tribal Villages"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
   },
   {
     "place_id": "p024",
-    "name": "Parasnath 24",
-    "district": "Ranchi",
-    "category": "Historical",
-    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
-    "opening_hours": "9:00–17:00",
-    "entry_fees": "₹50",
-    "best_time": "Oct–Mar",
-    "coordinates": {
-      "lat": 24.080000000000002,
-      "lng": 85.2
-    },
-    "average_rating": 4.8,
-    "popularity_index": 71,
+    "name": "Tata Steel Zoological Park",
+    "district": "Jamshedpur",
+    "category": "Wildlife",
+    "description": "Tata Steel Zoo is well-kept, informative and a good family spot for seeing different species.",
     "images": [
-      "/smart/places/images/placeholder-5.jpg",
-      "/smart/places/images/placeholder-6.jpg",
-      "/smart/places/images/placeholder-7.jpg"
-    ]
+      {
+        "url": "/images/what-to-see/wildlife.jpg",
+        "caption": "Tata Steel Zoological Park"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
   },
   {
     "place_id": "p025",
-    "name": "Betla 25",
-    "district": "Latehar",
-    "category": "Hill",
-    "description": "Netarhat is a scenic hill plateau known for sunrise views, rolling hills, and biodiversity. Explore nature trails, viewpoints and sheltered picnic spots. Ideal for photography, short treks, and seasonal flower displays. Local homestays provide authentic cuisine and lodging. Respect local regulations in fragile areas and follow low-impact travel practices.",
-    "opening_hours": "9:00–17:00",
-    "entry_fees": "Free",
-    "best_time": "Oct–Mar",
-    "coordinates": {
-      "lat": 24.1,
-      "lng": 85.23
-    },
-    "average_rating": 4.5,
-    "popularity_index": 52,
+    "name": "Hanging Bridge, Deoghar",
+    "district": "Deoghar",
+    "category": "Historical",
+    "description": "The Hanging Bridge is a rustic, photogenic structure with scenic views and local legends.",
     "images": [
-      "/smart/places/images/placeholder-1.jpg",
-      "/smart/places/images/placeholder-2.jpg",
-      "/smart/places/images/placeholder-3.jpg"
-    ]
+      {
+        "url": "/images/discover/patratu.jpg",
+        "caption": "Hanging Bridge, Deoghar"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
+  },
+  {
+    "place_id": "p026",
+    "name": "Jonha (Baidyanath nearby)",
+    "district": "Deoghar",
+    "category": "Historical",
+    "description": "Jonha is near Deoghar and offers local culture and quiet temple visits; good as a calm stopover for pilgrims.",
+    "images": [
+      {
+        "url": "/smart/images/deoghar-360.png",
+        "caption": "Jonha (Baidyanath nearby)"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
+  },
+  {
+    "place_id": "p027",
+    "name": "Tusu & Chhau festival spots",
+    "district": "Various",
+    "category": "Other",
+    "description": "Experience traditional Chhau dance performances and harvest festivals (Tusu) across rural Jharkhand.",
+    "images": [
+      {
+        "url": "/images/what-to-see/festival.jpg",
+        "caption": "Tusu & Chhau festival spots"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
+  },
+  {
+    "place_id": "p028",
+    "name": "Palamu Wildlife Zone",
+    "district": "Palamu",
+    "category": "Wildlife",
+    "description": "Palamu offers a wide region of forests and wildlife sanctuaries with diverse fauna and birdlife.",
+    "images": [
+      {
+        "url": "/images/what-to-see/wildlife.jpg",
+        "caption": "Palamu Wildlife Zone"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
+  },
+  {
+    "place_id": "p029",
+    "name": "Palamu waterfalls & rock views",
+    "district": "Palamu",
+    "category": "Waterfall",
+    "description": "A region in Palamu with several small waterfalls and rocky vantage points ideal for short treks.",
+    "images": [
+      {
+        "url": "/images/discover/lodh-falls.jpg",
+        "caption": "Palamu waterfalls & rock views"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
+  },
+  {
+    "place_id": "p030",
+    "name": "Ranchi city heritage walk",
+    "district": "Ranchi",
+    "category": "Historical",
+    "description": "A walk through central Ranchi reveals colonial buildings, temples and modern civic spaces worth exploring.",
+    "images": [
+      {
+        "url": "/images/what-to-see/temple.jpg",
+        "caption": "Ranchi city heritage walk"
+      }
+    ],
+    "createdAt": "2026-09-21T12:29:20.143Z",
+    "updatedAt": "2026-09-21T12:29:20.143Z"
   }
 ]
-
-
-

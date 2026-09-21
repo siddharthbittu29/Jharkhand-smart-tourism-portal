@@ -1,115 +1,611 @@
-<div class="container py-5">
+<!-- =========================================================
+     JHARKHAND TOURISM — TOURIST DASHBOARD
+     ========================================================= -->
 
-    <div class="row mb-4">
-        <div class="col-md-12">
-            <div class="card shadow-lg border-0">
-                <div class="card-body">
+<main class="jt-dashboard-page">
 
-                    <h2 class="fw-bold text-success">
-                        Welcome, <%= user.email %>
-                    </h2>
+  <!-- =======================================================
+       DASHBOARD HERO
+       ======================================================= -->
 
-                    <p class="text-muted">
-                        Smart Tourism Dashboard
-                    </p>
+  <section class="jt-dashboard-hero">
 
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="jt-container">
 
-    <div class="row g-4">
+      <div class="jt-dashboard-hero-inner">
 
-        <div class="col-md-4">
-            <div class="card shadow h-100">
-                <div class="card-body">
+        <div class="jt-dashboard-welcome">
 
-                    <h4>👤 Profile</h4>
+          <span class="jt-eyebrow jt-eyebrow-light">
+            <i class="fa-solid fa-compass"></i>
+            Tourist Dashboard
+          </span>
 
-                    <hr>
+          <h1>
+            Welcome back,
+            <span>
+              <%= user?.name || "Traveller" %>
+            </span>
+          </h1>
 
-                    <p>
-                        <strong>Email:</strong><br>
-                        <%= user.email %>
-                    </p>
+          <p>
+            Continue discovering destinations, experiences and
+            places to stay across Jharkhand.
+          </p>
 
-                    <p>
-                        <strong>Role:</strong><br>
-                        <%= user.role %>
-                    </p>
-
-                </div>
-            </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="card shadow h-100">
-                <div class="card-body">
+        <div class="jt-dashboard-hero-action">
 
-                    <h4>🌿 Eco Score</h4>
+          <a
+            href="/places"
+            class="jt-btn jt-btn-light"
+          >
+            Explore destinations
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
 
-                    <hr>
-
-                    <h1 class="text-success">
-                        82
-                    </h1>
-
-                    <p>
-                        Eco Friendly Traveller
-                    </p>
-
-                </div>
-            </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="card shadow h-100">
-                <div class="card-body">
-
-                    <h4>🏆 Tourist Badge</h4>
-
-                    <hr>
-
-                    <h5 class="text-warning">
-                        Explorer Level
-                    </h5>
-
-                    <p>
-                        Visited 12 destinations
-                    </p>
-
-                </div>
-            </div>
-        </div>
+      </div>
 
     </div>
 
-    <div class="row mt-5 g-4">
+  </section>
 
-        <div class="col-md-3">
-            <a href="/places" class="btn btn-success w-100 py-3">
-                Explore Places
+
+  <!-- =======================================================
+       DASHBOARD CONTENT
+       ======================================================= -->
+
+  <section class="jt-dashboard-content">
+
+    <div class="jt-container">
+
+
+      <!-- =====================================================
+           ACCOUNT / QUICK STATS
+           ===================================================== -->
+
+      <div class="jt-dashboard-stats">
+
+
+        <!-- Profile -->
+
+        <article class="jt-dashboard-stat-card">
+
+          <div class="jt-dashboard-stat-icon">
+            <i class="fa-solid fa-user"></i>
+          </div>
+
+          <div class="jt-dashboard-stat-content">
+
+            <span class="jt-dashboard-stat-label">
+              Account
+            </span>
+
+            <strong>
+              <%= user?.role || "tourist" %>
+            </strong>
+
+            <small>
+              <%= user?.email || "Account email" %>
+            </small>
+
+          </div>
+
+        </article>
+
+
+        <!-- Eco Score -->
+
+        <article class="jt-dashboard-stat-card">
+
+          <div class="jt-dashboard-stat-icon jt-dashboard-stat-icon-green">
+            <i class="fa-solid fa-leaf"></i>
+          </div>
+
+          <div class="jt-dashboard-stat-content">
+
+            <span class="jt-dashboard-stat-label">
+              Eco Score
+            </span>
+
+            <strong>
+              82
+              <small>/100</small>
+            </strong>
+
+            <small>
+              Keep travelling responsibly
+            </small>
+
+          </div>
+
+        </article>
+
+
+        <!-- Explorer Level -->
+
+        <article class="jt-dashboard-stat-card">
+
+          <div class="jt-dashboard-stat-icon jt-dashboard-stat-icon-gold">
+            <i class="fa-solid fa-medal"></i>
+          </div>
+
+          <div class="jt-dashboard-stat-content">
+
+            <span class="jt-dashboard-stat-label">
+              Explorer Level
+            </span>
+
+            <strong>
+              Explorer
+            </strong>
+
+            <small>
+              Keep discovering Jharkhand
+            </small>
+
+          </div>
+
+        </article>
+
+
+        <!-- Wishlist -->
+
+        <article class="jt-dashboard-stat-card">
+
+          <div class="jt-dashboard-stat-icon jt-dashboard-stat-icon-red">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+
+          <div class="jt-dashboard-stat-content">
+
+            <span class="jt-dashboard-stat-label">
+              Saved Places
+            </span>
+
+            <strong>
+              <%= wishlistCount || 0 %>
+            </strong>
+
+            <small>
+              Destinations in your wishlist
+            </small>
+
+          </div>
+
+        </article>
+
+      </div>
+
+
+      <!-- =====================================================
+           MAIN DASHBOARD GRID
+           ===================================================== -->
+
+      <div class="jt-dashboard-grid">
+
+
+        <!-- ===================================================
+             PROFILE / ACCOUNT CARD
+             =================================================== -->
+
+        <section class="jt-dashboard-panel jt-dashboard-profile-panel">
+
+          <div class="jt-dashboard-panel-heading">
+
+            <div>
+
+              <span class="jt-eyebrow">
+                <i class="fa-solid fa-id-card"></i>
+                Your account
+              </span>
+
+              <h2>
+                Traveller profile
+              </h2>
+
+            </div>
+
+            <div class="jt-dashboard-panel-icon">
+              <i class="fa-solid fa-user-check"></i>
+            </div>
+
+          </div>
+
+
+          <div class="jt-dashboard-profile">
+
+            <div class="jt-dashboard-avatar">
+              <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div class="jt-dashboard-profile-details">
+
+              <h3>
+                <%= user?.name || "Traveller" %>
+              </h3>
+
+              <p>
+                <i class="fa-regular fa-envelope"></i>
+                <%= user?.email || "Email unavailable" %>
+              </p>
+
+              <span class="jt-dashboard-role">
+                <i class="fa-solid fa-shield-halved"></i>
+                <%= user?.role || "tourist" %>
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="jt-dashboard-profile-actions">
+
+            <a
+              href="/places"
+              class="jt-btn jt-btn-primary"
+            >
+              Explore places
+              <i class="fa-solid fa-arrow-right"></i>
             </a>
+
+            <a
+              href="/auth/logout"
+              class="jt-dashboard-text-link"
+            >
+              Sign out
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </a>
+
+          </div>
+
+        </section>
+
+
+        <!-- ===================================================
+             QUICK ACTIONS
+             =================================================== -->
+
+        <section class="jt-dashboard-panel">
+
+          <div class="jt-dashboard-panel-heading">
+
+            <div>
+
+              <span class="jt-eyebrow">
+                <i class="fa-solid fa-bolt"></i>
+                Quick access
+              </span>
+
+              <h2>
+                Plan your journey
+              </h2>
+
+            </div>
+
+          </div>
+
+
+          <div class="jt-dashboard-quick-actions">
+
+
+            <a
+              href="/planner"
+              class="jt-dashboard-action-card"
+            >
+
+              <span class="jt-dashboard-action-icon">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+              </span>
+
+              <span class="jt-dashboard-action-content">
+
+                <strong>
+                  AI Trip Planner
+                </strong>
+
+                <small>
+                  Build a personalised Jharkhand itinerary.
+                </small>
+
+              </span>
+
+              <i class="fa-solid fa-arrow-right jt-dashboard-action-arrow"></i>
+
+            </a>
+
+
+            <a
+              href="/hotels"
+              class="jt-dashboard-action-card"
+            >
+
+              <span class="jt-dashboard-action-icon">
+                <i class="fa-solid fa-hotel"></i>
+              </span>
+
+              <span class="jt-dashboard-action-content">
+
+                <strong>
+                  Find a stay
+                </strong>
+
+                <small>
+                  Discover hotels and places to stay.
+                </small>
+
+              </span>
+
+              <i class="fa-solid fa-arrow-right jt-dashboard-action-arrow"></i>
+
+            </a>
+
+
+            <a
+              href="/festivals"
+              class="jt-dashboard-action-card"
+            >
+
+              <span class="jt-dashboard-action-icon">
+                <i class="fa-solid fa-drum"></i>
+              </span>
+
+              <span class="jt-dashboard-action-content">
+
+                <strong>
+                  Festivals & culture
+                </strong>
+
+                <small>
+                  Explore the living traditions of Jharkhand.
+                </small>
+
+              </span>
+
+              <i class="fa-solid fa-arrow-right jt-dashboard-action-arrow"></i>
+
+            </a>
+
+
+            <a
+              href="/smart-tourism"
+              class="jt-dashboard-action-card"
+            >
+
+              <span class="jt-dashboard-action-icon">
+                <i class="fa-solid fa-map-location-dot"></i>
+              </span>
+
+              <span class="jt-dashboard-action-content">
+
+                <strong>
+                  Smart Tourism
+                </strong>
+
+                <small>
+                  Explore intelligent travel experiences.
+                </small>
+
+              </span>
+
+              <i class="fa-solid fa-arrow-right jt-dashboard-action-arrow"></i>
+
+            </a>
+
+          </div>
+
+        </section>
+
+      </div>
+
+
+      <!-- =====================================================
+           WISHLIST SECTION
+           ===================================================== -->
+
+      <section class="jt-dashboard-panel jt-dashboard-wishlist-panel">
+
+        <div class="jt-dashboard-panel-heading">
+
+          <div>
+
+            <span class="jt-eyebrow">
+              <i class="fa-solid fa-heart"></i>
+              Your collection
+            </span>
+
+            <h2>
+              Saved destinations
+            </h2>
+
+            <p>
+              Keep the places you want to experience next close at hand.
+            </p>
+
+          </div>
+
+          <a
+            href="/wishlist"
+            class="jt-view-all-link"
+          >
+            View wishlist
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+
         </div>
 
-        <div class="col-md-3">
-            <a href="/hotels" class="btn btn-primary w-100 py-3">
-                Book Hotels
+
+        <% if (recentWishlist && recentWishlist.length > 0) { %>
+
+          <div class="jt-dashboard-wishlist-grid">
+
+            <% recentWishlist.forEach((item) => { %>
+
+              <article class="jt-dashboard-wishlist-card">
+
+                <div class="jt-dashboard-wishlist-image">
+
+                  <img
+                    src="<%= item.image || '/images/placeholder.jpg' %>"
+                    alt="<%= item.placeName || 'Saved destination' %>"
+                    loading="lazy"
+                    onerror="this.onerror=null;this.src='/images/placeholder.jpg';"
+                  >
+
+                  <span class="jt-dashboard-wishlist-heart">
+                    <i class="fa-solid fa-heart"></i>
+                  </span>
+
+                </div>
+
+
+                <div class="jt-dashboard-wishlist-body">
+
+                  <span class="jt-dashboard-wishlist-district">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <%= item.district || "Jharkhand" %>
+
+                  </span>
+
+
+                  <h3>
+                    <%= item.placeName || "Saved destination" %>
+                  </h3>
+
+
+                  <a
+                    href="/places/<%= encodeURIComponent(item.placeId) %>"
+                    class="jt-dashboard-wishlist-link"
+                  >
+                    Explore destination
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </a>
+
+                </div>
+
+              </article>
+
+            <% }); %>
+
+          </div>
+
+
+          <% if (wishlistCount > 3) { %>
+
+            <div class="jt-dashboard-wishlist-footer">
+
+              <span>
+                Showing your 3 most recently saved destinations.
+              </span>
+
+              <a href="/wishlist">
+                View all <%= wishlistCount %> saved places
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+
+            </div>
+
+          <% } %>
+
+
+        <% } else { %>
+
+
+          <!-- =================================================
+               EMPTY WISHLIST
+               ================================================= -->
+
+          <div class="jt-dashboard-wishlist-empty">
+
+            <div class="jt-dashboard-empty-icon">
+              <i class="fa-regular fa-heart"></i>
+            </div>
+
+            <div class="jt-dashboard-empty-content">
+
+              <h3>
+                Your wishlist is waiting.
+              </h3>
+
+              <p>
+                Save destinations you would like to visit and
+                they will appear here.
+              </p>
+
+            </div>
+
+            <a
+              href="/places"
+              class="jt-btn jt-btn-primary"
+            >
+              Explore destinations
+              <i class="fa-solid fa-arrow-right"></i>
             </a>
+
+          </div>
+
+
+        <% } %>
+
+      </section>
+
+
+      <!-- =====================================================
+           DISCOVERY CTA
+           ===================================================== -->
+
+      <section class="jt-dashboard-discovery">
+
+        <div class="jt-dashboard-discovery-content">
+
+          <span class="jt-eyebrow jt-eyebrow-light">
+            <i class="fa-solid fa-mountain-sun"></i>
+            Keep exploring
+          </span>
+
+          <h2>
+            There is always more of Jharkhand to discover.
+          </h2>
+
+          <p>
+            From waterfalls and forests to festivals and
+            cultural experiences, plan your next journey.
+          </p>
+
         </div>
 
-        <div class="col-md-3">
-            <a href="/festivals" class="btn btn-warning w-100 py-3">
-                Festivals
-            </a>
+
+        <div class="jt-dashboard-discovery-actions">
+
+          <a
+            href="/places"
+            class="jt-btn jt-btn-light"
+          >
+            Explore destinations
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+
+          <a
+            href="/planner"
+            class="jt-btn jt-btn-cta-outline"
+          >
+            Plan a trip
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+          </a>
+
         </div>
 
-        <div class="col-md-3">
-            <a href="/auth/logout" class="btn btn-danger w-100 py-3">
-                Logout
-            </a>
-        </div>
+      </section>
+
 
     </div>
 
-</div>
+  </section>
+
+</main>

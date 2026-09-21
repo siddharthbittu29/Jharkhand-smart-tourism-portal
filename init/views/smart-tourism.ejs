@@ -1,51 +1,880 @@
-<!-- init/views/smart/tourism.ejs -->
-<div class="container">
-  <h1 class="mb-3">Smart Tourism – Jharkhand</h1>
-  <p class="lead">A smart digital platform to promote Eco & Cultural Tourism in Jharkhand.</p>
+<%
+/*
+ * ============================================================
+ * JHARKHAND TOURISM
+ * SMART TOURISM — TOP-LEVEL OVERVIEW
+ * File: init/views/smart-tourism.ejs
+ *
+ * Note:
+ * The primary Smart Tourism route uses:
+ *     smart-tourism/index.ejs
+ *
+ * This view remains compatible with the existing project
+ * structure while presenting the same Smart Tourism direction
+ * in a clean premium format.
+ * ============================================================
+ */
 
-  <div class="row g-4 mt-2">
-    <div class="col-md-6">
-      <div class="card h-100">
-        <div class="card-body">
-          <h5 class="card-title">Problem Overview</h5>
-          <ul class="mb-0">
-            <li>Tourism data is fragmented/outdated.</li>
-            <li>Limited visibility of eco & cultural sites.</li>
-            <li>Language & accessibility barriers.</li>
-            <li>Low digital benefit to local communities.</li>
-          </ul>
+const smartTitle =
+  typeof title !== "undefined" && title
+    ? title
+    : "Smart Tourism — Jharkhand";
+%>
+
+
+<link
+  rel="stylesheet"
+  href="/css/smart-tourism.css?v=2"
+>
+
+
+<div class="jt-smart-page">
+
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+
+  <section class="jt-st-page-hero">
+
+    <div class="jt-smart-shell">
+
+      <div class="jt-st-page-hero-grid">
+
+        <div>
+
+          <span class="eyebrow">
+
+            <i
+              class="fa-solid fa-microchip"
+              aria-hidden="true">
+            </i>
+
+            Smart Tourism
+          </span>
+
+
+          <h1>
+            A connected digital tourism experience for Jharkhand.
+          </h1>
+
+
+          <p>
+            Explore a structured vision for smarter destination discovery,
+            intelligent trip planning, interactive navigation, cultural
+            experiences and sustainability-oriented tourism.
+          </p>
+
         </div>
-      </div>
-    </div>
 
-    <div class="col-md-6">
-      <div class="card h-100">
-        <div class="card-body">
-          <h5 class="card-title">Proposed Solution</h5>
-          <ul class="mb-0">
-            <li>Web & mobile platform with interactive map.</li>
-            <li>AI itinerary planner & eco insights.</li>
-            <li>Festivals & cultural storytelling hub.</li>
-            <li>Integration with booking & local stakeholders.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
 
-    <div class="col-12">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Core Modules</h5>
-          <div class="row row-cols-2 row-cols-md-3 g-3">
-            <div class="col"><span>🏞️ Explore Destinations</span></div>
-            <div class="col"><span>🎭 Cultural Hub</span></div>
-            <div class="col"><span>♻️ Eco Insights</span></div>
-            <div class="col"><span>🧭 Smart Trip Planner</span></div>
-            <div class="col"><span>🧑‍🤝‍🧑 Local Connect</span></div>
-            <div class="col"><span>📸 Virtual Experiences</span></div>
+        <aside class="jt-st-page-hero-panel">
+
+          <div class="panel-label">
+            Explore the platform
           </div>
-        </div>
+
+
+          <div class="jt-st-stat-stack">
+
+            <div class="jt-st-stat-row">
+
+              <span>
+                Discovery
+              </span>
+
+              <strong>
+                Destinations
+              </strong>
+
+            </div>
+
+
+            <div class="jt-st-stat-row">
+
+              <span>
+                Planning
+              </span>
+
+              <strong>
+                Intelligent Trips
+              </strong>
+
+            </div>
+
+
+            <div class="jt-st-stat-row">
+
+              <span>
+                Navigation
+              </span>
+
+              <strong>
+                Interactive Maps
+              </strong>
+
+            </div>
+
+
+            <div class="jt-st-stat-row">
+
+              <span>
+                Experience
+              </span>
+
+              <strong>
+                Culture + Eco
+              </strong>
+
+            </div>
+
+          </div>
+
+        </aside>
+
       </div>
+
     </div>
-  </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       SECTION NAVIGATION
+  ============================================================ -->
+
+  <%- include("smart-tourism/partials/nav") %>
+
+
+  <!-- ============================================================
+       INTRODUCTION
+  ============================================================ -->
+
+  <section class="jt-smart-section">
+
+    <div class="jt-smart-shell">
+
+      <div class="jt-smart-section-head">
+
+        <span class="jt-smart-section-kicker">
+          <i
+            class="fa-solid fa-compass"
+            aria-hidden="true">
+          </i>
+
+          Platform Overview
+        </span>
+
+
+        <h2>
+          Bringing nature, culture and technology into one journey.
+        </h2>
+
+
+        <p>
+          Smart Tourism connects the major stages of a visitor's experience,
+          from discovering places and planning a trip to navigating
+          destinations and exploring cultural and eco-tourism experiences.
+        </p>
+
+      </div>
+
+
+      <div class="jt-smart-cap-grid">
+
+
+        <!-- ======================================================
+             DISCOVERY
+        ======================================================= -->
+
+        <a
+          href="/places"
+          class="jt-smart-cap-card"
+        >
+
+          <div class="cap-icon">
+            <i
+              class="fa-solid fa-location-dot"
+              aria-hidden="true">
+            </i>
+          </div>
+
+
+          <h3>
+            Explore Destinations
+          </h3>
+
+
+          <p>
+            Discover tourism destinations across Jharkhand through
+            structured destination information and categories.
+          </p>
+
+
+          <span class="cap-link">
+
+            Explore places
+
+            <i
+              class="fa-solid fa-arrow-right"
+              aria-hidden="true">
+            </i>
+
+          </span>
+
+        </a>
+
+
+        <!-- ======================================================
+             PLANNING
+        ======================================================= -->
+
+        <a
+          href="/planner"
+          class="jt-smart-cap-card"
+        >
+
+          <div class="cap-icon">
+            <i
+              class="fa-solid fa-route"
+              aria-hidden="true">
+            </i>
+          </div>
+
+
+          <h3>
+            AI Trip Planner
+          </h3>
+
+
+          <p>
+            Build a structured itinerary with destination planning,
+            hotel suggestions, budget information and travel insights.
+          </p>
+
+
+          <span class="cap-link">
+
+            Plan your trip
+
+            <i
+              class="fa-solid fa-arrow-right"
+              aria-hidden="true">
+            </i>
+
+          </span>
+
+        </a>
+
+
+        <!-- ======================================================
+             MAP
+        ======================================================= -->
+
+        <a
+          href="/smart-tourism/core-features"
+          class="jt-smart-cap-card"
+        >
+
+          <div class="cap-icon">
+            <i
+              class="fa-solid fa-map-location-dot"
+              aria-hidden="true">
+            </i>
+          </div>
+
+
+          <h3>
+            Interactive Smart Map
+          </h3>
+
+
+          <p>
+            Connect destinations, routes and tourism information through
+            an interactive map-oriented visitor experience.
+          </p>
+
+
+          <span class="cap-link">
+
+            View core features
+
+            <i
+              class="fa-solid fa-arrow-right"
+              aria-hidden="true">
+            </i>
+
+          </span>
+
+        </a>
+
+
+        <!-- ======================================================
+             CULTURE
+        ======================================================= -->
+
+        <a
+          href="/festivals"
+          class="jt-smart-cap-card"
+        >
+
+          <div class="cap-icon">
+            <i
+              class="fa-solid fa-drum"
+              aria-hidden="true">
+            </i>
+          </div>
+
+
+          <h3>
+            Cultural Discovery
+          </h3>
+
+
+          <p>
+            Discover festivals, heritage and cultural experiences as
+            part of the wider tourism journey.
+          </p>
+
+
+          <span class="cap-link">
+
+            Discover culture
+
+            <i
+              class="fa-solid fa-arrow-right"
+              aria-hidden="true">
+            </i>
+
+          </span>
+
+        </a>
+
+
+        <!-- ======================================================
+             ECO
+        ======================================================= -->
+
+        <a
+          href="/smart-tourism/core-features"
+          class="jt-smart-cap-card"
+        >
+
+          <div class="cap-icon">
+            <i
+              class="fa-solid fa-leaf"
+              aria-hidden="true">
+            </i>
+          </div>
+
+
+          <h3>
+            Eco Tourism
+          </h3>
+
+
+          <p>
+            Keep responsible tourism, sustainability and environmental
+            awareness visible within the visitor experience.
+          </p>
+
+
+          <span class="cap-link">
+
+            Explore Smart Tourism
+
+            <i
+              class="fa-solid fa-arrow-right"
+              aria-hidden="true">
+            </i>
+
+          </span>
+
+        </a>
+
+
+        <!-- ======================================================
+             VISITOR SUPPORT
+        ======================================================= -->
+
+        <a
+          href="/chatbot"
+          class="jt-smart-cap-card"
+        >
+
+          <div class="cap-icon">
+            <i
+              class="fa-solid fa-comments"
+              aria-hidden="true">
+            </i>
+          </div>
+
+
+          <h3>
+            Tourist Assistance
+          </h3>
+
+
+          <p>
+            Access the tourism chatbot for visitor-oriented questions,
+            destination information and trip guidance.
+          </p>
+
+
+          <span class="cap-link">
+
+            Ask the assistant
+
+            <i
+              class="fa-solid fa-arrow-right"
+              aria-hidden="true">
+            </i>
+
+          </span>
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       PROBLEM / SOLUTION
+  ============================================================ -->
+
+  <section class="jt-smart-section soft">
+
+    <div class="jt-smart-shell">
+
+      <div class="jt-smart-section-head">
+
+        <span class="jt-smart-section-kicker">
+          <i
+            class="fa-solid fa-arrows-to-circle"
+            aria-hidden="true">
+          </i>
+
+          Product Direction
+        </span>
+
+
+        <h2>
+          From fragmented information to a connected experience.
+        </h2>
+
+
+        <p>
+          The Smart Tourism concept is organised around a simple idea:
+          important tourism interactions should feel connected instead
+          of operating as isolated pieces of information.
+        </p>
+
+      </div>
+
+
+      <div class="jt-smart-problem-grid">
+
+
+        <article class="jt-smart-problem-card">
+
+          <div class="jt-smart-card-icon">
+
+            <i
+              class="fa-solid fa-magnifying-glass"
+              aria-hidden="true">
+            </i>
+
+          </div>
+
+
+          <h3>
+            Discover
+          </h3>
+
+
+          <p>
+            Help visitors identify destinations, experiences and tourism
+            categories that match what they want to explore.
+          </p>
+
+        </article>
+
+
+        <article class="jt-smart-problem-card">
+
+          <div class="jt-smart-card-icon">
+
+            <i
+              class="fa-solid fa-calendar-check"
+              aria-hidden="true">
+            </i>
+
+          </div>
+
+
+          <h3>
+            Plan
+          </h3>
+
+
+          <p>
+            Turn destination choices into an organised travel plan with
+            itinerary, accommodation, cost and travel information.
+          </p>
+
+        </article>
+
+
+        <article class="jt-smart-problem-card">
+
+          <div class="jt-smart-card-icon">
+
+            <i
+              class="fa-solid fa-map"
+              aria-hidden="true">
+            </i>
+
+          </div>
+
+
+          <h3>
+            Navigate
+          </h3>
+
+
+          <p>
+            Connect places and routes through maps and location-oriented
+            information during the journey.
+          </p>
+
+        </article>
+
+
+        <article class="jt-smart-problem-card">
+
+          <div class="jt-smart-card-icon">
+
+            <i
+              class="fa-solid fa-landmark"
+              aria-hidden="true">
+            </i>
+
+          </div>
+
+
+          <h3>
+            Experience
+          </h3>
+
+
+          <p>
+            Encourage deeper engagement with culture, heritage, nature,
+            sustainability and local tourism experiences.
+          </p>
+
+        </article>
+
+      </div>
+
+
+      <div class="jt-smart-blueprint">
+
+        <h3>
+          One journey. Multiple connected capabilities.
+        </h3>
+
+
+        <p>
+          The platform direction combines destination discovery, AI-assisted
+          planning, smart maps, cultural information, sustainability
+          concepts and visitor support without separating them into unrelated
+          experiences.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       CORE MODULES
+  ============================================================ -->
+
+  <section class="jt-smart-section">
+
+    <div class="jt-smart-shell">
+
+      <div class="jt-smart-section-head">
+
+        <span class="jt-smart-section-kicker">
+          <i
+            class="fa-solid fa-cubes-stacked"
+            aria-hidden="true">
+          </i>
+
+          Core Modules
+        </span>
+
+
+        <h2>
+          The key building blocks of Smart Tourism.
+        </h2>
+
+
+        <p>
+          Explore the six highlighted feature concepts and their role in
+          creating a more connected visitor experience.
+        </p>
+
+      </div>
+
+
+      <div class="jt-smart-cap-grid">
+
+
+        <a
+          href="/smart-tourism/core-features"
+          class="jt-smart-cap-card"
+        >
+
+          <div class="cap-icon">
+            <i
+              class="fa-solid fa-wand-magic-sparkles"
+              aria-hidden="true">
+            </i>
+          </div>
+
+          <h3>
+            AI Trip Recommender
+          </h3>
+
+          <p>
+            Intelligent recommendations designed to help visitors structure
+            and personalise their trip.
+          </p>
+
+          <span class="cap-link">
+            Explore
+            <i class="fa-solid fa-arrow-right"></i>
+          </span>
+
+        </a>
+
+
+        <a
+          href="/smart-tourism/core-features"
+          class="jt-smart-cap-card"
+        >
+
+          <div class="cap-icon">
+            <i
+              class="fa-solid fa-map-location-dot"
+              aria-hidden="true">
+            </i>
+          </div>
+
+          <h3>
+            Interactive Smart Map
+          </h3>
+
+          <p>
+            Map-oriented discovery and navigation for places, journeys and
+            tourism context.
+          </p>
+
+          <span class="cap-link">
+            Explore
+            <i class="fa-solid fa-arrow-right"></i>
+          </span>
+
+        </a>
+
+
+        <a
+          href="/smart-tourism/core-features"
+          class="jt-smart-cap-card"
+        >
+
+          <div class="cap-icon">
+            <i
+              class="fa-solid fa-masks-theater"
+              aria-hidden="true">
+            </i>
+          </div>
+
+          <h3>
+            Cultural Hub
+          </h3>
+
+          <p>
+            A digital space for cultural discovery, festivals and heritage
+            storytelling.
+          </p>
+
+          <span class="cap-link">
+            Explore
+            <i class="fa-solid fa-arrow-right"></i>
+          </span>
+
+        </a>
+
+
+        <a
+          href="/smart-tourism/core-features"
+          class="jt-smart-cap-card"
+        >
+
+          <div class="cap-icon">
+            <i
+              class="fa-solid fa-seedling"
+              aria-hidden="true">
+            </i>
+          </div>
+
+          <h3>
+            EcoScore Tracker
+          </h3>
+
+          <p>
+            Sustainability-oriented indicators that bring responsible travel
+            into the tourism planning conversation.
+          </p>
+
+          <span class="cap-link">
+            Explore
+            <i class="fa-solid fa-arrow-right"></i>
+          </span>
+
+        </a>
+
+
+        <a
+          href="/smart-tourism/core-features"
+          class="jt-smart-cap-card"
+        >
+
+          <div class="cap-icon">
+            <i
+              class="fa-solid fa-vr-cardboard"
+              aria-hidden="true">
+            </i>
+          </div>
+
+          <h3>
+            AR/VR Heritage View
+          </h3>
+
+          <p>
+            Immersive heritage presentation concepts that can enrich digital
+            cultural exploration.
+          </p>
+
+          <span class="cap-link">
+            Explore
+            <i class="fa-solid fa-arrow-right"></i>
+          </span>
+
+        </a>
+
+
+        <a
+          href="/smart-tourism/core-features"
+          class="jt-smart-cap-card"
+        >
+
+          <div class="cap-icon">
+            <i
+              class="fa-solid fa-people-arrows"
+              aria-hidden="true">
+            </i>
+          </div>
+
+          <h3>
+            Tourist–Local Connect
+          </h3>
+
+          <p>
+            A wider ecosystem concept for meaningful connections between
+            visitors and local tourism stakeholders.
+          </p>
+
+          <span class="cap-link">
+            Explore
+            <i class="fa-solid fa-arrow-right"></i>
+          </span>
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       CTA
+  ============================================================ -->
+
+  <section class="jt-smart-cta">
+
+    <div class="jt-smart-shell">
+
+      <div class="jt-smart-cta-box">
+
+        <div>
+
+          <h2>
+            Explore the complete Smart Tourism framework.
+          </h2>
+
+
+          <p>
+            Continue through the objectives, features, visitor journey,
+            architecture and core feature experience.
+          </p>
+
+        </div>
+
+
+        <div class="jt-smart-cta-actions">
+
+          <a
+            href="/smart-tourism/objectives"
+            class="jt-smart-btn jt-smart-btn-primary"
+          >
+            Objectives
+
+            <i
+              class="fa-solid fa-arrow-right"
+              aria-hidden="true">
+            </i>
+          </a>
+
+
+          <a
+            href="/smart-tourism/core-features"
+            class="jt-smart-btn jt-smart-btn-secondary"
+          >
+            Core Features
+
+            <i
+              class="fa-solid fa-cubes-stacked"
+              aria-hidden="true">
+            </i>
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
 </div>

@@ -1,20 +1,144 @@
 <%
-// helper: mark current tab active
-const ACTIVE = (p) => (currentPath === p ? 'active' : '');
+/*
+ * ============================================================
+ * JHARKHAND TOURISM — SMART TOURISM COMPACT SUBNAV
+ * File: init/views/smart-tourism/partials/subnav.ejs
+ *
+ * Purpose:
+ * - Compact internal navigation for Smart Tourism content
+ * - Intended for pages that need only the section tabs
+ * - Keeps Core Features available
+ * ============================================================
+ */
+
+const subnavPath =
+  typeof currentPath !== "undefined"
+    ? currentPath
+    : "";
+
+const subnavItems = [
+  {
+    href: "/smart-tourism",
+    label: "Overview",
+    icon: "fa-compass"
+  },
+  {
+    href: "/smart-tourism/objectives",
+    label: "Objectives",
+    icon: "fa-bullseye"
+  },
+  {
+    href: "/smart-tourism/features",
+    label: "Features",
+    icon: "fa-layer-group"
+  },
+  {
+    href: "/smart-tourism/journey",
+    label: "User Journey",
+    icon: "fa-route"
+  },
+  {
+    href: "/smart-tourism/architecture",
+    label: "Architecture",
+    icon: "fa-diagram-project"
+  },
+  {
+    href: "/smart-tourism/core-features",
+    label: "Core Features",
+    icon: "fa-cubes-stacked"
+  }
+];
+
+const subnavActive = (href) =>
+  subnavPath === href;
 %>
 
-<div class="container mt-3">
-  <div class="btn-group flex-wrap gap-2">
-    <a href="/smart-tourism" class="btn btn-outline-primary <%= ACTIVE('/smart-tourism') %>">Overview</a>
-    <a href="/smart-tourism/objectives" class="btn btn-outline-primary <%= ACTIVE('/smart-tourism/objectives') %>">Objectives</a>
-    <a href="/smart-tourism/features" class="btn btn-outline-primary <%= ACTIVE('/smart-tourism/features') %>">Features</a>
-    <a href="/smart-tourism/journey" class="btn btn-outline-primary <%= ACTIVE('/smart-tourism/journey') %>">User Journey</a>
-    <a href="/smart-tourism/architecture" class="btn btn-outline-primary <%= ACTIVE('/smart-tourism/architecture') %>">Architecture</a>
+
+<!-- ============================================================
+     COMPACT SMART TOURISM SUBNAV
+============================================================ -->
+
+<div class="jt-smart-subnav">
+
+  <div
+    class="jt-smart-subnav-inner"
+    role="navigation"
+    aria-label="Smart Tourism sections"
+  >
+
+    <span
+      class="jt-st-badge dark"
+      aria-hidden="true"
+    >
+      <i class="fa-solid fa-microchip"></i>
+      Smart Tourism
+    </span>
+
+
+    <% subnavItems.forEach((item) => { %>
+
+      <a
+        href="<%= item.href %>"
+        class="<%= subnavActive(item.href) ? 'active' : '' %>"
+        <%= subnavActive(item.href) ? 'aria-current="page"' : '' %>
+      >
+
+        <i
+          class="fa-solid <%= item.icon %>"
+          aria-hidden="true"
+        ></i>
+
+        <span>
+          <%= item.label %>
+        </span>
+
+      </a>
+
+    <% }) %>
+
   </div>
+
 </div>
 
-<style>
-  .btn-group .btn { transition: transform .15s ease, box-shadow .15s ease; }
-  .btn-group .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.12); }
-  .btn-group .btn.active { color: #fff; background-color: #0d6efd; border-color: #0d6efd; }
-</style>
+
+<script>
+(() => {
+  "use strict";
+
+  const wrapper =
+    document.querySelector(
+      ".jt-smart-subnav"
+    );
+
+  if (!wrapper) return;
+
+  const active =
+    wrapper.querySelector(
+      'a.active, a[aria-current="page"]'
+    );
+
+  if (!active) return;
+
+  const mobile =
+    window.matchMedia &&
+    window.matchMedia(
+      "(max-width: 760px)"
+    ).matches;
+
+  if (!mobile) return;
+
+  const reduced =
+    window.matchMedia &&
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+  requestAnimationFrame(() => {
+    active.scrollIntoView({
+      behavior: reduced ? "auto" : "smooth",
+      block: "nearest",
+      inline: "center"
+    });
+  });
+})();
+</script>

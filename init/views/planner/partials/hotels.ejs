@@ -1,139 +1,580 @@
-<!-- ========================================= -->
-<!-- AI HOTEL RECOMMENDATIONS -->
-<!-- ========================================= -->
+<!-- =========================================================
+     JHARKHAND TOURISM — PLANNER HOTEL RECOMMENDATIONS
+========================================================= -->
 
-<section class="hotel-section">
+<%
+    const safeHotels =
+        Array.isArray(hotelRecommendations)
+            ? hotelRecommendations
+            : [];
+%>
+
+
+<section
+    class="hotel-section"
+    aria-labelledby="hotel-section-title"
+>
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
 
     <div class="section-heading">
 
         <span class="section-badge">
 
-            🏨 Stay Recommendations
+            <i
+                class="fa-solid fa-hotel"
+                aria-hidden="true">
+            </i>
+
+            Smart Stay Recommendations
 
         </span>
 
-        <h2>
 
-            AI Recommended Hotels
+        <h2 id="hotel-section-title">
+
+            Places to stay along your journey
 
         </h2>
 
+
         <p>
 
-            Best hotels selected according to your destination and itinerary.
+            Explore accommodation suggestions connected
+            to the destinations in your travel plan.
 
         </p>
 
     </div>
 
-    <div class="hotel-grid">
 
-        <% hotelRecommendations.forEach((item)=>{ 
+    <% if (safeHotels.length) { %>
 
-            const hotel = item.hotel;
 
-        %>
+        <!-- =================================================
+             HOTEL GRID
+        ================================================== -->
 
-        <div class="hotel-card">
+        <div class="hotel-grid">
 
-            <div class="hotel-image">
 
-                <img
+            <% safeHotels.forEach(function(item, index) {
 
-                    src="<%= hotel.image %>"
+                const hotel =
+                    item &&
+                    item.hotel
+                        ? item.hotel
+                        : null;
 
-                    alt="<%= hotel.name %>"
+                const place =
+                    item &&
+                    item.place
+                        ? item.place
+                        : "Your destination";
 
+
+                if (!hotel) {
+                    return;
+                }
+
+
+                const hotelName =
+                    hotel.name ||
+                    "Recommended Stay";
+
+
+                const hotelImage =
+                    hotel.image ||
+                    "/images/placeholder-hotel.jpg";
+
+
+                const hotelRating =
+                    Number(hotel.rating || 0);
+
+
+                const hotelPrice =
+                    Number(hotel.price_from || 0);
+
+
+                const hotelAddress =
+                    hotel.address ||
+                    hotel.district ||
+                    "Jharkhand";
+
+
+                const amenities =
+                    Array.isArray(hotel.amenities)
+                        ? hotel.amenities
+                        : [];
+
+
+                const roomTypes =
+                    Array.isArray(hotel.room_types)
+                        ? hotel.room_types
+                        : [];
+
+
+                const availability =
+                    String(
+                        hotel.availability || ""
+                    ).trim();
+
+
+                const hotelUrl =
+                    hotel.id
+                        ? `/hotels/${encodeURIComponent(hotel.id)}`
+                        : "/hotels";
+
+
+                const mapUrl =
+                    hotel.map ||
+                    "";
+
+            %>
+
+
+                <!-- =================================================
+                     HOTEL CARD
+                ================================================== -->
+
+                <article
+                    class="hotel-card"
+                    data-hotel-id="<%= hotel.id || '' %>"
                 >
 
-                <div class="hotel-rating">
 
-                    ⭐ <%= hotel.rating %>
+                    <!-- IMAGE -->
+
+                    <div class="hotel-card-media">
+
+
+                        <img
+                            src="<%= hotelImage %>"
+                            alt="<%= hotelName %>"
+                            loading="lazy"
+                            onerror="
+                                this.onerror=null;
+                                this.src='/images/placeholder-hotel.jpg';
+                            "
+                        >
+
+
+                        <div
+                            class="hotel-card-overlay"
+                            aria-hidden="true">
+                        </div>
+
+
+                        <!-- Destination -->
+
+                        <span class="hotel-place-badge">
+
+                            <i
+                                class="fa-solid fa-location-dot"
+                                aria-hidden="true">
+                            </i>
+
+                            <%= place %>
+
+                        </span>
+
+
+                        <!-- Rating -->
+
+                        <% if (hotelRating > 0) { %>
+
+                            <span class="hotel-rating-badge">
+
+                                <i
+                                    class="fa-solid fa-star"
+                                    aria-hidden="true">
+                                </i>
+
+                                <%= hotelRating.toFixed(1) %>
+
+                            </span>
+
+                        <% } %>
+
+
+                        <!-- Availability -->
+
+                        <% if (availability) { %>
+
+                            <span
+                                class="
+                                    hotel-availability
+                                    <%= availability.toLowerCase().includes('sold')
+                                        ? 'is-sold'
+                                        : availability.toLowerCase().includes('few')
+                                            ? 'is-limited'
+                                            : 'is-available' %>
+                                "
+                            >
+
+                                <span
+                                    class="hotel-availability-dot"
+                                    aria-hidden="true">
+                                </span>
+
+                                <%= availability %>
+
+                            </span>
+
+                        <% } %>
+
+                    </div>
+
+
+                    <!-- CONTENT -->
+
+                    <div class="hotel-card-body">
+
+
+                        <div class="hotel-card-kicker">
+
+                            <i
+                                class="fa-solid fa-bed"
+                                aria-hidden="true">
+                            </i>
+
+                            Recommended stay
+
+                        </div>
+
+
+                        <h3 class="hotel-card-title">
+
+                            <a
+                                href="<%= hotelUrl %>"
+                            >
+
+                                <%= hotelName %>
+
+                            </a>
+
+                        </h3>
+
+
+                        <!-- ADDRESS -->
+
+                        <div class="hotel-card-location">
+
+                            <i
+                                class="fa-solid fa-location-crosshairs"
+                                aria-hidden="true">
+                            </i>
+
+                            <span>
+                                <%= hotelAddress %>
+                            </span>
+
+                        </div>
+
+
+                        <!-- PRICE -->
+
+                        <div class="hotel-card-price-row">
+
+
+                            <div>
+
+                                <span class="hotel-price-label">
+
+                                    Starting from
+
+                                </span>
+
+
+                                <% if (hotelPrice > 0) { %>
+
+                                    <strong class="hotel-price">
+
+                                        ₹<%= hotelPrice.toLocaleString("en-IN") %>
+
+                                    </strong>
+
+                                    <span class="hotel-price-unit">
+
+                                        / night
+
+                                    </span>
+
+                                <% } else { %>
+
+                                    <strong class="hotel-price">
+
+                                        Price on request
+
+                                    </strong>
+
+                                <% } %>
+
+                            </div>
+
+
+                            <% if (hotelRating > 0) { %>
+
+                                <div class="hotel-review-summary">
+
+                                    <i
+                                        class="fa-solid fa-star"
+                                        aria-hidden="true">
+                                    </i>
+
+                                    <strong>
+                                        <%= hotelRating.toFixed(1) %>
+                                    </strong>
+
+                                    <span>
+                                        rated stay
+                                    </span>
+
+                                </div>
+
+                            <% } %>
+
+                        </div>
+
+
+                        <!-- AMENITIES -->
+
+                        <% if (amenities.length) { %>
+
+                            <div class="hotel-amenities">
+
+                                <% amenities
+                                    .slice(0, 4)
+                                    .forEach(function(amenity) {
+                                %>
+
+                                    <span>
+
+                                        <i
+                                            class="fa-solid fa-check"
+                                            aria-hidden="true">
+                                        </i>
+
+                                        <%= amenity %>
+
+                                    </span>
+
+                                <% }); %>
+
+                            </div>
+
+                        <% } %>
+
+
+                        <!-- ROOM TYPES -->
+
+                        <% if (roomTypes.length) { %>
+
+                            <div class="hotel-room-types">
+
+                                <span class="hotel-detail-label">
+
+                                    <i
+                                        class="fa-solid fa-door-open"
+                                        aria-hidden="true">
+                                    </i>
+
+                                    Room options
+
+                                </span>
+
+
+                                <span class="hotel-room-text">
+
+                                    <%= roomTypes
+                                        .slice(0, 3)
+                                        .join(" • ") %>
+
+                                </span>
+
+                            </div>
+
+                        <% } %>
+
+
+                        <!-- FOOTER -->
+
+                        <div class="hotel-card-footer">
+
+
+                            <a
+                                href="<%= hotelUrl %>"
+                                class="hotel-primary-action"
+                            >
+
+                                View hotel
+
+                                <i
+                                    class="fa-solid fa-arrow-right"
+                                    aria-hidden="true">
+                                </i>
+
+                            </a>
+
+
+                            <% if (mapUrl) { %>
+
+                                <a
+                                    href="<%= mapUrl %>"
+                                    class="hotel-map-action"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="
+                                        Open <%= hotelName %>
+                                        in Google Maps
+                                    "
+                                >
+
+                                    <i
+                                        class="fa-solid fa-map-location-dot"
+                                        aria-hidden="true">
+                                    </i>
+
+                                    Map
+
+                                </a>
+
+                            <% } %>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            <% }); %>
+
+        </div>
+
+
+        <!-- =================================================
+             SECTION FOOTER
+        ================================================== -->
+
+        <div class="hotel-section-footer">
+
+
+            <div class="hotel-section-note">
+
+                <span
+                    class="hotel-section-note-icon"
+                    aria-hidden="true"
+                >
+
+                    <i
+                        class="fa-solid fa-circle-info">
+                    </i>
+
+                </span>
+
+
+                <div>
+
+                    <strong>
+                        Smart stay suggestions
+                    </strong>
+
+                    <p>
+
+                        These recommendations come from
+                        the accommodation data available
+                        to the planner.
+
+                    </p>
 
                 </div>
 
             </div>
 
-            <div class="hotel-body">
+
+            <a
+                href="/hotels"
+                class="hotel-view-all"
+            >
+
+                Explore all hotels
+
+                <i
+                    class="fa-solid fa-arrow-right"
+                    aria-hidden="true">
+                </i>
+
+            </a>
+
+        </div>
+
+
+    <% } else { %>
+
+
+        <!-- =================================================
+             EMPTY STATE
+        ================================================== -->
+
+        <div class="hotel-empty-state">
+
+
+            <div class="hotel-empty-icon">
+
+                <i
+                    class="fa-solid fa-hotel"
+                    aria-hidden="true">
+                </i>
+
+            </div>
+
+
+            <div>
+
+                <span class="hotel-empty-kicker">
+
+                    Accommodation
+
+                </span>
+
 
                 <h3>
-
-                    <%= hotel.name %>
-
+                    No hotel recommendations yet
                 </h3>
 
-                <p>
-
-                    📍 Near
-
-                    <strong>
-
-                        <%= item.place %>
-
-                    </strong>
-
-                </p>
 
                 <p>
 
-                    <%= hotel.address %>
+                    We couldn't find a stay suggestion
+                    for this itinerary. You can explore
+                    the complete hotel collection instead.
 
                 </p>
 
-                <div class="hotel-features">
 
-                    <% hotel.amenities.slice(0,4).forEach(feature=>{ %>
+                <a
+                    href="/hotels"
+                    class="hotel-primary-action"
+                >
 
-                        <span>
+                    Browse hotels
 
-                            <%= feature %>
+                    <i
+                        class="fa-solid fa-arrow-right"
+                        aria-hidden="true">
+                    </i>
 
-                        </span>
-
-                    <% }) %>
-
-                </div>
-
-                <div class="hotel-footer">
-
-                    <div>
-
-                        <small>
-
-                            Starting From
-
-                        </small>
-
-                        <h4>
-
-                            ₹<%= hotel.price_from %>
-
-                        </h4>
-
-                    </div>
-
-                    <a
-
-                        href="<%= hotel.map %>"
-
-                        target="_blank"
-
-                        class="hotel-book-btn"
-
-                    >
-
-                        View
-
-                    </a>
-
-                </div>
+                </a>
 
             </div>
 
         </div>
 
-        <% }) %>
+    <% } %>
 
-    </div>
 
 </section>

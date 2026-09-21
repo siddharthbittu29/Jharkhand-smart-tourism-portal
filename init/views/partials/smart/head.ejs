@@ -1,2 +1,142 @@
-<link rel="stylesheet" href="/css/core-features-arvr.css">
-<link rel="stylesheet" href="/smart/css/slide7.css">
+<%
+/*
+ * ============================================================
+ * JHARKHAND TOURISM
+ * SMART TOURISM — SHARED HEAD ASSETS
+ * File: init/views/partials/smart/head.ejs
+ *
+ * Responsibilities:
+ * - Shared Smart Tourism visual system
+ * - AR/VR heritage experience styling
+ * - Compatibility with existing Smart Tourism modules
+ *
+ * No page business logic belongs here.
+ * ============================================================
+ */
+%>
+
+
+<!-- ============================================================
+     SMART TOURISM SHARED DESIGN SYSTEM
+============================================================ -->
+
+<link
+  rel="stylesheet"
+  href="/css/smart-tourism.css?v=2"
+>
+
+
+<!-- ============================================================
+     AR / VR HERITAGE EXPERIENCE
+     Existing styling preserved
+============================================================ -->
+
+<link
+  rel="stylesheet"
+  href="/css/core-features-arvr.css?v=2"
+>
+
+
+<!-- ============================================================
+     LEGACY SMART TOURISM SLIDE STYLES
+     Preserved for existing slide/feature implementations
+============================================================ -->
+
+<link
+  rel="stylesheet"
+  href="/smart/css/slide7.css?v=2"
+>
+
+
+<!-- ============================================================
+     OPTIONAL SMART TOURISM PAGE HELPERS
+============================================================ -->
+
+<style>
+  /*
+   * Small shared guard so pages using the Smart Tourism partials
+   * always inherit the correct document flow.
+   */
+
+  .jt-smart-page,
+  .jt-objectives-page,
+  .jt-smart-features-page,
+  .jt-smart-journey-page,
+  .jt-smart-architecture-page,
+  .jt-smart-core-page {
+    width: 100%;
+  }
+
+
+  /*
+   * Prevent media inside Smart Tourism cards from creating
+   * horizontal overflow on narrow screens.
+   */
+
+  .jt-smart-page img,
+  .jt-objectives-page img,
+  .jt-smart-features-page img,
+  .jt-smart-journey-page img,
+  .jt-smart-architecture-page img,
+  .jt-smart-core-page img {
+    max-width: 100%;
+    height: auto;
+  }
+
+
+  /*
+   * AR/VR modal should remain above local navigation and
+   * page content.
+   */
+
+  .vr-modal {
+    z-index: 2000;
+  }
+
+
+  /*
+   * Keep hidden AR/VR elements genuinely hidden even when
+   * other global CSS rules affect display.
+   */
+
+  .vr-modal[hidden] {
+    display: none !important;
+  }
+
+
+  /*
+   * Keyboard users receive a visible focus treatment.
+   */
+
+  .jt-smart-page :focus-visible,
+  .jt-objectives-page :focus-visible,
+  .jt-smart-features-page :focus-visible,
+  .jt-smart-journey-page :focus-visible,
+  .jt-smart-architecture-page :focus-visible,
+  .jt-smart-core-page :focus-visible {
+    outline:
+      3px solid rgba(200, 155, 82, 0.68);
+
+    outline-offset:
+      3px;
+  }
+
+
+  /*
+   * Respect reduced-motion preferences for any component
+   * that may be controlled by local Smart Tourism scripts.
+   */
+
+  @media (prefers-reduced-motion: reduce) {
+
+    .jt-smart-page *,
+    .jt-objectives-page *,
+    .jt-smart-features-page *,
+    .jt-smart-journey-page *,
+    .jt-smart-architecture-page *,
+    .jt-smart-core-page * {
+      scroll-behavior: auto !important;
+    }
+
+  }
+</style>

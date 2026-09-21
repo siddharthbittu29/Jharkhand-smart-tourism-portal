@@ -1,85 +1,233 @@
-<!-- ========================================= -->
-<!-- DESTINATION HIGHLIGHTS -->
-<!-- ========================================= -->
+<!-- =========================================================
+     JHARKHAND TOURISM — DESTINATION HIGHLIGHTS
+========================================================= -->
 
-<section class="highlights-section">
+<section
+    class="highlights-section"
+    aria-labelledby="highlights-section-title"
+>
+
+    <!-- =====================================================
+         SECTION INTRO
+    ====================================================== -->
 
     <div class="section-heading">
 
         <span class="section-badge">
-
-            📍 Explore More
-
+            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+            Explore More
         </span>
 
-        <h2>
-
-            Destination Highlights
-
+        <h2 id="highlights-section-title">
+            Places worth discovering
         </h2>
 
         <p>
-
-            Discover the most beautiful attractions recommended for your journey.
-
+            Explore the attractions and experiences selected for your
+            journey, based on the destination recommendations in your plan.
         </p>
 
     </div>
 
-    <div class="highlights-grid">
 
-        <% destinationHighlights.forEach((item,index)=>{ %>
+    <%
+        const highlights = Array.isArray(destinationHighlights)
+            ? destinationHighlights
+            : [];
+    %>
 
-            <div class="highlight-card">
 
-                <div class="highlight-number">
+    <% if (highlights.length) { %>
 
-                    <%= index+1 %>
+        <!-- =================================================
+             HIGHLIGHTS GRID
+        ================================================== -->
 
-                </div>
+        <div class="highlights-grid">
 
-                <div class="highlight-content">
+            <% highlights.forEach((item, index) => { %>
 
-                    <h3>
+                <article class="highlight-card">
 
-                        ⭐ Highlight <%= index+1 %>
+                    <!-- =====================================
+                         NUMBER / VISUAL MARKER
+                    ====================================== -->
 
-                    </h3>
-
-                    <p>
-
-                        <%= item %>
-
-                    </p>
-
-                    <div class="highlight-tags">
+                    <div class="highlight-number" aria-hidden="true">
 
                         <span>
-
-                            🌿 Nature
-
-                        </span>
-
-                        <span>
-
-                            📸 Photography
-
-                        </span>
-
-                        <span>
-
-                            🤖 AI Pick
-
+                            <%= String(index + 1).padStart(2, "0") %>
                         </span>
 
                     </div>
 
-                </div>
+
+                    <!-- =====================================
+                         CONTENT
+                    ====================================== -->
+
+                    <div class="highlight-content">
+
+                        <div class="highlight-topline">
+
+                            <span class="highlight-kicker">
+                                <i
+                                    class="fa-solid fa-compass"
+                                    aria-hidden="true">
+                                </i>
+
+                                AI Selected
+                            </span>
+
+                            <span class="highlight-index">
+                                <%= index + 1 %>/<%= highlights.length %>
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            <i
+                                class="fa-solid fa-star"
+                                aria-hidden="true">
+                            </i>
+
+                            Highlight <%= index + 1 %>
+                        </h3>
+
+
+                        <p>
+                            <%= item %>
+                        </p>
+
+
+                        <!-- =================================
+                             HIGHLIGHT TAGS
+                        ================================== -->
+
+                        <div class="highlight-tags">
+
+                            <span>
+                                <i
+                                    class="fa-solid fa-leaf"
+                                    aria-hidden="true">
+                                </i>
+                                Nature & Culture
+                            </span>
+
+                            <span>
+                                <i
+                                    class="fa-solid fa-camera"
+                                    aria-hidden="true">
+                                </i>
+                                Photo Worthy
+                            </span>
+
+                            <span>
+                                <i
+                                    class="fa-solid fa-wand-magic-sparkles"
+                                    aria-hidden="true">
+                                </i>
+                                AI Pick
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =====================================
+                         CARD ACCENT
+                    ====================================== -->
+
+                    <div
+                        class="highlight-card-arrow"
+                        aria-hidden="true"
+                    >
+                        <i class="fa-solid fa-arrow-up-right"></i>
+                    </div>
+
+                </article>
+
+            <% }) %>
+
+        </div>
+
+
+        <!-- =================================================
+             DISCOVERY FOOTER
+        ================================================== -->
+
+        <div class="highlights-footer">
+
+            <div class="highlights-footer-icon" aria-hidden="true">
+                <i class="fa-solid fa-map-location-dot"></i>
+            </div>
+
+            <div class="highlights-footer-content">
+
+                <strong>
+                    Keep exploring beyond the itinerary
+                </strong>
+
+                <p>
+                    Your travel plan gives you a starting point.
+                    Explore more destinations across Jharkhand when
+                    you have time to discover something unexpected.
+                </p>
 
             </div>
 
-        <% }) %>
+            <a
+                href="/places"
+                class="highlights-explore-button"
+            >
+                <span>Explore destinations</span>
 
-    </div>
+                <i
+                    class="fa-solid fa-arrow-right"
+                    aria-hidden="true">
+                </i>
+            </a>
+
+        </div>
+
+    <% } else { %>
+
+        <!-- =================================================
+             EMPTY STATE
+        ================================================== -->
+
+        <div class="planner-empty-state highlights-empty-state">
+
+            <div class="planner-empty-icon" aria-hidden="true">
+                <i class="fa-solid fa-map-location-dot"></i>
+            </div>
+
+            <h3>
+                No destination highlights available
+            </h3>
+
+            <p>
+                We couldn't generate destination highlights for this
+                plan. Explore the destination catalogue to discover
+                more places.
+            </p>
+
+            <a
+                href="/places"
+                class="hero-btn"
+            >
+                <i
+                    class="fa-solid fa-compass"
+                    aria-hidden="true">
+                </i>
+
+                Explore Places
+            </a>
+
+        </div>
+
+    <% } %>
 
 </section>

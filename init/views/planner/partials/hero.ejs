@@ -1,104 +1,120 @@
-<!-- ========================================= -->
-<!-- PREMIUM HERO -->
-<!-- ========================================= -->
+<!-- =========================================================
+     JHARKHAND TOURISM — TRIP RESULT HERO
+========================================================= -->
 
-<section class="planner-hero">
+<section class="planner-hero" aria-labelledby="planner-result-title">
+
+    <div class="planner-hero-bg" aria-hidden="true"></div>
 
     <div class="planner-overlay">
 
         <div class="planner-left">
 
-            <span class="planner-badge">
+            <div class="planner-eyebrow">
+                <span class="planner-eyebrow-icon" aria-hidden="true">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </span>
 
-                ✨ AI Powered Smart Tourism
+                <span>AI-Powered Smart Tourism</span>
+            </div>
 
-            </span>
 
-            <h1>
-
-                <%= destination %>
-
+            <h1 id="planner-result-title">
+                Your journey to
+                <span><%= destination %></span>
             </h1>
 
-            <p>
 
-                Your personalized AI-generated travel itinerary for Jharkhand with
-                optimized routes, budget planning, eco-friendly suggestions,
-                hotel recommendations and intelligent travel insights.
-
+            <p class="planner-hero-description">
+                Your personalized travel plan for Jharkhand with
+                itinerary planning, budget insights, hotel recommendations,
+                eco-friendly suggestions and intelligent travel guidance.
             </p>
+
 
             <div class="hero-buttons">
 
                 <a href="/" class="hero-btn">
-
-                    🏠 Home
-
+                    <i class="fa-solid fa-house" aria-hidden="true"></i>
+                    <span>Home</span>
                 </a>
 
                 <a href="#timeline" class="hero-btn hero-btn-light">
-
-                    🗺 View Journey
-
+                    <i class="fa-solid fa-route" aria-hidden="true"></i>
+                    <span>View Journey</span>
                 </a>
 
             </div>
 
         </div>
 
-        <div class="planner-right">
+
+        <!-- =============================================
+             TRIP SNAPSHOT
+        ============================================== -->
+
+        <div class="planner-right" aria-label="Trip summary">
+
+            <!-- Travel Days -->
 
             <div class="hero-stat">
 
-                <span class="hero-icon">
+                <div class="hero-stat-icon" aria-hidden="true">
+                    <i class="fa-regular fa-calendar-days"></i>
+                </div>
 
-                    📅
+                <div class="hero-stat-content">
 
-                </span>
+                    <h2>
+                        <%= tripDays %>
+                    </h2>
 
-                <h2>
+                    <p>Travel Days</p>
 
-                    <%= tripDays %>
-
-                </h2>
-
-                <p>Travel Days</p>
+                </div>
 
             </div>
 
+
+            <!-- Budget -->
+
             <div class="hero-stat">
 
-                <span class="hero-icon">
+                <div class="hero-stat-icon" aria-hidden="true">
+                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                </div>
 
-                    💰
+                <div class="hero-stat-content">
 
-                </span>
+                    <h2>
+                        ₹<%= Number(tripBudget || 0).toLocaleString("en-IN") %>
+                    </h2>
 
-                <h2>
+                    <p>Trip Budget</p>
 
-                    ₹<%= tripBudget.toLocaleString() %>
-
-                </h2>
-
-                <p>Budget</p>
+                </div>
 
             </div>
 
+
+            <!-- Eco Score -->
+
             <div class="hero-stat">
 
-                <span class="hero-icon">
+                <div class="hero-stat-icon" aria-hidden="true">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
 
-                    🌱
+                <div class="hero-stat-content">
 
-                </span>
+                    <h2>
+                        <%= ecoScore %>
+                        <small>/100</small>
+                    </h2>
 
-                <h2>
+                    <p>Eco Score</p>
 
-                    <%= ecoScore %>
-
-                </h2>
-
-                <p>Eco Score</p>
+                </div>
 
             </div>
 

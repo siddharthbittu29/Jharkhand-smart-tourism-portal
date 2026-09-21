@@ -1,187 +1,2708 @@
 <%
-var t = (typeof t !== 'undefined' && t) || {
-  sitemap: "Sitemap", skip: "Skip To Main Content", access: "Accessibility",
-  about: "About Us", contact: "Contact Us", reservations: "JTDC Reservations", helpline: "Tourism Helpline"
-};
-var lang = (typeof lang !== 'undefined' && lang) || 'en';
-function qp(overrides) {
-  const obj = Object.assign({}, filters || {}, { page: undefined }, overrides || {});
-  const params = new URLSearchParams();
-  for (const k in obj) if (obj[k]) params.set(k, obj[k]);
-  return '?' + params.toString();
-}
+  /* ============================================================
+     JHARKHAND TOURISM
+     Listings Explorer
+     Body/content view
+     ============================================================ */
+
+  const listingPlaces =
+    Array.isArray(places)
+      ? places
+      : [];
+
+  const listingCategories =
+    Array.isArray(categories)
+      ? categories
+      : [];
+
+  const listingDistricts =
+    Array.isArray(districts)
+      ? districts
+      : [];
+
+  const listingPagination =
+    pagination || {};
+
+  const listingFilters =
+    filters || {};
+
+  const listingPage =
+    Number(listingPagination.page) || 1;
+
+  const listingLimit =
+    Number(listingPagination.limit) || 9;
+
+  const listingTotal =
+    Number(listingPagination.total) ||
+    listingPlaces.length;
+
+  const listingTotalPages =
+    Number(listingPagination.totalPages) || 1;
+
+  const listingHasPrev =
+    Boolean(listingPagination.hasPrev);
+
+  const listingHasNext =
+    Boolean(listingPagination.hasNext);
+
+  const listingQuery =
+    typeof listingFilters.q === "string"
+      ? listingFilters.q
+      : "";
+
+  const listingCategory =
+    typeof listingFilters.category === "string"
+      ? listingFilters.category
+      : "";
+
+  const listingDistrict =
+    typeof listingFilters.district === "string"
+      ? listingFilters.district
+      : "";
+
+  const listingMinRating =
+    typeof listingFilters.minRating === "string"
+      ? listingFilters.minRating
+      : "";
+
+  const listingSort =
+    typeof listingFilters.sort === "string"
+      ? listingFilters.sort
+      : "name";
+
+
+  const hasListingFilters =
+    Boolean(
+      listingQuery ||
+      listingCategory ||
+      listingDistrict ||
+      listingMinRating ||
+      listingSort !== "name"
+    );
+
+
+  function listingQueryUrl(overrides) {
+
+    const params =
+      new URLSearchParams();
+
+
+    const merged = {
+
+      q:
+        listingQuery,
+
+      category:
+        listingCategory,
+
+      district:
+        listingDistrict,
+
+      minRating:
+        listingMinRating,
+
+      sort:
+        listingSort,
+
+      limit:
+        String(listingLimit),
+
+      page:
+        String(listingPage),
+
+      ...(overrides || {})
+
+    };
+
+
+    Object.keys(merged)
+      .forEach(function (key) {
+
+        const value =
+          merged[key];
+
+
+        if (
+          value !== undefined &&
+          value !== null &&
+          String(value).trim() !== ""
+        ) {
+
+          params.set(
+            key,
+            String(value)
+          );
+
+        }
+
+      });
+
+
+    return (
+      "/listings?" +
+      params.toString()
+    );
+
+  }
+
+
+  function placeImage(place) {
+
+    if (
+      place &&
+      Array.isArray(place.images) &&
+      place.images.length
+    ) {
+
+      const firstImage =
+        place.images[0];
+
+      if (
+        firstImage &&
+        typeof firstImage === "object" &&
+        firstImage.url
+      ) {
+
+        return firstImage.url;
+
+      }
+
+      if (
+        typeof firstImage === "string"
+      ) {
+
+        return firstImage;
+
+      }
+
+    }
+
+
+    if (
+      place &&
+      place.image
+    ) {
+
+      return place.image;
+
+    }
+
+
+    return "/images/placeholder.jpg";
+
+  }
+
+
+  function placeRating(place) {
+
+    const rating =
+      Number(
+        place?.average_rating
+      );
+
+    return Number.isFinite(rating)
+      ? rating
+      : 0;
+
+  }
+
+
+  function placeDescription(place) {
+
+    const text =
+      String(
+        place?.description || ""
+      ).trim();
+
+
+    if (!text) {
+
+      return "Discover this destination and explore more of Jharkhand.";
+
+    }
+
+
+    return text;
+
+  }
+
 %>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Listings | Jharkhand Tourism</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body{font-family:"Segoe UI",Arial,sans-serif;background:#f8f9fa}
-    .top-bar{background:#004d40;color:#fff;font-size:14px;padding:6px 0}.top-bar a{color:#ffeb3b;text-decoration:none}
-    .navbar{background:#00695c}.navbar-brand img{height:55px}
-    .section-title{color:#004d40;text-transform:uppercase;font-weight:600;margin:24px 0 12px;text-align:center}
-    .card-title{margin-bottom:.25rem}
-    .muted{color:#666;font-size:13px}
-    .pagination .active > .page-link{background:#00695c;border-color:#00695c}
-  </style>
-</head>
 
-<body>
+<style>
+  /* ==========================================================
+     LISTINGS PAGE — SCOPED PRESENTATION
+     ========================================================== */
 
-<!-- Top Bar -->
-<div class="top-bar text-center px-2">
-  <a href="/sitemap.xml"><%= t.sitemap %></a> | <a href="#main"><%= t.skip %></a> |
-  <form action="/lang" method="POST" style="display:inline;">
-    <select name="lang" onchange="this.form.submit()">
-      <option value="en" <%= lang==='en'?'selected':'' %>>English</option>
-      <option value="hi" <%= lang==='hi'?'selected':'' %>>हिन्दी</option>
-    </select>
-  </form>
-  &nbsp; | <%= t.reservations %>: 0651-2438866 / 2438002 | <%= t.helpline %>: <a href="tel:1364">1364</a>
-</div>
+  .jt-listings-page {
+    min-height: 100vh;
+    overflow: hidden;
+    background:
+      linear-gradient(
+        180deg,
+        #f6f7f3 0,
+        #ffffff 520px,
+        #f5f6f2 100%
+      );
+    color: #17211c;
+  }
 
-<!-- Navbar -->
-<nav class="navbar navbar-dark">
-  <div class="container">
-    <a class="navbar-brand d-flex align-items-center gap-2" href="/">
-      <img src="https://upload.wikimedia.org/wikipedia/en/8/8c/Goa_Tourism_Logo.png">
-      <span class="fw-bold">JK Tourism</span>
-    </a>
-    <div class="d-flex gap-2">
-      <a href="/places" class="btn btn-light btn-sm">Places</a>
-      <a href="/listings" class="btn btn-outline-light btn-sm">Listing</a>
-    </div>
-  </div>
-</nav>
 
-<div class="container" id="main">
-  <h1 class="section-title">All Listings</h1>
+  .jt-listings-page *,
+  .jt-listings-page *::before,
+  .jt-listings-page *::after {
+    box-sizing: border-box;
+  }
 
-  <!-- Filters -->
-  <form class="row g-2 align-items-end mb-3" method="GET" action="/listings">
-    <div class="col-md-4">
-      <label class="form-label">Search</label>
-      <input type="search" name="q" class="form-control" placeholder="E.g., waterfall, temple" value="<%= filters.q || '' %>">
-    </div>
-    <div class="col-md-3">
-      <label class="form-label">Sort</label>
-      <select name="sort" class="form-select">
-        <option value="name" <%= filters.sort==='name'?'selected':'' %>>Name</option>
-        <option value="recent" <%= filters.sort==='recent'?'selected':'' %>>Recent</option>
-        <option value="popular" <%= filters.sort==='popular'?'selected':'' %>>Popular</option>
-        <option value="rating" <%= filters.sort==='rating'?'selected':'' %>>Top Rated</option>
-      </select>
-    </div>
-    <div class="col-md-2">
-      <label class="form-label">Min Rating</label>
-      <input type="number" name="minRating" class="form-control" min="0" max="5" step="0.5" value="<%= filters.minRating || '' %>">
-    </div>
-    <div class="col-md-2">
-      <label class="form-label">Per Page</label>
-      <select name="limit" class="form-select">
-        <% [6,9,12,24,48].forEach(L => { %>
-          <option value="<%= L %>" <%= (pagination.limit==L)?'selected':'' %>><%= L %></option>
-        <% }) %>
-      </select>
-    </div>
-    <div class="col-md-1 d-grid">
-      <button class="btn btn-success">Apply</button>
-    </div>
-  </form>
 
-  <!-- Listings Grid -->
-  <div class="row g-3">
-    <% if (!places || !places.length) { %>
-      <div class="col-12"><div class="alert alert-warning">No listings found.</div></div>
-    <% } %>
+  .jt-listings-container {
+    width: min(
+      calc(100% - 40px),
+      1240px
+    );
+    margin-inline: auto;
+  }
 
-    <% places.forEach(p => { %>
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title"><%= p.name %></h5>
-            <div class="muted mb-2">
-              <%= p.category || 'Place' %> • <%= p.district || 'Jharkhand' %> • ⭐ <%= (p.rating || 0).toFixed(1) %>
-            </div>
-            <p class="card-text"><%= (p.description || '').slice(0,110) %><%= (p.description||'').length>110?'…':'' %></p>
 
-            <div class="d-flex flex-wrap gap-2">
+  /* ==========================================================
+     HERO
+     ========================================================== */
 
-              <% if (p.slug) { %>
-                <a class="btn btn-success btn-sm" href="/places/<%= p.slug %>">View Details</a>
-              <% } %>
+  .jt-listings-hero {
+    position: relative;
+    overflow: hidden;
+    min-height: 410px;
+    display: flex;
+    align-items: center;
+    isolation: isolate;
+    background:
+      linear-gradient(
+        105deg,
+        rgba(5, 27, 19, 0.95) 0%,
+        rgba(13, 67, 50, 0.90) 55%,
+        rgba(13, 67, 50, 0.65) 100%
+      ),
+      url("/images/discover/patratu.jpg")
+      center / cover no-repeat;
+  }
 
-              <a class="btn btn-outline-success btn-sm" href="/places?<%= new URLSearchParams({ q: p.category || '' }).toString() %>">More like this</a>
-              <a class="btn btn-outline-secondary btn-sm" href="tel:1364">Call Helpline</a>
 
-              <!-- 👍 LIKE BUTTON -->
-              <button type="button" class="btn btn-outline-primary btn-sm like-btn" data-id="<%= p._id %>">
-                👍 Like <span class="like-count">15,000</span>
-              </button>
+  .jt-listings-hero::before {
+    content: "";
+    position: absolute;
+    right: -180px;
+    bottom: -250px;
+    width: 570px;
+    height: 570px;
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 50%;
+    pointer-events: none;
+  }
 
-            </div>
+
+  .jt-listings-hero-inner {
+    position: relative;
+    z-index: 1;
+    padding: 75px 0;
+  }
+
+
+  .jt-listings-breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 23px;
+    color: rgba(255,255,255,0.67);
+    font-size: 0.75rem;
+    font-weight: 750;
+  }
+
+
+  .jt-listings-breadcrumb a {
+    color: rgba(255,255,255,0.67);
+    text-decoration: none;
+  }
+
+
+  .jt-listings-breadcrumb a:hover {
+    color: #ffffff;
+  }
+
+
+  .jt-listings-breadcrumb i {
+    color: rgba(255,255,255,0.35);
+    font-size: 0.56rem;
+  }
+
+
+  .jt-listings-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding: 7px 12px;
+    border: 1px solid rgba(255,255,255,0.19);
+    border-radius: 999px;
+    background: rgba(255,255,255,0.07);
+    color: #ead39a;
+    font-size: 0.70rem;
+    font-weight: 900;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    backdrop-filter: blur(8px);
+  }
+
+
+  .jt-listings-hero h1 {
+    max-width: 800px;
+    margin: 0;
+    color: #ffffff;
+    font-family:
+      "Playfair Display",
+      Georgia,
+      serif;
+    font-size:
+      clamp(
+        2.7rem,
+        5vw,
+        4.9rem
+      );
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+  }
+
+
+  .jt-listings-hero p {
+    max-width: 690px;
+    margin: 19px 0 0;
+    color: rgba(255,255,255,0.76);
+    font-size: 1rem;
+    line-height: 1.78;
+  }
+
+
+  .jt-listings-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 27px;
+  }
+
+
+  .jt-listings-stat {
+    min-width: 125px;
+    padding: 12px 15px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 13px;
+    background: rgba(255,255,255,0.07);
+    backdrop-filter: blur(8px);
+  }
+
+
+  .jt-listings-stat strong {
+    display: block;
+    color: #ffffff;
+    font-size: 1.08rem;
+  }
+
+
+  .jt-listings-stat span {
+    display: block;
+    margin-top: 3px;
+    color: rgba(255,255,255,0.61);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+
+  /* ==========================================================
+     FILTER PANEL
+     ========================================================== */
+
+  .jt-listings-filter-card {
+    position: relative;
+    z-index: 3;
+    margin-top: -35px;
+    padding: 22px;
+    border: 1px solid rgba(18,55,42,0.08);
+    border-radius: 19px;
+    background: rgba(255,255,255,0.97);
+    box-shadow:
+      0 18px 45px rgba(18,55,42,0.09);
+  }
+
+
+  .jt-listings-filter-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 18px;
+  }
+
+
+  .jt-listings-kicker {
+    margin: 0 0 6px;
+    color: #c9a34e;
+    font-size: 0.70rem;
+    font-weight: 900;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+
+  .jt-listings-filter-heading h2 {
+    margin: 0;
+    color: #12372a;
+    font-family:
+      "Playfair Display",
+      Georgia,
+      serif;
+    font-size: 1.7rem;
+    line-height: 1.15;
+  }
+
+
+  .jt-listings-result-count {
+    flex-shrink: 0;
+    color: #68756e;
+    font-size: 0.78rem;
+    font-weight: 750;
+  }
+
+
+  .jt-listings-result-count strong {
+    color: #12372a;
+    font-weight: 950;
+  }
+
+
+  .jt-listings-filter-grid {
+    display: grid;
+    grid-template-columns:
+      minmax(220px, 1.5fr)
+      repeat(5, minmax(125px, 1fr))
+      auto;
+    gap: 10px;
+    align-items: end;
+  }
+
+
+  .jt-listings-field {
+    min-width: 0;
+  }
+
+
+  .jt-listings-field label {
+    display: block;
+    margin-bottom: 7px;
+    color: #17211c;
+    font-size: 0.71rem;
+    font-weight: 900;
+  }
+
+
+  .jt-listings-input,
+  .jt-listings-select {
+    width: 100%;
+    min-height: 45px;
+    padding: 9px 12px;
+    border: 1px solid #dfe6e1;
+    border-radius: 10px;
+    outline: 0;
+    background: #ffffff;
+    color: #17211c;
+    font: inherit;
+    font-size: 0.79rem;
+    transition:
+      border-color 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+
+  .jt-listings-input:focus,
+  .jt-listings-select:focus {
+    border-color: #12372a;
+    box-shadow:
+      0 0 0 3px rgba(18,55,42,0.09);
+  }
+
+
+  .jt-listings-actions {
+    display: flex;
+    gap: 7px;
+  }
+
+
+  .jt-listings-submit,
+  .jt-listings-clear {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 45px;
+    padding: 0 15px;
+    border-radius: 10px;
+    font-size: 0.74rem;
+    font-weight: 900;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+
+  .jt-listings-submit {
+    border: 1px solid #12372a;
+    background: #12372a;
+    color: #ffffff;
+    cursor: pointer;
+  }
+
+
+  .jt-listings-submit:hover {
+    background: #0a271d;
+    color: #ffffff;
+  }
+
+
+  .jt-listings-clear {
+    border: 1px solid #dfe6e1;
+    background: #ffffff;
+    color: #68756e;
+  }
+
+
+  .jt-listings-clear:hover {
+    border-color: #12372a;
+    background: #eaf3ee;
+    color: #12372a;
+  }
+
+
+  /* ==========================================================
+     FILTER CHIPS
+     ========================================================== */
+
+  .jt-listings-active-filters {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 15px;
+  }
+
+
+  .jt-listings-active-label {
+    color: #68756e;
+    font-size: 0.70rem;
+    font-weight: 900;
+  }
+
+
+  .jt-listings-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 29px;
+    padding: 0 9px;
+    border: 1px solid #dfe7e1;
+    border-radius: 999px;
+    background: #eaf3ee;
+    color: #12372a;
+    font-size: 0.68rem;
+    font-weight: 800;
+  }
+
+
+  .jt-listings-chip i {
+    color: #c9a34e;
+  }
+
+
+  /* ==========================================================
+     MAIN RESULTS
+     ========================================================== */
+
+  .jt-listings-main {
+    padding: 68px 0 90px;
+  }
+
+
+  .jt-listings-results-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 25px;
+    margin-bottom: 25px;
+  }
+
+
+  .jt-listings-results-head h2 {
+    margin: 0;
+    color: #12372a;
+    font-family:
+      "Playfair Display",
+      Georgia,
+      serif;
+    font-size:
+      clamp(
+        1.9rem,
+        3vw,
+        2.6rem
+      );
+    line-height: 1.08;
+  }
+
+
+  .jt-listings-view-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: #68756e;
+    font-size: 0.74rem;
+    font-weight: 750;
+  }
+
+
+  .jt-listings-view-note i {
+    color: #c9a34e;
+  }
+
+
+  /* ==========================================================
+     GRID
+     ========================================================== */
+
+  .jt-listings-grid {
+    display: grid;
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    align-items: stretch;
+  }
+
+
+  /* ==========================================================
+     CARD
+     ========================================================== */
+
+  .jt-listing-card {
+    min-width: 0;
+    min-height: 460px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid #dfe6e1;
+    border-radius: 17px;
+    background: #ffffff;
+    box-shadow:
+      0 7px 22px rgba(18,55,42,0.06);
+    transition:
+      transform 240ms ease,
+      box-shadow 240ms ease,
+      border-color 240ms ease;
+  }
+
+
+  .jt-listing-card:hover {
+    border-color: rgba(18,55,42,0.15);
+    box-shadow:
+      0 24px 54px rgba(18,55,42,0.13);
+    transform: translateY(-5px);
+  }
+
+
+  .jt-listing-media {
+    position: relative;
+    display: block;
+    flex: 0 0 225px;
+    height: 225px;
+    overflow: hidden;
+    background: #eaf3ee;
+  }
+
+
+  .jt-listing-media img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition:
+      transform 500ms ease;
+  }
+
+
+  .jt-listing-card:hover
+  .jt-listing-media img {
+    transform: scale(1.045);
+  }
+
+
+  .jt-listing-media-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(0,0,0,0.02) 20%,
+        rgba(0,0,0,0.44) 100%
+      );
+    pointer-events: none;
+  }
+
+
+  .jt-listing-category {
+    position: absolute;
+    left: 14px;
+    bottom: 14px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 28px;
+    padding: 0 9px;
+    border: 1px solid rgba(255,255,255,0.20);
+    border-radius: 999px;
+    background: rgba(12,42,32,0.84);
+    color: #ffffff;
+    font-size: 0.66rem;
+    font-weight: 850;
+    backdrop-filter: blur(8px);
+  }
+
+
+  .jt-listing-rating {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    min-height: 30px;
+    padding: 0 9px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.95);
+    color: #17211c;
+    font-size: 0.72rem;
+    font-weight: 900;
+    box-shadow:
+      0 6px 17px rgba(0,0,0,0.13);
+  }
+
+
+  .jt-listing-rating i {
+    color: #c9a34e;
+    font-size: 0.65rem;
+  }
+
+
+  .jt-listing-body {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 19px;
+  }
+
+
+  .jt-listing-location {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+    color: #68756e;
+    font-size: 0.69rem;
+    font-weight: 850;
+  }
+
+
+  .jt-listing-location i {
+    color: #c9a34e;
+  }
+
+
+  .jt-listing-title {
+    min-height: 53px;
+    margin: 0;
+    color: #12372a;
+    font-family:
+      "Playfair Display",
+      Georgia,
+      serif;
+    font-size: 1.28rem;
+    line-height: 1.25;
+  }
+
+
+  .jt-listing-description {
+    display: -webkit-box;
+    min-height: 61px;
+    margin: 9px 0 16px;
+    overflow: hidden;
+    color: #68756e;
+    font-size: 0.78rem;
+    line-height: 1.7;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+
+  .jt-listing-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 17px;
+  }
+
+
+  .jt-listing-meta-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    min-height: 27px;
+    padding: 0 8px;
+    border-radius: 8px;
+    background: #f5f7f4;
+    color: #68756e;
+    font-size: 0.65rem;
+    font-weight: 800;
+  }
+
+
+  .jt-listing-meta-pill i {
+    color: #c9a34e;
+  }
+
+
+  .jt-listing-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 15px;
+    border-top: 1px solid #ebefec;
+  }
+
+
+  .jt-listing-actions {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+
+  .jt-listing-like {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 39px;
+    padding: 0 10px;
+    border: 1px solid #dfe6e1;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #68756e;
+    font: inherit;
+    font-size: 0.68rem;
+    font-weight: 850;
+    cursor: pointer;
+  }
+
+
+  .jt-listing-like:hover {
+    border-color: #d9bcbc;
+    background: #fffafa;
+    color: #a84442;
+  }
+
+
+  .jt-listing-like.is-liked {
+    border-color: #eccaca;
+    background: #f8e9e8;
+    color: #a84442;
+  }
+
+
+  .jt-listing-details {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 39px;
+    padding: 0 12px;
+    border: 1px solid #12372a;
+    border-radius: 9px;
+    background: transparent;
+    color: #12372a;
+    font-size: 0.69rem;
+    font-weight: 900;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+
+  .jt-listing-details:hover {
+    background: #12372a;
+    color: #ffffff;
+  }
+
+
+  /* ==========================================================
+     EMPTY
+     ========================================================== */
+
+  .jt-listings-empty {
+    grid-column: 1 / -1;
+    min-height: 360px;
+    display: grid;
+    place-items: center;
+    padding: 45px 24px;
+    border: 1px dashed #ccd6cf;
+    border-radius: 22px;
+    background: #ffffff;
+    text-align: center;
+  }
+
+
+  .jt-listings-empty-icon {
+    width: 70px;
+    height: 70px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 16px;
+    border-radius: 50%;
+    background: #eaf3ee;
+    color: #12372a;
+    font-size: 1.4rem;
+  }
+
+
+  .jt-listings-empty h3 {
+    margin: 0;
+    color: #12372a;
+    font-family:
+      "Playfair Display",
+      Georgia,
+      serif;
+    font-size: 1.65rem;
+  }
+
+
+  .jt-listings-empty p {
+    max-width: 500px;
+    margin: 9px auto 20px;
+    color: #68756e;
+    line-height: 1.7;
+  }
+
+
+  /* ==========================================================
+     PAGINATION
+     ========================================================== */
+
+  .jt-listings-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 38px;
+  }
+
+
+  .jt-listings-page-link {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 12px;
+    border: 1px solid #dfe6e1;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #68756e;
+    font-size: 0.70rem;
+    font-weight: 850;
+    text-decoration: none;
+  }
+
+
+  .jt-listings-page-link:hover {
+    border-color: #12372a;
+    background: #eaf3ee;
+    color: #12372a;
+  }
+
+
+  .jt-listings-page-link.is-disabled {
+    opacity: 0.42;
+    pointer-events: none;
+  }
+
+
+  .jt-listings-page-info {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0 12px;
+    border: 1px solid #dfe6e1;
+    border-radius: 9px;
+    background: #f8faf8;
+    color: #68756e;
+    font-size: 0.70rem;
+    font-weight: 750;
+  }
+
+
+  .jt-listings-page-info strong {
+    color: #12372a;
+    font-weight: 950;
+  }
+
+
+  /* ==========================================================
+     CTA
+     ========================================================== */
+
+  .jt-listings-cta {
+    margin-top: 72px;
+    padding: 36px 40px;
+    border-radius: 24px;
+    overflow: hidden;
+    background:
+      linear-gradient(
+        105deg,
+        #071d16,
+        #12372a
+      );
+    color: #ffffff;
+  }
+
+
+  .jt-listings-cta-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+  }
+
+
+  .jt-listings-cta-icon {
+    width: 52px;
+    height: 52px;
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 14px;
+    background: rgba(255,255,255,0.07);
+    color: #ead18d;
+  }
+
+
+  .jt-listings-cta-copy {
+    flex: 1 1 auto;
+  }
+
+
+  .jt-listings-cta-copy span {
+    display: block;
+    margin-bottom: 6px;
+    color: #ead18d;
+    font-size: 0.69rem;
+    font-weight: 900;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+
+  .jt-listings-cta-copy h2 {
+    margin: 0;
+    color: #ffffff;
+    font-family:
+      "Playfair Display",
+      Georgia,
+      serif;
+    font-size: 2rem;
+  }
+
+
+  .jt-listings-cta-copy p {
+    max-width: 650px;
+    margin: 8px 0 0;
+    color: rgba(255,255,255,0.69);
+    line-height: 1.68;
+  }
+
+
+  .jt-listings-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 17px;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #12372a;
+    font-size: 0.74rem;
+    font-weight: 900;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+
+  .jt-listings-cta-btn:hover {
+    color: #0a271d;
+    transform: translateY(-1px);
+  }
+
+
+  /* ==========================================================
+     FOCUS
+     ========================================================== */
+
+  .jt-listings-page
+  a:focus-visible,
+  .jt-listings-page
+  button:focus-visible,
+  .jt-listings-page
+  input:focus-visible,
+  .jt-listings-page
+  select:focus-visible {
+    outline: 3px solid rgba(201,163,78,0.50);
+    outline-offset: 2px;
+  }
+
+
+  /* ==========================================================
+     RESPONSIVE
+     ========================================================== */
+
+  @media (max-width: 1180px) {
+
+    .jt-listings-filter-grid {
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+    }
+
+    .jt-listings-field:first-child {
+      grid-column: span 3;
+    }
+
+    .jt-listings-actions {
+      grid-column: span 3;
+    }
+
+    .jt-listings-grid {
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    }
+
+  }
+
+
+  @media (max-width: 800px) {
+
+    .jt-listings-container {
+      width: min(
+        calc(100% - 30px),
+        1240px
+      );
+    }
+
+    .jt-listings-hero,
+    .jt-listings-hero-inner {
+      min-height: 390px;
+    }
+
+    .jt-listings-hero-inner {
+      padding: 60px 0;
+    }
+
+    .jt-listings-filter-card {
+      margin-top: -28px;
+    }
+
+    .jt-listings-filter-grid {
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    }
+
+    .jt-listings-field:first-child,
+    .jt-listings-actions {
+      grid-column: span 2;
+    }
+
+    .jt-listings-results-head {
+      display: block;
+    }
+
+    .jt-listings-view-note {
+      margin-top: 10px;
+    }
+
+    .jt-listings-cta-inner {
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+  }
+
+
+  @media (max-width: 620px) {
+
+    .jt-listings-container {
+      width: min(
+        calc(100% - 24px),
+        1240px
+      );
+    }
+
+    .jt-listings-hero {
+      min-height: 450px;
+    }
+
+    .jt-listings-hero h1 {
+      font-size: 2.55rem;
+    }
+
+    .jt-listings-hero p {
+      font-size: 0.88rem;
+    }
+
+    .jt-listings-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .jt-listings-filter-card {
+      padding: 16px;
+    }
+
+    .jt-listings-filter-heading {
+      display: block;
+    }
+
+    .jt-listings-result-count {
+      display: block;
+      margin-top: 6px;
+    }
+
+    .jt-listings-filter-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .jt-listings-field:first-child,
+    .jt-listings-actions {
+      grid-column: auto;
+    }
+
+    .jt-listings-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .jt-listings-submit,
+    .jt-listings-clear {
+      width: 100%;
+    }
+
+    .jt-listings-main {
+      padding: 50px 0 68px;
+    }
+
+    .jt-listings-grid {
+      grid-template-columns: 1fr;
+      gap: 17px;
+    }
+
+    .jt-listing-card {
+      min-height: 0;
+    }
+
+    .jt-listing-media {
+      flex-basis: 225px;
+      height: 225px;
+    }
+
+    .jt-listing-body {
+      padding: 18px;
+    }
+
+    .jt-listing-title {
+      min-height: auto;
+    }
+
+    .jt-listing-description {
+      min-height: auto;
+    }
+
+    .jt-listing-footer {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .jt-listing-actions {
+      width: 100%;
+    }
+
+    .jt-listing-like {
+      min-width: 74px;
+    }
+
+    .jt-listing-details {
+      flex: 1 1 auto;
+    }
+
+    .jt-listings-cta {
+      margin-top: 48px;
+      padding: 28px 21px;
+    }
+
+    .jt-listings-cta-copy h2 {
+      font-size: 1.65rem;
+    }
+
+    .jt-listings-cta-btn {
+      width: 100%;
+    }
+
+  }
+
+
+  @media (max-width: 420px) {
+
+    .jt-listings-hero h1 {
+      font-size: 2.2rem;
+    }
+
+    .jt-listings-stats {
+      grid-template-columns: 1fr;
+    }
+
+    .jt-listings-actions {
+      grid-template-columns: 1fr;
+    }
+
+    .jt-listing-media {
+      flex-basis: 205px;
+      height: 205px;
+    }
+
+    .jt-listing-actions {
+      display: grid;
+      grid-template-columns: auto 1fr;
+    }
+
+  }
+
+
+  @media (prefers-reduced-motion: reduce) {
+
+    .jt-listing-card,
+    .jt-listing-media img {
+      transition: none;
+    }
+
+    .jt-listing-card:hover {
+      transform: none;
+    }
+
+    .jt-listing-card:hover
+    .jt-listing-media img {
+      transform: none;
+    }
+
+  }
+</style>
+
+
+<main
+  class="jt-listings-page"
+  id="main"
+>
+
+
+  <!-- ========================================================
+       HERO
+       ======================================================== -->
+
+  <section class="jt-listings-hero">
+
+    <div class="jt-listings-container">
+
+      <div class="jt-listings-hero-inner">
+
+        <nav
+          class="jt-listings-breadcrumb"
+          aria-label="Breadcrumb"
+        >
+
+          <a href="/">
+            Home
+          </a>
+
+          <i
+            class="fa-solid fa-chevron-right"
+            aria-hidden="true"
+          ></i>
+
+          <span>
+            Listings
+          </span>
+
+        </nav>
+
+
+        <span class="jt-listings-eyebrow">
+
+          <i
+            class="fa-solid fa-compass"
+            aria-hidden="true"
+          ></i>
+
+          Discover Jharkhand
+
+        </span>
+
+
+        <h1>
+          Find places worth
+          discovering.
+        </h1>
+
+
+        <p>
+          Browse destinations across Jharkhand by
+          category, district, rating and popularity.
+          Explore a place in detail whenever something
+          catches your eye.
+        </p>
+
+
+        <div class="jt-listings-stats">
+
+          <div class="jt-listings-stat">
+
+            <strong>
+              <%= listingTotal %>
+            </strong>
+
+            <span>
+              Results
+            </span>
+
           </div>
+
+
+          <div class="jt-listings-stat">
+
+            <strong>
+              <%= listingCategories.length %>
+            </strong>
+
+            <span>
+              Categories
+            </span>
+
+          </div>
+
+
+          <div class="jt-listings-stat">
+
+            <strong>
+              <%= listingDistricts.length %>
+            </strong>
+
+            <span>
+              Districts
+            </span>
+
+          </div>
+
         </div>
+
       </div>
-    <% }) %>
-  </div>
 
-  <!-- Pagination -->
-  <nav class="mt-3">
-    <ul class="pagination justify-content-center">
-      <li class="page-item <%= pagination.hasPrev?'':'disabled' %>"><a class="page-link" href="<%= qp({page:1}) %>">First</a></li>
-      <li class="page-item <%= pagination.hasPrev?'':'disabled' %>"><a class="page-link" href="<%= qp({page:pagination.page-1}) %>">Prev</a></li>
-      <% const start=Math.max(1,pagination.page-2),end=Math.min(pagination.totalPages,pagination.page+2); for(let i=start;i<=end;i++){ %>
-        <li class="page-item <%= i===pagination.page?'active':'' %>"><a class="page-link" href="<%= qp({page:i}) %>"><%= i %></a></li>
+    </div>
+
+  </section>
+
+
+  <!-- ========================================================
+       FILTERS
+       ======================================================== -->
+
+  <section class="jt-listings-container">
+
+    <div class="jt-listings-filter-card">
+
+      <div class="jt-listings-filter-heading">
+
+        <div>
+
+          <p class="jt-listings-kicker">
+            Explore
+          </p>
+
+          <h2>
+            Refine your discovery
+          </h2>
+
+        </div>
+
+
+        <span class="jt-listings-result-count">
+
+          <strong>
+            <%= listingTotal %>
+          </strong>
+
+          matching destinations
+
+        </span>
+
+      </div>
+
+
+      <form
+        method="GET"
+        action="/listings"
+        class="jt-listings-filter-grid"
+      >
+
+
+        <!-- Search -->
+
+        <div class="jt-listings-field">
+
+          <label for="listingSearch">
+            Search
+          </label>
+
+          <input
+            id="listingSearch"
+            class="jt-listings-input"
+            type="search"
+            name="q"
+            value="<%= listingQuery %>"
+            placeholder="Waterfalls, temples, wildlife..."
+            autocomplete="off"
+          >
+
+        </div>
+
+
+        <!-- Category -->
+
+        <div class="jt-listings-field">
+
+          <label for="listingCategory">
+            Category
+          </label>
+
+          <select
+            id="listingCategory"
+            name="category"
+            class="jt-listings-select"
+          >
+
+            <option value="">
+              All categories
+            </option>
+
+            <% listingCategories.forEach(function(category) { %>
+
+              <option
+                value="<%= category %>"
+                <%= listingCategory === category ? "selected" : "" %>
+              >
+                <%= category %>
+              </option>
+
+            <% }); %>
+
+          </select>
+
+        </div>
+
+
+        <!-- District -->
+
+        <div class="jt-listings-field">
+
+          <label for="listingDistrict">
+            District
+          </label>
+
+          <select
+            id="listingDistrict"
+            name="district"
+            class="jt-listings-select"
+          >
+
+            <option value="">
+              All districts
+            </option>
+
+            <% listingDistricts.forEach(function(district) { %>
+
+              <option
+                value="<%= district %>"
+                <%= listingDistrict === district ? "selected" : "" %>
+              >
+                <%= district %>
+              </option>
+
+            <% }); %>
+
+          </select>
+
+        </div>
+
+
+        <!-- Rating -->
+
+        <div class="jt-listings-field">
+
+          <label for="listingRating">
+            Minimum rating
+          </label>
+
+          <select
+            id="listingRating"
+            name="minRating"
+            class="jt-listings-select"
+          >
+
+            <option
+              value=""
+              <%= listingMinRating === "" ? "selected" : "" %>
+            >
+              Any rating
+            </option>
+
+            <option
+              value="3"
+              <%= listingMinRating === "3" ? "selected" : "" %>
+            >
+              3★ & above
+            </option>
+
+            <option
+              value="4"
+              <%= listingMinRating === "4" ? "selected" : "" %>
+            >
+              4★ & above
+            </option>
+
+            <option
+              value="4.5"
+              <%= listingMinRating === "4.5" ? "selected" : "" %>
+            >
+              4.5★ & above
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- Sort -->
+
+        <div class="jt-listings-field">
+
+          <label for="listingSort">
+            Sort by
+          </label>
+
+          <select
+            id="listingSort"
+            name="sort"
+            class="jt-listings-select"
+          >
+
+            <option
+              value="name"
+              <%= listingSort === "name" ? "selected" : "" %>
+            >
+              Name
+            </option>
+
+            <option
+              value="relevance"
+              <%= listingSort === "relevance" ? "selected" : "" %>
+            >
+              Relevance
+            </option>
+
+            <option
+              value="rating"
+              <%= listingSort === "rating" ? "selected" : "" %>
+            >
+              Top rated
+            </option>
+
+            <option
+              value="popular"
+              <%= listingSort === "popular" ? "selected" : "" %>
+            >
+              Most popular
+            </option>
+
+            <option
+              value="recent"
+              <%= listingSort === "recent" ? "selected" : "" %>
+            >
+              Recently added
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- Limit -->
+
+        <div class="jt-listings-field">
+
+          <label for="listingLimit">
+            Per page
+          </label>
+
+          <select
+            id="listingLimit"
+            name="limit"
+            class="jt-listings-select"
+          >
+
+            <% [6,9,12,24,48].forEach(function(value) { %>
+
+              <option
+                value="<%= value %>"
+                <%= listingLimit === value ? "selected" : "" %>
+              >
+                <%= value %>
+              </option>
+
+            <% }); %>
+
+          </select>
+
+        </div>
+
+
+        <!-- Actions -->
+
+        <div class="jt-listings-actions">
+
+          <button
+            type="submit"
+            class="jt-listings-submit"
+          >
+
+            <i
+              class="fa-solid fa-filter"
+              aria-hidden="true"
+            ></i>
+
+            Apply
+
+          </button>
+
+
+          <% if (hasListingFilters) { %>
+
+            <a
+              href="/listings"
+              class="jt-listings-clear"
+            >
+              Clear
+            </a>
+
+          <% } %>
+
+        </div>
+
+      </form>
+
+
+      <!-- Active filters -->
+
+      <% if (hasListingFilters) { %>
+
+        <div class="jt-listings-active-filters">
+
+          <span class="jt-listings-active-label">
+            Active:
+          </span>
+
+
+          <% if (listingQuery) { %>
+
+            <span class="jt-listings-chip">
+
+              <i
+                class="fa-solid fa-magnifying-glass"
+                aria-hidden="true"
+              ></i>
+
+              <%= listingQuery %>
+
+            </span>
+
+          <% } %>
+
+
+          <% if (listingCategory) { %>
+
+            <span class="jt-listings-chip">
+
+              <i
+                class="fa-solid fa-layer-group"
+                aria-hidden="true"
+              ></i>
+
+              <%= listingCategory %>
+
+            </span>
+
+          <% } %>
+
+
+          <% if (listingDistrict) { %>
+
+            <span class="jt-listings-chip">
+
+              <i
+                class="fa-solid fa-location-dot"
+                aria-hidden="true"
+              ></i>
+
+              <%= listingDistrict %>
+
+            </span>
+
+          <% } %>
+
+
+          <% if (listingMinRating) { %>
+
+            <span class="jt-listings-chip">
+
+              <i
+                class="fa-solid fa-star"
+                aria-hidden="true"
+              ></i>
+
+              <%= listingMinRating %>★+
+
+            </span>
+
+          <% } %>
+
+
+          <% if (listingSort !== "name") { %>
+
+            <span class="jt-listings-chip">
+
+              <i
+                class="fa-solid fa-arrow-down-wide-short"
+                aria-hidden="true"
+              ></i>
+
+              <%= listingSort %>
+
+            </span>
+
+          <% } %>
+
+        </div>
+
       <% } %>
-      <li class="page-item <%= pagination.hasNext?'':'disabled' %>"><a class="page-link" href="<%= qp({page:pagination.page+1}) %>">Next</a></li>
-      <li class="page-item <%= pagination.hasNext?'':'disabled' %>"><a class="page-link" href="<%= qp({page:pagination.totalPages}) %>">Last</a></li>
-    </ul>
-  </nav>
-</div>
 
-<footer class="text-center mt-4" style="background:#004d40;color:#fff;padding:16px 0;">
-  <small>Helpline: 1364 • JTDC Reservations: 0651-2438866 / 2438002</small>
-</footer>
+    </div>
+
+  </section>
+
+
+  <!-- ========================================================
+       RESULTS
+       ======================================================== -->
+
+  <section class="jt-listings-main">
+
+    <div class="jt-listings-container">
+
+
+      <div class="jt-listings-results-head">
+
+        <div>
+
+          <p class="jt-listings-kicker">
+            Destination explorer
+          </p>
+
+          <h2>
+            Places to explore
+          </h2>
+
+        </div>
+
+
+        <div class="jt-listings-view-note">
+
+          <i
+            class="fa-solid fa-shield-heart"
+            aria-hidden="true"
+          ></i>
+
+          Discover at your own pace
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="jt-listings-grid"
+        aria-live="polite"
+      >
+
+
+        <% if (!listingPlaces.length) { %>
+
+          <div class="jt-listings-empty">
+
+            <div>
+
+              <div class="jt-listings-empty-icon">
+
+                <i
+                  class="fa-solid fa-map-location-dot"
+                  aria-hidden="true"
+                ></i>
+
+              </div>
+
+
+              <h3>
+                No destinations found
+              </h3>
+
+
+              <p>
+                Try another search term or relax one
+                of the filters to discover more places.
+              </p>
+
+
+              <a
+                href="/listings"
+                class="jt-listings-submit"
+              >
+                View all destinations
+              </a>
+
+            </div>
+
+          </div>
+
+
+        <% } else { %>
+
+
+          <% listingPlaces.forEach(function(place) { %>
+
+            <article class="jt-listing-card">
+
+
+              <!-- Media -->
+
+              <a
+                href="/places/<%= encodeURIComponent(place.place_id || "") %>"
+                class="jt-listing-media"
+                aria-label="View <%= place.name || 'destination' %>"
+              >
+
+                <img
+                  src="<%= placeImage(place) %>"
+                  alt="<%= place.name || 'Jharkhand destination' %>"
+                  loading="lazy"
+                  onerror="this.onerror=null;this.src='/images/placeholder.jpg';"
+                >
+
+
+                <span
+                  class="jt-listing-media-overlay"
+                  aria-hidden="true"
+                ></span>
+
+
+                <% if (place.category) { %>
+
+                  <span class="jt-listing-category">
+
+                    <i
+                      class="fa-solid fa-mountain-sun"
+                      aria-hidden="true"
+                    ></i>
+
+                    <%= place.category %>
+
+                  </span>
+
+                <% } %>
+
+
+                <span class="jt-listing-rating">
+
+                  <i
+                    class="fa-solid fa-star"
+                    aria-hidden="true"
+                  ></i>
+
+                  <%= placeRating(place).toFixed(1) %>
+
+                </span>
+
+              </a>
+
+
+              <!-- Content -->
+
+              <div class="jt-listing-body">
+
+
+                <div class="jt-listing-location">
+
+                  <i
+                    class="fa-solid fa-location-dot"
+                    aria-hidden="true"
+                  ></i>
+
+                  <%= place.district || "Jharkhand" %>
+
+                </div>
+
+
+                <h3 class="jt-listing-title">
+
+                  <%= place.name || "Destination" %>
+
+                </h3>
+
+
+                <p class="jt-listing-description">
+
+                  <%= placeDescription(place) %>
+
+                </p>
+
+
+                <div class="jt-listing-meta">
+
+
+                  <% if (place.best_time) { %>
+
+                    <span class="jt-listing-meta-pill">
+
+                      <i
+                        class="fa-regular fa-calendar"
+                        aria-hidden="true"
+                      ></i>
+
+                      Best time available
+
+                    </span>
+
+                  <% } %>
+
+
+                  <% if (place.entry_fees) { %>
+
+                    <span class="jt-listing-meta-pill">
+
+                      <i
+                        class="fa-solid fa-ticket"
+                        aria-hidden="true"
+                      ></i>
+
+                      Entry info
+
+                    </span>
+
+                  <% } %>
+
+
+                  <% if (place.popularity_index) { %>
+
+                    <span class="jt-listing-meta-pill">
+
+                      <i
+                        class="fa-solid fa-fire"
+                        aria-hidden="true"
+                      ></i>
+
+                      Popular
+
+                    </span>
+
+                  <% } %>
+
+                </div>
+
+
+                <div class="jt-listing-footer">
+
+
+                  <div>
+
+                    <span
+                      class="jt-listing-location"
+                      style="margin:0;"
+                    >
+
+                      <i
+                        class="fa-solid fa-compass"
+                        aria-hidden="true"
+                      ></i>
+
+                      Explore destination
+
+                    </span>
+
+                  </div>
+
+
+                  <div class="jt-listing-actions">
+
+
+                    <!-- Like -->
+
+                    <button
+                      type="button"
+                      class="jt-listing-like like-btn"
+                      data-id="<%= place._id || "" %>"
+                      aria-pressed="false"
+                      aria-label="Like <%= place.name || 'destination' %>"
+                    >
+
+                      <i
+                        class="fa-regular fa-heart"
+                        aria-hidden="true"
+                      ></i>
+
+                      <span class="like-count">
+                        —
+                      </span>
+
+                    </button>
+
+
+                    <!-- Details -->
+
+                    <a
+                      class="jt-listing-details"
+                      href="/places/<%= encodeURIComponent(place.place_id || "") %>"
+                    >
+
+                      View
+
+                      <i
+                        class="fa-solid fa-arrow-right"
+                        aria-hidden="true"
+                      ></i>
+
+                    </a>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </article>
+
+          <% }); %>
+
+
+        <% } %>
+
+
+      </div>
+
+
+      <!-- ======================================================
+           PAGINATION
+           ====================================================== -->
+
+      <% if (listingTotalPages > 1) { %>
+
+        <nav
+          class="jt-listings-pagination"
+          aria-label="Listings pagination"
+        >
+
+
+          <% if (listingHasPrev) { %>
+
+            <a
+              href="<%= listingQueryUrl({ page: 1 }) %>"
+              class="jt-listings-page-link"
+            >
+
+              <i
+                class="fa-solid fa-angles-left"
+                aria-hidden="true"
+              ></i>
+
+              First
+
+            </a>
+
+
+            <a
+              href="<%= listingQueryUrl({ page: listingPage - 1 }) %>"
+              class="jt-listings-page-link"
+            >
+
+              <i
+                class="fa-solid fa-arrow-left"
+                aria-hidden="true"
+              ></i>
+
+              Previous
+
+            </a>
+
+          <% } else { %>
+
+            <span class="jt-listings-page-link is-disabled">
+              First
+            </span>
+
+            <span class="jt-listings-page-link is-disabled">
+              Previous
+            </span>
+
+          <% } %>
+
+
+          <span class="jt-listings-page-info">
+
+            Page
+
+            <strong>
+              <%= listingPage %>
+            </strong>
+
+            of
+
+            <strong>
+              <%= listingTotalPages %>
+            </strong>
+
+          </span>
+
+
+          <% if (listingHasNext) { %>
+
+            <a
+              href="<%= listingQueryUrl({ page: listingPage + 1 }) %>"
+              class="jt-listings-page-link"
+            >
+
+              Next
+
+              <i
+                class="fa-solid fa-arrow-right"
+                aria-hidden="true"
+              ></i>
+
+            </a>
+
+
+            <a
+              href="<%= listingQueryUrl({ page: listingTotalPages }) %>"
+              class="jt-listings-page-link"
+            >
+
+              Last
+
+              <i
+                class="fa-solid fa-angles-right"
+                aria-hidden="true"
+              ></i>
+
+            </a>
+
+          <% } else { %>
+
+            <span class="jt-listings-page-link is-disabled">
+              Next
+            </span>
+
+            <span class="jt-listings-page-link is-disabled">
+              Last
+            </span>
+
+          <% } %>
+
+
+        </nav>
+
+      <% } %>
+
+
+      <!-- ======================================================
+           SMART TOURISM CTA
+           ====================================================== -->
+
+      <section class="jt-listings-cta">
+
+        <div class="jt-listings-cta-inner">
+
+
+          <div class="jt-listings-cta-icon">
+
+            <i
+              class="fa-solid fa-wand-magic-sparkles"
+              aria-hidden="true"
+            ></i>
+
+          </div>
+
+
+          <div class="jt-listings-cta-copy">
+
+            <span>
+              Smart Tourism
+            </span>
+
+            <h2>
+              Ready to plan your journey?
+            </h2>
+
+            <p>
+              Turn the places you're discovering into
+              a personalized Jharkhand itinerary with
+              the AI Trip Planner.
+            </p>
+
+          </div>
+
+
+          <a
+            href="/planner"
+            class="jt-listings-cta-btn"
+          >
+
+            Plan my trip
+
+            <i
+              class="fa-solid fa-arrow-right"
+              aria-hidden="true"
+            ></i>
+
+          </a>
+
+        </div>
+
+      </section>
+
+
+    </div>
+
+  </section>
+
+
+</main>
+
 
 <script>
-  const fmt = new Intl.NumberFormat('en-IN');
+(function () {
+
+  "use strict";
+
+
+  /* ==========================================================
+     LIKE COUNTS
+     ========================================================== */
+
+  const likeButtons =
+    Array.from(
+      document.querySelectorAll(
+        ".jt-listing-like"
+      )
+    );
+
+
+  const formatter =
+    new Intl.NumberFormat(
+      "en-IN"
+    );
+
 
   async function preloadLikes() {
-    const btns = [...document.querySelectorAll('.like-btn')];
-    if (!btns.length) return;
 
-    const ids = btns.map(b=>b.dataset.id).join(',');
-    const res = await fetch('/likes?ids='+encodeURIComponent(ids));
-    const data = await res.json();
-    if(!data.ok) return;
-
-    btns.forEach(b=>{
-      const count = data.counts[b.dataset.id] || 15000;
-      b.querySelector('.like-count').textContent = fmt.format(count);
-      b.dataset.count = count;
-    });
-  }
-
-  async function handleLike(e) {
-    const b = e.currentTarget;
-    const id = b.dataset.id;
-    const r = await fetch('/likes/'+id, {method:'POST'});
-    const j = await r.json();
-    if(j.ok){
-      b.dataset.count = j.count;
-      b.querySelector('.like-count').textContent = fmt.format(j.count);
+    if (!likeButtons.length) {
+      return;
     }
+
+
+    const validButtons =
+      likeButtons.filter(
+        function (button) {
+
+          return Boolean(
+            button.dataset.id
+          );
+
+        }
+      );
+
+
+    if (!validButtons.length) {
+      return;
+    }
+
+
+    const ids =
+      validButtons
+        .map(
+          button =>
+            button.dataset.id
+        )
+        .join(",");
+
+
+    try {
+
+      const response =
+        await fetch(
+          "/likes?ids=" +
+          encodeURIComponent(ids),
+          {
+            headers: {
+              Accept:
+                "application/json"
+            }
+          }
+        );
+
+
+      if (!response.ok) {
+        return;
+      }
+
+
+      const data =
+        await response.json();
+
+
+      if (
+        !data ||
+        data.ok !== true ||
+        !data.counts
+      ) {
+        return;
+      }
+
+
+      validButtons.forEach(
+        function (button) {
+
+          const id =
+            button.dataset.id;
+
+          const count =
+            Number(
+              data.counts[id]
+            );
+
+
+          const countNode =
+            button.querySelector(
+              ".like-count"
+            );
+
+
+          if (
+            countNode &&
+            Number.isFinite(count)
+          ) {
+
+            countNode.textContent =
+              formatter.format(
+                count
+              );
+
+          }
+
+        }
+      );
+
+    } catch (error) {
+
+      console.warn(
+        "Listings likes could not be loaded:",
+        error
+      );
+
+    }
+
   }
 
-  document.addEventListener('DOMContentLoaded',()=>{
-    preloadLikes();
-    document.querySelectorAll('.like-btn').forEach(b=>b.addEventListener('click',handleLike));
-  });
-</script>
 
-</body>
-</html>
+  /* ==========================================================
+     LIKE ACTION
+     ========================================================== */
+
+  async function handleLike(
+    button
+  ) {
+
+    const id =
+      button.dataset.id;
+
+
+    if (!id) {
+      return;
+    }
+
+
+    button.disabled =
+      true;
+
+
+    try {
+
+      const response =
+        await fetch(
+          "/likes/" +
+          encodeURIComponent(id),
+          {
+            method: "POST",
+            headers: {
+              Accept:
+                "application/json"
+            }
+          }
+        );
+
+
+      if (!response.ok) {
+        return;
+      }
+
+
+      const data =
+        await response.json();
+
+
+      if (
+        !data ||
+        data.ok !== true
+      ) {
+        return;
+      }
+
+
+      const count =
+        Number(data.count);
+
+
+      const countNode =
+        button.querySelector(
+          ".like-count"
+        );
+
+
+      if (
+        countNode &&
+        Number.isFinite(count)
+      ) {
+
+        countNode.textContent =
+          formatter.format(
+            count
+          );
+
+      }
+
+
+      button.classList.add(
+        "is-liked"
+      );
+
+
+      button.setAttribute(
+        "aria-pressed",
+        "true"
+      );
+
+
+      const icon =
+        button.querySelector(
+          "i"
+        );
+
+
+      if (icon) {
+
+        icon.classList.remove(
+          "fa-regular"
+        );
+
+        icon.classList.add(
+          "fa-solid"
+        );
+
+      }
+
+    } catch (error) {
+
+      console.warn(
+        "Unable to like listing:",
+        error
+      );
+
+    } finally {
+
+      button.disabled =
+        false;
+
+    }
+
+  }
+
+
+  likeButtons.forEach(
+    function (button) {
+
+      button.addEventListener(
+        "click",
+        function () {
+
+          handleLike(
+            this
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+  preloadLikes();
+
+
+})();
+</script>

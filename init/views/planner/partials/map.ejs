@@ -1,137 +1,695 @@
-<!-- ========================================= -->
-<!-- INTERACTIVE TRIP MAP -->
-<!-- ========================================= -->
+<!-- =========================================================
+     JHARKHAND TOURISM — SMART JOURNEY MAP
+========================================================= -->
 
-<section class="map-section">
+<%
+    const safeDestination =
+        String(destination || "Jharkhand");
+
+    const safeTripDays =
+        Number(tripDays || 0);
+
+    const safeEcoScore =
+        Number(ecoScore || 0);
+
+    const safeTotalCost =
+        Number(totalCost || 0);
+
+    const safeItinerary =
+        Array.isArray(itinerary)
+            ? itinerary
+            : [];
+
+    const safeHotels =
+        Array.isArray(hotelRecommendations)
+            ? hotelRecommendations
+            : [];
+
+
+    const mapItinerary =
+        safeItinerary.map(
+            (item, index) => {
+
+                if (
+                    item &&
+                    typeof item === "object"
+                ) {
+
+                    return {
+
+                        day:
+                            item.day ||
+                            index + 1,
+
+                        place:
+                            item.place ||
+                            item.name ||
+                            "",
+
+                        description:
+                            item.description ||
+                            "",
+
+                        image:
+                            item.image ||
+                            "",
+
+                        cost:
+                            item.cost ||
+                            ""
+
+                    };
+
+                }
+
+                return {
+
+                    day:
+                        index + 1,
+
+                    place:
+                        String(item || ""),
+
+                    description:
+                        "",
+
+                    image:
+                        "",
+
+                    cost:
+                        ""
+
+                };
+
+            }
+        );
+
+
+    const mapHotels =
+        safeHotels
+            .map(
+                (item) => {
+
+                    const hotel =
+                        item &&
+                        item.hotel
+                            ? item.hotel
+                            : null;
+
+                    if (!hotel) {
+                        return null;
+                    }
+
+                    return {
+
+                        place:
+                            item.place ||
+                            "",
+
+                        name:
+                            hotel.name ||
+                            "",
+
+                        address:
+                            hotel.address ||
+                            "",
+
+                        district:
+                            hotel.district ||
+                            "",
+
+                        rating:
+                            hotel.rating ||
+                            "",
+
+                        price_from:
+                            hotel.price_from ||
+                            "",
+
+                        image:
+                            hotel.image ||
+                            "",
+
+                        map:
+                            hotel.map ||
+                            ""
+
+                    };
+
+                }
+            )
+            .filter(Boolean);
+%>
+
+
+<section
+    class="map-section"
+    aria-labelledby="map-section-title"
+>
+
+
+    <!-- =====================================================
+         SECTION HEADER
+    ====================================================== -->
 
     <div class="section-heading">
 
         <span class="section-badge">
 
-            🗺 Smart Navigation
+            <i
+                class="fa-solid fa-map-location-dot"
+                aria-hidden="true">
+            </i>
+
+            Smart Navigation
 
         </span>
 
-        <h2>
 
-            Interactive Trip Map
+        <h2 id="map-section-title">
+
+            Explore your journey on the map
 
         </h2>
 
+
         <p>
 
-            Visualize your destination, nearby hotels and planned journey.
+            Follow your destination, planned stops and
+            recommended stays through an interactive
+            travel map.
 
         </p>
 
     </div>
 
-    <div class="map-layout">
 
-        <!-- LEFT PANEL -->
+    <!-- =====================================================
+         MAP APPLICATION
+    ====================================================== -->
 
-        <div class="map-info">
+    <div
+        class="map-layout"
+        id="plannerMapApp"
+        data-destination="<%= safeDestination %>"
+    >
 
-            <div class="map-info-card">
 
-                <h3>
+        <!-- =================================================
+             INFORMATION PANEL
+        ================================================== -->
 
-                    📍 Destination
+        <aside
+            class="map-info"
+            aria-label="Journey map information"
+        >
 
-                </h3>
 
-                <h4>
+            <!-- Destination -->
 
-                    <%= destination %>
+            <div
+                class="map-info-card map-info-destination"
+            >
 
-                </h4>
+                <div
+                    class="map-info-icon"
+                    aria-hidden="true"
+                >
 
-            </div>
+                    <i
+                        class="fa-solid fa-location-dot">
+                    </i>
 
-            <div class="map-info-card">
+                </div>
 
-                <h3>
 
-                    📅 Duration
+                <div class="map-info-content">
 
-                </h3>
+                    <span>
+                        Destination
+                    </span>
 
-                <h4>
+                    <h3>
+                        <%= safeDestination %>
+                    </h3>
 
-                    <%= tripDays %> Days
-
-                </h4>
-
-            </div>
-
-            <div class="map-info-card">
-
-                <h3>
-
-                    🏨 Hotels
-
-                </h3>
-
-                <h4>
-
-                    <%= hotelRecommendations.length %>
-
-                </h4>
-
-            </div>
-
-            <div class="map-info-card">
-
-                <h3>
-
-                    🌱 Eco Score
-
-                </h3>
-
-                <h4>
-
-                    <%= ecoScore %>/100
-
-                </h4>
+                </div>
 
             </div>
 
+
+            <!-- Duration -->
+
             <div class="map-info-card">
 
-                <h3>
+                <div
+                    class="map-info-icon"
+                    aria-hidden="true"
+                >
 
-                    💰 Estimated Cost
+                    <i
+                        class="fa-regular fa-calendar-days">
+                    </i>
 
-                </h3>
+                </div>
 
-                <h4>
 
-                    ₹<%= totalCost.toLocaleString() %>
+                <div class="map-info-content">
 
-                </h4>
+                    <span>
+                        Journey
+                    </span>
+
+                    <h3>
+                        <%= safeTripDays %> Days
+                    </h3>
+
+                </div>
 
             </div>
 
-        </div>
 
-        <!-- MAP -->
+            <!-- Stops -->
+
+            <div class="map-info-card">
+
+                <div
+                    class="map-info-icon"
+                    aria-hidden="true"
+                >
+
+                    <i
+                        class="fa-solid fa-route">
+                    </i>
+
+                </div>
+
+
+                <div class="map-info-content">
+
+                    <span>
+                        Planned Stops
+                    </span>
+
+                    <h3>
+                        <%= mapItinerary.length %>
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- Hotels -->
+
+            <div class="map-info-card">
+
+                <div
+                    class="map-info-icon"
+                    aria-hidden="true"
+                >
+
+                    <i
+                        class="fa-solid fa-hotel">
+                    </i>
+
+                </div>
+
+
+                <div class="map-info-content">
+
+                    <span>
+                        Recommended Hotels
+                    </span>
+
+                    <h3>
+                        <%= mapHotels.length %>
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- Eco -->
+
+            <div class="map-info-card">
+
+                <div
+                    class="map-info-icon"
+                    aria-hidden="true"
+                >
+
+                    <i
+                        class="fa-solid fa-leaf">
+                    </i>
+
+                </div>
+
+
+                <div class="map-info-content">
+
+                    <span>
+                        Eco Score
+                    </span>
+
+                    <h3>
+                        <%= safeEcoScore %>/100
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- Cost -->
+
+            <div class="map-info-card">
+
+                <div
+                    class="map-info-icon"
+                    aria-hidden="true"
+                >
+
+                    <i
+                        class="fa-solid fa-indian-rupee-sign">
+                    </i>
+
+                </div>
+
+
+                <div class="map-info-content">
+
+                    <span>
+                        Estimated Cost
+                    </span>
+
+                    <h3>
+                        ₹<%= safeTotalCost.toLocaleString("en-IN") %>
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 LEGEND
+            ================================================== -->
+
+            <div class="map-legend">
+
+                <span class="map-legend-title">
+
+                    Map Legend
+
+                </span>
+
+
+                <div class="map-legend-item">
+
+                    <span
+                        class="
+                            map-legend-dot
+                            map-legend-destination
+                        "
+                        aria-hidden="true">
+                    </span>
+
+                    Destination
+
+                </div>
+
+
+                <div class="map-legend-item">
+
+                    <span
+                        class="
+                            map-legend-dot
+                            map-legend-itinerary
+                        "
+                        aria-hidden="true">
+                    </span>
+
+                    Planned stop
+
+                </div>
+
+
+                <div class="map-legend-item">
+
+                    <span
+                        class="
+                            map-legend-dot
+                            map-legend-hotel
+                        "
+                        aria-hidden="true">
+                    </span>
+
+                    Recommended stay
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 CONTROLS
+            ================================================== -->
+
+            <div class="map-actions">
+
+                <button
+                    type="button"
+                    id="mapFitBounds"
+                    class="map-action-button"
+                >
+
+                    <i
+                        class="fa-solid fa-expand"
+                        aria-hidden="true">
+                    </i>
+
+                    Fit journey
+
+                </button>
+
+
+                <button
+                    type="button"
+                    id="mapLocateDestination"
+                    class="map-action-button"
+                >
+
+                    <i
+                        class="fa-solid fa-crosshairs"
+                        aria-hidden="true">
+                    </i>
+
+                    Destination
+
+                </button>
+
+
+                <button
+                    type="button"
+                    id="mapResetView"
+                    class="map-action-button"
+                >
+
+                    <i
+                        class="fa-solid fa-rotate-left"
+                        aria-hidden="true">
+                    </i>
+
+                    Reset
+
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =================================================
+             MAP
+        ================================================== -->
 
         <div class="map-container">
 
-            <div id="tripMap"></div>
+
+            <div
+                id="tripMap"
+                role="application"
+                aria-label="
+                    Interactive map showing your
+                    Jharkhand travel itinerary
+                "
+            >
+
+                <!-- Loading -->
+
+                <div
+                    id="mapLoading"
+                    class="map-loading"
+                >
+
+                    <div
+                        class="map-loading-spinner"
+                        aria-hidden="true"
+                    >
+
+                        <i
+                            class="fa-solid fa-compass">
+                        </i>
+
+                    </div>
+
+
+                    <strong>
+                        Preparing your journey map
+                    </strong>
+
+
+                    <span>
+                        Locating your destinations...
+                    </span>
+
+                </div>
+
+
+                <!-- Error -->
+
+                <div
+                    id="mapError"
+                    class="map-error"
+                    hidden
+                >
+
+                    <div
+                        class="map-error-icon"
+                        aria-hidden="true"
+                    >
+
+                        <i
+                            class="fa-solid fa-map-location-dot">
+                        </i>
+
+                    </div>
+
+
+                    <h3>
+                        Map unavailable
+                    </h3>
+
+
+                    <p>
+                        We couldn't prepare the
+                        interactive map.
+                    </p>
+
+
+                    <button
+                        type="button"
+                        id="mapRetry"
+                        class="map-retry-button"
+                    >
+
+                        <i
+                            class="fa-solid fa-rotate-right">
+                        </i>
+
+                        Try again
+
+                    </button>
+
+                </div>
+
+
+                <!-- Toolbar -->
+
+                <div
+                    class="map-toolbar"
+                    aria-live="polite"
+                >
+
+                    <div class="map-toolbar-status">
+
+                        <span
+                            id="mapStatusDot"
+                            class="map-status-dot is-loading"
+                            aria-hidden="true">
+                        </span>
+
+                        <span id="mapStatusText">
+
+                            Preparing map...
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="map-toolbar-actions">
+
+                        <button
+                            type="button"
+                            id="mapToolbarFit"
+                            class="map-toolbar-button"
+                            title="Fit journey"
+                            aria-label="Fit journey"
+                        >
+
+                            <i
+                                class="fa-solid fa-expand">
+                            </i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
 
     </div>
 
+
+    <!-- =====================================================
+         DATA BRIDGE
+    ====================================================== -->
+
+    <script
+        id="plannerMapData"
+        type="application/json"
+    ><%- JSON.stringify({
+        destination: safeDestination,
+        tripDays: safeTripDays,
+        ecoScore: safeEcoScore,
+        totalCost: safeTotalCost,
+        itinerary: mapItinerary,
+        hotels: mapHotels
+    })
+        .replace(/</g, "\\u003c")
+        .replace(/>/g, "\\u003e")
+        .replace(/&/g, "\\u0026")
+    %></script>
+
+
+    <!-- =====================================================
+         LEAFLET
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        defer
+    ></script>
+
 </section>
-
-<link
-rel="stylesheet"
-href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-
-<script
-src="https://unpkg.com/leaflet/dist/leaflet.js">
-</script>
-
-<script src="/js/map.js"></script>

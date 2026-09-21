@@ -1,70 +1,729 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title><%= hotel.name %> — Hotels Jharkhand</title>
-  <meta name="description" content="<%= hotel.name %> in <%= hotel.district %>">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/css/hotels.css">
-</head>
-<body>
-<main class="container single-hotel">
-  <nav class="breadcrumb"><a href="/">Home</a> › <a href="/hotels">Hotels</a> › <span><%= hotel.name %></span></nav>
+<%
+  const hotelData = hotel || {};
 
-  <header class="hero" style="background-image:url('<%= hotel.image %>')">
-    <div class="hero-inner">
-      <h1><%= hotel.name %></h1>
-      <p class="muted"><%= hotel.address %> • <span class="badge"><%= hotel.rating %> ★</span></p>
-    </div>
-  </header>
+  const hotelId = hotelData.id || "";
+  const hotelName = hotelData.name || "Hotel";
+  const hotelDistrict = hotelData.district || "Jharkhand";
+  const hotelAddress = hotelData.address || "Location details available on request";
+  const hotelImage =
+    hotelData.image ||
+    "/images/placeholder-hotel.jpg";
 
-  <section class="details">
-    <div class="left">
-      <h2>Overview</h2>
-      <p><strong>Starting price:</strong> ₹ <%= hotel.price_from %> / night</p>
-      <p><strong>Availability:</strong> <%= hotel.availability %></p>
-      <h3>Room types</h3>
-      <ul class="room-types">
-        <% hotel.room_types.forEach(rt => { %><li><%= rt %></li><% }) %>
-      </ul>
+  const hotelRating = Number(hotelData.rating || 0);
+  const hotelPrice = hotelData.price_from;
 
-      <h3>Amenities</h3>
-      <ul class="amenities">
-        <% hotel.amenities.forEach(a => { %><li><%= a %></li><% }) %>
-      </ul>
+  const hotelAvailability =
+    hotelData.availability ||
+    "Check availability";
 
-      <h3>Booking</h3>
-      <form id="bookingForm" class="booking-form">
-        <label>Check-in <input type="date" name="checkin" required></label>
-        <label>Check-out <input type="date" name="checkout" required></label>
-        <label>Rooms <input type="number" name="rooms" min="1" value="1"></label>
-        <label>Adults <input type="number" name="adults" min="1" value="2"></label>
-        <label>Children <input type="number" name="children" min="0" value="0"></label>
-        <button class="btn primary">Book (UI only)</button>
-      </form>
-    </div>
+  const hotelDescription =
+    hotelData.description ||
+    hotelData.desc ||
+    "Explore comfortable accommodation while discovering the natural, cultural and heritage attractions of Jharkhand.";
 
-    <aside class="right">
-      <div class="card glass">
-        <h4>Contact</h4>
-        <p><strong>Phone:</strong> <%= hotel.phone %></p>
-        <p><a href="<%= hotel.map %>" target="_blank">Open in Google Maps</a></p>
+  const nearbyHotels =
+    Array.isArray(nearby)
+      ? nearby
+      : [];
+
+  const mapQuery = encodeURIComponent(
+    hotelAddress || hotelName
+  );
+
+  const mapUrl =
+    hotelData.google_map ||
+    hotelData.map ||
+    `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
+
+  const embedMapUrl =
+    `https://www.google.com/maps?q=${mapQuery}&output=embed`;
+%>
+
+<main class="jt-hotel-detail-page">
+
+  <!-- =====================================================
+       TOP NAVIGATION
+       ===================================================== -->
+
+  <div class="jt-hotel-detail-top">
+    <div class="jt-hotel-detail-container">
+
+      <a
+        href="/hotels"
+        class="jt-hotel-back"
+        aria-label="Back to hotels"
+      >
+        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+        <span>Back to hotels</span>
+      </a>
+
+      <div class="jt-hotel-breadcrumb">
+        <a href="/">Home</a>
+        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+        <a href="/hotels">Hotels</a>
+        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+        <span><%= hotelName %></span>
       </div>
 
-      <div class="card glass">
-        <h4>Nearby Hotels</h4>
-        <% if (!nearby || nearby.length === 0) { %><p>No nearby hotels.</p><% } else { %>
-          <ul>
-          <% nearby.forEach(n => { %>
-            <li><a href="/hotels/<%= n.id %>"><%= n.name %></a> <small class="muted">• <%= n.price_from ? 'from ₹' + n.price_from : '' %></small></li>
-          <% }) %>
-          </ul>
-        <% } %>
+    </div>
+  </div>
+
+
+  <!-- =====================================================
+       HERO
+       ===================================================== -->
+
+  <section class="jt-hotel-detail-hero">
+
+    <div class="jt-hotel-detail-hero-image">
+
+      <img
+        src="<%= hotelImage %>"
+        alt="<%= hotelName %>"
+        class="jt-hotel-detail-image"
+        loading="eager"
+      >
+
+      <div
+        class="jt-hotel-detail-hero-overlay"
+        aria-hidden="true"
+      ></div>
+
+      <div class="jt-hotel-detail-hero-content">
+
+        <div class="jt-hotel-detail-container">
+
+          <div class="jt-hotel-detail-hero-copy">
+
+            <span class="jt-hotel-detail-eyebrow">
+              <i class="fa-solid fa-hotel" aria-hidden="true"></i>
+              Stay in Jharkhand
+            </span>
+
+            <h1><%= hotelName %></h1>
+
+            <div class="jt-hotel-detail-meta">
+
+              <span>
+                <i
+                  class="fa-solid fa-location-dot"
+                  aria-hidden="true"
+                ></i>
+                <%= hotelDistrict %>
+              </span>
+
+              <% if (hotelRating > 0) { %>
+                <span class="jt-hotel-detail-rating">
+                  <i
+                    class="fa-solid fa-star"
+                    aria-hidden="true"
+                  ></i>
+                  <%= hotelRating.toFixed(1) %>
+                </span>
+              <% } %>
+
+              <span>
+                <i
+                  class="fa-solid fa-map-pin"
+                  aria-hidden="true"
+                ></i>
+                Jharkhand
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
-    </aside>
+
+    </div>
+
   </section>
+
+
+  <!-- =====================================================
+       MAIN CONTENT
+       ===================================================== -->
+
+  <section class="jt-hotel-detail-content">
+
+    <div class="jt-hotel-detail-container">
+
+      <div class="jt-hotel-detail-layout">
+
+
+        <!-- =================================================
+             PRIMARY CONTENT
+             ================================================= -->
+
+        <div class="jt-hotel-detail-main">
+
+
+          <!-- About -->
+
+          <article class="jt-hotel-detail-card">
+
+            <div class="jt-hotel-section-heading">
+
+              <span class="jt-hotel-section-icon">
+                <i
+                  class="fa-solid fa-hotel"
+                  aria-hidden="true"
+                ></i>
+              </span>
+
+              <div>
+                <p class="jt-hotel-section-kicker">
+                  Accommodation
+                </p>
+
+                <h2>About this stay</h2>
+              </div>
+
+            </div>
+
+            <p class="jt-hotel-description">
+              <%= hotelDescription %>
+            </p>
+
+          </article>
+
+
+          <!-- Location -->
+
+          <article class="jt-hotel-detail-card">
+
+            <div class="jt-hotel-section-heading">
+
+              <span class="jt-hotel-section-icon">
+                <i
+                  class="fa-solid fa-location-dot"
+                  aria-hidden="true"
+                ></i>
+              </span>
+
+              <div>
+                <p class="jt-hotel-section-kicker">
+                  Location
+                </p>
+
+                <h2>Where you'll stay</h2>
+              </div>
+
+            </div>
+
+            <div class="jt-hotel-address-box">
+
+              <i
+                class="fa-solid fa-location-dot"
+                aria-hidden="true"
+              ></i>
+
+              <div>
+                <strong><%= hotelDistrict %></strong>
+                <span><%= hotelAddress %></span>
+              </div>
+
+            </div>
+
+            <div class="jt-hotel-map">
+              <iframe
+                src="<%= embedMapUrl %>"
+                title="Map showing <%= hotelName %>"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen
+              ></iframe>
+            </div>
+
+            <a
+              href="<%= mapUrl %>"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="jt-hotel-map-link"
+            >
+              <i
+                class="fa-solid fa-diamond-turn-right"
+                aria-hidden="true"
+              ></i>
+              Open location in Google Maps
+              <i
+                class="fa-solid fa-arrow-up-right-from-square"
+                aria-hidden="true"
+              ></i>
+            </a>
+
+          </article>
+
+
+          <!-- Nearby hotels -->
+
+          <% if (nearbyHotels.length) { %>
+
+            <section class="jt-hotel-nearby">
+
+              <div class="jt-hotel-section-heading">
+
+                <span class="jt-hotel-section-icon">
+                  <i
+                    class="fa-solid fa-compass"
+                    aria-hidden="true"
+                  ></i>
+                </span>
+
+                <div>
+                  <p class="jt-hotel-section-kicker">
+                    More stays
+                  </p>
+
+                  <h2>Nearby hotels</h2>
+                </div>
+
+              </div>
+
+
+              <div class="jt-hotel-nearby-grid">
+
+                <% nearbyHotels.forEach((item) => { %>
+
+                  <a
+                    href="/hotels/<%= encodeURIComponent(item.id || "") %>"
+                    class="jt-nearby-hotel-card"
+                  >
+
+                    <div class="jt-nearby-hotel-image">
+
+                      <img
+                        src="<%= item.image || '/images/placeholder-hotel.jpg' %>"
+                        alt="<%= item.name || 'Nearby hotel' %>"
+                        loading="lazy"
+                      >
+
+                    </div>
+
+                    <div class="jt-nearby-hotel-body">
+
+                      <span class="jt-nearby-hotel-location">
+                        <i
+                          class="fa-solid fa-location-dot"
+                          aria-hidden="true"
+                        ></i>
+                        <%= item.district || "Jharkhand" %>
+                      </span>
+
+                      <h3>
+                        <%= item.name || "Hotel" %>
+                      </h3>
+
+                      <% if (item.rating) { %>
+                        <span class="jt-nearby-hotel-rating">
+                          <i
+                            class="fa-solid fa-star"
+                            aria-hidden="true"
+                          ></i>
+                          <%= Number(item.rating).toFixed(1) %>
+                        </span>
+                      <% } %>
+
+                      <% if (item.price_from) { %>
+                        <span class="jt-nearby-hotel-price">
+                          From ₹<%= Number(item.price_from).toLocaleString("en-IN") %>
+                        </span>
+                      <% } %>
+
+                    </div>
+
+                  </a>
+
+                <% }); %>
+
+              </div>
+
+            </section>
+
+          <% } %>
+
+
+        </div>
+
+
+        <!-- =================================================
+             SIDEBAR
+             ================================================= -->
+
+        <aside class="jt-hotel-detail-sidebar">
+
+
+          <!-- Booking / summary card -->
+
+          <div class="jt-hotel-booking-card">
+
+            <div class="jt-hotel-booking-top">
+
+              <span class="jt-hotel-booking-label">
+                Starting from
+              </span>
+
+              <% if (hotelPrice !== undefined && hotelPrice !== null && hotelPrice !== "") { %>
+
+                <div class="jt-hotel-booking-price">
+                  ₹<%= Number(hotelPrice).toLocaleString("en-IN") %>
+                  <small>/ night</small>
+                </div>
+
+              <% } else { %>
+
+                <div class="jt-hotel-booking-price">
+                  Contact hotel
+                </div>
+
+              <% } %>
+
+            </div>
+
+
+            <div class="jt-hotel-availability-box">
+
+              <span class="jt-hotel-availability-dot"></span>
+
+              <div>
+                <strong><%= hotelAvailability %></strong>
+                <small>Availability may vary by date</small>
+              </div>
+
+            </div>
+
+
+            <div class="jt-hotel-booking-actions">
+
+              <a
+                href="<%= mapUrl %>"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="jt-hotel-primary-action"
+              >
+                <i
+                  class="fa-solid fa-location-arrow"
+                  aria-hidden="true"
+                ></i>
+                View location
+              </a>
+
+              <button
+                type="button"
+                class="jt-hotel-secondary-action"
+                id="hotelFavoriteButton"
+                data-id="<%= hotelId %>"
+                aria-pressed="false"
+                aria-label="Add hotel to favorites"
+              >
+                <i
+                  class="fa-regular fa-heart"
+                  aria-hidden="true"
+                ></i>
+                <span>Save hotel</span>
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- Quick information -->
+
+          <div class="jt-hotel-quick-card">
+
+            <div class="jt-hotel-sidebar-heading">
+              <i
+                class="fa-solid fa-circle-info"
+                aria-hidden="true"
+              ></i>
+              Quick information
+            </div>
+
+
+            <div class="jt-hotel-quick-list">
+
+              <div class="jt-hotel-quick-item">
+
+                <span>
+                  <i
+                    class="fa-solid fa-location-dot"
+                    aria-hidden="true"
+                  ></i>
+                  District
+                </span>
+
+                <strong>
+                  <%= hotelDistrict %>
+                </strong>
+
+              </div>
+
+
+              <% if (hotelRating > 0) { %>
+
+                <div class="jt-hotel-quick-item">
+
+                  <span>
+                    <i
+                      class="fa-solid fa-star"
+                      aria-hidden="true"
+                    ></i>
+                    Rating
+                  </span>
+
+                  <strong>
+                    <%= hotelRating.toFixed(1) %> / 5
+                  </strong>
+
+                </div>
+
+              <% } %>
+
+
+              <% if (hotelPrice !== undefined && hotelPrice !== null && hotelPrice !== "") { %>
+
+                <div class="jt-hotel-quick-item">
+
+                  <span>
+                    <i
+                      class="fa-solid fa-indian-rupee-sign"
+                      aria-hidden="true"
+                    ></i>
+                    Starting price
+                  </span>
+
+                  <strong>
+                    ₹<%= Number(hotelPrice).toLocaleString("en-IN") %>
+                  </strong>
+
+                </div>
+
+              <% } %>
+
+
+              <div class="jt-hotel-quick-item">
+
+                <span>
+                  <i
+                    class="fa-solid fa-map"
+                    aria-hidden="true"
+                  ></i>
+                  Region
+                </span>
+
+                <strong>
+                  Jharkhand
+                </strong>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- Planner CTA -->
+
+          <div class="jt-hotel-planner-card">
+
+            <span class="jt-hotel-planner-icon">
+              <i
+                class="fa-solid fa-wand-magic-sparkles"
+                aria-hidden="true"
+              ></i>
+            </span>
+
+            <p class="jt-hotel-planner-kicker">
+              Smart Tourism
+            </p>
+
+            <h3>
+              Planning a complete Jharkhand trip?
+            </h3>
+
+            <p>
+              Build an itinerary around your destination,
+              accommodation and travel interests.
+            </p>
+
+            <a href="/planner">
+              Open AI Trip Planner
+              <i
+                class="fa-solid fa-arrow-right"
+                aria-hidden="true"
+              ></i>
+            </a>
+
+          </div>
+
+
+        </aside>
+
+      </div>
+
+
+      <!-- =================================================
+           BOTTOM CTA
+           ================================================= -->
+
+      <section class="jt-hotel-bottom-cta">
+
+        <div class="jt-hotel-bottom-cta-content">
+
+          <span class="jt-hotel-bottom-icon">
+            <i
+              class="fa-solid fa-map-location-dot"
+              aria-hidden="true"
+            ></i>
+          </span>
+
+          <div>
+
+            <p>
+              Discover more of Jharkhand
+            </p>
+
+            <h2>
+              Explore destinations around your stay.
+            </h2>
+
+          </div>
+
+        </div>
+
+        <a
+          href="/places"
+          class="jt-hotel-bottom-btn"
+        >
+          Explore places
+          <i
+            class="fa-solid fa-arrow-right"
+            aria-hidden="true"
+          ></i>
+        </a>
+
+      </section>
+
+    </div>
+
+  </section>
+
 </main>
 
-<script src="/js/hotels.js" defer></script>
-</body>
-</html>
+
+<script>
+(function () {
+  "use strict";
+
+  const favoriteButton =
+    document.getElementById("hotelFavoriteButton");
+
+  if (!favoriteButton) return;
+
+  const storageKey = "jh_hotels_favs_v1";
+  const hotelId =
+    String(favoriteButton.dataset.id || "");
+
+  if (!hotelId) return;
+
+
+  function readFavorites() {
+    try {
+      const value =
+        JSON.parse(
+          localStorage.getItem(storageKey) || "[]"
+        );
+
+      return Array.isArray(value)
+        ? value
+        : [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+
+  function updateButton() {
+    const favorites = readFavorites();
+
+    const active =
+      favorites.includes(hotelId);
+
+    favoriteButton.classList.toggle(
+      "is-active",
+      active
+    );
+
+    favoriteButton.setAttribute(
+      "aria-pressed",
+      active ? "true" : "false"
+    );
+
+    favoriteButton.setAttribute(
+      "aria-label",
+      active
+        ? "Remove hotel from favorites"
+        : "Add hotel to favorites"
+    );
+
+    const icon =
+      favoriteButton.querySelector("i");
+
+    const label =
+      favoriteButton.querySelector("span");
+
+    if (icon) {
+      icon.className = active
+        ? "fa-solid fa-heart"
+        : "fa-regular fa-heart";
+    }
+
+    if (label) {
+      label.textContent = active
+        ? "Saved"
+        : "Save hotel";
+    }
+  }
+
+
+  favoriteButton.addEventListener(
+    "click",
+    function () {
+
+      const favorites =
+        readFavorites();
+
+      const index =
+        favorites.indexOf(hotelId);
+
+      if (index === -1) {
+        favorites.push(hotelId);
+      } else {
+        favorites.splice(index, 1);
+      }
+
+      try {
+        localStorage.setItem(
+          storageKey,
+          JSON.stringify(favorites)
+        );
+      } catch (error) {
+        console.warn(
+          "Unable to save hotel favorite.",
+          error
+        );
+      }
+
+      updateButton();
+    }
+  );
+
+
+  updateButton();
+
+})();
+</script>

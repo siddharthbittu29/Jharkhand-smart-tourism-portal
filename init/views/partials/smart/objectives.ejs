@@ -1,101 +1,207 @@
-<!-- Slide 3 · Objectives + Government Vision -->
-<section class="py-5 bg-light" id="objectives">
-  <div class="container">
-    <div class="text-center mb-4">
-      <h2 class="fw-bold">Objectives</h2>
-      <p class="text-muted mb-0">Clear goals to guide Smart Tourism in Jharkhand</p>
-    </div>
+<%
+/*
+ * ============================================================
+ * JHARKHAND TOURISM
+ * SMART TOURISM — OBJECTIVES PARTIAL
+ * File: init/views/partials/smart/objectives.ejs
+ *
+ * Purpose:
+ * Reusable objectives section for Smart Tourism pages.
+ * ============================================================
+ */
 
-    <div class="row g-4">
-      <div class="col-md-6">
-        <div class="p-4 h-100 bg-white shadow-sm rounded-3">
-          <h5 class="mb-3"><i class="bi bi-bullseye me-2"></i>Key Objectives</h5>
-          <ul class="list-unstyled mb-0">
-            <li class="d-flex mb-3">
-              <i class="bi bi-check2-circle fs-5 me-2"></i>
-              <span>Digital visitor journey: discovery → booking → on-ground navigation.</span>
-            </li>
-            <li class="d-flex mb-3">
-              <i class="bi bi-check2-circle fs-5 me-2"></i>
-              <span>Real-time information for safety, crowd management, and alerts.</span>
-            </li>
-            <li class="d-flex mb-3">
-              <i class="bi bi-check2-circle fs-5 me-2"></i>
-              <span>Boost local economy via homestays, guides, crafts & festivals.</span>
-            </li>
-            <li class="d-flex mb-3">
-              <i class="bi bi-check2-circle fs-5 me-2"></i>
-              <span>Accessibility & inclusivity by design (WCAG/EN 301 549 mindset).</span>
-            </li>
-            <li class="d-flex">
-              <i class="bi bi-check2-circle fs-5 me-2"></i>
-              <span>Sustainability: waste, water & energy monitoring at sites.</span>
-            </li>
-          </ul>
-        </div>
-      </div>
+const objectiveItems = [
+  {
+    number: "01",
+    title: "Digital First",
+    icon: "fa-mobile-screen-button",
+    text:
+      "Create a stronger digital layer for destination discovery, information access, planning and visitor interaction."
+  },
+  {
+    number: "02",
+    title: "Sustainable Growth",
+    icon: "fa-leaf",
+    text:
+      "Keep responsible travel, eco-tourism and sustainability visible within the tourism experience."
+  },
+  {
+    number: "03",
+    title: "Inclusive Tourism",
+    icon: "fa-universal-access",
+    text:
+      "Reduce information and accessibility barriers so more visitors can participate in tourism experiences."
+  },
+  {
+    number: "04",
+    title: "Smart Operations",
+    icon: "fa-gears",
+    text:
+      "Support connected tourism workflows through structured information, digital services and technology."
+  },
+  {
+    number: "05",
+    title: "Safety & Trust",
+    icon: "fa-shield-halved",
+    text:
+      "Keep trustworthy information, visitor confidence and safer tourism interactions central to the platform."
+  },
+  {
+    number: "06",
+    title: "Brand Jharkhand",
+    icon: "fa-mountain-sun",
+    text:
+      "Strengthen Jharkhand's digital tourism identity through nature, culture, heritage and adventure."
+  }
+];
+%>
 
-      <div class="col-md-6">
-        <div class="p-4 h-100 bg-white shadow-sm rounded-3">
-          <h5 class="mb-3"><i class="bi bi-bank2 me-2"></i>Government Vision</h5>
 
-          <div class="mb-3">
-            <div class="border-start ps-3">
-              <p class="mb-2"><strong>Smart, sustainable & inclusive tourism</strong> that preserves culture, protects nature, and creates quality jobs.</p>
-              <p class="mb-0 text-muted">“One portal, many experiences” — seamless state-wide platform for discovery, booking, and support.</p>
-            </div>
+<!-- ============================================================
+     OBJECTIVES SECTION
+============================================================ -->
+
+<section
+  class="jt-smart-section"
+  id="objectives"
+  aria-labelledby="smartObjectivesTitle"
+>
+
+  <div class="jt-smart-shell">
+
+
+    <!-- ========================================================
+         SECTION HEADER
+    ========================================================= -->
+
+    <header class="jt-smart-section-head">
+
+      <span class="jt-smart-section-kicker">
+
+        <i
+          class="fa-solid fa-bullseye"
+          aria-hidden="true">
+        </i>
+
+        Strategic Objectives
+
+      </span>
+
+
+      <h2 id="smartObjectivesTitle">
+        Six pillars shape the Smart Tourism direction.
+      </h2>
+
+
+      <p>
+        The Smart Tourism framework connects digital discovery,
+        sustainability, inclusion, smarter operations, trust and
+        Jharkhand's destination identity.
+      </p>
+
+    </header>
+
+
+    <!-- ========================================================
+         OBJECTIVES GRID
+    ========================================================= -->
+
+    <div class="jt-objectives-grid">
+
+
+      <% objectiveItems.forEach((objective) => { %>
+
+        <article
+          class="jt-objective-card"
+        >
+
+
+          <!-- ==================================================
+               NUMBER
+          =================================================== -->
+
+          <span
+            class="jt-objective-number"
+            aria-hidden="true"
+          >
+            <%= objective.number %>
+          </span>
+
+
+          <!-- ==================================================
+               ICON
+          =================================================== -->
+
+          <div
+            class="jt-objective-icon"
+            aria-hidden="true"
+          >
+
+            <i
+              class="fa-solid <%= objective.icon %>"
+            ></i>
+
           </div>
 
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item px-0">
-              <i class="bi bi-globe2 me-2"></i> Unified digital stack (content CMS, maps, tickets, passes, analytics)
-            </li>
-            <li class="list-group-item px-0">
-              <i class="bi bi-shield-check me-2"></i> Safety-first: SOS, verified operators, grievance redressal
-            </li>
-            <li class="list-group-item px-0">
-              <i class="bi bi-tree me-2"></i> Green standards for destinations & events
-            </li>
-            <li class="list-group-item px-0">
-              <i class="bi bi-people me-2"></i> Skills & livelihoods for local youth, SHGs, and artisans
-            </li>
-          </ul>
 
-          <div class="mt-4">
-            <h6 class="text-uppercase text-muted mb-2">Roadmap Highlights</h6>
-            <ol class="timeline list-unstyled mb-0">
-              <li>
-                <span class="dot"></span>
-                <strong>Phase 1:</strong> Content, listings, maps, basic bookings
-              </li>
-              <li>
-                <span class="dot"></span>
-                <strong>Phase 2:</strong> Smart passes, events, homestays, guides
-              </li>
-              <li>
-                <span class="dot"></span>
-                <strong>Phase 3:</strong> IoT dashboards, sustainability KPIs, AI assistant
-              </li>
-            </ol>
-          </div>
-        </div>
-      </div>
+          <!-- ==================================================
+               CONTENT
+          =================================================== -->
+
+          <h3>
+            <%= objective.title %>
+          </h3>
+
+
+          <p>
+            <%= objective.text %>
+          </p>
+
+
+        </article>
+
+      <% }); %>
+
+
     </div>
+
+
+    <!-- ========================================================
+         VISION NOTE
+    ========================================================= -->
+
+    <div class="jt-vision-banner">
+
+      <div class="banner-top">
+
+        <h3>
+          Strategy first. Technology in service of the journey.
+        </h3>
+
+
+        <span class="jt-vision-tag">
+
+          <i
+            class="fa-solid fa-compass"
+            aria-hidden="true">
+          </i>
+
+          Vision Framework
+
+        </span>
+
+      </div>
+
+
+      <p>
+        These objectives describe the strategic direction of Smart
+        Tourism. Individual capabilities may exist at different stages
+        of implementation as the wider platform evolves.
+      </p>
+
+    </div>
+
 
   </div>
-</section>
 
-<style>
-  /* tiny timeline styling (scoped) */
-  #objectives .timeline li {
-    position: relative;
-    padding-left: 1.75rem;
-    margin-bottom: .6rem;
-  }
-  #objectives .timeline li .dot{
-    position:absolute; left:0; top:.2rem;
-    width:.6rem; height:.6rem; border-radius:50%;
-    background: currentColor;
-    opacity:.25;
-  }
-</style>
+</section>

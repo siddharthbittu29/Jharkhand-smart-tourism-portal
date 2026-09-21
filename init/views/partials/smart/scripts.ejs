@@ -1,2 +1,99 @@
-<script src="/js/core-features-arvr.js" defer></script>
-<script src="/smart/js/slide7.js" defer></script>
+<%
+/*
+ * ============================================================
+ * JHARKHAND TOURISM
+ * SMART TOURISM — SHARED SCRIPTS
+ * File: init/views/partials/smart/scripts.ejs
+ *
+ * Responsibilities:
+ * - AR/VR heritage interactions
+ * - Smart Tourism slide/core-feature interactions
+ *
+ * Business logic remains inside the dedicated JS modules.
+ * ============================================================
+ */
+%>
+
+
+<!-- ============================================================
+     AR / VR HERITAGE EXPERIENCE
+============================================================ -->
+
+<script
+  src="/js/core-features-arvr.js?v=2"
+  defer>
+</script>
+
+
+<!-- ============================================================
+     SMART TOURISM CORE / SLIDE INTERACTIONS
+============================================================ -->
+
+<script
+  src="/smart/js/slide7.js?v=2"
+  defer>
+</script>
+
+
+<!-- ============================================================
+     SAFE SMART TOURISM INITIALIZATION HOOK
+============================================================ -->
+
+<script>
+(() => {
+
+  "use strict";
+
+
+  /*
+   * ----------------------------------------------------------
+   * Smart Tourism page readiness
+   * ----------------------------------------------------------
+   *
+   * This does not own any feature logic.
+   * It simply exposes a semantic event that other modules
+   * can listen for when necessary.
+   */
+
+  const dispatchReady = () => {
+
+    window.dispatchEvent(
+      new CustomEvent(
+        "jt:smart-tourism-ready",
+        {
+          detail: {
+            path: window.location.pathname
+          }
+        }
+      )
+    );
+
+  };
+
+
+  /*
+   * DOM may already be ready when this partial is processed,
+   * especially because scripts are deferred.
+   */
+
+  if (
+    document.readyState === "loading"
+  ) {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      dispatchReady,
+      {
+        once: true
+      }
+    );
+
+  } else {
+
+    dispatchReady();
+
+  }
+
+
+})();
+</script>

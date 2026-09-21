@@ -1,175 +1,619 @@
-<!-- ========================================= -->
-<!-- TRIP ACTION CENTER -->
-<!-- ========================================= -->
+<!-- =========================================================
+     JHARKHAND TOURISM — TRIP ACTION CENTER
+========================================================= -->
 
-<section class="action-section">
+<%
+    const encodePlannerData = (value) => {
+        try {
+            return encodeURIComponent(
+                JSON.stringify(
+                    value ?? null
+                )
+            );
+        } catch (error) {
+            return encodeURIComponent(
+                JSON.stringify(null)
+            );
+        }
+    };
+
+    const pdfPlannerData = {
+        destination:
+            destination || "",
+
+        tripDays:
+            tripDays || "",
+
+        tripBudget:
+            tripBudget || "",
+
+        ecoScore:
+            ecoScore || "",
+
+        hotelCost:
+            hotelCost || "",
+
+        foodCost:
+            foodCost || "",
+
+        transportCost:
+            transportCost || "",
+
+        totalCost:
+            totalCost || "",
+
+        budgetStatus:
+            budgetStatus || "",
+
+        itinerary:
+            itinerary || [],
+
+        hotelRecommendations:
+            hotelRecommendations || [],
+
+        weatherInfo:
+            weatherInfo || {},
+
+        aiRecommendation:
+            aiRecommendation || "",
+
+        travelTips:
+            travelTips || [],
+
+        destinationHighlights:
+            destinationHighlights || [],
+
+        tripInsights:
+            tripInsights || {},
+
+        packingList:
+            packingList || []
+    };
+%>
+
+
+<section
+    class="action-section"
+    aria-labelledby="action-section-title"
+>
 
     <div class="section-heading">
 
         <span class="section-badge">
 
-            📄 Trip Action Center
+            <i
+                class="fa-solid fa-file-export"
+                aria-hidden="true">
+            </i>
+
+            Trip Action Center
 
         </span>
 
-        <h2>
 
-            Export & Manage Your Trip
-
+        <h2 id="action-section-title">
+            Export & manage your trip
         </h2>
 
+
         <p>
-
-            Save, share or download your AI generated travel plan.
-
+            Save, share, print or download your
+            personalized Jharkhand travel plan.
         </p>
 
     </div>
 
+
     <div class="action-grid">
 
-        <!-- PDF -->
 
-        <a
+        <!-- =================================================
+             DOWNLOAD PDF
+        ================================================== -->
 
-            href="/pdf?destination=<%= destination %>&days=<%= tripDays %>&budget=<%= tripBudget %>&ecoScore=<%= ecoScore %>&hotelCost=<%= hotelCost %>&foodCost=<%= foodCost %>&transportCost=<%= transportCost %>&totalCost=<%= totalCost %>&budgetStatus=<%= encodeURIComponent(budgetStatus) %>"
+        <form
+            action="/pdf"
+            method="POST"
+            class="action-card-form"
+        >
 
-            class="action-card">
+            <input
+                type="hidden"
+                name="destination"
+                value="<%= pdfPlannerData.destination %>"
+            >
 
-            <div class="action-icon">
+            <input
+                type="hidden"
+                name="tripDays"
+                value="<%= pdfPlannerData.tripDays %>"
+            >
 
-                📄
+            <input
+                type="hidden"
+                name="tripBudget"
+                value="<%= pdfPlannerData.tripBudget %>"
+            >
 
-            </div>
+            <input
+                type="hidden"
+                name="ecoScore"
+                value="<%= pdfPlannerData.ecoScore %>"
+            >
 
-            <h3>
+            <input
+                type="hidden"
+                name="hotelCost"
+                value="<%= pdfPlannerData.hotelCost %>"
+            >
 
-                Download Report
+            <input
+                type="hidden"
+                name="foodCost"
+                value="<%= pdfPlannerData.foodCost %>"
+            >
 
-            </h3>
+            <input
+                type="hidden"
+                name="transportCost"
+                value="<%= pdfPlannerData.transportCost %>"
+            >
 
-            <p>
+            <input
+                type="hidden"
+                name="totalCost"
+                value="<%= pdfPlannerData.totalCost %>"
+            >
 
-                Generate your premium AI travel report in PDF format.
+            <input
+                type="hidden"
+                name="budgetStatus"
+                value="<%= pdfPlannerData.budgetStatus %>"
+            >
 
-            </p>
+            <input
+                type="hidden"
+                name="itinerary"
+                value="<%= encodePlannerData(pdfPlannerData.itinerary) %>"
+            >
 
-        </a>
+            <input
+                type="hidden"
+                name="hotelRecommendations"
+                value="<%= encodePlannerData(pdfPlannerData.hotelRecommendations) %>"
+            >
 
-        <!-- PRINT -->
+            <input
+                type="hidden"
+                name="weatherInfo"
+                value="<%= encodePlannerData(pdfPlannerData.weatherInfo) %>"
+            >
+
+            <input
+                type="hidden"
+                name="aiRecommendation"
+                value="<%= encodePlannerData(pdfPlannerData.aiRecommendation) %>"
+            >
+
+            <input
+                type="hidden"
+                name="travelTips"
+                value="<%= encodePlannerData(pdfPlannerData.travelTips) %>"
+            >
+
+            <input
+                type="hidden"
+                name="destinationHighlights"
+                value="<%= encodePlannerData(pdfPlannerData.destinationHighlights) %>"
+            >
+
+            <input
+                type="hidden"
+                name="tripInsights"
+                value="<%= encodePlannerData(pdfPlannerData.tripInsights) %>"
+            >
+
+            <input
+                type="hidden"
+                name="packingList"
+                value="<%= encodePlannerData(pdfPlannerData.packingList) %>"
+            >
+
+
+            <button
+                type="submit"
+                class="action-card action-card-primary action-submit"
+                aria-label="Download your complete AI travel report"
+            >
+
+                <div
+                    class="action-icon"
+                    aria-hidden="true"
+                >
+                    <i class="fa-solid fa-file-pdf"></i>
+                </div>
+
+
+                <div class="action-content">
+
+                    <span class="action-kicker">
+                        Export
+                    </span>
+
+                    <h3>
+                        Download Report
+                    </h3>
+
+                    <p>
+                        Generate your complete personalized
+                        travel report as a rich PDF.
+                    </p>
+
+                </div>
+
+
+                <span
+                    class="action-arrow"
+                    aria-hidden="true"
+                >
+                    <i class="fa-solid fa-arrow-right"></i>
+                </span>
+
+            </button>
+
+        </form>
+
+
+        <!-- =================================================
+             PRINT
+        ================================================== -->
 
         <button
+            type="button"
+            id="printPlannerButton"
+            class="action-card action-button"
+            aria-label="Print the complete travel planner"
+        >
 
-            onclick="window.print()"
+            <div
+                class="action-icon"
+                aria-hidden="true"
+            >
+                <i class="fa-solid fa-print"></i>
+            </div>
 
-            class="action-card action-button">
 
-            <div class="action-icon">
+            <div class="action-content">
 
-                🖨
+                <span class="action-kicker">
+                    Print
+                </span>
+
+                <h3>
+                    Print Planner
+                </h3>
+
+                <p>
+                    Print your complete itinerary and
+                    travel information.
+                </p>
 
             </div>
 
-            <h3>
 
-                Print Planner
-
-            </h3>
-
-            <p>
-
-                Print the complete itinerary.
-
-            </p>
+            <span
+                class="action-arrow"
+                aria-hidden="true"
+            >
+                <i class="fa-solid fa-arrow-right"></i>
+            </span>
 
         </button>
 
-        <!-- SHARE -->
+
+        <!-- =================================================
+             SHARE
+        ================================================== -->
 
         <button
+            type="button"
+            id="shareTripButton"
+            class="action-card action-button"
+            aria-label="Share your AI generated travel itinerary"
+        >
 
-            onclick="shareTrip()"
+            <div
+                class="action-icon"
+                aria-hidden="true"
+            >
+                <i class="fa-solid fa-share-nodes"></i>
+            </div>
 
-            class="action-card action-button">
 
-            <div class="action-icon">
+            <div class="action-content">
 
-                📤
+                <span class="action-kicker">
+                    Share
+                </span>
+
+                <h3>
+                    Share Trip
+                </h3>
+
+                <p>
+                    Share your personalized itinerary
+                    with friends and travel companions.
+                </p>
 
             </div>
 
-            <h3>
 
-                Share Trip
-
-            </h3>
-
-            <p>
-
-                Share your AI generated itinerary.
-
-            </p>
+            <span
+                class="action-arrow"
+                aria-hidden="true"
+            >
+                <i class="fa-solid fa-arrow-right"></i>
+            </span>
 
         </button>
 
-        <!-- HOME -->
+
+        <!-- =================================================
+             HOME
+        ================================================== -->
 
         <a
-
             href="/"
+            class="action-card"
+            aria-label="Return to the Jharkhand Tourism homepage"
+        >
 
-            class="action-card">
+            <div
+                class="action-icon"
+                aria-hidden="true"
+            >
+                <i class="fa-solid fa-house"></i>
+            </div>
 
-            <div class="action-icon">
 
-                🏠
+            <div class="action-content">
+
+                <span class="action-kicker">
+                    Navigation
+                </span>
+
+                <h3>
+                    Back Home
+                </h3>
+
+                <p>
+                    Return to Jharkhand Tourism and
+                    continue exploring.
+                </p>
 
             </div>
 
-            <h3>
 
-                Back Home
-
-            </h3>
-
-            <p>
-
-                Return to Smart Tourism homepage.
-
-            </p>
+            <span
+                class="action-arrow"
+                aria-hidden="true"
+            >
+                <i class="fa-solid fa-arrow-right"></i>
+            </span>
 
         </a>
 
     </div>
 
+
+    <div
+        id="tripShareStatus"
+        class="trip-share-status"
+        role="status"
+        aria-live="polite"
+        hidden
+    ></div>
+
 </section>
 
+
 <script>
+(function () {
 
-function shareTrip(){
+    "use strict";
 
-    if(navigator.share){
 
-        navigator.share({
+    /* =====================================================
+       PRINT
+    ====================================================== */
 
-            title:"AI Smart Tourism Planner",
+    const printButton =
+        document.getElementById(
+            "printPlannerButton"
+        );
 
-            text:"Check out my AI generated Jharkhand travel itinerary!",
 
-            url:window.location.href
+    if (printButton) {
 
-        });
+        printButton.addEventListener(
+            "click",
+            function () {
+
+                window.print();
+
+            }
+        );
 
     }
 
-    else{
 
-        navigator.clipboard.writeText(window.location.href);
+    /* =====================================================
+       SHARE
+    ====================================================== */
 
-        alert("Trip link copied to clipboard.");
+    const shareButton =
+        document.getElementById(
+            "shareTripButton"
+        );
+
+    const shareStatus =
+        document.getElementById(
+            "tripShareStatus"
+        );
+
+
+    function showShareStatus(message) {
+
+        if (!shareStatus) {
+            return;
+        }
+
+        shareStatus.textContent =
+            message;
+
+        shareStatus.hidden =
+            false;
+
+
+        window.setTimeout(
+            function () {
+
+                shareStatus.hidden =
+                    true;
+
+            },
+            3500
+        );
 
     }
 
-}
 
+    async function shareTrip() {
+
+        const shareData = {
+
+            title:
+                "My Jharkhand Travel Plan",
+
+            text:
+                "Check out my personalized Jharkhand travel itinerary.",
+
+            url:
+                window.location.href
+
+        };
+
+
+        if (
+            navigator.share &&
+            typeof navigator.share === "function"
+        ) {
+
+            try {
+
+                await navigator.share(
+                    shareData
+                );
+
+                showShareStatus(
+                    "Trip shared successfully."
+                );
+
+                return;
+
+            } catch (error) {
+
+                if (
+                    error &&
+                    error.name === "AbortError"
+                ) {
+                    return;
+                }
+
+            }
+
+        }
+
+
+        try {
+
+            if (
+                navigator.clipboard &&
+                typeof navigator.clipboard.writeText ===
+                    "function"
+            ) {
+
+                await navigator.clipboard.writeText(
+                    window.location.href
+                );
+
+                showShareStatus(
+                    "Trip link copied to your clipboard."
+                );
+
+                return;
+
+            }
+
+        } catch (_) {}
+
+
+        try {
+
+            const temporaryInput =
+                document.createElement(
+                    "input"
+                );
+
+            temporaryInput.value =
+                window.location.href;
+
+            temporaryInput.setAttribute(
+                "readonly",
+                ""
+            );
+
+            temporaryInput.style.position =
+                "fixed";
+
+            temporaryInput.style.opacity =
+                "0";
+
+            document.body.appendChild(
+                temporaryInput
+            );
+
+            temporaryInput.select();
+
+            document.execCommand(
+                "copy"
+            );
+
+            temporaryInput.remove();
+
+            showShareStatus(
+                "Trip link copied to your clipboard."
+            );
+
+        } catch (_) {
+
+            showShareStatus(
+                "Copy this page URL to share your trip."
+            );
+
+        }
+
+    }
+
+
+    if (shareButton) {
+
+        shareButton.addEventListener(
+            "click",
+            shareTrip
+        );
+
+    }
+
+})();
 </script>

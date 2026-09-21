@@ -1,10 +1,628 @@
+<%
+/*
+ * ============================================================
+ * JHARKHAND TOURISM
+ * 404 — PAGE NOT FOUND
+ * File: init/views/404.ejs
+ * ============================================================
+ */
 
-<h2>Page not found</h2>
-<p>We couldn't find what you were looking for.</p>
-<a class="btn" href="/">Go Home</a>
+const requestedPath =
+  typeof path !== "undefined" && path
+    ? path
+    : (
+        typeof requestedUrl !== "undefined" && requestedUrl
+          ? requestedUrl
+          : ""
+      );
+%>
 
-<section class="container py-5 text-center">
-  <h1 class="display-6 mb-3">Page not found</h1>
-  <p class="text-muted">We couldn't find what you were looking for.</p>
-  <a href="/" class="btn btn-success mt-2">Go Home</a>
-</section>
+
+<link
+  rel="stylesheet"
+  href="/css/smart-tourism.css?v=2"
+>
+
+
+<style>
+  /* =========================================================
+     JHARKHAND TOURISM — 404
+     ========================================================= */
+
+  .jt-404-page {
+    min-height: 70vh;
+
+    display: grid;
+    place-items: center;
+
+    padding:
+      70px 20px 90px;
+
+    background:
+      radial-gradient(
+        circle at 50% 0%,
+        rgba(40,122,85,0.08),
+        transparent 34%
+      ),
+      #fbfaf7;
+
+    color: #183129;
+  }
+
+
+  .jt-404-shell {
+    width:
+      min(760px, 100%);
+
+    margin-inline: auto;
+  }
+
+
+  .jt-404-card {
+    position: relative;
+
+    overflow: hidden;
+
+    padding:
+      52px 42px;
+
+    text-align: center;
+
+    background:
+      #ffffff;
+
+    border:
+      1px solid rgba(18,61,45,0.11);
+
+    border-radius:
+      30px;
+
+    box-shadow:
+      0 30px 75px rgba(18,61,45,0.11);
+  }
+
+
+  .jt-404-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 240px;
+    height: 240px;
+
+    right: -120px;
+    top: -140px;
+
+    border:
+      1px solid rgba(40,122,85,0.09);
+
+    border-radius: 50%;
+  }
+
+
+  .jt-404-icon {
+    width: 74px;
+    height: 74px;
+
+    display: grid;
+    place-items: center;
+
+    margin:
+      0 auto 23px;
+
+    border-radius:
+      22px;
+
+    background:
+      #eaf4ed;
+
+    color:
+      #287a55;
+
+    font-size:
+      1.7rem;
+  }
+
+
+  .jt-404-code {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color:
+      #c89b52;
+
+    font-size:
+      0.74rem;
+
+    font-weight:
+      900;
+
+    letter-spacing:
+      0.15em;
+
+    text-transform:
+      uppercase;
+  }
+
+
+  .jt-404-card h1 {
+    margin:
+      0 0 13px;
+
+    color:
+      #123d2d;
+
+    font-size:
+      clamp(2.2rem, 5vw, 4rem);
+
+    line-height:
+      1;
+
+    letter-spacing:
+      -0.045em;
+  }
+
+
+  .jt-404-card p {
+    max-width:
+      570px;
+
+    margin:
+      0 auto;
+
+    color:
+      #687770;
+
+    line-height:
+      1.75;
+
+    font-size:
+      0.98rem;
+  }
+
+
+  .jt-404-path {
+    display:
+      inline-flex;
+
+    align-items:
+      center;
+
+    gap:
+      8px;
+
+    max-width:
+      100%;
+
+    margin:
+      23px auto 0;
+
+    padding:
+      9px 12px;
+
+    overflow:
+      hidden;
+
+    border:
+      1px solid rgba(18,61,45,0.10);
+
+    border-radius:
+      10px;
+
+    background:
+      #f4f7f4;
+
+    color:
+      #52635c;
+
+    font-family:
+      ui-monospace,
+      SFMono-Regular,
+      Menlo,
+      Monaco,
+      Consolas,
+      monospace;
+
+    font-size:
+      0.75rem;
+  }
+
+
+  .jt-404-path span:last-child {
+    min-width: 0;
+
+    overflow:
+      hidden;
+
+    text-overflow:
+      ellipsis;
+
+    white-space:
+      nowrap;
+  }
+
+
+  .jt-404-actions {
+    display:
+      flex;
+
+    flex-wrap:
+      wrap;
+
+    justify-content:
+      center;
+
+    gap:
+      10px;
+
+    margin-top:
+      29px;
+  }
+
+
+  .jt-404-btn {
+    min-height:
+      46px;
+
+    display:
+      inline-flex;
+
+    align-items:
+      center;
+
+    justify-content:
+      center;
+
+    gap:
+      8px;
+
+    padding:
+      0 16px;
+
+    border-radius:
+      11px;
+
+    font-size:
+      0.82rem;
+
+    font-weight:
+      900;
+
+    text-decoration:
+      none;
+
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+
+  .jt-404-btn:hover {
+    transform:
+      translateY(-2px);
+  }
+
+
+  .jt-404-btn.primary {
+    background:
+      #123d2d;
+
+    color:
+      #ffffff;
+
+    box-shadow:
+      0 10px 25px rgba(18,61,45,0.15);
+  }
+
+
+  .jt-404-btn.secondary {
+    background:
+      #ffffff;
+
+    color:
+      #123d2d;
+
+    border:
+      1px solid rgba(18,61,45,0.14);
+  }
+
+
+  .jt-404-links {
+    display:
+      grid;
+
+    grid-template-columns:
+      repeat(3, 1fr);
+
+    gap:
+      11px;
+
+    margin-top:
+      34px;
+
+    padding-top:
+      25px;
+
+    border-top:
+      1px solid rgba(18,61,45,0.09);
+  }
+
+
+  .jt-404-link {
+    padding:
+      15px 12px;
+
+    border-radius:
+      14px;
+
+    background:
+      #f8f8f5;
+
+    color:
+      #183129;
+
+    text-decoration:
+      none;
+
+    border:
+      1px solid transparent;
+
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+
+  .jt-404-link:hover {
+    transform:
+      translateY(-2px);
+
+    border-color:
+      rgba(40,122,85,0.13);
+
+    background:
+      #eef5ef;
+  }
+
+
+  .jt-404-link i {
+    display:
+      block;
+
+    margin-bottom:
+      8px;
+
+    color:
+      #287a55;
+  }
+
+
+  .jt-404-link strong {
+    display:
+      block;
+
+    font-size:
+      0.79rem;
+  }
+
+
+  .jt-404-link span {
+    display:
+      block;
+
+    margin-top:
+      3px;
+
+    color:
+      #7b8782;
+
+    font-size:
+      0.69rem;
+  }
+
+
+  @media (max-width: 620px) {
+
+    .jt-404-page {
+      padding:
+        50px 13px 65px;
+    }
+
+
+    .jt-404-card {
+      padding:
+        40px 22px;
+      border-radius:
+        24px;
+    }
+
+
+    .jt-404-links {
+      grid-template-columns:
+        1fr;
+    }
+
+
+    .jt-404-btn {
+      width:
+        100%;
+    }
+
+  }
+
+
+  @media (prefers-reduced-motion: reduce) {
+
+    .jt-404-btn,
+    .jt-404-link {
+      transition:
+        none;
+    }
+
+  }
+</style>
+
+
+<main
+  class="jt-404-page"
+  aria-labelledby="errorTitle"
+>
+
+  <div class="jt-404-shell">
+
+    <section class="jt-404-card">
+
+      <div
+        class="jt-404-icon"
+        aria-hidden="true"
+      >
+        <i class="fa-solid fa-compass"></i>
+      </div>
+
+
+      <span class="jt-404-code">
+        Error 404
+      </span>
+
+
+      <h1 id="errorTitle">
+        This trail ends here.
+      </h1>
+
+
+      <p>
+        The page you are looking for could not be found.
+        Return to the main journey or continue exploring
+        destinations, planning tools and Smart Tourism.
+      </p>
+
+
+      <% if (requestedPath) { %>
+
+        <div
+          class="jt-404-path"
+          aria-label="Requested path"
+        >
+
+          <i
+            class="fa-solid fa-link"
+            aria-hidden="true">
+          </i>
+
+          <span>
+            <%= requestedPath %>
+          </span>
+
+        </div>
+
+      <% } %>
+
+
+      <div class="jt-404-actions">
+
+        <a
+          href="/"
+          class="jt-404-btn primary"
+        >
+
+          <i
+            class="fa-solid fa-house"
+            aria-hidden="true">
+          </i>
+
+          Back to Home
+
+        </a>
+
+
+        <a
+          href="/places"
+          class="jt-404-btn secondary"
+        >
+
+          <i
+            class="fa-solid fa-location-dot"
+            aria-hidden="true">
+          </i>
+
+          Explore Destinations
+
+        </a>
+
+      </div>
+
+
+      <div class="jt-404-links">
+
+        <a
+          href="/planner"
+          class="jt-404-link"
+        >
+
+          <i
+            class="fa-solid fa-route"
+            aria-hidden="true">
+          </i>
+
+          <strong>
+            Plan a Journey
+          </strong>
+
+          <span>
+            Build your itinerary
+          </span>
+
+        </a>
+
+
+        <a
+          href="/smart-tourism"
+          class="jt-404-link"
+        >
+
+          <i
+            class="fa-solid fa-microchip"
+            aria-hidden="true">
+          </i>
+
+          <strong>
+            Smart Tourism
+          </strong>
+
+          <span>
+            Explore intelligent features
+          </span>
+
+        </a>
+
+
+        <a
+          href="/hotels"
+          class="jt-404-link"
+        >
+
+          <i
+            class="fa-solid fa-hotel"
+            aria-hidden="true">
+          </i>
+
+          <strong>
+            Find a Stay
+          </strong>
+
+          <span>
+            Discover accommodations
+          </span>
+
+        </a>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</main>

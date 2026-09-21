@@ -1,0 +1,1409 @@
+/* =========================================================
+   JHARKHAND TOURISM — FESTIVALS
+   Editorial cultural discovery page
+   ========================================================= */
+
+:root {
+  --festival-green: #12372a;
+  --festival-green-dark: #09251b;
+  --festival-green-mid: #1d5a43;
+
+  --festival-gold: #c9a34e;
+  --festival-gold-light: #ead79d;
+
+  --festival-cream: #f7f4ec;
+  --festival-paper: #fbfaf7;
+  --festival-white: #ffffff;
+
+  --festival-text: #18221d;
+  --festival-muted: #69756f;
+  --festival-border: #e1e6e1;
+
+  --festival-shadow:
+    0 18px 50px rgba(18, 55, 42, 0.10);
+
+  --festival-shadow-hover:
+    0 25px 65px rgba(18, 55, 42, 0.17);
+
+  --festival-radius: 20px;
+  --festival-radius-lg: 28px;
+
+  --festival-container: 1240px;
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.jt-festivals-page {
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    linear-gradient(
+      180deg,
+      var(--festival-cream) 0,
+      var(--festival-cream) 500px,
+      #ffffff 1000px,
+      #ffffff 100%
+    );
+  color: var(--festival-text);
+}
+
+.jt-festival-container {
+  width: min(100% - 40px, var(--festival-container));
+  margin-inline: auto;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.jt-festival-hero {
+  position: relative;
+  min-height: 620px;
+  overflow: hidden;
+  display: flex;
+  align-items: stretch;
+  background: var(--festival-green-dark);
+}
+
+.jt-festival-hero-bg {
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    url("/images/discover/lodh-falls.jpg");
+
+  background-position: center;
+  background-size: cover;
+
+  transform: scale(1.02);
+}
+
+.jt-festival-hero-overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(5, 25, 18, 0.96) 0%,
+      rgba(7, 31, 22, 0.88) 38%,
+      rgba(8, 34, 24, 0.52) 70%,
+      rgba(8, 34, 24, 0.30) 100%
+    );
+
+  pointer-events: none;
+}
+
+.jt-festival-hero::after {
+  content: "";
+
+  position: absolute;
+  right: -180px;
+  bottom: -280px;
+
+  width: 620px;
+  height: 620px;
+
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.jt-festival-hero-content {
+  position: relative;
+  z-index: 2;
+
+  min-height: 620px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 60px;
+
+  padding-top: 90px;
+  padding-bottom: 80px;
+}
+
+.jt-festival-hero-copy {
+  max-width: 850px;
+}
+
+.jt-festival-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-bottom: 24px;
+
+  color: var(--festival-gold-light);
+
+  font-size: 0.70rem;
+  font-weight: 900;
+
+  letter-spacing: 0.17em;
+}
+
+.jt-festival-eyebrow-line {
+  width: 40px;
+  height: 1px;
+
+  background: var(--festival-gold);
+}
+
+.jt-festival-hero h1 {
+  max-width: 850px;
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size: clamp(
+    3.2rem,
+    7vw,
+    6.4rem
+  );
+
+  font-weight: 600;
+
+  line-height: 0.98;
+
+  letter-spacing: -0.045em;
+}
+
+.jt-festival-hero h1 em {
+  display: block;
+
+  margin-top: 7px;
+
+  color: var(--festival-gold-light);
+
+  font-style: normal;
+}
+
+.jt-festival-hero-copy > p {
+  max-width: 650px;
+
+  margin: 28px 0 0;
+
+  color:
+    rgba(255, 255, 255, 0.72);
+
+  font-size: 0.98rem;
+
+  line-height: 1.85;
+}
+
+.jt-festival-hero-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 22px;
+
+  margin-top: 34px;
+}
+
+.jt-festival-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  min-height: 48px;
+
+  padding: 0 19px;
+
+  border-radius: 11px;
+
+  font-size: 0.77rem;
+  font-weight: 900;
+
+  text-decoration: none;
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.jt-festival-btn-light {
+  background: #ffffff;
+  color: var(--festival-green);
+}
+
+.jt-festival-btn-light:hover {
+  color: var(--festival-green-dark);
+
+  box-shadow:
+    0 12px 28px
+    rgba(0, 0, 0, 0.17);
+
+  transform: translateY(-2px);
+}
+
+.jt-festival-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #ffffff;
+
+  font-size: 0.78rem;
+  font-weight: 850;
+
+  text-decoration: none;
+}
+
+.jt-festival-text-link:hover {
+  color: var(--festival-gold-light);
+}
+
+.jt-festival-text-link i {
+  transition: transform 160ms ease;
+}
+
+.jt-festival-text-link:hover i {
+  transform: translateX(3px);
+}
+
+
+/* =========================================================
+   HERO STAT
+   ========================================================= */
+
+.jt-festival-hero-stat {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 160px;
+
+  width: 160px;
+  height: 160px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.17);
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 255, 255, 0.055);
+
+  color: #ffffff;
+
+  backdrop-filter: blur(8px);
+}
+
+.jt-festival-stat-number {
+  color: var(--festival-gold-light);
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size: 3.1rem;
+
+  line-height: 0.9;
+}
+
+.jt-festival-stat-label {
+  margin-top: 10px;
+
+  color:
+    rgba(255, 255, 255, 0.68);
+
+  font-size: 0.64rem;
+
+  font-weight: 850;
+
+  line-height: 1.35;
+
+  text-align: center;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.08em;
+}
+
+
+/* =========================================================
+   INTRODUCTION
+   ========================================================= */
+
+.jt-festival-introduction {
+  padding: 100px 0 75px;
+}
+
+.jt-festival-intro-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 0.9fr);
+
+  gap: 90px;
+
+  align-items: start;
+}
+
+.jt-festival-kicker {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: var(--festival-gold);
+
+  font-size: 0.68rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+}
+
+.jt-festival-intro-grid h2 {
+  max-width: 600px;
+
+  margin: 0;
+
+  color: var(--festival-green);
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(2.3rem, 4.5vw, 4rem);
+
+  font-weight: 600;
+
+  line-height: 1.08;
+
+  letter-spacing: -0.035em;
+}
+
+.jt-festival-intro-grid h2 span {
+  color: var(--festival-green-mid);
+}
+
+.jt-festival-intro-copy {
+  padding-top: 25px;
+}
+
+.jt-festival-intro-copy p {
+  max-width: 560px;
+
+  margin: 0 0 17px;
+
+  color: var(--festival-muted);
+
+  font-size: 0.94rem;
+
+  line-height: 1.9;
+}
+
+.jt-festival-intro-copy p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* =========================================================
+   EXPLORER
+   ========================================================= */
+
+.jt-festival-explorer {
+  padding: 25px 0 105px;
+}
+
+.jt-festival-section-heading {
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 30px;
+
+  margin-bottom: 28px;
+}
+
+.jt-festival-section-heading h2 {
+  margin: 0;
+
+  color: var(--festival-green);
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(2rem, 3.8vw, 3rem);
+
+  line-height: 1.1;
+
+  letter-spacing: -0.025em;
+}
+
+.jt-festival-section-count {
+  display: inline-flex;
+
+  align-items: center;
+
+  min-height: 34px;
+
+  padding: 0 12px;
+
+  border:
+    1px solid
+    var(--festival-border);
+
+  border-radius: 999px;
+
+  background: #ffffff;
+
+  color: var(--festival-muted);
+
+  font-size: 0.68rem;
+
+  font-weight: 850;
+}
+
+
+/* =========================================================
+   FEATURED FESTIVAL
+   ========================================================= */
+
+.jt-festival-featured {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.28fr)
+    minmax(320px, 0.72fr);
+
+  min-height: 440px;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    var(--festival-border);
+
+  border-radius: var(--festival-radius-lg);
+
+  background: #ffffff;
+
+  box-shadow: var(--festival-shadow);
+
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.jt-festival-featured:hover {
+  box-shadow: var(--festival-shadow-hover);
+
+  transform: translateY(-4px);
+}
+
+.jt-festival-featured-image {
+  position: relative;
+
+  min-height: 440px;
+
+  overflow: hidden;
+
+  background: var(--festival-green-soft);
+}
+
+.jt-festival-featured-image img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition:
+    transform 500ms ease;
+}
+
+.jt-festival-featured:hover
+.jt-festival-featured-image img {
+  transform: scale(1.035);
+}
+
+.jt-festival-featured-image::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent 45%,
+      rgba(0, 0, 0, 0.25)
+    );
+
+  pointer-events: none;
+}
+
+.jt-festival-image-number {
+  position: absolute;
+
+  z-index: 2;
+
+  top: 20px;
+  left: 20px;
+
+  display: grid;
+
+  place-items: center;
+
+  width: 45px;
+  height: 45px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.28);
+
+  border-radius: 13px;
+
+  background:
+    rgba(8, 35, 25, 0.76);
+
+  color: #ffffff;
+
+  font-size: 0.72rem;
+
+  font-weight: 900;
+
+  backdrop-filter: blur(8px);
+}
+
+
+/* =========================================================
+   FEATURED CONTENT
+   ========================================================= */
+
+.jt-festival-featured-content {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  min-width: 0;
+
+  padding: 50px;
+}
+
+.jt-festival-card-meta {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 22px;
+}
+
+.jt-festival-card-meta span:first-child {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  color: var(--festival-gold);
+
+  font-size: 0.68rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+.jt-festival-card-meta span:first-child i {
+  font-size: 0.7rem;
+}
+
+.jt-festival-card-meta span:last-child {
+  color: var(--festival-muted);
+
+  font-size: 0.66rem;
+
+  font-weight: 800;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.08em;
+}
+
+.jt-festival-featured-content h3 {
+  margin: 0;
+
+  color: var(--festival-green);
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(2rem, 4vw, 3.25rem);
+
+  line-height: 1.02;
+
+  letter-spacing: -0.035em;
+}
+
+.jt-festival-featured-content > p {
+  max-width: 470px;
+
+  margin: 18px 0 0;
+
+  color: var(--festival-muted);
+
+  font-size: 0.92rem;
+
+  line-height: 1.85;
+}
+
+.jt-festival-card-footer {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-top: 38px;
+
+  padding-top: 18px;
+
+  border-top:
+    1px solid
+    var(--festival-border);
+}
+
+.jt-festival-card-label {
+  color: var(--festival-text);
+
+  font-size: 0.68rem;
+
+  font-weight: 850;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.08em;
+}
+
+.jt-festival-card-arrow {
+  display: grid;
+
+  place-items: center;
+
+  width: 39px;
+  height: 39px;
+
+  border-radius: 50%;
+
+  background: var(--festival-green);
+
+  color: #ffffff;
+
+  font-size: 0.72rem;
+}
+
+
+/* =========================================================
+   SECONDARY FESTIVALS
+   ========================================================= */
+
+.jt-festival-secondary-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 20px;
+
+  margin-top: 20px;
+}
+
+.jt-festival-secondary-card {
+  overflow: hidden;
+
+  border:
+    1px solid
+    var(--festival-border);
+
+  border-radius: var(--festival-radius);
+
+  background: #ffffff;
+
+  box-shadow:
+    0 10px 30px
+    rgba(18, 55, 42, 0.06);
+
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease,
+    border-color 200ms ease;
+}
+
+.jt-festival-secondary-card:hover {
+  border-color:
+    rgba(18, 55, 42, 0.16);
+
+  box-shadow:
+    var(--festival-shadow-hover);
+
+  transform: translateY(-4px);
+}
+
+.jt-festival-secondary-image {
+  position: relative;
+
+  height: 230px;
+
+  overflow: hidden;
+
+  background: var(--festival-green-soft);
+}
+
+.jt-festival-secondary-image img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition:
+    transform 450ms ease;
+}
+
+.jt-festival-secondary-card:hover
+.jt-festival-secondary-image img {
+  transform: scale(1.045);
+}
+
+.jt-festival-secondary-image .jt-festival-image-number {
+  top: 14px;
+  left: 14px;
+
+  width: 38px;
+  height: 38px;
+
+  border-radius: 11px;
+}
+
+.jt-festival-secondary-content {
+  padding: 24px;
+}
+
+.jt-festival-small-meta {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin-bottom: 9px;
+
+  color: var(--festival-gold);
+
+  font-size: 0.65rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.07em;
+
+  text-transform: uppercase;
+}
+
+.jt-festival-small-meta i {
+  font-size: 0.64rem;
+}
+
+.jt-festival-secondary-content h3 {
+  margin: 0;
+
+  color: var(--festival-green);
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size: 1.55rem;
+
+  line-height: 1.15;
+}
+
+.jt-festival-secondary-content p {
+  min-height: 52px;
+
+  margin: 10px 0 18px;
+
+  color: var(--festival-muted);
+
+  font-size: 0.78rem;
+
+  line-height: 1.7;
+}
+
+.jt-festival-read-more {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  color: var(--festival-green);
+
+  font-size: 0.70rem;
+
+  font-weight: 900;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.05em;
+}
+
+.jt-festival-read-more i {
+  transition: transform 160ms ease;
+}
+
+.jt-festival-secondary-card:hover
+.jt-festival-read-more i {
+  transform: translateX(3px);
+}
+
+
+/* =========================================================
+   CULTURAL STATEMENT
+   ========================================================= */
+
+.jt-festival-statement {
+  padding: 0 0 105px;
+}
+
+.jt-festival-statement-inner {
+  position: relative;
+
+  overflow: hidden;
+
+  display: grid;
+
+  grid-template-columns:
+    auto
+    minmax(0, 1fr)
+    auto;
+
+  align-items: center;
+
+  gap: 25px;
+
+  padding: 43px 48px;
+
+  border-radius: var(--festival-radius-lg);
+
+  background:
+    var(--festival-green);
+
+  color: #ffffff;
+}
+
+.jt-festival-statement-inner::before {
+  content: "";
+
+  position: absolute;
+
+  right: -140px;
+  bottom: -230px;
+
+  width: 480px;
+  height: 480px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.08);
+
+  border-radius: 50%;
+}
+
+.jt-festival-statement-symbol {
+  position: relative;
+  z-index: 1;
+
+  display: grid;
+
+  place-items: center;
+
+  width: 54px;
+  height: 54px;
+
+  border-radius: 15px;
+
+  background:
+    rgba(255, 255, 255, 0.09);
+
+  color: var(--festival-gold-light);
+}
+
+.jt-festival-statement-inner .jt-festival-kicker {
+  position: relative;
+  z-index: 1;
+
+  margin-bottom: 7px;
+}
+
+.jt-festival-statement-inner h2 {
+  position: relative;
+  z-index: 1;
+
+  max-width: 700px;
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(1.5rem, 3vw, 2.35rem);
+
+  line-height: 1.18;
+
+  letter-spacing: -0.025em;
+}
+
+.jt-festival-statement-btn {
+  position: relative;
+  z-index: 2;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  min-height: 45px;
+
+  padding: 0 17px;
+
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  color: var(--festival-green);
+
+  font-size: 0.74rem;
+
+  font-weight: 900;
+
+  text-decoration: none;
+
+  white-space: nowrap;
+
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.jt-festival-statement-btn:hover {
+  color: var(--festival-green-dark);
+
+  box-shadow:
+    0 10px 25px
+    rgba(0, 0, 0, 0.16);
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   BOTTOM
+   ========================================================= */
+
+.jt-festival-bottom-space {
+  height: 20px;
+}
+
+
+/* =========================================================
+   RESPONSIVE — 1100px
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+  .jt-festival-container {
+    width: min(
+      100% - 32px,
+      var(--festival-container)
+    );
+  }
+
+  .jt-festival-hero-stat {
+    flex-basis: 135px;
+
+    width: 135px;
+    height: 135px;
+  }
+
+  .jt-festival-stat-number {
+    font-size: 2.6rem;
+  }
+
+  .jt-festival-featured-content {
+    padding: 38px;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 900px
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .jt-festival-hero {
+    min-height: 570px;
+  }
+
+  .jt-festival-hero-content {
+    min-height: 570px;
+  }
+
+  .jt-festival-hero-stat {
+    display: none;
+  }
+
+  .jt-festival-intro-grid {
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+  }
+
+  .jt-festival-intro-copy {
+    padding-top: 0;
+  }
+
+  .jt-festival-featured {
+    grid-template-columns: 1fr;
+  }
+
+  .jt-festival-featured-image {
+    min-height: 390px;
+    height: 390px;
+  }
+
+  .jt-festival-secondary-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .jt-festival-secondary-card:last-child {
+    grid-column: 1 / -1;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 680px
+   ========================================================= */
+
+@media (max-width: 680px) {
+
+  .jt-festival-container {
+    width: min(
+      100% - 24px,
+      var(--festival-container)
+    );
+  }
+
+  .jt-festival-hero {
+    min-height: 570px;
+  }
+
+  .jt-festival-hero-content {
+    min-height: 570px;
+
+    padding-top: 70px;
+    padding-bottom: 60px;
+  }
+
+  .jt-festival-hero h1 {
+    font-size: 3.15rem;
+  }
+
+  .jt-festival-hero-copy > p {
+    font-size: 0.88rem;
+  }
+
+  .jt-festival-hero-actions {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 17px;
+  }
+
+  .jt-festival-introduction {
+    padding: 65px 0 50px;
+  }
+
+  .jt-festival-intro-grid h2 {
+    font-size: 2.45rem;
+  }
+
+  .jt-festival-explorer {
+    padding-bottom: 70px;
+  }
+
+  .jt-festival-section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 10px;
+  }
+
+  .jt-festival-featured-image {
+    min-height: 310px;
+    height: 310px;
+  }
+
+  .jt-festival-featured-content {
+    padding: 28px 23px;
+  }
+
+  .jt-festival-featured-content h3 {
+    font-size: 2.15rem;
+  }
+
+  .jt-festival-secondary-grid {
+    grid-template-columns: 1fr;
+
+    gap: 16px;
+  }
+
+  .jt-festival-secondary-card:last-child {
+    grid-column: auto;
+  }
+
+  .jt-festival-secondary-image {
+    height: 240px;
+  }
+
+  .jt-festival-statement {
+    padding-bottom: 65px;
+  }
+
+  .jt-festival-statement-inner {
+    grid-template-columns: auto 1fr;
+
+    padding: 29px 23px;
+
+    gap: 15px;
+  }
+
+  .jt-festival-statement-btn {
+    grid-column: 1 / -1;
+
+    width: 100%;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 440px
+   ========================================================= */
+
+@media (max-width: 440px) {
+
+  .jt-festival-container {
+    width: min(
+      100% - 20px,
+      var(--festival-container)
+    );
+  }
+
+  .jt-festival-hero {
+    min-height: 540px;
+
+    background-position: 62% center;
+  }
+
+  .jt-festival-hero-content {
+    min-height: 540px;
+
+    padding-top: 60px;
+    padding-bottom: 45px;
+  }
+
+  .jt-festival-eyebrow {
+    margin-bottom: 18px;
+
+    font-size: 0.62rem;
+  }
+
+  .jt-festival-hero h1 {
+    font-size: 2.7rem;
+  }
+
+  .jt-festival-hero-copy > p {
+    margin-top: 21px;
+
+    font-size: 0.82rem;
+
+    line-height: 1.7;
+  }
+
+  .jt-festival-btn {
+    width: 100%;
+  }
+
+  .jt-festival-intro-grid h2 {
+    font-size: 2.05rem;
+  }
+
+  .jt-festival-featured-image {
+    min-height: 260px;
+    height: 260px;
+  }
+
+  .jt-festival-featured-content {
+    padding: 24px 19px;
+  }
+
+  .jt-festival-featured-content h3 {
+    font-size: 1.9rem;
+  }
+
+  .jt-festival-card-footer {
+    margin-top: 27px;
+  }
+
+  .jt-festival-secondary-image {
+    height: 205px;
+  }
+
+  .jt-festival-secondary-content {
+    padding: 20px;
+  }
+
+  .jt-festival-secondary-content p {
+    min-height: auto;
+  }
+
+  .jt-festival-statement-inner h2 {
+    font-size: 1.35rem;
+  }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+.jt-festivals-page
+a:focus-visible {
+  outline:
+    3px solid
+    rgba(201, 163, 78, 0.60);
+
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .jt-festival-btn,
+  .jt-festival-text-link i,
+  .jt-festival-featured,
+  .jt-festival-featured-image img,
+  .jt-festival-secondary-card,
+  .jt-festival-secondary-image img,
+  .jt-festival-read-more i,
+  .jt-festival-statement-btn {
+    transition: none;
+  }
+
+  .jt-festival-btn-light:hover,
+  .jt-festival-featured:hover,
+  .jt-festival-secondary-card:hover,
+  .jt-festival-statement-btn:hover {
+    transform: none;
+  }
+
+  .jt-festival-featured:hover
+  .jt-festival-featured-image img,
+  .jt-festival-secondary-card:hover
+  .jt-festival-secondary-image img {
+    transform: none;
+  }
+
+}
+
+
+/* =========================================================
+   PRINT
+   ========================================================= */
+
+@media print {
+
+  .jt-festival-hero {
+    min-height: 320px;
+
+    background:
+      var(--festival-green-dark);
+  }
+
+  .jt-festival-hero-actions,
+  .jt-festival-hero-stat,
+  .jt-festival-statement {
+    display: none;
+  }
+
+  .jt-festival-featured,
+  .jt-festival-secondary-card {
+    box-shadow: none;
+
+    break-inside: avoid;
+  }
+
+}

@@ -1,0 +1,1210 @@
+/* =========================================================
+   JHARKHAND TOURISM
+   RESOURCES & DOWNLOADS
+   ========================================================= */
+
+.jt-downloads-page {
+  --downloads-forest: #123d2d;
+  --downloads-forest-dark: #0c2d21;
+  --downloads-forest-light: #1b5b40;
+
+  --downloads-emerald: #287a55;
+  --downloads-emerald-soft: #eaf4ed;
+
+  --downloads-gold: #c89b52;
+  --downloads-gold-soft: #f4ead7;
+
+  --downloads-paper: #fbfaf7;
+  --downloads-cream: #f4efe5;
+  --downloads-white: #ffffff;
+  --downloads-ink: #183129;
+  --downloads-muted: #687770;
+
+  --downloads-line: rgba(18, 61, 45, 0.11);
+
+  --downloads-radius: 22px;
+
+  --downloads-shadow:
+    0 18px 48px rgba(18, 61, 45, 0.075);
+
+  color: var(--downloads-ink);
+
+  background:
+    var(--downloads-paper);
+}
+
+
+.jt-downloads-page *,
+.jt-downloads-page *::before,
+.jt-downloads-page *::after {
+  box-sizing: border-box;
+}
+
+
+.jt-downloads-shell {
+  width:
+    min(1180px, calc(100% - 40px));
+
+  margin-inline: auto;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.jt-downloads-hero {
+  padding:
+    84px 0 76px;
+
+  color: var(--downloads-white);
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 82% 10%,
+      rgba(200,155,82,0.15),
+      transparent 28%
+    ),
+    linear-gradient(
+      135deg,
+      #0c2d21,
+      #123d2d 55%,
+      #1b5b40
+    );
+
+  border-radius:
+    0 0 32px 32px;
+}
+
+
+.jt-downloads-hero-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.15fr)
+    minmax(320px, 0.85fr);
+
+  align-items: center;
+
+  gap: 52px;
+}
+
+
+.jt-downloads-eyebrow {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-bottom: 20px;
+
+  color: #e1bd7a;
+
+  font-size: 0.74rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.15em;
+
+  text-transform: uppercase;
+}
+
+
+.jt-downloads-hero h1 {
+  max-width: 750px;
+
+  margin: 0 0 19px;
+
+  color: #ffffff;
+
+  font-size:
+    clamp(2.6rem, 5.7vw, 4.7rem);
+
+  line-height: 1;
+
+  letter-spacing: -0.046em;
+}
+
+
+.jt-downloads-hero-content p {
+  max-width: 700px;
+
+  margin: 0;
+
+  color:
+    rgba(255,255,255,0.72);
+
+  font-size: 1.02rem;
+
+  line-height: 1.8;
+}
+
+
+.jt-downloads-hero-actions {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-top: 28px;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.jt-downloads-btn {
+  min-height: 46px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  padding:
+    0 16px;
+
+  border-radius: 11px;
+
+  font-size: 0.82rem;
+
+  font-weight: 900;
+
+  text-decoration: none;
+
+  border:
+    1px solid transparent;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    background-color .2s ease,
+    border-color .2s ease;
+}
+
+
+.jt-downloads-btn:hover {
+  transform:
+    translateY(-2px);
+}
+
+
+.jt-downloads-btn.primary {
+  color:
+    var(--downloads-forest);
+
+  background:
+    #ffffff;
+
+  box-shadow:
+    0 11px 28px rgba(0,0,0,0.10);
+}
+
+
+.jt-downloads-btn.secondary {
+  color:
+    #ffffff;
+
+  background:
+    rgba(255,255,255,0.055);
+
+  border-color:
+    rgba(255,255,255,0.17);
+}
+
+
+.jt-downloads-btn.secondary:hover {
+  background:
+    rgba(255,255,255,0.10);
+}
+
+
+/* =========================================================
+   HERO PANEL
+   ========================================================= */
+
+.jt-downloads-hero-panel {
+  padding: 25px;
+
+  border-radius:
+    25px;
+
+  border:
+    1px solid rgba(255,255,255,0.13);
+
+  background:
+    rgba(255,255,255,0.055);
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,0.17);
+
+  backdrop-filter:
+    blur(12px);
+}
+
+
+.jt-downloads-hero-panel-top {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 19px;
+
+  color:
+    rgba(255,255,255,0.50);
+
+  font-size:
+    0.71rem;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    0.13em;
+}
+
+
+.jt-downloads-hero-panel-top i {
+  color:
+    #dfbc79;
+}
+
+
+.jt-downloads-hero-stack {
+  display:
+    grid;
+
+  gap:
+    9px;
+}
+
+
+.jt-downloads-hero-item {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    11px;
+
+  padding:
+    12px;
+
+  border-radius:
+    13px;
+
+  background:
+    rgba(255,255,255,0.05);
+
+  color:
+    rgba(255,255,255,0.76);
+
+  font-size:
+    0.84rem;
+
+  font-weight:
+    700;
+}
+
+
+.jt-downloads-hero-item .icon {
+  width:
+    39px;
+
+  height:
+    39px;
+
+  flex:
+    0 0 auto;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border-radius:
+    11px;
+
+  background:
+    rgba(255,255,255,0.075);
+
+  color:
+    #dfbc79;
+}
+
+
+/* =========================================================
+   GENERIC SECTION
+   ========================================================= */
+
+.jt-downloads-section {
+  padding:
+    88px 0;
+}
+
+
+.jt-downloads-section.soft {
+  background:
+    var(--downloads-cream);
+}
+
+
+.jt-downloads-heading {
+  max-width:
+    770px;
+
+  margin-bottom:
+    40px;
+}
+
+
+.jt-downloads-kicker {
+  display:
+    inline-block;
+
+  margin-bottom:
+    11px;
+
+  color:
+    var(--downloads-emerald);
+
+  font-size:
+    0.73rem;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    0.15em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.jt-downloads-heading h2 {
+  margin:
+    0 0 13px;
+
+  color:
+    var(--downloads-forest);
+
+  font-size:
+    clamp(2rem, 4vw, 3.1rem);
+
+  line-height:
+    1.05;
+
+  letter-spacing:
+    -0.038em;
+}
+
+
+.jt-downloads-heading p {
+  margin:
+    0;
+
+  color:
+    var(--downloads-muted);
+
+  line-height:
+    1.78;
+}
+
+
+/* =========================================================
+   DOWNLOAD CARDS
+   ========================================================= */
+
+.jt-downloads-grid {
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0,1fr));
+
+  gap:
+    18px;
+}
+
+
+.jt-download-card {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  min-height:
+    290px;
+
+  padding:
+    25px;
+
+  border:
+    1px solid var(--downloads-line);
+
+  border-radius:
+    var(--downloads-radius);
+
+  background:
+    var(--downloads-white);
+
+  box-shadow:
+    var(--downloads-shadow);
+
+  transition:
+    transform .23s ease,
+    box-shadow .23s ease,
+    border-color .23s ease;
+}
+
+
+.jt-download-card:hover {
+  transform:
+    translateY(-5px);
+
+  border-color:
+    rgba(40,122,85,0.20);
+
+  box-shadow:
+    0 25px 60px rgba(18,61,45,0.10);
+}
+
+
+.jt-download-card-top {
+  display:
+    flex;
+
+  justify-content:
+    space-between;
+
+  align-items:
+    flex-start;
+
+  gap:
+    12px;
+
+  margin-bottom:
+    21px;
+}
+
+
+.jt-download-icon {
+  width:
+    50px;
+
+  height:
+    50px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border-radius:
+    15px;
+
+  color:
+    var(--downloads-emerald);
+
+  background:
+    var(--downloads-emerald-soft);
+
+  font-size:
+    1.1rem;
+}
+
+
+.jt-download-tag {
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  min-height:
+    28px;
+
+  padding:
+    0 9px;
+
+  border-radius:
+    999px;
+
+  color:
+    #735426;
+
+  background:
+    var(--downloads-gold-soft);
+
+  font-size:
+    0.67rem;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    0.04em;
+}
+
+
+.jt-download-card h3 {
+  margin:
+    0 0 10px;
+
+  color:
+    var(--downloads-forest);
+
+  font-size:
+    1.08rem;
+}
+
+
+.jt-download-card p {
+  margin:
+    0;
+
+  color:
+    var(--downloads-muted);
+
+  font-size:
+    0.89rem;
+
+  line-height:
+    1.7;
+}
+
+
+.jt-download-card-footer {
+  margin-top:
+    auto;
+
+  padding-top:
+    22px;
+
+  display:
+    flex;
+
+  justify-content:
+    space-between;
+
+  align-items:
+    center;
+
+  gap:
+    10px;
+
+  border-top:
+    1px solid var(--downloads-line);
+}
+
+
+.jt-download-type {
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    7px;
+
+  color:
+    #7b8782;
+
+  font-size:
+    0.70rem;
+
+  font-weight:
+    800;
+}
+
+
+.jt-download-link {
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    7px;
+
+  color:
+    var(--downloads-emerald);
+
+  font-size:
+    0.79rem;
+
+  font-weight:
+    900;
+
+  text-decoration:
+    none;
+}
+
+
+.jt-download-link:hover {
+  text-decoration:
+    underline;
+}
+
+
+/* =========================================================
+   STEPS
+   ========================================================= */
+
+.jt-downloads-steps {
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0,1fr));
+
+  gap:
+    17px;
+}
+
+
+.jt-download-step {
+  position:
+    relative;
+
+  min-height:
+    230px;
+
+  padding:
+    25px;
+
+  border:
+    1px solid var(--downloads-line);
+
+  border-radius:
+    var(--downloads-radius);
+
+  background:
+    var(--downloads-white);
+}
+
+
+.jt-download-step .step-number {
+  position:
+    absolute;
+
+  right:
+    20px;
+
+  top:
+    18px;
+
+  color:
+    rgba(18,61,45,0.21);
+
+  font-size:
+    0.71rem;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    0.12em;
+}
+
+
+.jt-download-step .step-icon {
+  width:
+    47px;
+
+  height:
+    47px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  margin-bottom:
+    19px;
+
+  border-radius:
+    14px;
+
+  color:
+    var(--downloads-emerald);
+
+  background:
+    var(--downloads-emerald-soft);
+}
+
+
+.jt-download-step h3 {
+  margin:
+    0 0 8px;
+
+  color:
+    var(--downloads-forest);
+
+  font-size:
+    1.05rem;
+}
+
+
+.jt-download-step p {
+  margin:
+    0;
+
+  color:
+    var(--downloads-muted);
+
+  font-size:
+    0.87rem;
+
+  line-height:
+    1.67;
+}
+
+
+/* =========================================================
+   SMART TOURISM CONNECTION
+   ========================================================= */
+
+.jt-downloads-smart {
+  padding:
+    78px 0;
+
+  background:
+    var(--downloads-paper);
+}
+
+
+.jt-downloads-smart-box {
+  display:
+    grid;
+
+  grid-template-columns:
+    minmax(0,1fr)
+    auto;
+
+  gap:
+    28px;
+
+  align-items:
+    center;
+
+  padding:
+    38px;
+
+  border-radius:
+    27px;
+
+  color:
+    #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--downloads-forest),
+      var(--downloads-forest-light)
+    );
+
+  box-shadow:
+    0 25px 65px rgba(18,61,45,0.13);
+}
+
+
+.jt-downloads-smart-kicker {
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    8px;
+
+  margin-bottom:
+    12px;
+
+  color:
+    #dfbd7d;
+
+  font-size:
+    0.73rem;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    0.13em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.jt-downloads-smart-copy h2 {
+  margin:
+    0 0 10px;
+
+  color:
+    #ffffff;
+
+  font-size:
+    clamp(1.8rem, 3vw, 2.6rem);
+
+  line-height:
+    1.08;
+
+  letter-spacing:
+    -0.035em;
+}
+
+
+.jt-downloads-smart-copy p {
+  max-width:
+    710px;
+
+  margin:
+    0;
+
+  color:
+    rgba(255,255,255,0.67);
+
+  line-height:
+    1.72;
+}
+
+
+.jt-downloads-smart-actions {
+  display:
+    flex;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    9px;
+}
+
+
+/* =========================================================
+   FINAL CTA
+   ========================================================= */
+
+.jt-downloads-final {
+  padding:
+    80px 0 94px;
+}
+
+
+.jt-downloads-final-box {
+  display:
+    grid;
+
+  grid-template-columns:
+    minmax(0,1fr)
+    auto;
+
+  gap:
+    28px;
+
+  align-items:
+    center;
+
+  padding:
+    42px;
+
+  border-radius:
+    28px;
+
+  color:
+    #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #183e30,
+      #235f43
+    );
+
+  box-shadow:
+    0 26px 70px rgba(18,61,45,0.14);
+}
+
+
+.jt-downloads-final-label {
+  display:
+    inline-block;
+
+  margin-bottom:
+    10px;
+
+  color:
+    #ddba78;
+
+  font-size:
+    0.72rem;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    0.14em;
+}
+
+
+.jt-downloads-final-box h2 {
+  margin:
+    0 0 9px;
+
+  color:
+    #ffffff;
+
+  font-size:
+    clamp(1.8rem, 3vw, 2.7rem);
+
+  line-height:
+    1.08;
+
+  letter-spacing:
+    -0.035em;
+}
+
+
+.jt-downloads-final-box p {
+  max-width:
+    690px;
+
+  margin:
+    0;
+
+  color:
+    rgba(255,255,255,0.67);
+
+  line-height:
+    1.7;
+}
+
+
+.jt-downloads-final-actions {
+  display:
+    flex;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    9px;
+}
+
+
+/* =========================================================
+   FOCUS / ACCESSIBILITY
+   ========================================================= */
+
+.jt-downloads-page a:focus-visible {
+  outline:
+    3px solid rgba(200,155,82,0.65);
+
+  outline-offset:
+    3px;
+}
+
+
+/* =========================================================
+   RESPONSIVE — 980
+   ========================================================= */
+
+@media (max-width: 980px) {
+
+  .jt-downloads-hero-grid,
+  .jt-downloads-smart-box,
+  .jt-downloads-final-box {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .jt-downloads-grid {
+    grid-template-columns:
+      repeat(2, minmax(0,1fr));
+  }
+
+
+  .jt-downloads-steps {
+    grid-template-columns:
+      repeat(2, minmax(0,1fr));
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 700
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .jt-downloads-shell {
+    width:
+      min(100% - 26px, 1180px);
+  }
+
+
+  .jt-downloads-hero {
+    padding:
+      62px 0 55px;
+
+    border-radius:
+      0 0 24px 24px;
+  }
+
+
+  .jt-downloads-section {
+    padding:
+      66px 0;
+  }
+
+
+  .jt-downloads-hero h1 {
+    font-size:
+      2.65rem;
+  }
+
+
+  .jt-downloads-grid,
+  .jt-downloads-steps {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .jt-downloads-smart-box,
+  .jt-downloads-final-box {
+    padding:
+      30px;
+  }
+
+
+  .jt-downloads-hero-actions,
+  .jt-downloads-smart-actions,
+  .jt-downloads-final-actions {
+    width:
+      100%;
+  }
+
+
+  .jt-downloads-btn {
+    width:
+      100%;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 420
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .jt-downloads-hero h1 {
+    font-size:
+      2.3rem;
+  }
+
+
+  .jt-download-card,
+  .jt-download-step {
+    border-radius:
+      18px;
+  }
+
+
+  .jt-downloads-hero-panel {
+    padding:
+      19px;
+  }
+
+
+  .jt-downloads-final-box,
+  .jt-downloads-smart-box {
+    padding:
+      24px;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .jt-downloads-page *,
+  .jt-downloads-page *::before,
+  .jt-downloads-page *::after {
+    scroll-behavior:
+      auto !important;
+  }
+
+
+  .jt-download-card,
+  .jt-downloads-btn {
+    transition:
+      none !important;
+  }
+
+}
+
+
+/* =========================================================
+   PRINT
+   ========================================================= */
+
+@media print {
+
+  .jt-downloads-hero,
+  .jt-downloads-smart-box,
+  .jt-downloads-final-box {
+    color:
+      #000 !important;
+
+    background:
+      #ffffff !important;
+
+    border:
+      1px solid #bbb !important;
+
+    box-shadow:
+      none !important;
+  }
+
+
+  .jt-downloads-hero *,
+  .jt-downloads-smart-box *,
+  .jt-downloads-final-box * {
+    color:
+      #000 !important;
+  }
+
+}

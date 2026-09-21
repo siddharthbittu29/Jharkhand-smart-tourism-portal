@@ -1,19 +1,1222 @@
-<section class="container py-5">
-  <h1 class="mb-3">Gallery</h1>
-  <p class="lead text-muted">Visual journey through landscapes, culture, and heritage of Jharkhand.</p>
+<%
+  /*
+   * ============================================================
+   * JHARKHAND TOURISM — GALLERY
+   * File: init/views/gallery/index.ejs
+   *
+   * Preserved:
+   * - Gallery route/content
+   * - Local project imagery
+   * - Nature / Waterfalls / Heritage / Culture categories
+   * - Responsive gallery
+   * - Lightbox
+   * - CTA to /places
+   * ============================================================
+   */
 
-  <div class="row row-cols-2 row-cols-md-4 g-3 mt-2">
-    <% const images = [
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200",
-      "https://images.unsplash.com/photo-1499346030926-9a72daac6c63?q=80&w=1200",
-      "https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=1200",
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200"
-    ]; %>
+  const galleryItems = [
+    {
+      number: "01",
+      title: "Hundru Falls",
+      category: "Waterfalls",
+      categories: "waterfalls nature",
+      description:
+        "One of Jharkhand's signature waterfalls, surrounded by forest and rocky landscapes.",
+      image: "/images/hundru-falls.jpg",
+      alt: "Hundru Falls in Jharkhand"
+    },
+    {
+      number: "02",
+      title: "Dassam Falls",
+      category: "Waterfalls",
+      categories: "waterfalls nature",
+      description:
+        "A dramatic cascade set within a green landscape near Ranchi.",
+      image: "/images/dassam-falls.jpg",
+      alt: "Dassam Falls in Jharkhand"
+    },
+    {
+      number: "03",
+      title: "Jonha Falls",
+      category: "Waterfalls",
+      categories: "waterfalls nature",
+      description:
+        "A forest-framed waterfall and a popular nature escape in the Ranchi region.",
+      image: "/images/jonha-falls.jpg",
+      alt: "Jonha Falls in Jharkhand"
+    },
+    {
+      number: "04",
+      title: "Netarhat",
+      category: "Nature",
+      categories: "nature",
+      description:
+        "Hill landscapes, forests and quiet viewpoints define the Netarhat experience.",
+      image: "/images/netarhat.jpg",
+      alt: "Netarhat landscape in Jharkhand"
+    },
+    {
+      number: "05",
+      title: "Betla National Park",
+      category: "Wildlife",
+      categories: "nature",
+      description:
+        "Forest landscapes and wildlife experiences in one of Jharkhand's major protected areas.",
+      image: "/images/betla-national-park.jpg",
+      alt: "Betla National Park in Jharkhand"
+    },
+    {
+      number: "06",
+      title: "Parasnath Hills",
+      category: "Nature",
+      categories: "nature heritage",
+      description:
+        "A distinctive hill landscape combining natural scenery with spiritual heritage.",
+      image: "/images/parasnath-hill.jpg",
+      alt: "Parasnath Hill in Jharkhand"
+    },
+    {
+      number: "07",
+      title: "Khunti Tribal Villages",
+      category: "Culture",
+      categories: "culture nature",
+      description:
+        "A glimpse into community life, traditions and the cultural landscapes of Jharkhand.",
+      image: "/images/khunti-tribal-villages.jpg",
+      alt: "Tribal village landscape in Khunti, Jharkhand"
+    },
+    {
+      number: "08",
+      title: "Ranchi Heritage Walk",
+      category: "Heritage",
+      categories: "heritage culture",
+      description:
+        "Historic places, civic landmarks and urban stories across Ranchi.",
+      image: "/images/ranchi-city-heritage-walk.jpg",
+      alt: "Ranchi city heritage landscape"
+    },
+    {
+      number: "09",
+      title: "Palamu Forts",
+      category: "Heritage",
+      categories: "heritage culture",
+      description:
+        "Historic fort landscapes carrying stories from Jharkhand's past.",
+      image: "/images/palamu-forts.jpg",
+      alt: "Palamu forts in Jharkhand"
+    },
+    {
+      number: "10",
+      title: "Jagannath Temple",
+      category: "Heritage",
+      categories: "heritage culture",
+      description:
+        "A cultural and architectural landmark forming part of Ranchi's heritage landscape.",
+      image: "/images/jagannath-temple-ranchi.jpg",
+      alt: "Jagannath Temple in Ranchi"
+    },
+    {
+      number: "11",
+      title: "Rajrappa Temple",
+      category: "Heritage",
+      categories: "heritage culture nature",
+      description:
+        "A major heritage destination set within a distinctive natural landscape.",
+      image: "/images/rajrappa-temple.jpg",
+      alt: "Rajrappa Temple in Jharkhand"
+    },
+    {
+      number: "12",
+      title: "Palamu Waterfalls",
+      category: "Waterfalls",
+      categories: "waterfalls nature",
+      description:
+        "Rocky terrain, forest surroundings and seasonal waterfalls across the Palamu region.",
+      image: "/images/palamu-waterfalls.jpg",
+      alt: "Waterfalls and rocky landscape in Palamu, Jharkhand"
+    }
+  ];
+%>
 
-    <% images.forEach(src => { %>
-      <div class="col">
-        <img src="<%= src %>" class="img-fluid rounded shadow-sm" alt="">
+
+<main
+  class="jt-gallery-page"
+  aria-labelledby="galleryPageTitle"
+>
+
+  <!-- ==========================================================
+       HERO
+       ========================================================== -->
+
+  <section class="jt-gallery-hero">
+
+    <div
+      class="jt-gallery-hero-bg"
+      aria-hidden="true"
+    ></div>
+
+    <div
+      class="jt-gallery-hero-overlay"
+      aria-hidden="true"
+    ></div>
+
+
+    <div class="jt-gallery-container jt-gallery-hero-inner">
+
+      <div class="jt-gallery-hero-copy">
+
+        <span class="jt-gallery-eyebrow">
+
+          <i
+            class="fa-solid fa-images"
+            aria-hidden="true"
+          ></i>
+
+          Visual journey
+
+        </span>
+
+
+        <h1 id="galleryPageTitle">
+
+          See the
+          <em>spirit of Jharkhand.</em>
+
+        </h1>
+
+
+        <p>
+
+          Explore a visual collection of waterfalls, forests,
+          wildlife, culture and heritage from across Jharkhand.
+
+        </p>
+
+
+        <div class="jt-gallery-hero-actions">
+
+          <a
+            href="#gallery-grid"
+            class="jt-gallery-hero-btn"
+          >
+
+            Explore gallery
+
+            <i
+              class="fa-solid fa-arrow-down"
+              aria-hidden="true"
+            ></i>
+
+          </a>
+
+
+          <a
+            href="/places"
+            class="jt-gallery-hero-btn jt-gallery-hero-btn-outline"
+          >
+
+            Discover places
+
+            <i
+              class="fa-solid fa-arrow-right"
+              aria-hidden="true"
+            ></i>
+
+          </a>
+
+        </div>
+
       </div>
-    <% }) %>
+
+
+      <div
+        class="jt-gallery-hero-mark"
+        aria-label="Jharkhand Tourism"
+      >
+
+        <span>JT</span>
+
+        <small>
+          Jharkhand<br>
+          Tourism
+        </small>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==========================================================
+       INTRO
+       ========================================================== -->
+
+  <section class="jt-gallery-intro">
+
+    <div class="jt-gallery-container">
+
+      <div class="jt-gallery-intro-grid">
+
+        <div class="jt-gallery-intro-heading">
+
+          <span class="jt-gallery-kicker">
+            Explore through images
+          </span>
+
+          <h2>
+
+            Landscapes.
+            <br>
+
+            Culture.
+            <br>
+
+            <span>Stories.</span>
+
+          </h2>
+
+        </div>
+
+
+        <div class="jt-gallery-intro-copy">
+
+          <p>
+
+            From forests and waterfalls to cultural traditions
+            and heritage landscapes, Jharkhand offers a journey
+            shaped by nature and community.
+
+          </p>
+
+
+          <div class="jt-gallery-mini-stats">
+
+            <div class="jt-gallery-mini-stat">
+
+              <strong>
+                12
+              </strong>
+
+              <span>
+                Visual stories
+              </span>
+
+            </div>
+
+
+            <div class="jt-gallery-mini-stat">
+
+              <strong>
+                04
+              </strong>
+
+              <span>
+                Categories
+              </span>
+
+            </div>
+
+
+            <div class="jt-gallery-mini-stat">
+
+              <strong>
+                01
+              </strong>
+
+              <span>
+                Jharkhand
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==========================================================
+       GALLERY SHOWCASE
+       ========================================================== -->
+
+  <section
+    id="gallery-grid"
+    class="jt-gallery-showcase"
+  >
+
+    <div class="jt-gallery-container">
+
+      <div class="jt-gallery-heading">
+
+        <div>
+
+          <span class="jt-gallery-kicker">
+            Visual collection
+          </span>
+
+          <h2>
+            A glimpse of Jharkhand
+          </h2>
+
+          <p>
+            Browse the landscapes, cultural places and natural
+            experiences that shape the state.
+          </p>
+
+        </div>
+
+
+        <div class="jt-gallery-count-box">
+
+          <strong id="galleryVisibleCount">
+            12
+          </strong>
+
+          <span>
+            visuals
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================================
+           FILTER BAR
+           ======================================================== -->
+
+      <div
+        class="jt-gallery-filter-wrap"
+        aria-label="Gallery categories"
+      >
+
+        <div
+          class="jt-gallery-filters"
+          role="tablist"
+          aria-label="Filter gallery"
+        >
+
+          <button
+            type="button"
+            class="jt-gallery-filter is-active"
+            data-filter="all"
+            role="tab"
+            aria-selected="true"
+          >
+
+            <i
+              class="fa-solid fa-border-all"
+              aria-hidden="true"
+            ></i>
+
+            All
+
+          </button>
+
+
+          <button
+            type="button"
+            class="jt-gallery-filter"
+            data-filter="nature"
+            role="tab"
+            aria-selected="false"
+          >
+
+            <i
+              class="fa-solid fa-leaf"
+              aria-hidden="true"
+            ></i>
+
+            Nature
+
+          </button>
+
+
+          <button
+            type="button"
+            class="jt-gallery-filter"
+            data-filter="waterfalls"
+            role="tab"
+            aria-selected="false"
+          >
+
+            <i
+              class="fa-solid fa-water"
+              aria-hidden="true"
+            ></i>
+
+            Waterfalls
+
+          </button>
+
+
+          <button
+            type="button"
+            class="jt-gallery-filter"
+            data-filter="heritage"
+            role="tab"
+            aria-selected="false"
+          >
+
+            <i
+              class="fa-solid fa-landmark"
+              aria-hidden="true"
+            ></i>
+
+            Heritage
+
+          </button>
+
+
+          <button
+            type="button"
+            class="jt-gallery-filter"
+            data-filter="culture"
+            role="tab"
+            aria-selected="false"
+          >
+
+            <i
+              class="fa-solid fa-people-group"
+              aria-hidden="true"
+            ></i>
+
+            Culture
+
+          </button>
+
+        </div>
+
+
+        <span class="jt-gallery-filter-note">
+
+          <i
+            class="fa-solid fa-hand-pointer"
+            aria-hidden="true"
+          ></i>
+
+          Select a category or open an image
+
+        </span>
+
+      </div>
+
+
+      <!-- ========================================================
+           IMAGE GRID
+           ======================================================== -->
+
+      <div
+        class="jt-gallery-grid"
+        id="jtGalleryGrid"
+      >
+
+        <% galleryItems.forEach((item, index) => { %>
+
+          <article
+            class="jt-gallery-card <%= index === 0 ? 'jt-gallery-card-feature' : '' %>"
+            data-gallery-card
+            data-category="<%= item.categories %>"
+            data-index="<%= index %>"
+          >
+
+            <button
+              type="button"
+              class="jt-gallery-card-button"
+              data-lightbox-open="<%= index %>"
+              aria-label="Open <%= item.title %> in gallery"
+            >
+
+              <div class="jt-gallery-card-media">
+
+                <img
+                  src="<%= item.image %>"
+                  alt="<%= item.alt %>"
+                  loading="<%= index < 3 ? 'eager' : 'lazy' %>"
+                  <%= index === 0 ? 'fetchpriority="high"' : '' %>
+                >
+
+
+                <span class="jt-gallery-card-shade"></span>
+
+
+                <span class="jt-gallery-card-number">
+
+                  <%= item.number %>
+
+                </span>
+
+
+                <span class="jt-gallery-card-view">
+
+                  <i
+                    class="fa-solid fa-expand"
+                    aria-hidden="true"
+                  ></i>
+
+                </span>
+
+
+                <div class="jt-gallery-card-content">
+
+                  <span class="jt-gallery-card-category">
+
+                    <i
+                      class="fa-solid fa-location-dot"
+                      aria-hidden="true"
+                    ></i>
+
+                    <%= item.category %>
+
+                  </span>
+
+
+                  <h3>
+                    <%= item.title %>
+                  </h3>
+
+
+                  <p>
+                    <%= item.description %>
+                  </p>
+
+                </div>
+
+              </div>
+
+            </button>
+
+          </article>
+
+        <% }); %>
+
+
+        <div
+          class="jt-gallery-empty"
+          id="galleryEmptyState"
+          hidden
+        >
+
+          <div class="jt-gallery-empty-icon">
+
+            <i
+              class="fa-solid fa-images"
+              aria-hidden="true"
+            ></i>
+
+          </div>
+
+          <h3>
+            No visuals in this category yet.
+          </h3>
+
+          <p>
+            Choose another category to continue exploring Jharkhand.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==========================================================
+       EXPERIENCE STRIP
+       ========================================================== -->
+
+  <section class="jt-gallery-experience">
+
+    <div class="jt-gallery-experience-pattern"></div>
+
+    <div class="jt-gallery-container">
+
+      <div class="jt-gallery-experience-inner">
+
+        <div class="jt-gallery-experience-icon">
+
+          <i
+            class="fa-solid fa-camera-retro"
+            aria-hidden="true"
+          ></i>
+
+        </div>
+
+
+        <div class="jt-gallery-experience-copy">
+
+          <span>
+            Experience it yourself
+          </span>
+
+          <h2>
+
+            The best view is the one
+            you experience in person.
+
+          </h2>
+
+          <p>
+
+            Continue your journey and discover destinations,
+            waterfalls, wildlife, heritage and cultural places
+            across Jharkhand.
+
+          </p>
+
+        </div>
+
+
+        <a
+          href="/places"
+          class="jt-gallery-experience-btn"
+        >
+
+          Explore places
+
+          <i
+            class="fa-solid fa-arrow-right"
+            aria-hidden="true"
+          ></i>
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==========================================================
+       LIGHTBOX
+       ========================================================== -->
+
+  <div
+    class="jt-gallery-lightbox"
+    id="jtGalleryLightbox"
+    hidden
+    aria-hidden="true"
+  >
+
+    <div
+      class="jt-gallery-lightbox-backdrop"
+      data-lightbox-close
+    ></div>
+
+
+    <div
+      class="jt-gallery-lightbox-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="lightboxTitle"
+    >
+
+      <button
+        type="button"
+        class="jt-gallery-lightbox-close"
+        data-lightbox-close
+        aria-label="Close image viewer"
+      >
+
+        <i
+          class="fa-solid fa-xmark"
+          aria-hidden="true"
+        ></i>
+
+      </button>
+
+
+      <div class="jt-gallery-lightbox-image-wrap">
+
+        <img
+          src=""
+          alt=""
+          id="lightboxImage"
+          class="jt-gallery-lightbox-image"
+        >
+
+      </div>
+
+
+      <div class="jt-gallery-lightbox-info">
+
+        <div>
+
+          <span
+            class="jt-gallery-lightbox-number"
+            id="lightboxNumber"
+          >
+            01
+          </span>
+
+          <span
+            class="jt-gallery-lightbox-category"
+            id="lightboxCategory"
+          >
+            Nature
+          </span>
+
+        </div>
+
+
+        <h2 id="lightboxTitle">
+          Jharkhand
+        </h2>
+
+
+        <p id="lightboxDescription">
+          Explore Jharkhand.
+        </p>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="jt-gallery-lightbox-nav jt-gallery-lightbox-prev"
+        id="lightboxPrev"
+        aria-label="Previous image"
+      >
+
+        <i
+          class="fa-solid fa-chevron-left"
+          aria-hidden="true"
+        ></i>
+
+      </button>
+
+
+      <button
+        type="button"
+        class="jt-gallery-lightbox-nav jt-gallery-lightbox-next"
+        id="lightboxNext"
+        aria-label="Next image"
+      >
+
+        <i
+          class="fa-solid fa-chevron-right"
+          aria-hidden="true"
+        ></i>
+
+      </button>
+
+    </div>
+
   </div>
-</section>
+
+
+  <div class="jt-gallery-bottom-space"></div>
+
+</main>
+
+
+<!-- ============================================================
+     GALLERY INTERACTION
+     ============================================================ -->
+
+<script>
+(function () {
+
+  "use strict";
+
+
+  const galleryItems = <%- JSON.stringify(galleryItems) %>;
+
+  const cards = Array.from(
+    document.querySelectorAll("[data-gallery-card]")
+  );
+
+  const filterButtons = Array.from(
+    document.querySelectorAll(".jt-gallery-filter")
+  );
+
+  const visibleCount =
+    document.getElementById("galleryVisibleCount");
+
+  const emptyState =
+    document.getElementById("galleryEmptyState");
+
+
+  const lightbox =
+    document.getElementById("jtGalleryLightbox");
+
+  const lightboxImage =
+    document.getElementById("lightboxImage");
+
+  const lightboxTitle =
+    document.getElementById("lightboxTitle");
+
+  const lightboxDescription =
+    document.getElementById("lightboxDescription");
+
+  const lightboxCategory =
+    document.getElementById("lightboxCategory");
+
+  const lightboxNumber =
+    document.getElementById("lightboxNumber");
+
+  const lightboxPrev =
+    document.getElementById("lightboxPrev");
+
+  const lightboxNext =
+    document.getElementById("lightboxNext");
+
+  const lightboxOpenButtons =
+    Array.from(
+      document.querySelectorAll("[data-lightbox-open]")
+    );
+
+
+  let currentFilter = "all";
+  let currentLightboxIndex = 0;
+
+
+  /* ==========================================================
+     FILTERING
+     ========================================================== */
+
+  function applyFilter(filter) {
+
+    currentFilter = filter;
+
+    let count = 0;
+
+
+    cards.forEach((card) => {
+
+      const categories =
+        (card.dataset.category || "")
+          .split(/\s+/)
+          .filter(Boolean);
+
+
+      const shouldShow =
+        filter === "all" ||
+        categories.includes(filter);
+
+
+      card.hidden = !shouldShow;
+
+      if (shouldShow) {
+        count += 1;
+      }
+
+    });
+
+
+    if (visibleCount) {
+      visibleCount.textContent = String(count);
+    }
+
+
+    if (emptyState) {
+      emptyState.hidden = count !== 0;
+    }
+
+
+    filterButtons.forEach((button) => {
+
+      const active =
+        button.dataset.filter === filter;
+
+
+      button.classList.toggle(
+        "is-active",
+        active
+      );
+
+
+      button.setAttribute(
+        "aria-selected",
+        active ? "true" : "false"
+      );
+
+    });
+
+  }
+
+
+  filterButtons.forEach((button) => {
+
+    button.addEventListener(
+      "click",
+      function () {
+
+        applyFilter(
+          this.dataset.filter || "all"
+        );
+
+      }
+    );
+
+  });
+
+
+  /* ==========================================================
+     LIGHTBOX
+     ========================================================== */
+
+  function getFilteredIndices() {
+
+    return galleryItems
+      .map((item, index) => {
+
+        if (currentFilter === "all") {
+          return index;
+        }
+
+
+        const categories =
+          (item.categories || "")
+            .split(/\s+/)
+            .filter(Boolean);
+
+
+        return categories.includes(currentFilter)
+          ? index
+          : null;
+
+      })
+      .filter(
+        (index) => index !== null
+      );
+
+  }
+
+
+  function renderLightbox(index) {
+
+    const item =
+      galleryItems[index];
+
+
+    if (!item) {
+      return;
+    }
+
+
+    currentLightboxIndex = index;
+
+
+    lightboxImage.src =
+      item.image;
+
+
+    lightboxImage.alt =
+      item.alt;
+
+
+    lightboxTitle.textContent =
+      item.title;
+
+
+    lightboxDescription.textContent =
+      item.description;
+
+
+    lightboxCategory.textContent =
+      item.category;
+
+
+    lightboxNumber.textContent =
+      item.number;
+
+  }
+
+
+  function openLightbox(index) {
+
+    renderLightbox(index);
+
+
+    lightbox.hidden = false;
+
+    lightbox.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
+
+    document.body.classList.add(
+      "jt-gallery-lightbox-open"
+    );
+
+
+    window.setTimeout(
+      function () {
+
+        lightbox
+          .querySelector(".jt-gallery-lightbox-close")
+          ?.focus();
+
+      },
+      0
+    );
+
+  }
+
+
+  function closeLightbox() {
+
+    lightbox.hidden = true;
+
+    lightbox.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+
+    document.body.classList.remove(
+      "jt-gallery-lightbox-open"
+    );
+
+  }
+
+
+  function navigateLightbox(direction) {
+
+    const indices =
+      getFilteredIndices();
+
+
+    if (!indices.length) {
+      return;
+    }
+
+
+    const currentPosition =
+      indices.indexOf(
+        currentLightboxIndex
+      );
+
+
+    let nextPosition =
+      currentPosition + direction;
+
+
+    if (nextPosition < 0) {
+      nextPosition =
+        indices.length - 1;
+    }
+
+
+    if (
+      nextPosition >=
+      indices.length
+    ) {
+      nextPosition = 0;
+    }
+
+
+    renderLightbox(
+      indices[nextPosition]
+    );
+
+  }
+
+
+  lightboxOpenButtons.forEach(
+    (button) => {
+
+      button.addEventListener(
+        "click",
+        function () {
+
+          const index =
+            Number(
+              this.dataset.lightboxOpen
+            );
+
+
+          openLightbox(index);
+
+        }
+      );
+
+    }
+  );
+
+
+  document
+    .querySelectorAll("[data-lightbox-close]")
+    .forEach((element) => {
+
+      element.addEventListener(
+        "click",
+        closeLightbox
+      );
+
+    });
+
+
+  lightboxPrev.addEventListener(
+    "click",
+    function () {
+
+      navigateLightbox(-1);
+
+    }
+  );
+
+
+  lightboxNext.addEventListener(
+    "click",
+    function () {
+
+      navigateLightbox(1);
+
+    }
+  );
+
+
+  document.addEventListener(
+    "keydown",
+    function (event) {
+
+      if (lightbox.hidden) {
+        return;
+      }
+
+
+      if (event.key === "Escape") {
+
+        closeLightbox();
+
+      }
+
+
+      if (event.key === "ArrowLeft") {
+
+        navigateLightbox(-1);
+
+      }
+
+
+      if (event.key === "ArrowRight") {
+
+        navigateLightbox(1);
+
+      }
+
+    }
+  );
+
+
+  /* ==========================================================
+     INITIAL STATE
+     ========================================================== */
+
+  applyFilter("all");
+
+
+})();
+</script>

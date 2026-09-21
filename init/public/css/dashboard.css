@@ -1,0 +1,1395 @@
+/* =========================================================
+   JHARKHAND TOURISM
+   TOURIST DASHBOARD
+   PREMIUM DASHBOARD UI
+   ========================================================= */
+
+:root {
+  --jt-dash-green-950: #0b2d22;
+  --jt-dash-green-900: #123f31;
+  --jt-dash-green-800: #185843;
+  --jt-dash-green-700: #247258;
+  --jt-dash-green-600: #318867;
+
+  --jt-dash-gold: #c79a4b;
+  --jt-dash-gold-light: #ead09a;
+
+  --jt-dash-cream: #f5f2ea;
+  --jt-dash-paper: #fffefa;
+  --jt-dash-paper-soft: #fbfaf6;
+
+  --jt-dash-text: #18352d;
+  --jt-dash-muted: #718078;
+  --jt-dash-border: #e1e7e2;
+
+  --jt-dash-danger: #a04d43;
+
+  --jt-dash-shadow:
+    0 18px 45px rgba(20, 58, 46, 0.08);
+
+  --jt-dash-shadow-hover:
+    0 28px 60px rgba(20, 58, 46, 0.13);
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.jt-dashboard-page {
+  min-height: 100vh;
+  color: var(--jt-dash-text);
+  background: var(--jt-dash-cream);
+}
+
+.jt-dashboard-content {
+  padding: 76px 0 96px;
+}
+
+.jt-dashboard-page .jt-container {
+  width: min(1240px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.jt-dashboard-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+
+  min-height: 390px;
+
+  display: flex;
+  align-items: center;
+
+  color: #fff;
+
+  background:
+    linear-gradient(
+      120deg,
+      var(--jt-dash-green-950),
+      var(--jt-dash-green-900)
+    );
+}
+
+.jt-dashboard-hero::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  z-index: -2;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(7, 34, 26, 0.95),
+      rgba(15, 63, 48, 0.72),
+      rgba(15, 63, 48, 0.32)
+    ),
+    url("/images/discover/patratu.jpg");
+
+  background-size: cover;
+  background-position: center 55%;
+}
+
+.jt-dashboard-hero::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  z-index: -1;
+
+  background:
+    radial-gradient(
+      circle at 82% 30%,
+      rgba(199, 154, 75, 0.18),
+      transparent 32%
+    );
+}
+
+.jt-dashboard-hero-inner {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 40px;
+
+  padding: 82px 0;
+}
+
+.jt-dashboard-welcome {
+  max-width: 720px;
+}
+
+.jt-dashboard-welcome h1 {
+  margin: 14px 0 0;
+
+  color: #fff;
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.jt-dashboard-welcome h1 span {
+  display: block;
+
+  margin-top: 7px;
+
+  color: var(--jt-dash-gold-light);
+
+  font-style: italic;
+}
+
+.jt-dashboard-welcome p {
+  max-width: 620px;
+
+  margin: 26px 0 0;
+
+  color: rgba(255, 255, 255, 0.78);
+
+  font-size: 0.96rem;
+  line-height: 1.8;
+}
+
+
+/* =========================================================
+   EYEBROWS
+   ========================================================= */
+
+.jt-dashboard-page .jt-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  color: var(--jt-dash-green-700);
+
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.jt-dashboard-page .jt-eyebrow i {
+  font-size: 0.7rem;
+}
+
+.jt-dashboard-page .jt-eyebrow-light {
+  color: rgba(255, 255, 255, 0.76);
+}
+
+
+/* =========================================================
+   HERO ACTION
+   ========================================================= */
+
+.jt-dashboard-hero-action {
+  flex: 0 0 auto;
+}
+
+.jt-dashboard-hero-action .jt-btn {
+  min-height: 52px;
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.jt-dashboard-page .jt-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  min-height: 48px;
+
+  padding: 0 20px;
+
+  border-radius: 10px;
+
+  font-size: 0.78rem;
+  font-weight: 800;
+
+  text-decoration: none;
+
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.jt-dashboard-page .jt-btn:hover {
+  transform: translateY(-2px);
+}
+
+.jt-dashboard-page .jt-btn-primary {
+  color: #fff;
+  background: var(--jt-dash-green-800);
+  box-shadow: 0 10px 25px rgba(24, 88, 67, 0.15);
+}
+
+.jt-dashboard-page .jt-btn-primary:hover {
+  color: #fff;
+  background: var(--jt-dash-green-700);
+  box-shadow: 0 14px 30px rgba(24, 88, 67, 0.2);
+}
+
+.jt-dashboard-page .jt-btn-light {
+  color: var(--jt-dash-green-900);
+  background: #fff;
+}
+
+.jt-dashboard-page .jt-btn-light:hover {
+  color: var(--jt-dash-green-900);
+  background: #f3eee2;
+}
+
+.jt-dashboard-page .jt-btn-cta-outline {
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.jt-dashboard-page .jt-btn-cta-outline:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+
+/* =========================================================
+   STAT CARDS
+   ========================================================= */
+
+.jt-dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+
+  margin-bottom: 22px;
+}
+
+.jt-dashboard-stat-card {
+  min-width: 0;
+  min-height: 142px;
+
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  padding: 23px;
+
+  border: 1px solid var(--jt-dash-border);
+  border-radius: 18px;
+
+  background: var(--jt-dash-paper);
+
+  box-shadow: var(--jt-dash-shadow);
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.jt-dashboard-stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--jt-dash-shadow-hover);
+}
+
+.jt-dashboard-stat-icon {
+  width: 52px;
+  height: 52px;
+
+  flex: 0 0 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  color: var(--jt-dash-green-700);
+  background: #eaf3ed;
+}
+
+.jt-dashboard-stat-icon-green {
+  color: #3e7b4f;
+  background: #edf5e8;
+}
+
+.jt-dashboard-stat-icon-gold {
+  color: #a27325;
+  background: #f8f0dd;
+}
+
+.jt-dashboard-stat-icon-red {
+  color: #a04d43;
+  background: #faece9;
+}
+
+.jt-dashboard-stat-content {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.jt-dashboard-stat-label {
+  margin-bottom: 5px;
+
+  color: #8a9690;
+
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.jt-dashboard-stat-content strong {
+  color: var(--jt-dash-text);
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size: 1.45rem;
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.jt-dashboard-stat-content strong small {
+  color: var(--jt-dash-muted);
+
+  font-family:
+    "DM Sans",
+    sans-serif;
+
+  font-size: 0.7rem;
+}
+
+.jt-dashboard-stat-content > small {
+  margin-top: 5px;
+
+  color: var(--jt-dash-muted);
+
+  font-size: 0.69rem;
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   MAIN DASHBOARD GRID
+   ========================================================= */
+
+.jt-dashboard-grid {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 0.95fr)
+    minmax(0, 1.05fr);
+
+  gap: 18px;
+
+  margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   PANELS
+   ========================================================= */
+
+.jt-dashboard-panel {
+  min-width: 0;
+
+  padding: 30px;
+
+  border: 1px solid var(--jt-dash-border);
+  border-radius: 20px;
+
+  background: var(--jt-dash-paper);
+
+  box-shadow: var(--jt-dash-shadow);
+}
+
+.jt-dashboard-panel-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 24px;
+}
+
+.jt-dashboard-panel-heading h2 {
+  margin: 7px 0 0;
+
+  color: var(--jt-dash-text);
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size: clamp(1.7rem, 2.5vw, 2.35rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+
+.jt-dashboard-panel-heading p {
+  max-width: 560px;
+
+  margin: 9px 0 0;
+
+  color: var(--jt-dash-muted);
+
+  font-size: 0.78rem;
+  line-height: 1.65;
+}
+
+.jt-dashboard-panel-icon {
+  width: 44px;
+  height: 44px;
+
+  flex: 0 0 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  color: var(--jt-dash-green-700);
+  background: #edf5ef;
+}
+
+
+/* =========================================================
+   PROFILE
+   ========================================================= */
+
+.jt-dashboard-profile {
+  display: flex;
+  align-items: center;
+
+  gap: 18px;
+
+  padding: 12px 0 25px;
+}
+
+.jt-dashboard-avatar {
+  width: 68px;
+  height: 68px;
+
+  flex: 0 0 68px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  color: #fff;
+  background: var(--jt-dash-green-800);
+
+  box-shadow:
+    0 10px 24px rgba(24, 88, 67, 0.2);
+
+  font-size: 1.25rem;
+}
+
+.jt-dashboard-profile-details {
+  min-width: 0;
+}
+
+.jt-dashboard-profile-details h3 {
+  margin: 0 0 8px;
+
+  color: var(--jt-dash-text);
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size: 1.45rem;
+  font-weight: 500;
+}
+
+.jt-dashboard-profile-details p {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  margin: 0;
+
+  color: var(--jt-dash-muted);
+
+  font-size: 0.76rem;
+
+  overflow-wrap: anywhere;
+}
+
+.jt-dashboard-profile-details p i {
+  color: var(--jt-dash-green-700);
+}
+
+.jt-dashboard-role {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  margin-top: 9px;
+  padding: 5px 9px;
+
+  border-radius: 999px;
+
+  color: var(--jt-dash-green-800);
+  background: #edf5ef;
+
+  font-size: 0.64rem;
+  font-weight: 800;
+  text-transform: capitalize;
+}
+
+.jt-dashboard-profile-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 17px;
+
+  padding-top: 22px;
+
+  border-top: 1px solid #edf0ed;
+}
+
+.jt-dashboard-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  color: var(--jt-dash-muted);
+
+  font-size: 0.74rem;
+  font-weight: 700;
+
+  text-decoration: underline;
+  text-underline-offset: 3px;
+
+  transition: color 160ms ease;
+}
+
+.jt-dashboard-text-link:hover {
+  color: var(--jt-dash-danger);
+}
+
+
+/* =========================================================
+   QUICK ACTIONS
+   ========================================================= */
+
+.jt-dashboard-quick-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+
+  gap: 10px;
+}
+
+.jt-dashboard-action-card {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 17px;
+
+  border: 1px solid var(--jt-dash-border);
+  border-radius: 15px;
+
+  color: inherit;
+  background: var(--jt-dash-paper-soft);
+
+  text-decoration: none;
+
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.jt-dashboard-action-card:hover {
+  color: inherit;
+
+  border-color: #cbd9d1;
+
+  background: #fff;
+
+  transform: translateX(4px);
+
+  box-shadow:
+    0 14px 30px rgba(20, 58, 46, 0.08);
+}
+
+.jt-dashboard-action-icon {
+  width: 45px;
+  height: 45px;
+
+  flex: 0 0 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  color: var(--jt-dash-green-700);
+  background: #eaf3ed;
+}
+
+.jt-dashboard-action-content {
+  min-width: 0;
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.jt-dashboard-action-content strong {
+  color: var(--jt-dash-text);
+
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.jt-dashboard-action-content small {
+  margin-top: 4px;
+
+  color: var(--jt-dash-muted);
+
+  font-size: 0.7rem;
+  line-height: 1.5;
+}
+
+.jt-dashboard-action-arrow {
+  flex: 0 0 auto;
+
+  color: var(--jt-dash-green-800);
+
+  font-size: 0.7rem;
+
+  transition: transform 160ms ease;
+}
+
+.jt-dashboard-action-card:hover .jt-dashboard-action-arrow {
+  transform: translateX(4px);
+}
+
+
+/* =========================================================
+   WISHLIST PANEL
+   ========================================================= */
+
+.jt-dashboard-wishlist-panel {
+  margin-top: 18px;
+}
+
+.jt-view-all-link {
+  flex: 0 0 auto;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding-top: 5px;
+
+  color: var(--jt-dash-green-800);
+
+  font-size: 0.72rem;
+  font-weight: 800;
+
+  text-decoration: none;
+
+  white-space: nowrap;
+
+  transition:
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.jt-view-all-link:hover {
+  color: var(--jt-dash-green-600);
+  transform: translateX(3px);
+}
+
+
+/* =========================================================
+   WISHLIST GRID
+   ========================================================= */
+
+.jt-dashboard-wishlist-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 16px;
+}
+
+.jt-dashboard-wishlist-card {
+  min-width: 0;
+  overflow: hidden;
+
+  border: 1px solid var(--jt-dash-border);
+  border-radius: 17px;
+
+  background: #fff;
+
+  box-shadow:
+    0 10px 30px rgba(20, 58, 46, 0.055);
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.jt-dashboard-wishlist-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 20px 42px rgba(20, 58, 46, 0.1);
+}
+
+.jt-dashboard-wishlist-image {
+  position: relative;
+
+  height: 180px;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      #dfe8e1,
+      #edf2ec
+    );
+}
+
+.jt-dashboard-wishlist-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition: transform 500ms ease;
+}
+
+.jt-dashboard-wishlist-card:hover
+.jt-dashboard-wishlist-image img {
+  transform: scale(1.045);
+}
+
+.jt-dashboard-wishlist-heart {
+  position: absolute;
+  top: 13px;
+  right: 13px;
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+
+  color: #fff;
+  background: rgba(14, 48, 37, 0.7);
+
+  backdrop-filter: blur(7px);
+
+  font-size: 0.72rem;
+}
+
+.jt-dashboard-wishlist-body {
+  padding: 19px;
+}
+
+.jt-dashboard-wishlist-district {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  color: var(--jt-dash-green-700);
+
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.jt-dashboard-wishlist-district i {
+  font-size: 0.62rem;
+}
+
+.jt-dashboard-wishlist-body h3 {
+  min-height: 48px;
+
+  margin: 9px 0 15px;
+
+  color: var(--jt-dash-text);
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.jt-dashboard-wishlist-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  color: var(--jt-dash-green-800);
+
+  font-size: 0.7rem;
+  font-weight: 800;
+
+  text-decoration: none;
+
+  transition:
+    color 160ms ease,
+    gap 160ms ease;
+}
+
+.jt-dashboard-wishlist-link:hover {
+  color: var(--jt-dash-green-600);
+  gap: 10px;
+}
+
+
+/* =========================================================
+   WISHLIST FOOTER
+   ========================================================= */
+
+.jt-dashboard-wishlist-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-top: 22px;
+  padding-top: 20px;
+
+  border-top: 1px solid #edf0ed;
+
+  color: var(--jt-dash-muted);
+
+  font-size: 0.7rem;
+}
+
+.jt-dashboard-wishlist-footer a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  color: var(--jt-dash-green-800);
+
+  font-weight: 800;
+
+  text-decoration: none;
+}
+
+
+/* =========================================================
+   EMPTY WISHLIST
+   ========================================================= */
+
+.jt-dashboard-wishlist-empty {
+  display: flex;
+  align-items: center;
+
+  gap: 22px;
+
+  padding: 28px;
+
+  border: 1px dashed #cfdad3;
+  border-radius: 17px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fbfcf9,
+      #f4f8f4
+    );
+}
+
+.jt-dashboard-empty-icon {
+  width: 60px;
+  height: 60px;
+
+  flex: 0 0 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  color: var(--jt-dash-green-700);
+  background: #e8f2eb;
+
+  font-size: 1.2rem;
+}
+
+.jt-dashboard-empty-content {
+  flex: 1;
+}
+
+.jt-dashboard-empty-content h3 {
+  margin: 0 0 5px;
+
+  color: var(--jt-dash-text);
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+
+.jt-dashboard-empty-content p {
+  max-width: 580px;
+
+  margin: 0;
+
+  color: var(--jt-dash-muted);
+
+  font-size: 0.74rem;
+  line-height: 1.65;
+}
+
+
+/* =========================================================
+   DISCOVERY CTA
+   ========================================================= */
+
+.jt-dashboard-discovery {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 35px;
+
+  overflow: hidden;
+
+  margin-top: 18px;
+  padding: 42px;
+
+  border-radius: 22px;
+
+  color: #fff;
+
+  background:
+    linear-gradient(
+      115deg,
+      var(--jt-dash-green-950),
+      var(--jt-dash-green-800)
+    );
+
+  box-shadow:
+    0 22px 50px rgba(20, 58, 46, 0.14);
+}
+
+.jt-dashboard-discovery::after {
+  content: "";
+
+  position: absolute;
+
+  width: 300px;
+  height: 300px;
+
+  right: -110px;
+  top: -140px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(199, 154, 75, 0.13);
+}
+
+.jt-dashboard-discovery-content {
+  position: relative;
+  z-index: 1;
+
+  max-width: 700px;
+}
+
+.jt-dashboard-discovery-content h2 {
+  margin: 10px 0 0;
+
+  color: #fff;
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size: clamp(2rem, 3.2vw, 3rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+
+.jt-dashboard-discovery-content p {
+  max-width: 610px;
+
+  margin: 15px 0 0;
+
+  color: rgba(255, 255, 255, 0.74);
+
+  font-size: 0.8rem;
+  line-height: 1.7;
+}
+
+.jt-dashboard-discovery-actions {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  flex: 0 0 auto;
+}
+
+
+/* =========================================================
+   RESPONSIVE — 1100px
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+  .jt-dashboard-page .jt-container {
+    width: min(100% - 40px, 1000px);
+  }
+
+  .jt-dashboard-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .jt-dashboard-wishlist-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 900px
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .jt-dashboard-hero-inner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .jt-dashboard-hero-action {
+    margin-top: 5px;
+  }
+
+  .jt-dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .jt-dashboard-wishlist-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .jt-dashboard-discovery {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 700px
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .jt-dashboard-content {
+    padding: 58px 0 72px;
+  }
+
+  .jt-dashboard-page .jt-container {
+    width: min(100% - 32px, 100%);
+  }
+
+  .jt-dashboard-hero {
+    min-height: 430px;
+  }
+
+  .jt-dashboard-hero-inner {
+    padding: 65px 0;
+  }
+
+  .jt-dashboard-welcome h1 {
+    font-size: clamp(2.7rem, 11vw, 4rem);
+  }
+
+  .jt-dashboard-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .jt-dashboard-panel {
+    padding: 24px;
+  }
+
+  .jt-dashboard-wishlist-empty {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .jt-dashboard-discovery {
+    padding: 32px 26px;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 520px
+   ========================================================= */
+
+@media (max-width: 520px) {
+
+  .jt-dashboard-page .jt-container {
+    width: min(100% - 24px, 100%);
+  }
+
+  .jt-dashboard-hero {
+    min-height: 450px;
+  }
+
+  .jt-dashboard-hero-inner {
+    padding: 54px 0;
+  }
+
+  .jt-dashboard-welcome p {
+    font-size: 0.86rem;
+  }
+
+  .jt-dashboard-hero-action,
+  .jt-dashboard-hero-action .jt-btn {
+    width: 100%;
+  }
+
+  .jt-dashboard-panel {
+    padding: 20px;
+    border-radius: 17px;
+  }
+
+  .jt-dashboard-panel-heading {
+    gap: 12px;
+  }
+
+  .jt-dashboard-panel-heading h2 {
+    font-size: 1.85rem;
+  }
+
+  .jt-dashboard-profile {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .jt-dashboard-profile-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .jt-dashboard-profile-actions .jt-btn {
+    width: 100%;
+  }
+
+  .jt-dashboard-wishlist-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .jt-dashboard-wishlist-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .jt-dashboard-discovery-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .jt-dashboard-discovery-actions .jt-btn {
+    width: 100%;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 390px
+   ========================================================= */
+
+@media (max-width: 390px) {
+
+  .jt-dashboard-welcome h1 {
+    font-size: 2.55rem;
+  }
+
+  .jt-dashboard-stat-card {
+    padding: 19px;
+  }
+
+  .jt-dashboard-stat-icon {
+    width: 46px;
+    height: 46px;
+
+    flex-basis: 46px;
+  }
+
+  .jt-dashboard-action-card {
+    padding: 14px;
+  }
+
+  .jt-dashboard-action-icon {
+    width: 41px;
+    height: 41px;
+
+    flex-basis: 41px;
+  }
+
+  .jt-dashboard-discovery {
+    padding: 27px 21px;
+  }
+
+  .jt-dashboard-discovery-content h2 {
+    font-size: 2rem;
+  }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+.jt-dashboard-page a:focus-visible,
+.jt-dashboard-page button:focus-visible {
+  outline: 3px solid rgba(52, 141, 104, 0.35);
+  outline-offset: 4px;
+}
+
+.jt-dashboard-page ::selection {
+  color: #fff;
+  background: var(--jt-dash-green-700);
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .jt-dashboard-page *,
+  .jt-dashboard-page *::before,
+  .jt-dashboard-page *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .jt-dashboard-stat-card:hover,
+  .jt-dashboard-action-card:hover,
+  .jt-dashboard-wishlist-card:hover,
+  .jt-dashboard-page .jt-btn:hover {
+    transform: none;
+  }
+
+}
+
+
+/* =========================================================
+   PRINT
+   ========================================================= */
+
+@media print {
+
+  .jt-dashboard-page {
+    background: #fff;
+  }
+
+  .jt-dashboard-hero {
+    min-height: auto;
+
+    color: #000;
+
+    background: #fff;
+  }
+
+  .jt-dashboard-hero::before,
+  .jt-dashboard-hero::after,
+  .jt-dashboard-hero-action,
+  .jt-dashboard-discovery,
+  .jt-dashboard-profile-actions {
+    display: none;
+  }
+
+  .jt-dashboard-hero-inner {
+    padding: 25px 0;
+  }
+
+  .jt-dashboard-welcome h1,
+  .jt-dashboard-welcome h1 span {
+    color: #000;
+  }
+
+  .jt-dashboard-stat-card,
+  .jt-dashboard-panel,
+  .jt-dashboard-wishlist-card {
+    box-shadow: none;
+  }
+}

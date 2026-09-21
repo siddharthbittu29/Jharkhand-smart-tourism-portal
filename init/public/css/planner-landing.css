@@ -1,0 +1,2339 @@
+/* =========================================================
+   JHARKHAND TOURISM
+   PREMIUM AI TRIP PLANNER — LANDING
+========================================================= */
+
+:root {
+
+  --planner-green-950: #061f17;
+  --planner-green-900: #0a3024;
+  --planner-green-800: #104735;
+  --planner-green-700: #176149;
+  --planner-green-600: #27805e;
+
+  --planner-gold: #c6a15b;
+  --planner-gold-light: #ead8ad;
+
+  --planner-cream: #f5f1e8;
+  --planner-paper: #fcfbf7;
+  --planner-white: #ffffff;
+
+  --planner-text: #17251f;
+  --planner-muted: #6e7b74;
+
+  --planner-border: #e1e7e2;
+
+  --planner-shadow:
+    0 24px 70px rgba(7, 38, 28, 0.10);
+
+  --planner-shadow-heavy:
+    0 35px 90px rgba(0, 0, 0, 0.25);
+
+}
+
+
+/* =========================================================
+   FOUNDATION
+========================================================= */
+
+.jt-planner-page {
+
+  width: 100%;
+
+  overflow: hidden;
+
+  background:
+    var(--planner-paper);
+
+  color:
+    var(--planner-text);
+
+}
+
+
+.jt-planner-page *,
+.jt-planner-page *::before,
+.jt-planner-page *::after {
+
+  box-sizing: border-box;
+
+}
+
+
+.jt-planner-page .jt-container {
+
+  width:
+    min(1180px, calc(100% - 48px));
+
+  margin-inline:
+    auto;
+
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.jt-planner-hero {
+
+  position: relative;
+
+  min-height: 720px;
+
+  display: flex;
+
+  align-items: center;
+
+  overflow: hidden;
+
+  background:
+    var(--planner-green-950);
+
+}
+
+
+.jt-planner-hero-image {
+
+  position: absolute;
+
+  inset: 0;
+
+  background-image:
+    url("/images/discover/patratu.jpg");
+
+  background-size:
+    cover;
+
+  background-position:
+    center;
+
+  transform:
+    scale(1.03);
+
+}
+
+
+.jt-planner-hero-overlay {
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(3, 25, 18, 0.98) 0%,
+      rgba(5, 34, 25, 0.93) 35%,
+      rgba(5, 34, 25, 0.70) 62%,
+      rgba(5, 34, 25, 0.42) 100%
+    );
+
+}
+
+
+.jt-planner-hero-pattern {
+
+  position: absolute;
+
+  inset: 0;
+
+  opacity: 0.22;
+
+  background-image:
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(255,255,255,0.13) 1px,
+      transparent 1px
+    );
+
+  background-size:
+    26px 26px;
+
+}
+
+
+.jt-planner-hero-inner {
+
+  position: relative;
+
+  z-index: 2;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.05fr)
+    minmax(410px, 0.75fr);
+
+  align-items: center;
+
+  gap: 80px;
+
+  padding:
+    95px 0 105px;
+
+}
+
+
+/* =========================================================
+   HERO COPY
+========================================================= */
+
+.jt-planner-hero-copy {
+
+  max-width:
+    690px;
+
+}
+
+
+.jt-planner-eyebrow {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    12px;
+
+  margin-bottom:
+    22px;
+
+  color:
+    var(--planner-gold-light);
+
+  font-size:
+    0.67rem;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    0.19em;
+
+  text-transform:
+    uppercase;
+
+}
+
+
+.jt-planner-eyebrow-line {
+
+  width:
+    38px;
+
+  height:
+    1px;
+
+  background:
+    var(--planner-gold);
+
+}
+
+
+.jt-planner-hero-copy h1 {
+
+  max-width:
+    680px;
+
+  margin:
+    0 0 26px;
+
+  color:
+    #ffffff;
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(3.4rem, 6vw, 6.2rem);
+
+  font-weight:
+    500;
+
+  line-height:
+    0.94;
+
+  letter-spacing:
+    -0.05em;
+
+}
+
+
+.jt-planner-hero-copy h1 span {
+
+  display:
+    block;
+
+  color:
+    #d9c38f;
+
+}
+
+
+.jt-planner-hero-description {
+
+  max-width:
+    620px;
+
+  margin:
+    0;
+
+  color:
+    rgba(255,255,255,0.74);
+
+  font-size:
+    0.98rem;
+
+  line-height:
+    1.9;
+
+}
+
+
+/* =========================================================
+   HERO FEATURE LIST
+========================================================= */
+
+.jt-planner-hero-features {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap:
+    12px;
+
+  max-width:
+    620px;
+
+  margin-top:
+    34px;
+
+}
+
+
+.jt-planner-hero-feature {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    12px;
+
+  min-height:
+    58px;
+
+  padding:
+    10px 13px;
+
+  border:
+    1px solid rgba(255,255,255,0.10);
+
+  border-radius:
+    12px;
+
+  background:
+    rgba(255,255,255,0.055);
+
+  backdrop-filter:
+    blur(10px);
+
+}
+
+
+.jt-planner-hero-feature > span {
+
+  width:
+    34px;
+
+  height:
+    34px;
+
+  flex:
+    0 0 34px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border-radius:
+    9px;
+
+  background:
+    rgba(198,161,91,0.14);
+
+  color:
+    var(--planner-gold-light);
+
+}
+
+
+.jt-planner-hero-feature strong {
+
+  display:
+    block;
+
+  color:
+    #ffffff;
+
+  font-size:
+    0.73rem;
+
+}
+
+
+.jt-planner-hero-feature small {
+
+  display:
+    block;
+
+  margin-top:
+    3px;
+
+  color:
+    rgba(255,255,255,0.49);
+
+  font-size:
+    0.59rem;
+
+}
+
+
+.jt-planner-trust {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    9px;
+
+  margin-top:
+    24px;
+
+  color:
+    rgba(255,255,255,0.54);
+
+  font-size:
+    0.65rem;
+
+}
+
+
+.jt-planner-trust i {
+
+  color:
+    #81b99d;
+
+}
+
+
+/* =========================================================
+   FORM CARD
+========================================================= */
+
+.jt-planner-form-card {
+
+  position: relative;
+
+  padding:
+    31px;
+
+  border:
+    1px solid rgba(255,255,255,0.7);
+
+  border-radius:
+    25px;
+
+  background:
+    rgba(255,255,255,0.97);
+
+  box-shadow:
+    var(--planner-shadow-heavy);
+
+}
+
+
+.jt-planner-form-card::before {
+
+  content:
+    "";
+
+  position:
+    absolute;
+
+  top:
+    0;
+
+  left:
+    35px;
+
+  right:
+    35px;
+
+  height:
+    3px;
+
+  border-radius:
+    0 0 5px 5px;
+
+  background:
+    var(--planner-gold);
+
+}
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.jt-planner-card-top {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    14px;
+
+  padding-bottom:
+    24px;
+
+  border-bottom:
+    1px solid #edf0ed;
+
+}
+
+
+.jt-planner-card-icon {
+
+  width:
+    48px;
+
+  height:
+    48px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  flex:
+    0 0 48px;
+
+  border-radius:
+    14px;
+
+  background:
+    var(--planner-green-900);
+
+  color:
+    var(--planner-gold-light);
+
+  font-size:
+    1rem;
+
+}
+
+
+.jt-planner-card-top > div:last-child > span {
+
+  color:
+    var(--planner-green-600);
+
+  font-size:
+    0.6rem;
+
+  font-weight:
+    850;
+
+  letter-spacing:
+    0.14em;
+
+  text-transform:
+    uppercase;
+
+}
+
+
+.jt-planner-card-top h2 {
+
+  margin:
+    5px 0 3px;
+
+  color:
+    var(--planner-green-900);
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size:
+    1.65rem;
+
+  font-weight:
+    600;
+
+}
+
+
+.jt-planner-card-top p {
+
+  margin:
+    0;
+
+  color:
+    var(--planner-muted);
+
+  font-size:
+    0.68rem;
+
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.jt-planner-card-progress {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  padding:
+    20px 0 22px;
+
+}
+
+
+.jt-planner-progress-step {
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    center;
+
+  gap:
+    5px;
+
+}
+
+
+.jt-planner-progress-step span {
+
+  width:
+    27px;
+
+  height:
+    27px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border:
+    1px solid #dfe6e1;
+
+  border-radius:
+    50%;
+
+  background:
+    #ffffff;
+
+  color:
+    #9aa49f;
+
+  font-size:
+    0.62rem;
+
+  font-weight:
+    800;
+
+}
+
+
+.jt-planner-progress-step small {
+
+  color:
+    #9aa49f;
+
+  font-size:
+    0.54rem;
+
+  font-weight:
+    700;
+
+}
+
+
+.jt-planner-progress-step.active span {
+
+  border-color:
+    var(--planner-green-700);
+
+  background:
+    var(--planner-green-700);
+
+  color:
+    #ffffff;
+
+}
+
+
+.jt-planner-progress-step.active small {
+
+  color:
+    var(--planner-green-700);
+
+}
+
+
+.jt-planner-progress-line {
+
+  flex:
+    1;
+
+  height:
+    1px;
+
+  margin:
+    0 9px 18px;
+
+  background:
+    #e2e7e3;
+
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.jt-planner-form {
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    18px;
+
+}
+
+
+.jt-planner-field {
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    7px;
+
+}
+
+
+.jt-planner-field label {
+
+  color:
+    var(--planner-text);
+
+  font-size:
+    0.69rem;
+
+  font-weight:
+    800;
+
+}
+
+
+.jt-planner-field small {
+
+  color:
+    #8a948f;
+
+  font-size:
+    0.58rem;
+
+}
+
+
+.jt-planner-input-grid {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    0.8fr 1.2fr;
+
+  gap:
+    12px;
+
+}
+
+
+.jt-planner-input {
+
+  position:
+    relative;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+}
+
+
+.jt-planner-input input {
+
+  width:
+    100%;
+
+  height:
+    51px;
+
+  padding:
+    0 13px 0 43px;
+
+  border:
+    1px solid #dce3de;
+
+  border-radius:
+    11px;
+
+  outline:
+    none;
+
+  background:
+    #fafcf9;
+
+  color:
+    var(--planner-text);
+
+  font-family:
+    inherit;
+
+  font-size:
+    0.76rem;
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+
+}
+
+
+.jt-planner-input input:focus {
+
+  border-color:
+    var(--planner-green-600);
+
+  background:
+    #ffffff;
+
+  box-shadow:
+    0 0 0 4px rgba(39,128,94,0.09);
+
+}
+
+
+.jt-planner-input-icon {
+
+  position:
+    absolute;
+
+  left:
+    14px;
+
+  z-index:
+    2;
+
+  color:
+    var(--planner-green-700);
+
+  pointer-events:
+    none;
+
+}
+
+
+.jt-planner-input-currency {
+
+  position:
+    absolute;
+
+  left:
+    14px;
+
+  z-index:
+    2;
+
+  color:
+    var(--planner-green-700);
+
+  font-size:
+    0.95rem;
+
+  font-weight:
+    800;
+
+}
+
+
+.jt-planner-input-suffix {
+
+  position:
+    absolute;
+
+  right:
+    13px;
+
+  color:
+    #8a948f;
+
+  font-size:
+    0.6rem;
+
+  pointer-events:
+    none;
+
+}
+
+
+.jt-planner-input:has(.jt-planner-input-suffix) input {
+
+  padding-right:
+    48px;
+
+}
+
+
+/* =========================================================
+   GENERATE BUTTON
+========================================================= */
+
+.jt-planner-generate {
+
+  width:
+    100%;
+
+  min-height:
+    54px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    15px;
+
+  margin-top:
+    3px;
+
+  padding:
+    0 17px;
+
+  border:
+    0;
+
+  border-radius:
+    12px;
+
+  background:
+    var(--planner-green-800);
+
+  color:
+    #ffffff;
+
+  font-family:
+    inherit;
+
+  font-size:
+    0.73rem;
+
+  font-weight:
+    850;
+
+  cursor:
+    pointer;
+
+  box-shadow:
+    0 12px 25px rgba(16,71,53,0.18);
+
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+
+}
+
+
+.jt-planner-generate span {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    9px;
+
+}
+
+
+.jt-planner-generate:hover {
+
+  background:
+    var(--planner-green-600);
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 17px 32px rgba(16,71,53,0.23);
+
+}
+
+
+.jt-planner-card-footer {
+
+  padding-top:
+    5px;
+
+}
+
+
+.jt-planner-card-footer span {
+
+  display:
+    flex;
+
+  align-items:
+    flex-start;
+
+  gap:
+    7px;
+
+  color:
+    #929b96;
+
+  font-size:
+    0.56rem;
+
+  line-height:
+    1.5;
+
+}
+
+
+.jt-planner-card-footer i {
+
+  margin-top:
+    1px;
+
+  color:
+    var(--planner-green-600);
+
+}
+
+
+/* =========================================================
+   SCROLL INDICATOR
+========================================================= */
+
+.jt-planner-scroll {
+
+  position:
+    absolute;
+
+  bottom:
+    23px;
+
+  left:
+    50%;
+
+  z-index:
+    3;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    9px;
+
+  transform:
+    translateX(-50%);
+
+  color:
+    rgba(255,255,255,0.45);
+
+  font-size:
+    0.58rem;
+
+  letter-spacing:
+    0.09em;
+
+  text-transform:
+    uppercase;
+
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.jt-planner-intro {
+
+  padding:
+    110px 0 85px;
+
+  background:
+    var(--planner-paper);
+
+}
+
+
+.jt-planner-intro-grid {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    1fr 0.8fr;
+
+  gap:
+    90px;
+
+  align-items:
+    end;
+
+}
+
+
+.jt-planner-section-label {
+
+  display:
+    inline-block;
+
+  margin-bottom:
+    13px;
+
+  color:
+    var(--planner-green-600);
+
+  font-size:
+    0.63rem;
+
+  font-weight:
+    850;
+
+  letter-spacing:
+    0.17em;
+
+  text-transform:
+    uppercase;
+
+}
+
+
+.jt-planner-section-label.light {
+
+  color:
+    var(--planner-gold-light);
+
+}
+
+
+.jt-planner-intro h2,
+.jt-planner-section-heading h2 {
+
+  margin:
+    0;
+
+  color:
+    var(--planner-green-900);
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(2.4rem, 4vw, 4.1rem);
+
+  font-weight:
+    500;
+
+  line-height:
+    1.03;
+
+  letter-spacing:
+    -0.04em;
+
+}
+
+
+.jt-planner-intro h2 span,
+.jt-planner-section-heading h2 span {
+
+  display:
+    block;
+
+  color:
+    #799184;
+
+}
+
+
+.jt-planner-intro-grid p {
+
+  margin:
+    0;
+
+  color:
+    var(--planner-muted);
+
+  font-size:
+    0.86rem;
+
+  line-height:
+    1.9;
+
+}
+
+
+/* =========================================================
+   STEPS
+========================================================= */
+
+.jt-planner-steps {
+
+  padding:
+    20px 0 110px;
+
+  background:
+    var(--planner-paper);
+
+}
+
+
+.jt-planner-step-grid {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap:
+    16px;
+
+}
+
+
+.jt-planner-step-card {
+
+  min-height:
+    310px;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  justify-content:
+    space-between;
+
+  padding:
+    28px;
+
+  border:
+    1px solid var(--planner-border);
+
+  border-radius:
+    21px;
+
+  background:
+    #ffffff;
+
+  box-shadow:
+    var(--planner-shadow);
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+
+}
+
+
+.jt-planner-step-card:hover {
+
+  transform:
+    translateY(-5px);
+
+  box-shadow:
+    0 30px 70px rgba(7,38,28,0.12);
+
+}
+
+
+.jt-planner-step-card-dark {
+
+  border-color:
+    var(--planner-green-900);
+
+  background:
+    var(--planner-green-900);
+
+}
+
+
+.jt-planner-step-top {
+
+  display:
+    flex;
+
+  justify-content:
+    space-between;
+
+  align-items:
+    flex-start;
+
+}
+
+
+.jt-planner-step-number {
+
+  color:
+    #cbd6d0;
+
+  font-size:
+    0.65rem;
+
+  font-weight:
+    850;
+
+  letter-spacing:
+    0.13em;
+
+}
+
+
+.jt-planner-step-card-dark .jt-planner-step-number {
+
+  color:
+    rgba(255,255,255,0.24);
+
+}
+
+
+.jt-planner-step-icon {
+
+  width:
+    50px;
+
+  height:
+    50px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border-radius:
+    14px;
+
+  background:
+    #eaf3ed;
+
+  color:
+    var(--planner-green-700);
+
+}
+
+
+.jt-planner-step-card-dark .jt-planner-step-icon {
+
+  background:
+    rgba(255,255,255,0.08);
+
+  color:
+    var(--planner-gold-light);
+
+}
+
+
+.jt-planner-step-label {
+
+  display:
+    block;
+
+  margin-bottom:
+    8px;
+
+  color:
+    var(--planner-green-600);
+
+  font-size:
+    0.58rem;
+
+  font-weight:
+    850;
+
+  letter-spacing:
+    0.15em;
+
+}
+
+
+.jt-planner-step-card-dark .jt-planner-step-label {
+
+  color:
+    var(--planner-gold-light);
+
+}
+
+
+.jt-planner-step-card h3 {
+
+  margin:
+    0 0 10px;
+
+  color:
+    var(--planner-green-900);
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size:
+    1.45rem;
+
+  font-weight:
+    600;
+
+}
+
+
+.jt-planner-step-card-dark h3 {
+
+  color:
+    #ffffff;
+
+}
+
+
+.jt-planner-step-card p {
+
+  max-width:
+    310px;
+
+  margin:
+    0;
+
+  color:
+    var(--planner-muted);
+
+  font-size:
+    0.72rem;
+
+  line-height:
+    1.75;
+
+}
+
+
+.jt-planner-step-card-dark p {
+
+  color:
+    rgba(255,255,255,0.58);
+
+}
+
+
+/* =========================================================
+   CAPABILITIES
+========================================================= */
+
+.jt-planner-capabilities {
+
+  padding:
+    110px 0;
+
+  background:
+    #f1eee5;
+
+}
+
+
+.jt-planner-section-heading {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    1fr 0.65fr;
+
+  gap:
+    80px;
+
+  align-items:
+    end;
+
+  margin-bottom:
+    45px;
+
+}
+
+
+.jt-planner-section-heading > p {
+
+  margin:
+    0;
+
+  color:
+    var(--planner-muted);
+
+  font-size:
+    0.82rem;
+
+  line-height:
+    1.8;
+
+}
+
+
+.jt-planner-capability-grid {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap:
+    14px;
+
+}
+
+
+.jt-planner-capability-card {
+
+  position:
+    relative;
+
+  min-height:
+    260px;
+
+  padding:
+    25px;
+
+  border:
+    1px solid rgba(16,71,53,0.09);
+
+  border-radius:
+    19px;
+
+  background:
+    rgba(255,255,255,0.83);
+
+  overflow:
+    hidden;
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+
+}
+
+
+.jt-planner-capability-card.large {
+
+  grid-column:
+    span 2;
+
+  background:
+    var(--planner-green-900);
+
+}
+
+
+.jt-planner-capability-card:hover {
+
+  transform:
+    translateY(-4px);
+
+  box-shadow:
+    var(--planner-shadow);
+
+}
+
+
+.jt-planner-capability-icon {
+
+  width:
+    45px;
+
+  height:
+    45px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  margin-bottom:
+    32px;
+
+  border-radius:
+    12px;
+
+  background:
+    #e9f3ed;
+
+  color:
+    var(--planner-green-700);
+
+}
+
+
+.jt-planner-capability-icon.gold {
+
+  background:
+    #f6eedc;
+
+  color:
+    #9c762e;
+
+}
+
+
+.jt-planner-capability-icon.blue {
+
+  background:
+    #e9f0f7;
+
+  color:
+    #4d6f91;
+
+}
+
+
+.jt-planner-capability-icon.sky {
+
+  background:
+    #e9f3f6;
+
+  color:
+    #4e8090;
+
+}
+
+
+.jt-planner-capability-icon.leaf {
+
+  background:
+    #edf4e8;
+
+  color:
+    #568252;
+
+}
+
+
+.jt-planner-capability-icon.purple {
+
+  background:
+    #f0ebf5;
+
+  color:
+    #76618e;
+
+}
+
+
+.jt-planner-capability-card > span {
+
+  position:
+    absolute;
+
+  top:
+    25px;
+
+  right:
+    25px;
+
+  color:
+    #b5c0ba;
+
+  font-size:
+    0.6rem;
+
+  font-weight:
+    850;
+
+}
+
+
+.jt-planner-capability-card.large > span {
+
+  color:
+    rgba(255,255,255,0.22);
+
+}
+
+
+.jt-planner-capability-card h3 {
+
+  margin:
+    0 0 9px;
+
+  color:
+    var(--planner-green-900);
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size:
+    1.3rem;
+
+  font-weight:
+    600;
+
+}
+
+
+.jt-planner-capability-card.large h3 {
+
+  color:
+    #ffffff;
+
+  font-size:
+    1.65rem;
+
+}
+
+
+.jt-planner-capability-card p {
+
+  max-width:
+    330px;
+
+  margin:
+    0;
+
+  color:
+    var(--planner-muted);
+
+  font-size:
+    0.7rem;
+
+  line-height:
+    1.7;
+
+}
+
+
+.jt-planner-capability-card.large p {
+
+  color:
+    rgba(255,255,255,0.60);
+
+}
+
+
+.jt-planner-capability-arrow {
+
+  position:
+    absolute;
+
+  right:
+    25px;
+
+  bottom:
+    25px;
+
+  width:
+    36px;
+
+  height:
+    36px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border:
+    1px solid rgba(255,255,255,0.13);
+
+  border-radius:
+    50%;
+
+  color:
+    var(--planner-gold-light);
+
+}
+
+
+/* =========================================================
+   VISUAL DESTINATION
+========================================================= */
+
+.jt-planner-visual {
+
+  padding:
+    100px 0;
+
+  background:
+    var(--planner-paper);
+
+}
+
+
+.jt-planner-visual-card {
+
+  position:
+    relative;
+
+  min-height:
+    540px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  overflow:
+    hidden;
+
+  border-radius:
+    26px;
+
+  background:
+    var(--planner-green-950);
+
+  box-shadow:
+    var(--planner-shadow-heavy);
+
+}
+
+
+.jt-planner-visual-image {
+
+  position:
+    absolute;
+
+  inset:
+    0 0 0 40%;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--planner-green-950) 0%,
+      rgba(6,31,23,0.65) 20%,
+      rgba(6,31,23,0.20) 100%
+    ),
+    url("/images/discover/lodh-falls.jpg")
+    center / cover no-repeat;
+
+}
+
+
+.jt-planner-visual-content {
+
+  position:
+    relative;
+
+  z-index:
+    2;
+
+  width:
+    52%;
+
+  padding:
+    65px;
+
+}
+
+
+.jt-planner-visual-content h2 {
+
+  margin:
+    0 0 20px;
+
+  color:
+    #ffffff;
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(3rem, 5vw, 5rem);
+
+  font-weight:
+    500;
+
+  line-height:
+    0.95;
+
+  letter-spacing:
+    -0.04em;
+
+}
+
+
+.jt-planner-visual-content p {
+
+  max-width:
+    390px;
+
+  margin:
+    0 0 28px;
+
+  color:
+    rgba(255,255,255,0.62);
+
+  font-size:
+    0.8rem;
+
+  line-height:
+    1.8;
+
+}
+
+
+.jt-planner-outline-button {
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    12px;
+
+  min-height:
+    48px;
+
+  padding:
+    0 17px;
+
+  border:
+    1px solid rgba(255,255,255,0.24);
+
+  border-radius:
+    10px;
+
+  color:
+    #ffffff;
+
+  font-size:
+    0.68rem;
+
+  font-weight:
+    800;
+
+  text-decoration:
+    none;
+
+  transition:
+    background 180ms ease,
+    transform 180ms ease;
+
+}
+
+
+.jt-planner-outline-button:hover {
+
+  color:
+    #ffffff;
+
+  background:
+    rgba(255,255,255,0.08);
+
+  transform:
+    translateY(-2px);
+
+}
+
+
+/* =========================================================
+   FINAL CTA
+========================================================= */
+
+.jt-planner-final {
+
+  padding:
+    30px 0 110px;
+
+  background:
+    var(--planner-paper);
+
+}
+
+
+.jt-planner-final-inner {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    35px;
+
+  padding:
+    48px 55px;
+
+  border-radius:
+    22px;
+
+  background:
+    #eaf1eb;
+
+}
+
+
+.jt-planner-final h2 {
+
+  margin:
+    0;
+
+  color:
+    var(--planner-green-900);
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(2rem, 4vw, 3.5rem);
+
+  font-weight:
+    500;
+
+  line-height:
+    1;
+
+}
+
+
+.jt-planner-final h2 span {
+
+  display:
+    block;
+
+  color:
+    #779082;
+
+}
+
+
+.jt-planner-final-button {
+
+  flex:
+    0 0 auto;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    12px;
+
+  min-height:
+    51px;
+
+  padding:
+    0 20px;
+
+  border-radius:
+    11px;
+
+  background:
+    var(--planner-green-900);
+
+  color:
+    #ffffff;
+
+  font-size:
+    0.7rem;
+
+  font-weight:
+    800;
+
+  text-decoration:
+    none;
+
+  transition:
+    transform 180ms ease,
+    background 180ms ease;
+
+}
+
+
+.jt-planner-final-button:hover {
+
+  color:
+    #ffffff;
+
+  background:
+    var(--planner-green-700);
+
+  transform:
+    translateY(-2px);
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1050px) {
+
+  .jt-planner-hero-inner {
+
+    grid-template-columns:
+      1fr;
+
+    gap:
+      45px;
+
+  }
+
+  .jt-planner-form-card {
+
+    max-width:
+      620px;
+
+  }
+
+  .jt-planner-section-heading {
+
+    grid-template-columns:
+      1fr;
+
+    gap:
+      20px;
+
+  }
+
+}
+
+
+@media (max-width: 800px) {
+
+  .jt-planner-page .jt-container {
+
+    width:
+      min(100% - 30px, 1180px);
+
+  }
+
+  .jt-planner-hero {
+
+    min-height:
+      auto;
+
+  }
+
+  .jt-planner-hero-inner {
+
+    padding:
+      70px 0 90px;
+
+  }
+
+  .jt-planner-hero-copy h1 {
+
+    font-size:
+      3.5rem;
+
+  }
+
+  .jt-planner-step-grid,
+  .jt-planner-capability-grid {
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+  .jt-planner-capability-card.large {
+
+    grid-column:
+      span 1;
+
+  }
+
+  .jt-planner-visual-image {
+
+    inset:
+      0;
+
+    opacity:
+      0.35;
+
+  }
+
+  .jt-planner-visual-content {
+
+    width:
+      100%;
+
+    padding:
+      45px;
+
+  }
+
+  .jt-planner-final-inner {
+
+    flex-direction:
+      column;
+
+    align-items:
+      flex-start;
+
+  }
+
+}
+
+
+@media (max-width: 560px) {
+
+  .jt-planner-hero-copy h1 {
+
+    font-size:
+      2.75rem;
+
+  }
+
+  .jt-planner-hero-features {
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+  .jt-planner-input-grid {
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+  .jt-planner-form-card {
+
+    padding:
+      23px;
+
+    border-radius:
+      19px;
+
+  }
+
+  .jt-planner-intro-grid {
+
+    grid-template-columns:
+      1fr;
+
+    gap:
+      25px;
+
+  }
+
+  .jt-planner-visual-content {
+
+    padding:
+      35px 25px;
+
+  }
+
+  .jt-planner-final-inner {
+
+    padding:
+      35px 25px;
+
+  }
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .jt-planner-step-card,
+  .jt-planner-capability-card,
+  .jt-planner-generate,
+  .jt-planner-outline-button,
+  .jt-planner-final-button {
+
+    transition:
+      none;
+
+  }
+
+}

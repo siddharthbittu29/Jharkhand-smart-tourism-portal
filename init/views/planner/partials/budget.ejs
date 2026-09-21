@@ -1,157 +1,389 @@
-<!-- ========================================= -->
-<!-- BUDGET ANALYTICS -->
-<!-- ========================================= -->
+<!-- =========================================================
+     JHARKHAND TOURISM — SMART BUDGET ANALYTICS
+========================================================= -->
 
-<section class="budget-section">
+<%
+    const safeTripBudget = Number(tripBudget || 0);
+    const safeTotalCost = Number(totalCost || 0);
+    const safeHotelCost = Number(hotelCost || 0);
+    const safeFoodCost = Number(foodCost || 0);
+    const safeTransportCost = Number(transportCost || 0);
+
+    const budgetUtilization = safeTripBudget > 0
+        ? Math.round((safeTotalCost / safeTripBudget) * 100)
+        : 0;
+
+    const progressWidth = Math.min(
+        Math.max(budgetUtilization, 0),
+        100
+    );
+
+    const remainingBudget = Math.max(
+        safeTripBudget - safeTotalCost,
+        0
+    );
+
+    const budgetDifference = safeTripBudget - safeTotalCost;
+
+    const isWithinBudget = String(budgetStatus || "")
+        .toLowerCase()
+        .includes("within");
+%>
+
+
+<section
+    class="budget-section"
+    aria-labelledby="budget-section-title"
+>
+
+    <!-- =====================================================
+         SECTION INTRO
+    ====================================================== -->
 
     <div class="section-heading">
 
         <span class="section-badge">
-            💰 Budget Analytics
+            <i class="fa-solid fa-chart-pie" aria-hidden="true"></i>
+            Budget Analytics
         </span>
 
-        <h2>
-            Smart Expense Analysis
+        <h2 id="budget-section-title">
+            Smart expense analysis
         </h2>
 
         <p>
-            AI generated financial overview of your complete trip.
+            A complete financial overview of your planned journey,
+            including accommodation, food, transport and remaining budget.
         </p>
 
     </div>
 
+
+    <!-- =====================================================
+         BUDGET DASHBOARD
+    ====================================================== -->
+
     <div class="budget-dashboard">
 
-        <!-- LEFT -->
 
-        <div class="budget-summary">
+        <!-- =================================================
+             LEFT — BUDGET SUMMARY
+        ================================================== -->
 
-            <h3>
+        <article class="budget-summary">
 
-                Total Trip Cost
+            <div class="budget-summary-top">
 
-            </h3>
+                <div>
 
-            <h1>
+                    <span class="budget-kicker">
+                        <i
+                            class="fa-solid fa-wallet"
+                            aria-hidden="true">
+                        </i>
+                        Trip Budget
+                    </span>
 
-                ₹ <%= totalCost.toLocaleString() %>
+                    <h3>
+                        Total Trip Cost
+                    </h3>
 
-            </h1>
+                </div>
+
+                <div
+                    class="budget-summary-icon"
+                    aria-hidden="true"
+                >
+                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                </div>
+
+            </div>
+
+
+            <!-- Total Cost -->
+
+            <div class="budget-total">
+
+                <span>₹</span>
+
+                <strong>
+                    <%= safeTotalCost.toLocaleString("en-IN") %>
+                </strong>
+
+            </div>
+
+
+            <!-- Budget Status -->
 
             <div class="budget-status">
 
-                <span class="<%= budgetStatus.includes('Within') ? 'budget-good' : 'budget-danger' %>">
+                <span class="<%= isWithinBudget ? 'budget-good' : 'budget-danger' %>">
 
-                    <%= budgetStatus %>
+                    <i
+                        class="fa-solid <%= isWithinBudget
+                            ? 'fa-circle-check'
+                            : 'fa-triangle-exclamation' %>"
+                        aria-hidden="true">
+                    </i>
+
+                    <%= budgetStatus || "Budget status unavailable" %>
 
                 </span>
 
             </div>
 
-            <hr>
+
+            <!-- Original Budget -->
+
+            <div class="budget-original">
+
+                <span>
+                    Planned budget
+                </span>
+
+                <strong>
+                    ₹<%= safeTripBudget.toLocaleString("en-IN") %>
+                </strong>
+
+            </div>
+
+
+            <div class="budget-divider" aria-hidden="true"></div>
+
+
+            <!-- Progress -->
 
             <div class="budget-progress">
 
-                <div class="progress">
+                <div class="budget-progress-heading">
+
+                    <span>
+                        Budget utilization
+                    </span>
+
+                    <strong>
+                        <%= budgetUtilization %>%
+                    </strong>
+
+                </div>
+
+                <div
+                    class="progress"
+                    role="progressbar"
+                    aria-label="Budget utilization"
+                    aria-valuenow="<%= budgetUtilization %>"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                >
 
                     <div
-                        class="progress-bar bg-success"
-                        style="width:<%= Math.min((totalCost/tripBudget)*100,100) %>%">
-
+                        class="progress-bar <%= isWithinBudget
+                            ? 'bg-success'
+                            : 'bg-danger' %>"
+                        style="width:<%= progressWidth %>%"
+                    >
                     </div>
 
                 </div>
 
             </div>
 
-            <small>
 
-                Budget Utilization :
-                <strong>
+            <!-- Remaining / Difference -->
 
-                    <%= Math.round((totalCost/tripBudget)*100) %>%
+            <div class="budget-bottom-summary">
 
-                </strong>
+                <div>
 
-            </small>
+                    <span>
+                        <i
+                            class="fa-solid fa-arrow-down"
+                            aria-hidden="true">
+                        </i>
+                        Remaining
+                    </span>
 
-        </div>
+                    <strong>
+                        ₹<%= remainingBudget.toLocaleString("en-IN") %>
+                    </strong>
 
-        <!-- RIGHT -->
+                </div>
+
+                <div>
+
+                    <span>
+                        <i
+                            class="fa-solid fa-calculator"
+                            aria-hidden="true">
+                        </i>
+                        Planned
+                    </span>
+
+                    <strong>
+                        ₹<%= safeTripBudget.toLocaleString("en-IN") %>
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- =================================================
+             RIGHT — EXPENSE BREAKDOWN
+        ================================================== -->
 
         <div class="budget-breakdown">
 
-            <div class="expense-card">
+            <!-- Hotels -->
 
-                <span>🏨</span>
+            <article class="expense-card expense-card-hotel">
 
-                <div>
+                <div
+                    class="expense-icon"
+                    aria-hidden="true"
+                >
+                    <i class="fa-solid fa-hotel"></i>
+                </div>
 
-                    <h4>Hotels</h4>
+                <div class="expense-content">
+
+                    <span class="expense-kicker">
+                        Accommodation
+                    </span>
+
+                    <h4>
+                        Hotels
+                    </h4>
 
                     <p>
-
-                        ₹ <%= hotelCost.toLocaleString() %>
-
+                        ₹<%= safeHotelCost.toLocaleString("en-IN") %>
                     </p>
 
                 </div>
 
-            </div>
+            </article>
 
-            <div class="expense-card">
 
-                <span>🍽</span>
+            <!-- Food -->
 
-                <div>
+            <article class="expense-card expense-card-food">
 
-                    <h4>Food</h4>
+                <div
+                    class="expense-icon"
+                    aria-hidden="true"
+                >
+                    <i class="fa-solid fa-utensils"></i>
+                </div>
+
+                <div class="expense-content">
+
+                    <span class="expense-kicker">
+                        Dining
+                    </span>
+
+                    <h4>
+                        Food
+                    </h4>
 
                     <p>
-
-                        ₹ <%= foodCost.toLocaleString() %>
-
+                        ₹<%= safeFoodCost.toLocaleString("en-IN") %>
                     </p>
 
                 </div>
 
-            </div>
+            </article>
 
-            <div class="expense-card">
 
-                <span>🚗</span>
+            <!-- Transport -->
 
-                <div>
+            <article class="expense-card expense-card-transport">
 
-                    <h4>Transport</h4>
+                <div
+                    class="expense-icon"
+                    aria-hidden="true"
+                >
+                    <i class="fa-solid fa-car-side"></i>
+                </div>
+
+                <div class="expense-content">
+
+                    <span class="expense-kicker">
+                        Mobility
+                    </span>
+
+                    <h4>
+                        Transport
+                    </h4>
 
                     <p>
-
-                        ₹ <%= transportCost.toLocaleString() %>
-
+                        ₹<%= safeTransportCost.toLocaleString("en-IN") %>
                     </p>
 
                 </div>
 
-            </div>
+            </article>
 
-            <div class="expense-card">
 
-                <span>💵</span>
+            <!-- Remaining Budget -->
 
-                <div>
+            <article class="expense-card expense-card-remaining">
 
-                    <h4>Remaining Budget</h4>
+                <div
+                    class="expense-icon"
+                    aria-hidden="true"
+                >
+                    <i class="fa-solid fa-piggy-bank"></i>
+                </div>
+
+                <div class="expense-content">
+
+                    <span class="expense-kicker">
+                        Available
+                    </span>
+
+                    <h4>
+                        Remaining Budget
+                    </h4>
 
                     <p>
-
-                        ₹ <%= Math.max(tripBudget-totalCost,0).toLocaleString() %>
-
+                        ₹<%= remainingBudget.toLocaleString("en-IN") %>
                     </p>
 
                 </div>
 
-            </div>
+            </article>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         COST SNAPSHOT
+    ====================================================== -->
+
+    <div class="budget-cost-note">
+
+        <div
+            class="budget-cost-note-icon"
+            aria-hidden="true"
+        >
+            <i class="fa-solid fa-chart-line"></i>
+        </div>
+
+        <div>
+
+            <strong>
+                Trip cost snapshot
+            </strong>
+
+            <p>
+                Estimated expenses are based on the current itinerary
+                and the Planner's existing cost calculation.
+                Actual travel expenses may vary.
+            </p>
 
         </div>
 

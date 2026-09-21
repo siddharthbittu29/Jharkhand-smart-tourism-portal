@@ -1,149 +1,1039 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-<title>Jharkhand Tourism Explorer | Discover Nature, Heritage & Adventure</title>  <meta name="description" content="Explore top tourist places in Jharkhand: waterfalls, temples, wildlife, heritage and hills." />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <link rel="stylesheet" href="/css/places.css">
-</head>
-<body>
 <%
-// defensive defaults
-places = Array.isArray(places) ? places : [];
-categories = Array.isArray(categories) ? categories : [];
-districts = Array.isArray(districts) ? districts : [];
-page = page || 1;
-totalPages = totalPages || 1;
-total = total || places.length;
-q = q || '';
-selectedCategory = selectedCategory || 'all';
+  // ------------------------------------------------------------
+  // Defensive defaults
+  // ------------------------------------------------------------
+
+  const safePlaces = Array.isArray(places) ? places : [];
+  const safeCategories = Array.isArray(categories) ? categories : [];
+  const safeDistricts = Array.isArray(districts) ? districts : [];
+
+  const currentPage = Number(page) || 1;
+  const currentTotalPages = Number(totalPages) || 1;
+  const currentTotal = Number(total) || safePlaces.length;
+
+  const currentQuery =
+    typeof q === 'string' ? q : '';
+
+  const currentCategory =
+    typeof selectedCategory === 'string'
+      ? selectedCategory
+      : 'all';
+
+  const currentDistrict =
+    typeof selectedDistrict === 'string'
+      ? selectedDistrict
+      : 'all';
+
+  // ------------------------------------------------------------
+  // Query builder
+  // Keeps filters while navigating pagination.
+  // ------------------------------------------------------------
+
+  function placesQuery(pageNumber) {
+    const params = new URLSearchParams();
+
+    params.set('page', pageNumber);
+
+    if (currentQuery.trim()) {
+      params.set('q', currentQuery.trim());
+    }
+
+    if (
+      currentCategory &&
+      currentCategory !== 'all'
+    ) {
+      params.set(
+        'category',
+        currentCategory
+      );
+    }
+
+    if (
+      currentDistrict &&
+      currentDistrict !== 'all'
+    ) {
+      params.set(
+        'district',
+        currentDistrict
+      );
+    }
+
+    return `/places?${params.toString()}`;
+  }
+
+  // ------------------------------------------------------------
+  // Common category shortcuts
+  // Only display shortcuts that exist in the dataset.
+  // ------------------------------------------------------------
+
+  const featuredCategories = [
+    'Waterfall',
+    'Wildlife',
+    'Adventure',
+    'Historical',
+    'Temple',
+    'Hill',
+    'Lake'
+  ].filter((category) =>
+    safeCategories.some(
+      (item) =>
+        String(item).toLowerCase() ===
+        category.toLowerCase()
+    )
+  );
 %>
 
-<main class="container">
-  <section class="hero glass">
-    <div class="hero-inner">
-      <div class="hero-left">
-        <img src="/images/jharkhand_tourism_logo_final.png" alt="Jharkhand Tourism" class="hero-logo">
-        <h1>Explore Jharkhand</h1>
-            <p class="muted">
-            Explore waterfalls, wildlife sanctuaries, spiritual circuits, eco-tourism trails and cultural heritage destinations across Jharkhand.
-            </p>        <a class="btn primary" href="#places-grid">Explore Top Places</a>
-      </div>
-      <div class="hero-right">
-        <!-- visually rich image on right (keeps slide 7 feel) -->
-       <div class="hero-image">
-           <img src="/images/discover/patratu.jpg" alt="Patratu Valley">
-       </div>
+<main class="jt-places-page">
 
-<div class="hero-stats">
-  <div class="stat-card">
-    <h3><%= total %></h3>
-    <p>Destinations</p>
-  </div>
+  <!-- ==========================================================
+       HERO
+       ========================================================== -->
 
-  <div class="stat-card">
-    <h3><%= districts.length %></h3>
-    <p>Districts</p>
-  </div>
+  <section class="jt-places-hero">
+    <div class="jt-container">
 
-  <div class="stat-card">
-    <h3><%= categories.length %></h3>
-    <p>Experiences</p>
-  </div>
-</div>
-      </div>
-    </div>
-  </section>
+      <div class="jt-places-hero-grid">
 
-  <section class="controls">
-    <div class="searchbar">
-      <input id="liveSearch" type="search" placeholder="Search by name, district or category..." value="<%= q %>">
-      <select id="filterCategory">
-        <option value="all">All Categories</option>
-        <% categories.forEach(function(c){ %>
-          <option value="<%= c %>" <%= selectedCategory===c ? 'selected' : '' %>><%= c %></option>
-        <% }) %>
-      </select>
-      <select id="filterDistrict">
-        <option value="all">All Districts</option>
-        <% districts.forEach(function(d){ %>
-          <option value="<%= d %>"><%= d %></option>
-        <% }) %>
-      </select>
-      <a id="serverSearch" class="btn" href="/places?page=1&category=<%= encodeURIComponent(selectedCategory) %>&q=">Search</a>
-    </div>
+        <div class="jt-places-hero-content">
 
-    <div class="category-row" aria-hidden="false">
-      <button class="chip" data-cat="all">All</button>
-      <% ['Adventure','Historical','Hill','Lake','Temple','Waterfall','Wildlife'].forEach(function(cc){ %>
-        <button class="chip" data-cat="<%= cc %>"><%= cc %></button>
-      <% }) %>
-    </div>
-  </section>
+          <span class="jt-eyebrow">
+            <i class="fa-solid fa-compass"></i>
+            Explore Jharkhand
+          </span>
 
-  <section id="places-grid" class="grid-section">
-    <div id="grid" class="grid">
-      <% if (!places || places.length === 0) { %>
-        <div class="empty">No places found (server: <%= total %>).</div>
-      <% } else { %>
-        <% places.forEach(function(p){ %>
-          <article class="place-card glass" data-id="<%= p.place_id %>" data-name="<%= p.name %>" data-district="<%= p.district %>" data-category="<%= p.category %>">
-          <div class="card-media">
-              <img src="<%= p.image %>" alt="<%= p.name %>">
-                  </div>
+          <h1>
+            Discover places worth
+            <span>remembering.</span>
+          </h1>
 
-            <div class="card-body">
-              <div class="meta">
-                <span class="badge"><%= p.category %></span>
-                <span class="muted">• <%= p.district %></span>
-              </div>
-              <h3 class="title"><%= p.name %></h3>
-              <p class="desc"><%= p.short_desc %></p>
-              <div class="card-actions">
-                <a class="btn small primary" href="/places/<%= p.place_id %>">View Details</a>
-                <button class="btn small ghost bookmark" data-id="<%= p.place_id %>">Bookmark</button>
-              </div>
+          <p class="jt-places-hero-description">
+            Explore waterfalls, forests, wildlife,
+            spiritual destinations, hills, heritage
+            sites and cultural experiences across
+            Jharkhand.
+          </p>
+
+          <div class="jt-places-hero-actions">
+            <a
+              href="#destination-explorer"
+              class="jt-btn jt-btn-primary"
+            >
+              <i class="fa-solid fa-map-location-dot"></i>
+              Explore destinations
+            </a>
+
+            <a
+              href="/planner"
+              class="jt-btn jt-btn-outline-light"
+            >
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              Plan with AI
+            </a>
+          </div>
+
+        </div>
+
+        <div class="jt-places-hero-visual">
+
+          <div class="jt-places-hero-image-wrap">
+
+            <img
+              src="/images/discover/patratu.jpg"
+              alt="Patratu Valley, Jharkhand"
+              class="jt-places-hero-image"
+              loading="eager"
+            >
+
+            <div class="jt-places-image-overlay"></div>
+
+            <div class="jt-places-hero-caption">
+              <span>
+                <i class="fa-solid fa-location-dot"></i>
+                Patratu Valley
+              </span>
+
+              <small>
+                Nature • Hills • Adventure
+              </small>
             </div>
-          </article>
-        <% }) %>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ======================================================
+           QUICK STATS
+           ====================================================== -->
+
+      <div class="jt-places-stats">
+
+        <div class="jt-places-stat">
+          <span class="jt-places-stat-icon">
+            <i class="fa-solid fa-location-dot"></i>
+          </span>
+
+          <div>
+            <strong>
+              <%= currentTotal %>
+            </strong>
+            <span>Destinations</span>
+          </div>
+        </div>
+
+        <div class="jt-places-stat">
+          <span class="jt-places-stat-icon">
+            <i class="fa-solid fa-map"></i>
+          </span>
+
+          <div>
+            <strong>
+              <%= safeDistricts.length %>
+            </strong>
+            <span>Districts</span>
+          </div>
+        </div>
+
+        <div class="jt-places-stat">
+          <span class="jt-places-stat-icon">
+            <i class="fa-solid fa-layer-group"></i>
+          </span>
+
+          <div>
+            <strong>
+              <%= safeCategories.length %>
+            </strong>
+            <span>Experiences</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================================
+       DESTINATION EXPLORER
+       ========================================================== -->
+
+  <section
+    id="destination-explorer"
+    class="jt-section jt-places-explorer"
+  >
+
+    <div class="jt-container">
+
+      <div class="jt-section-heading jt-places-heading">
+
+        <div>
+          <span class="jt-eyebrow jt-eyebrow-dark">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            Destination Explorer
+          </span>
+
+          <h2>
+            Find your next
+            <span>Jharkhand experience.</span>
+          </h2>
+
+          <p>
+            Search destinations by name, district or
+            experience and refine your journey using
+            the filters below.
+          </p>
+        </div>
+
+      </div>
+
+
+      <!-- ========================================================
+           SEARCH PANEL
+           ======================================================== -->
+
+      <form
+        id="placesSearchForm"
+        class="jt-places-search-panel"
+        method="GET"
+        action="/places"
+      >
+
+        <div class="jt-places-search-main">
+
+          <label
+            for="liveSearch"
+            class="jt-form-label"
+          >
+            Search destinations
+          </label>
+
+          <div class="jt-places-search-input">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+              id="liveSearch"
+              name="q"
+              type="search"
+              value="<%= currentQuery %>"
+              placeholder="Search waterfalls, temples, wildlife, districts..."
+              autocomplete="off"
+              aria-label="Search destinations"
+            >
+
+            <% if (currentQuery) { %>
+              <button
+                type="button"
+                id="clearPlaceSearch"
+                class="jt-search-clear"
+                aria-label="Clear search"
+              >
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            <% } %>
+
+          </div>
+
+        </div>
+
+
+        <div class="jt-places-filter">
+
+          <label
+            for="filterCategory"
+            class="jt-form-label"
+          >
+            Experience
+          </label>
+
+          <select
+            id="filterCategory"
+            name="category"
+            class="jt-select"
+          >
+            <option value="all">
+              All experiences
+            </option>
+
+            <% safeCategories.forEach(function(category) { %>
+              <option
+                value="<%= category %>"
+                <%= currentCategory === category ? 'selected' : '' %>
+              >
+                <%= category %>
+              </option>
+            <% }); %>
+          </select>
+
+        </div>
+
+
+        <div class="jt-places-filter">
+
+          <label
+            for="filterDistrict"
+            class="jt-form-label"
+          >
+            District
+          </label>
+
+          <select
+            id="filterDistrict"
+            name="district"
+            class="jt-select"
+          >
+            <option value="all">
+              All districts
+            </option>
+
+            <% safeDistricts.forEach(function(district) { %>
+              <option
+                value="<%= district %>"
+                <%= currentDistrict === district ? 'selected' : '' %>
+              >
+                <%= district %>
+              </option>
+            <% }); %>
+          </select>
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="jt-btn jt-btn-primary jt-search-submit"
+        >
+          <i class="fa-solid fa-arrow-right"></i>
+          Search
+        </button>
+
+      </form>
+
+
+      <!-- ========================================================
+           QUICK CATEGORY FILTERS
+           ======================================================== -->
+
+      <% if (featuredCategories.length > 0) { %>
+
+        <div class="jt-places-category-area">
+
+          <div class="jt-places-category-title">
+            <span>Popular experiences</span>
+          </div>
+
+          <div
+            class="jt-places-category-list"
+            aria-label="Popular destination categories"
+          >
+
+            <a
+              href="/places"
+              class="jt-place-chip <%= currentCategory === 'all' && !currentQuery && currentDistrict === 'all' ? 'is-active' : '' %>"
+            >
+              <i class="fa-solid fa-compass"></i>
+              All
+            </a>
+
+            <% featuredCategories.forEach(function(category) { %>
+
+              <a
+                href="/places?page=1&category=<%= encodeURIComponent(category) %>"
+                class="jt-place-chip <%= currentCategory.toLowerCase() === category.toLowerCase() ? 'is-active' : '' %>"
+              >
+
+                <% if (category.toLowerCase() === 'waterfall') { %>
+                  <i class="fa-solid fa-water"></i>
+                <% } else if (category.toLowerCase() === 'wildlife') { %>
+                  <i class="fa-solid fa-paw"></i>
+                <% } else if (category.toLowerCase() === 'adventure') { %>
+                  <i class="fa-solid fa-person-hiking"></i>
+                <% } else if (category.toLowerCase() === 'historical') { %>
+                  <i class="fa-solid fa-landmark"></i>
+                <% } else if (category.toLowerCase() === 'temple') { %>
+                  <i class="fa-solid fa-place-of-worship"></i>
+                <% } else if (category.toLowerCase() === 'hill') { %>
+                  <i class="fa-solid fa-mountain"></i>
+                <% } else if (category.toLowerCase() === 'lake') { %>
+                  <i class="fa-solid fa-water"></i>
+                <% } else { %>
+                  <i class="fa-solid fa-location-dot"></i>
+                <% } %>
+
+                <%= category %>
+
+              </a>
+
+            <% }); %>
+
+          </div>
+
+        </div>
+
       <% } %>
+
+
+      <!-- ========================================================
+           ACTIVE FILTER SUMMARY
+           ======================================================== -->
+
+      <% if (
+        currentQuery ||
+        currentCategory !== 'all' ||
+        currentDistrict !== 'all'
+      ) { %>
+
+        <div class="jt-active-filters">
+
+          <div class="jt-active-filters-label">
+            <i class="fa-solid fa-filter"></i>
+            Active filters
+          </div>
+
+          <div class="jt-active-filter-items">
+
+            <% if (currentQuery) { %>
+              <span class="jt-active-filter">
+                Search:
+                <strong>
+                  <%= currentQuery %>
+                </strong>
+              </span>
+            <% } %>
+
+            <% if (currentCategory !== 'all') { %>
+              <span class="jt-active-filter">
+                Experience:
+                <strong>
+                  <%= currentCategory %>
+                </strong>
+              </span>
+            <% } %>
+
+            <% if (currentDistrict !== 'all') { %>
+              <span class="jt-active-filter">
+                District:
+                <strong>
+                  <%= currentDistrict %>
+                </strong>
+              </span>
+            <% } %>
+
+            <a
+              href="/places"
+              class="jt-clear-filters"
+            >
+              Clear all
+            </a>
+
+          </div>
+
+        </div>
+
+      <% } %>
+
+
+      <!-- ========================================================
+           RESULTS HEADER
+           ======================================================== -->
+
+      <div class="jt-places-results-header">
+
+        <div>
+          <span class="jt-results-count">
+            <%= currentTotal %>
+          </span>
+
+          <span class="jt-results-label">
+            destination<%= currentTotal === 1 ? '' : 's' %>
+            found
+          </span>
+        </div>
+
+        <% if (currentTotal > 0) { %>
+          <span class="jt-results-page">
+            Page <strong><%= currentPage %></strong>
+            of
+            <strong><%= currentTotalPages %></strong>
+          </span>
+        <% } %>
+
+      </div>
+
+
+      <!-- ========================================================
+           DESTINATION GRID
+           ======================================================== -->
+
+      <% if (safePlaces.length === 0) { %>
+
+        <section
+          class="jt-places-empty"
+          aria-live="polite"
+        >
+
+          <div class="jt-empty-icon">
+            <i class="fa-solid fa-map-location-dot"></i>
+          </div>
+
+          <h3>
+            No destinations found
+          </h3>
+
+          <p>
+            Try changing your search or removing
+            one of the filters to discover more
+            places across Jharkhand.
+          </p>
+
+          <a
+            href="/places"
+            class="jt-btn jt-btn-primary"
+          >
+            <i class="fa-solid fa-rotate-left"></i>
+            Explore all destinations
+          </a>
+
+        </section>
+
+      <% } else { %>
+
+        <div
+          id="places-grid"
+          class="jt-places-grid"
+        >
+
+          <% safePlaces.forEach(function(place) { %>
+
+            <article
+              class="jt-destination-card"
+              data-id="<%= place.place_id %>"
+              data-name="<%= place.name %>"
+              data-district="<%= place.district %>"
+              data-category="<%= place.category %>"
+            >
+
+              <!-- Card image -->
+
+              <div class="jt-destination-media">
+
+                <img
+                  src="<%= place.image || '/images/placeholder.jpg' %>"
+                  alt="<%= place.name %>"
+                  class="jt-destination-image"
+                  loading="lazy"
+                  onerror="this.onerror=null;this.src='/images/placeholder.jpg';"
+                >
+
+                <div class="jt-destination-overlay"></div>
+
+                <div class="jt-destination-category">
+                  <i class="fa-solid fa-location-dot"></i>
+                  <%= place.category || 'Destination' %>
+                </div>
+
+                <button
+                  type="button"
+                  class="jt-destination-bookmark bookmark"
+                  data-id="<%= place.place_id %>"
+                  aria-label="Bookmark <%= place.name %>"
+                >
+                  <i class="fa-regular fa-bookmark"></i>
+                </button>
+
+              </div>
+
+
+              <!-- Card content -->
+
+              <div class="jt-destination-content">
+
+                <div class="jt-destination-location">
+
+                  <i class="fa-solid fa-location-dot"></i>
+
+                  <span>
+                    <%= place.district || 'Jharkhand' %>
+                  </span>
+
+                </div>
+
+                <h3 class="jt-destination-title">
+                  <%= place.name %>
+                </h3>
+
+                <p class="jt-destination-description">
+                  <%= place.short_desc || 'Discover this destination and experience the natural and cultural beauty of Jharkhand.' %>
+                </p>
+
+
+                <div class="jt-destination-footer">
+
+                  <a
+                    href="/places/<%= encodeURIComponent(place.place_id) %>"
+                    class="jt-destination-link"
+                  >
+                    Explore destination
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </a>
+
+                </div>
+
+              </div>
+
+            </article>
+
+          <% }); %>
+
+        </div>
+
+
+        <!-- ======================================================
+             PAGINATION
+             ====================================================== -->
+
+        <% if (currentTotalPages > 1) { %>
+
+          <nav
+            class="jt-pagination"
+            aria-label="Destination pagination"
+          >
+
+            <% if (currentPage > 1) { %>
+
+              <a
+                href="<%= placesQuery(currentPage - 1) %>"
+                class="jt-pagination-button"
+                aria-label="Previous page"
+              >
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Previous</span>
+              </a>
+
+            <% } else { %>
+
+              <span
+                class="jt-pagination-button is-disabled"
+                aria-disabled="true"
+              >
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Previous</span>
+              </span>
+
+            <% } %>
+
+
+            <div class="jt-pagination-pages">
+
+              <%
+                const visiblePages = [];
+
+                const startPage = Math.max(
+                  1,
+                  currentPage - 2
+                );
+
+                const endPage = Math.min(
+                  currentTotalPages,
+                  currentPage + 2
+                );
+
+                for (
+                  let paginationPage = startPage;
+                  paginationPage <= endPage;
+                  paginationPage++
+                ) {
+                  visiblePages.push(paginationPage);
+                }
+              %>
+
+
+              <% if (startPage > 1) { %>
+
+                <a
+                  href="<%= placesQuery(1) %>"
+                  class="jt-pagination-number"
+                >
+                  1
+                </a>
+
+                <% if (startPage > 2) { %>
+                  <span class="jt-pagination-dots">
+                    …
+                  </span>
+                <% } %>
+
+              <% } %>
+
+
+              <% visiblePages.forEach(function(paginationPage) { %>
+
+                <a
+                  href="<%= placesQuery(paginationPage) %>"
+                  class="jt-pagination-number <%= paginationPage === currentPage ? 'is-active' : '' %>"
+                  <%= paginationPage === currentPage ? 'aria-current="page"' : '' %>
+                >
+                  <%= paginationPage %>
+                </a>
+
+              <% }); %>
+
+
+              <% if (endPage < currentTotalPages) { %>
+
+                <% if (endPage < currentTotalPages - 1) { %>
+                  <span class="jt-pagination-dots">
+                    …
+                  </span>
+                <% } %>
+
+                <a
+                  href="<%= placesQuery(currentTotalPages) %>"
+                  class="jt-pagination-number"
+                >
+                  <%= currentTotalPages %>
+                </a>
+
+              <% } %>
+
+            </div>
+
+
+            <% if (currentPage < currentTotalPages) { %>
+
+              <a
+                href="<%= placesQuery(currentPage + 1) %>"
+                class="jt-pagination-button"
+                aria-label="Next page"
+              >
+                <span>Next</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+
+            <% } else { %>
+
+              <span
+                class="jt-pagination-button is-disabled"
+                aria-disabled="true"
+              >
+                <span>Next</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </span>
+
+            <% } %>
+
+          </nav>
+
+        <% } %>
+
+      <% } %>
+
     </div>
 
-    <nav class="pagination">
-      <% if (page > 1) { %>
-        <a class="page" href="/places?page=<%= page-1 %>&category=<%= encodeURIComponent(selectedCategory) %>">&larr; Prev</a>
-      <% } else { %>
-        <span class="page disabled">&larr; Prev</span>
-      <% } %>
-      <span class="page-info">Page <%= page %> of <%= totalPages %> — <%= total %> places</span>
-      <% if (page < totalPages) { %>
-        <a class="page" href="/places?page=<%= page+1 %>&category=<%= encodeURIComponent(selectedCategory) %>">Next &rarr;</a>
-      <% } else { %>
-        <span class="page disabled">Next &rarr;</span>
-      <% } %>
-    </nav>
   </section>
+
+
+  <!-- ==========================================================
+       PLAN CTA
+       ========================================================== -->
+
+  <section class="jt-places-planner-cta">
+
+    <div class="jt-container">
+
+      <div class="jt-planner-banner">
+
+        <div class="jt-planner-banner-content">
+
+          <span class="jt-eyebrow">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            Smart Tourism
+          </span>
+
+          <h2>
+            Not sure where to go?
+          </h2>
+
+          <p>
+            Let the AI Trip Planner help you build
+            an itinerary around your interests,
+            travel style and available time.
+          </p>
+
+          <a
+            href="/planner"
+            class="jt-btn jt-btn-light"
+          >
+            <i class="fa-solid fa-route"></i>
+            Build my trip
+          </a>
+
+        </div>
+
+        <div class="jt-planner-banner-icon">
+          <i class="fa-solid fa-map-location-dot"></i>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
 </main>
 
+
+<!-- ============================================================
+     PLACES PAGE JAVASCRIPT
+     ============================================================ -->
+
 <script src="/js/places.js" defer></script>
+
 <script>
-  // update server search link q param live
-  document.addEventListener('DOMContentLoaded', function(){
-    const s = document.getElementById('liveSearch');
-    const link = document.getElementById('serverSearch');
-    s?.addEventListener('input', ()=> {
-      link.href = '/places?page=1&category=' + encodeURIComponent(document.getElementById('filterCategory').value) + '&q=' + encodeURIComponent(s.value);
-    });
-    document.querySelectorAll('.chip').forEach(b=>{
-      b.addEventListener('click', ()=> {
-        // simulate click to filter client-side
-        const cat = b.dataset.cat;
-        document.getElementById('filterCategory').value = cat;
-        // also run client side filter
-        window.applyClientFilter();
+  document.addEventListener('DOMContentLoaded', function () {
+
+    const searchForm =
+      document.getElementById('placesSearchForm');
+
+    const searchInput =
+      document.getElementById('liveSearch');
+
+    const categorySelect =
+      document.getElementById('filterCategory');
+
+    const districtSelect =
+      document.getElementById('filterDistrict');
+
+    const clearSearch =
+      document.getElementById('clearPlaceSearch');
+
+
+    /*
+     * Clear search
+     */
+
+    if (clearSearch && searchInput) {
+      clearSearch.addEventListener('click', function () {
+        searchInput.value = '';
+        searchInput.focus();
       });
-    });
+    }
+
+
+    /*
+     * Submit when category or district changes.
+     * This keeps filtering server-side and therefore
+     * preserves the existing backend behavior.
+     */
+
+    if (categorySelect && searchForm) {
+      categorySelect.addEventListener(
+        'change',
+        function () {
+          searchForm.submit();
+        }
+      );
+    }
+
+    if (districtSelect && searchForm) {
+      districtSelect.addEventListener(
+        'change',
+        function () {
+          searchForm.submit();
+        }
+      );
+    }
+
+
+    /*
+     * Search form
+     */
+
+    if (searchForm) {
+      searchForm.addEventListener(
+        'submit',
+        function () {
+
+          if (searchInput) {
+            searchInput.value =
+              searchInput.value.trim();
+          }
+
+          /*
+           * Always start a new search from page 1.
+           */
+
+          let pageInput =
+            searchForm.querySelector(
+              'input[name="page"]'
+            );
+
+          if (!pageInput) {
+            pageInput =
+              document.createElement('input');
+
+            pageInput.type = 'hidden';
+            pageInput.name = 'page';
+
+            searchForm.appendChild(
+              pageInput
+            );
+          }
+
+          pageInput.value = '1';
+        }
+      );
+    }
+
+
+    /*
+     * Smooth scroll to destination grid
+     */
+
+    document
+      .querySelectorAll(
+        'a[href="#places-grid"]'
+      )
+      .forEach(function (link) {
+
+        link.addEventListener(
+          'click',
+          function (event) {
+
+            const target =
+              document.getElementById(
+                'places-grid'
+              );
+
+            if (!target) {
+              return;
+            }
+
+            event.preventDefault();
+
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+
+          }
+        );
+
+      });
+
+
+    /*
+     * Lightweight reveal animation
+     */
+
+    const revealItems =
+      document.querySelectorAll(
+        '.jt-destination-card, .jt-places-stat'
+      );
+
+    if (
+      'IntersectionObserver' in window &&
+      revealItems.length
+    ) {
+
+      const observer =
+        new IntersectionObserver(
+          function (entries) {
+
+            entries.forEach(function (entry) {
+
+              if (entry.isIntersecting) {
+
+                entry.target.classList.add(
+                  'is-visible'
+                );
+
+                observer.unobserve(
+                  entry.target
+                );
+
+              }
+
+            });
+
+          },
+          {
+            threshold: 0.08
+          }
+        );
+
+      revealItems.forEach(function (item) {
+        observer.observe(item);
+      });
+
+    } else {
+
+      revealItems.forEach(function (item) {
+        item.classList.add('is-visible');
+      });
+
+    }
+
   });
 </script>
-</body>
-</html>

@@ -1,39 +1,86 @@
+// =========================================================
+// JHARKHAND TOURISM — AI RECOMMENDATION SERVICE
+// =========================================================
+//
+// Generates a deterministic recommendation using:
+// - Eco Score
+// - Budget Status
+//
+// This service acts as a reliable fallback/recommendation
+// layer and does not require an external AI API.
+// =========================================================
+
+
+// =========================================================
+// GENERATE AI RECOMMENDATION
+// =========================================================
+
 const generateAIRecommendation = (
     ecoScore,
     budgetStatus
 ) => {
 
-    let aiRecommendation = "";
+    // -----------------------------------------------------
+    // Normalize inputs safely.
+    // -----------------------------------------------------
+
+    const safeEcoScore =
+        Number.isFinite(Number(ecoScore))
+            ? Number(ecoScore)
+            : 0;
+
+
+    const safeBudgetStatus =
+        typeof budgetStatus === "string"
+            ? budgetStatus
+            : "";
+
+
+    // -----------------------------------------------------
+    // Excellent eco-friendly trip + within budget
+    // -----------------------------------------------------
 
     if (
-        ecoScore >= 90 &&
-        budgetStatus.includes("Within")
+        safeEcoScore >= 90 &&
+        safeBudgetStatus.includes("Within")
     ) {
 
-        aiRecommendation =
-            "Excellent eco-friendly itinerary with minimal environmental impact.";
+        return (
+            "Excellent eco-friendly itinerary with minimal environmental impact."
+        );
 
     }
 
-    else if (
-        ecoScore >= 80
+
+    // -----------------------------------------------------
+    // Strong sustainability
+    // -----------------------------------------------------
+
+    if (
+        safeEcoScore >= 80
     ) {
 
-        aiRecommendation =
-            "Balanced trip with strong sustainability and tourism experience.";
+        return (
+            "Balanced trip with strong sustainability and tourism experience."
+        );
 
     }
 
-    else {
 
-        aiRecommendation =
-            "Consider reducing transportation and choosing eco-friendly accommodations to improve your trip.";
+    // -----------------------------------------------------
+    // Improvement recommendation
+    // -----------------------------------------------------
 
-    }
-
-    return aiRecommendation;
+    return (
+        "Consider reducing transportation and choosing eco-friendly accommodations to improve your trip."
+    );
 
 };
+
+
+// =========================================================
+// EXPORT
+// =========================================================
 
 module.exports = {
 

@@ -1,84 +1,215 @@
-<!-- ========================================= -->
-<!-- SMART TRAVEL TIPS -->
-<!-- ========================================= -->
+<!-- =========================================================
+     JHARKHAND TOURISM — SMART TRAVEL TIPS
+========================================================= -->
 
-<section class="tips-section">
+<section
+    class="tips-section"
+    aria-labelledby="tips-section-title"
+>
+
+    <!-- =====================================================
+         SECTION INTRO
+    ====================================================== -->
 
     <div class="section-heading">
 
         <span class="section-badge">
-
-            💡 Smart Travel Guide
-
+            <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>
+            Smart Travel Guide
         </span>
 
-        <h2>
-
-            AI Travel Tips
-
+        <h2 id="tips-section-title">
+            AI travel tips for your journey
         </h2>
 
         <p>
-
-            Important recommendations to make your journey safer,
-            smarter and more enjoyable.
-
+            Practical recommendations to help you travel more
+            thoughtfully, comfortably and confidently.
         </p>
 
     </div>
 
-    <div class="tips-grid">
 
-        <% travelTips.forEach((tip,index)=>{ %>
+    <%
+        const tips = Array.isArray(travelTips)
+            ? travelTips
+            : [];
 
-            <div class="tip-card">
+        const tipIcons = [
+            "fa-car-side",
+            "fa-leaf",
+            "fa-camera",
+            "fa-utensils",
+            "fa-triangle-exclamation"
+        ];
 
-                <div class="tip-icon">
+        const tipLabels = [
+            "Getting Around",
+            "Sustainable Travel",
+            "Photography",
+            "Local Experience",
+            "Travel Awareness"
+        ];
+    %>
 
-                    <% if(index % 5 === 0){ %>
 
-                        🚗
+    <% if (tips.length) { %>
 
-                    <% } else if(index % 5 === 1){ %>
+        <!-- =================================================
+             TIPS GRID
+        ================================================== -->
 
-                        🌱
+        <div class="tips-grid">
 
-                    <% } else if(index % 5 === 2){ %>
+            <% tips.forEach((tip, index) => {
 
-                        📸
+                const icon = tipIcons[index % tipIcons.length];
+                const label = tipLabels[index % tipLabels.length];
 
-                    <% } else if(index % 5 === 3){ %>
+            %>
 
-                        🍴
+                <article class="tip-card">
 
-                    <% } else { %>
+                    <!-- =====================================
+                         TIP NUMBER
+                    ====================================== -->
 
-                        ⚠️
+                    <div class="tip-number" aria-hidden="true">
+                        <%= String(index + 1).padStart(2, "0") %>
+                    </div>
 
-                    <% } %>
 
-                </div>
+                    <!-- =====================================
+                         TIP ICON
+                    ====================================== -->
 
-                <div class="tip-content">
+                    <div class="tip-icon" aria-hidden="true">
 
-                    <h3>
+                        <i class="fa-solid <%= icon %>"></i>
 
-                        Travel Tip <%= index+1 %>
+                    </div>
 
-                    </h3>
 
-                    <p>
+                    <!-- =====================================
+                         TIP CONTENT
+                    ====================================== -->
 
-                        <%= tip %>
+                    <div class="tip-content">
 
-                    </p>
+                        <div class="tip-meta">
 
-                </div>
+                            <span>
+                                <i
+                                    class="fa-solid fa-wand-magic-sparkles"
+                                    aria-hidden="true">
+                                </i>
+
+                                AI Guide
+                            </span>
+
+                            <span>
+                                <%= label %>
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            Travel Tip <%= index + 1 %>
+                        </h3>
+
+
+                        <p>
+                            <%= tip %>
+                        </p>
+
+
+                        <div class="tip-footer">
+
+                            <span>
+                                <i
+                                    class="fa-solid fa-check"
+                                    aria-hidden="true">
+                                </i>
+
+                                Keep this in mind
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            <% }) %>
+
+        </div>
+
+
+        <!-- =================================================
+             TRAVEL GUIDE NOTE
+        ================================================== -->
+
+        <div class="tips-guide-note">
+
+            <div
+                class="tips-guide-icon"
+                aria-hidden="true"
+            >
+                <i class="fa-solid fa-compass"></i>
+            </div>
+
+            <div class="tips-guide-content">
+
+                <strong>
+                    A better journey starts with good preparation
+                </strong>
+
+                <p>
+                    Review these recommendations alongside your
+                    itinerary, weather information and destination
+                    highlights before you begin your trip.
+                </p>
 
             </div>
 
-        <% }) %>
+        </div>
 
-    </div>
+    <% } else { %>
+
+        <!-- =================================================
+             EMPTY STATE
+        ================================================== -->
+
+        <div class="planner-empty-state tips-empty-state">
+
+            <div class="planner-empty-icon" aria-hidden="true">
+                <i class="fa-solid fa-lightbulb"></i>
+            </div>
+
+            <h3>
+                No travel tips available
+            </h3>
+
+            <p>
+                Travel guidance could not be generated for this plan.
+                Please try creating the itinerary again.
+            </p>
+
+            <a
+                href="/planner"
+                class="hero-btn"
+            >
+                <i
+                    class="fa-solid fa-rotate-right"
+                    aria-hidden="true">
+                </i>
+
+                Generate New Plan
+            </a>
+
+        </div>
+
+    <% } %>
 
 </section>

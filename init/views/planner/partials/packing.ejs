@@ -1,199 +1,596 @@
-<!-- ========================================= -->
-<!-- AI SMART PACKING ASSISTANT -->
-<!-- ========================================= -->
+<!-- =========================================================
+     JHARKHAND TOURISM — AI SMART PACKING ASSISTANT
+========================================================= -->
 
-<section class="packing-section">
+<section
+    class="packing-section"
+    aria-labelledby="packing-section-title"
+>
+
+    <!-- =====================================================
+         SECTION INTRO
+    ====================================================== -->
 
     <div class="section-heading">
 
         <span class="section-badge">
-
-            🎒 AI Packing Assistant
-
+            <i class="fa-solid fa-suitcase-rolling" aria-hidden="true"></i>
+            AI Packing Assistant
         </span>
 
-        <h2>
-
-            Smart Packing Checklist
-
+        <h2 id="packing-section-title">
+            Smart packing checklist
         </h2>
 
         <p>
-
-            AI generated essentials for a comfortable and hassle-free journey.
-
+            Keep your journey organized with essential items,
+            documents, electronics and clothing recommendations.
         </p>
 
     </div>
 
+
+    <%
+        const essentials = Array.isArray(packingList)
+            ? packingList
+            : [];
+    %>
+
+
+    <!-- =====================================================
+         PACKING SUMMARY
+    ====================================================== -->
+
+    <div class="packing-summary">
+
+        <div class="packing-summary-icon" aria-hidden="true">
+            <i class="fa-solid fa-clipboard-check"></i>
+        </div>
+
+        <div class="packing-summary-content">
+
+            <span>
+                Before you leave
+            </span>
+
+            <strong>
+                Check your essentials
+            </strong>
+
+            <p>
+                Tick items as you pack them. Your checklist stays
+                available while you prepare for the journey.
+            </p>
+
+        </div>
+
+        <div class="packing-summary-count">
+
+            <strong id="packingCheckedCount">
+                0
+            </strong>
+
+            <span>
+                packed
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         PACKING CATEGORIES
+    ====================================================== -->
+
     <div class="packing-container">
 
-        <!-- Essential Items -->
 
-        <div class="packing-category">
+        <!-- =================================================
+             ESSENTIAL ITEMS
+        ================================================== -->
 
-            <h3>
+        <article class="packing-category packing-category-essential">
 
-                🎒 Essential Items
+            <div class="packing-category-heading">
 
-            </h3>
+                <div class="packing-category-icon" aria-hidden="true">
+                    <i class="fa-solid fa-suitcase"></i>
+                </div>
 
-            <div class="packing-items">
+                <div>
 
-                <% (packingList || []).forEach(item=>{ %>
+                    <span class="packing-kicker">
+                        AI Essentials
+                    </span>
 
-                    <label class="packing-item">
+                    <h3>
+                        Essential Items
+                    </h3>
 
-                        <input type="checkbox">
-
-                        <span>
-
-                            <%= item %>
-
-                        </span>
-
-                    </label>
-
-                <% }) %>
+                </div>
 
             </div>
 
+
+            <div class="packing-items">
+
+                <% if (essentials.length) { %>
+
+                    <% essentials.forEach((item, index) => { %>
+
+                        <label class="packing-item">
+
+                            <input
+                                type="checkbox"
+                                class="packing-checkbox"
+                                data-packing-item
+                                id="packing-essential-<%= index %>"
+                            >
+
+                            <span class="packing-checkmark" aria-hidden="true">
+                                <i class="fa-solid fa-check"></i>
+                            </span>
+
+                            <span class="packing-item-text">
+                                <%= item %>
+                            </span>
+
+                        </label>
+
+                    <% }) %>
+
+                <% } else { %>
+
+                    <div class="packing-empty">
+
+                        <i
+                            class="fa-solid fa-circle-info"
+                            aria-hidden="true">
+                        </i>
+
+                        <span>
+                            No AI essentials were generated for this plan.
+                        </span>
+
+                    </div>
+
+                <% } %>
+
+            </div>
+
+        </article>
+
+
+        <!-- =================================================
+             DOCUMENTS
+        ================================================== -->
+
+        <article class="packing-category packing-category-documents">
+
+            <div class="packing-category-heading">
+
+                <div class="packing-category-icon" aria-hidden="true">
+                    <i class="fa-solid fa-file-lines"></i>
+                </div>
+
+                <div>
+
+                    <span class="packing-kicker">
+                        Travel Documents
+                    </span>
+
+                    <h3>
+                        Documents
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="packing-items">
+
+                <label class="packing-item">
+
+                    <input
+                        type="checkbox"
+                        class="packing-checkbox"
+                        data-packing-item
+                        id="packing-id"
+                    >
+
+                    <span class="packing-checkmark" aria-hidden="true">
+                        <i class="fa-solid fa-check"></i>
+                    </span>
+
+                    <span class="packing-item-text">
+                        Government ID
+                    </span>
+
+                </label>
+
+
+                <label class="packing-item">
+
+                    <input
+                        type="checkbox"
+                        class="packing-checkbox"
+                        data-packing-item
+                        id="packing-hotel"
+                    >
+
+                    <span class="packing-checkmark" aria-hidden="true">
+                        <i class="fa-solid fa-check"></i>
+                    </span>
+
+                    <span class="packing-item-text">
+                        Hotel Booking
+                    </span>
+
+                </label>
+
+
+                <label class="packing-item">
+
+                    <input
+                        type="checkbox"
+                        class="packing-checkbox"
+                        data-packing-item
+                        id="packing-ticket"
+                    >
+
+                    <span class="packing-checkmark" aria-hidden="true">
+                        <i class="fa-solid fa-check"></i>
+                    </span>
+
+                    <span class="packing-item-text">
+                        Train / Flight Ticket
+                    </span>
+
+                </label>
+
+
+                <label class="packing-item">
+
+                    <input
+                        type="checkbox"
+                        class="packing-checkbox"
+                        data-packing-item
+                        id="packing-emergency"
+                    >
+
+                    <span class="packing-checkmark" aria-hidden="true">
+                        <i class="fa-solid fa-check"></i>
+                    </span>
+
+                    <span class="packing-item-text">
+                        Emergency Contacts
+                    </span>
+
+                </label>
+
+            </div>
+
+        </article>
+
+
+        <!-- =================================================
+             ELECTRONICS
+        ================================================== -->
+
+        <article class="packing-category packing-category-electronics">
+
+            <div class="packing-category-heading">
+
+                <div class="packing-category-icon" aria-hidden="true">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                </div>
+
+                <div>
+
+                    <span class="packing-kicker">
+                        Devices
+                    </span>
+
+                    <h3>
+                        Electronics
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="packing-items">
+
+                <label class="packing-item">
+
+                    <input
+                        type="checkbox"
+                        class="packing-checkbox"
+                        data-packing-item
+                        id="packing-phone"
+                    >
+
+                    <span class="packing-checkmark" aria-hidden="true">
+                        <i class="fa-solid fa-check"></i>
+                    </span>
+
+                    <span class="packing-item-text">
+                        Mobile Phone
+                    </span>
+
+                </label>
+
+
+                <label class="packing-item">
+
+                    <input
+                        type="checkbox"
+                        class="packing-checkbox"
+                        data-packing-item
+                        id="packing-powerbank"
+                    >
+
+                    <span class="packing-checkmark" aria-hidden="true">
+                        <i class="fa-solid fa-check"></i>
+                    </span>
+
+                    <span class="packing-item-text">
+                        Power Bank
+                    </span>
+
+                </label>
+
+
+                <label class="packing-item">
+
+                    <input
+                        type="checkbox"
+                        class="packing-checkbox"
+                        data-packing-item
+                        id="packing-camera"
+                    >
+
+                    <span class="packing-checkmark" aria-hidden="true">
+                        <i class="fa-solid fa-check"></i>
+                    </span>
+
+                    <span class="packing-item-text">
+                        Camera
+                    </span>
+
+                </label>
+
+
+                <label class="packing-item">
+
+                    <input
+                        type="checkbox"
+                        class="packing-checkbox"
+                        data-packing-item
+                        id="packing-chargers"
+                    >
+
+                    <span class="packing-checkmark" aria-hidden="true">
+                        <i class="fa-solid fa-check"></i>
+                    </span>
+
+                    <span class="packing-item-text">
+                        Chargers
+                    </span>
+
+                </label>
+
+            </div>
+
+        </article>
+
+
+        <!-- =================================================
+             CLOTHING
+        ================================================== -->
+
+        <article class="packing-category packing-category-clothing">
+
+            <div class="packing-category-heading">
+
+                <div class="packing-category-icon" aria-hidden="true">
+                    <i class="fa-solid fa-shirt"></i>
+                </div>
+
+                <div>
+
+                    <span class="packing-kicker">
+                        Comfort
+                    </span>
+
+                    <h3>
+                        Clothing
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="packing-items">
+
+                <label class="packing-item">
+
+                    <input
+                        type="checkbox"
+                        class="packing-checkbox"
+                        data-packing-item
+                        id="packing-shoes"
+                    >
+
+                    <span class="packing-checkmark" aria-hidden="true">
+                        <i class="fa-solid fa-check"></i>
+                    </span>
+
+                    <span class="packing-item-text">
+                        Comfortable Shoes
+                    </span>
+
+                </label>
+
+
+                <label class="packing-item">
+
+                    <input
+                        type="checkbox"
+                        class="packing-checkbox"
+                        data-packing-item
+                        id="packing-jacket"
+                    >
+
+                    <span class="packing-checkmark" aria-hidden="true">
+                        <i class="fa-solid fa-check"></i>
+                    </span>
+
+                    <span class="packing-item-text">
+                        Light Jacket
+                    </span>
+
+                </label>
+
+
+                <label class="packing-item">
+
+                    <input
+                        type="checkbox"
+                        class="packing-checkbox"
+                        data-packing-item
+                        id="packing-rain"
+                    >
+
+                    <span class="packing-checkmark" aria-hidden="true">
+                        <i class="fa-solid fa-check"></i>
+                    </span>
+
+                    <span class="packing-item-text">
+                        Raincoat / Umbrella
+                    </span>
+
+                </label>
+
+
+                <label class="packing-item">
+
+                    <input
+                        type="checkbox"
+                        class="packing-checkbox"
+                        data-packing-item
+                        id="packing-sunglasses"
+                    >
+
+                    <span class="packing-checkmark" aria-hidden="true">
+                        <i class="fa-solid fa-check"></i>
+                    </span>
+
+                    <span class="packing-item-text">
+                        Sunglasses
+                    </span>
+
+                </label>
+
+            </div>
+
+        </article>
+
+    </div>
+
+
+    <!-- =====================================================
+         PACKING FOOTER
+    ====================================================== -->
+
+    <div class="packing-footer">
+
+        <div class="packing-footer-icon" aria-hidden="true">
+            <i class="fa-solid fa-circle-check"></i>
         </div>
 
-        <!-- Documents -->
-
-        <div class="packing-category">
-
-            <h3>
-
-                📄 Documents
-
-            </h3>
-
-            <label class="packing-item">
-
-                <input type="checkbox">
-
-                Government ID
-
-            </label>
-
-            <label class="packing-item">
-
-                <input type="checkbox">
-
-                Hotel Booking
-
-            </label>
-
-            <label class="packing-item">
-
-                <input type="checkbox">
-
-                Train / Flight Ticket
-
-            </label>
-
-            <label class="packing-item">
-
-                <input type="checkbox">
-
-                Emergency Contacts
-
-            </label>
-
-        </div>
-
-        <!-- Electronics -->
-
-        <div class="packing-category">
-
-            <h3>
-
-                📱 Electronics
-
-            </h3>
-
-            <label class="packing-item">
-
-                <input type="checkbox">
-
-                Mobile Phone
-
-            </label>
-
-            <label class="packing-item">
-
-                <input type="checkbox">
-
-                Power Bank
-
-            </label>
-
-            <label class="packing-item">
-
-                <input type="checkbox">
-
-                Camera
-
-            </label>
-
-            <label class="packing-item">
-
-                <input type="checkbox">
-
-                Chargers
-
-            </label>
-
-        </div>
-
-        <!-- Clothing -->
-
-        <div class="packing-category">
-
-            <h3>
-
-                👕
-
-                Clothing
-
-            </h3>
-
-            <label class="packing-item">
-
-                <input type="checkbox">
-
-                Comfortable Shoes
-
-            </label>
-
-            <label class="packing-item">
-
-                <input type="checkbox">
-
-                Light Jacket
-
-            </label>
-
-            <label class="packing-item">
-
-                <input type="checkbox">
-
-                Raincoat / Umbrella
-
-            </label>
-
-            <label class="packing-item">
-
-                <input type="checkbox">
-
-                Sunglasses
-
-            </label>
+        <div>
+
+            <strong>
+                Ready when your checklist is complete
+            </strong>
+
+            <p>
+                Review your documents, devices and essentials before
+                starting your Jharkhand journey.
+            </p>
 
         </div>
 
     </div>
 
 </section>
+
+
+<!-- =========================================================
+     PACKING CHECKLIST INTERACTION
+========================================================= -->
+
+<script>
+(function () {
+
+    const checkboxes = document.querySelectorAll(
+        "[data-packing-item]"
+    );
+
+    const counter = document.getElementById(
+        "packingCheckedCount"
+    );
+
+    if (!checkboxes.length || !counter) return;
+
+
+    function updatePackingProgress() {
+
+        let checked = 0;
+
+        checkboxes.forEach(function (checkbox) {
+
+            const item = checkbox.closest(".packing-item");
+
+            if (checkbox.checked) {
+
+                checked++;
+
+                if (item) {
+                    item.classList.add("is-packed");
+                }
+
+            } else {
+
+                if (item) {
+                    item.classList.remove("is-packed");
+                }
+
+            }
+
+        });
+
+        counter.textContent = checked;
+
+    }
+
+
+    checkboxes.forEach(function (checkbox) {
+
+        checkbox.addEventListener(
+            "change",
+            updatePackingProgress
+        );
+
+    });
+
+
+    updatePackingProgress();
+
+})();
+</script>

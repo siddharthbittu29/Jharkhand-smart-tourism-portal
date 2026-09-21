@@ -1,3 +1,7 @@
+// =========================================================
+// JHARKHAND TOURISM — AI TRIP PLANNER ROUTES
+// =========================================================
+
 const express = require("express");
 const router = express.Router();
 
@@ -37,207 +41,384 @@ const {
     getTripInsights
 } = require("../services/tripInsightsService");
 
+
+// =========================================================
+// GET /planner
+// Planner landing page
+// =========================================================
+
+router.get("/", (req, res) => {
+    try {
+        res.render("planner/index", {
+            title: "AI Trip Planner"
+        });
+
+    } catch (error) {
+        console.error("❌ GET /planner error:", error);
+
+        return res.status(500).send(
+            "Unable to load the AI Trip Planner right now."
+        );
+    }
+});
+
+
+// =========================================================
+// POST /planner
+// Generate trip plan
+// =========================================================
+
 router.post("/", async (req, res) => {
 
-    const {
-        destination,
-        days,
-        budget
-    } = req.body;
+    try {
 
-    const tripDays = parseInt(days);
-    const tripBudget = parseInt(budget);
+        // =====================================================
+        // INPUT
+        // =====================================================
 
-    // =========================================
-    // ITINERARY
-    // =========================================
+        const destination = String(
+            req.body.destination || ""
+        ).trim();
 
-    const itinerary =
-        generateItinerary(destination);
-
-    // =========================================
-    // ECO SCORE
-    // =========================================
-
-    const ecoScore =
-        Math.floor(Math.random() * 20) + 80;
-
-    // =========================================
-    // COST ANALYSIS
-    // =========================================
-
-    const {
-
-        hotelCost,
-
-        foodCost,
-
-        transportCost,
-
-        totalCost,
-
-        budgetStatus
-
-    } = calculateTripCost(
-
-        itinerary,
-
-        tripDays,
-
-        tripBudget
-
-    );
-
-    // =========================================
-    // HOTEL RECOMMENDATIONS
-    // =========================================
-
- 
- const hotelRecommendations = recommendHotels(itinerary);
-
-console.log("========== HOTELS ==========");
-console.dir(hotelRecommendations, { depth: null });
-console.log("============================");
-
-    // =========================================
-    // WEATHER
-    // =========================================
-
-    const weatherInfo =
-        getWeatherInfo(destination);
-
-    // =========================================
-    // AI RECOMMENDATION
-    // =========================================
-
-    let aiRecommendation =
-        generateAIRecommendation(
-
-            ecoScore,
-
-            budgetStatus
-
+        const tripDays = parseInt(
+            req.body.days,
+            10
         );
 
-    // =========================================
-    // TRAVEL TIPS
-    // =========================================
-
-    let travelTips =
-        getTravelTips(destination);
-
-    // =========================================
-    // DESTINATION HIGHLIGHTS
-    // =========================================
-
-    let destinationHighlights =
-        getDestinationHighlights(destination);
+        const tripBudget = parseInt(
+            req.body.budget,
+            10
+        );
 
 
+        // =====================================================
+        // VALIDATION
+        // =====================================================
 
+        if (!destination) {
+
+            return res.status(400).send(
+                "Please enter a destination or trip preference."
+            );
+        }
+
+
+        if (
+            !Number.isFinite(tripDays) ||
+            tripDays < 1 ||
+            tripDays > 15
+        ) {
+
+            return res.status(400).send(
+                "Trip duration must be between 1 and 15 days."
+            );
+        }
+
+
+        if (
+            !Number.isFinite(tripBudget) ||
+            tripBudget <= 0
+        ) {
+
+            return res.status(400).send(
+                "Please enter a valid travel budget."
+            );
+        }
+
+
+        // =====================================================
+        // ITINERARY
+        // =====================================================
+
+        const itinerary =
+            generateItinerary(destination);
+
+
+        // =====================================================
+        // ECO SCORE
+        // =====================================================
+
+        const ecoScore =
+            Math.floor(Math.random() * 20) + 80;
+
+
+        // =====================================================
+        // COST ANALYSIS
+        // =====================================================
+
+        const {
+            hotelCost,
+            foodCost,
+            transportCost,
+            totalCost,
+            budgetStatus
+        } = calculateTripCost(
+            itinerary,
+            tripDays,
+            tripBudget
+        );
+
+
+        // =====================================================
+        // HOTEL RECOMMENDATIONS
+        // =====================================================
+
+        const hotelRecommendations =
+            recommendHotels(itinerary);
+
+
+        // =====================================================
+        // WEATHER
+        // =====================================================
+
+        const weatherInfo =
+            getWeatherInfo(destination);
+
+
+        // =====================================================
+        // LOCAL AI RECOMMENDATION
+        // =====================================================
+
+        let aiRecommendation =
+            generateAIRecommendation(
+                ecoScore,
+                budgetStatus
+            );
+
+
+        // =====================================================
+        // TRAVEL TIPS
+        // =====================================================
+
+        let travelTips =
+            getTravelTips(destination);
+
+
+        // =====================================================
+        // DESTINATION HIGHLIGHTS
+        // =====================================================
+
+        let destinationHighlights =
+            getDestinationHighlights(destination);
+
+
+        // =====================================================
+        // DEFAULT PACKING LIST
+        // =====================================================
 
         let packingList = [
 
-    "Comfortable Shoes",
+            "Comfortable Shoes",
 
-    "Water Bottle",
+            "Water Bottle",
 
-    "Camera",
+            "Camera",
 
-    "Power Bank",
+            "Power Bank",
 
-    "Sunscreen",
+            "Sunscreen",
 
-    "Light Jacket"
+            "Light Jacket"
 
-];
+        ];
 
-    // =========================================
-    // AI TRIP INSIGHTS
-    // =========================================
 
-    const tripInsights =
-        getTripInsights(destination);
+        // =====================================================
+        // TRIP INSIGHTS
+        // =====================================================
 
-// =========================================
-// GEMINI AI
-// =========================================
+        const tripInsights =
+            getTripInsights(destination);
 
-const aiData =
-    await generateAITrip({
 
-        destination,
+        // =====================================================
+        // GEMINI AI ENHANCEMENT
+        // =====================================================
 
-        days: tripDays,
+        /*
+         * Gemini is an enhancement layer.
+         *
+         * If the API is unavailable, rate-limited,
+         * unconfigured or returns no data, the planner
+         * continues using the deterministic/local data
+         * generated above.
+         */
 
-        budget: tripBudget
+        let aiData = null;
 
-    });
+        try {
 
-if (aiData) {
+            aiData =
+                await generateAITrip({
 
-    if (aiData.recommendation)
-        aiRecommendation =
-            aiData.recommendation;
+                    destination,
 
-    if (aiData.travelTips)
-        travelTips =
-            aiData.travelTips;
+                    days: tripDays,
 
-    if (aiData.destinationHighlights)
-        destinationHighlights =
-            aiData.destinationHighlights;
+                    budget: tripBudget
 
-    if (aiData.packingList)
-        packingList =
-            aiData.packingList;
+                });
 
-}
+        } catch (error) {
 
-    // =========================================
-    // RENDER RESULT PAGE
-    // =========================================
+            console.error(
+                "⚠️ Gemini AI enhancement unavailable:",
+                error?.message || error
+            );
 
-    res.render("planner/result", {
+            aiData = null;
+        }
 
-        title: "AI Travel Plan",
 
-        destination,
+        // =====================================================
+        // APPLY AI ENHANCEMENTS
+        // =====================================================
 
-        tripDays,
+        if (aiData && typeof aiData === "object") {
 
-        tripBudget,
+            if (
+                aiData.recommendation
+            ) {
 
-        itinerary,
+                aiRecommendation =
+                    aiData.recommendation;
 
-        ecoScore,
+            }
 
-        hotelRecommendations,
 
-        weatherInfo,
+            if (
+                aiData.travelTips
+            ) {
 
-        aiRecommendation,
+                travelTips =
+                    aiData.travelTips;
 
-        travelTips,
+            }
 
-        destinationHighlights,
 
-        tripInsights,
+            if (
+                aiData.destinationHighlights
+            ) {
 
-        hotelCost,
+                destinationHighlights =
+                    aiData.destinationHighlights;
 
-        foodCost,
+            }
 
-        transportCost,
 
-        totalCost,
+            if (
+                Array.isArray(
+                    aiData.packingList
+                ) &&
+                aiData.packingList.length
+            ) {
 
-        budgetStatus,
+                packingList =
+                    aiData.packingList;
 
-        packingList,
+            }
 
-    });
+        }
+
+
+        // =====================================================
+        // RENDER RESULT
+        // =====================================================
+
+        return res.render(
+            "planner/result",
+            {
+
+                title:
+                    "AI Travel Plan",
+
+                destination,
+
+                tripDays,
+
+                tripBudget,
+
+                itinerary,
+
+                ecoScore,
+
+                hotelRecommendations,
+
+                weatherInfo,
+
+                aiRecommendation,
+
+                travelTips,
+
+                destinationHighlights,
+
+                tripInsights,
+
+                hotelCost,
+
+                foodCost,
+
+                transportCost,
+
+                totalCost,
+
+                budgetStatus,
+
+                packingList
+
+            }
+        );
+
+    } catch (error) {
+
+        // =====================================================
+        // PLANNER ERROR
+        // =====================================================
+
+        console.error(
+            "❌ POST /planner error:",
+            error
+        );
+
+
+        return res.status(500).send(`
+            <div style="
+                max-width:760px;
+                margin:60px auto;
+                padding:32px;
+                font-family:Arial,sans-serif;
+                color:#17372c;
+            ">
+
+                <h1>
+                    Unable to generate your travel plan
+                </h1>
+
+                <p>
+                    Something went wrong while preparing
+                    your itinerary. Please try again.
+                </p>
+
+                <a
+                    href="/planner"
+                    style="
+                        display:inline-block;
+                        margin-top:16px;
+                        padding:12px 20px;
+                        border-radius:8px;
+                        background:#185843;
+                        color:#fff;
+                        text-decoration:none;
+                    "
+                >
+                    Back to Trip Planner
+                </a>
+
+            </div>
+        `);
+    }
 
 });
+
 
 module.exports = router;

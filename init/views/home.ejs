@@ -1,6 +1,20 @@
- <%
-/* Safe defaults so EJS never throws ReferenceError when t/lang are missing */
-var t = (typeof t !== 'undefined' && t) || {
+<%
+/*
+ * ============================================================
+ * BRAVO — HOMEPAGE
+ * File: init/views/home.ejs
+ *
+ * IMPORTANT:
+ * - This file is intentionally a BODY/CONTENT view.
+ * - Global <html>, <head>, navbar and footer are owned by
+ *   layout.ejs + shared partials.
+ * - Existing homepage features are preserved.
+ * - No duplicate navbar/footer is created here.
+ * ============================================================
+ */
+
+/* Safe i18n defaults */
+var homeT = (typeof t !== "undefined" && t) || {
   sitemap: "Sitemap",
   skip: "Skip To Main Content",
   access: "Accessibility",
@@ -9,605 +23,2263 @@ var t = (typeof t !== 'undefined' && t) || {
   reservations: "JTDC Reservations",
   helpline: "Tourism Helpline"
 };
-var lang = (typeof lang !== 'undefined' && lang) || 'en';
+
+var homeLang =
+  (typeof lang !== "undefined" && lang) || "en";
+
+/*
+ * Optional dynamic values.
+ *
+ * The current / route does not provide these values, so the
+ * existing homepage numbers are retained as fallbacks.
+ */
+var touristPlacesCount =
+  (typeof placesCount !== "undefined" && placesCount !== null)
+    ? placesCount
+    : "250+";
+
+var hotelsCount =
+  (typeof hotelCount !== "undefined" && hotelCount !== null)
+    ? hotelCount
+    : "120+";
 %>
- <!DOCTYPE html>
-<html lang="en">
-<head>
 
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jharkhand Tourism Development Corporation</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/home.css">
-  <link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-  <style>
-    body { font-family: "Segoe UI", Arial, sans-serif; background-color:#F5F0E1; }
-    .top-bar { background-color: #004d40; color: #fff; font-size: 14px; padding: 5px 0; }
-    .top-bar a { color: #ffeb3b; text-decoration: none; margin-left: 10px; }
-    .navbar { background-color: #00695c; }
-    .navbar-brand img { height: 55px; }
-    .announcement { background-color: #fff3cd; color: #333; padding: 8px 10px; font-size: 14px; overflow: hidden; white-space: nowrap; }
-    .announcement span { display: inline-block; padding-left: 100%; animation: scroll 35s linear infinite; }
-    @keyframes scroll { 0% { transform: translateX(0%); } 100% { transform: translateX(-100%); } }
-    .section-title { color: #004d40; margin-top: 40px; margin-bottom: 25px; text-align: center; text-transform: uppercase; font-weight: 600; }
-    .tour-card img { height: 220px; object-fit: cover; }
-    .tour-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-    .tour-card:hover { transform: scale(1.03); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
-    footer { background-color: #004d40; color: #fff; padding: 25px 0; font-size: 14px; }
-    footer a { color: #ffeb3b; text-decoration: none; }
-    .cta-row { display:flex; gap:12px; justify-content:center; margin: 10px 0 30px; }
-  </style>
-</head>
-<body>
 
- <!-- 🔝 Top Bar (resilient to missing t/lang) -->
-<div class="top-bar text-center px-2">
-  <a href="/sitemap.xml"><%= (t && t.sitemap) || "Sitemap" %></a> |
-  <a href="#main"><%= (t && t.skip) || "Skip To Main Content" %></a> |
+<!-- =========================================================
+     HOMEPAGE ROOT
+========================================================= -->
 
-  <form action="/lang" method="POST" style="display:inline;">
-    <select name="lang" onchange="this.form.submit()">
-      <option value="en" <%= (lang==='en') ? 'selected' : '' %>>English</option>
-      <option value="hi" <%= (lang==='hi') ? 'selected' : '' %>>हिन्दी</option>
-    </select>
-  </form>
+<div class="bravo-home">
 
-  &nbsp; | <%= (t && t.reservations) || "JTDC Reservations" %>:
-  <a href="tel:06512438866">0651-2438866</a> / <a href="tel:2438002">2438002</a> |
-  <%= (t && t.helpline) || "Tourism Helpline" %>: <a href="tel:1364">1364</a>
 
-  <span class="float-end me-3">
-    <a href="/accessibility"><%= (t && t.access) || "Accessibility" %></a> -
-    <a href="/about"><%= (t && t.about) || "About Us" %></a> -
-    <a href="/contact"><%= (t && t.contact) || "Contact Us" %></a>
-  </span>
-</div>
+  <!-- =======================================================
+       OFFICIAL TOURISM UTILITY STRIP
 
-  <!-- 📢 Announcements -->
-  <div class="announcement">
-    <span>
-      📢 Circular - Updated Tariff for JTDC Hotels | Tender - Eco Resort at Netarhat | 
-      Jharkhand Monsoon on a Plate | Patratu Valley Ropeway Project | 
-      Jharkhand – India’s Green Tourism Pioneer | Trek to Lodh Falls - Winter 2025
-    </span>
-  </div>
+       Preserves the original homepage's language,
+       reservation and tourism helpline functionality without
+       recreating the complete navbar.
+  ======================================================== -->
 
-  <!-- <div class="d-flex gap-3 justify-content-center mt-4">
-  <a href="/places" class="home-btn">Explore Places</a>
-  <a href="/listings" class="home-btn">View Listings</a>
+  <section
+    class="bravo-home-official-strip"
+    aria-label="Tourism information"
+  >
 
-</div> -->
+    <div class="bravo-container">
 
- <!-- 🏞️ Discover Jharkhand Section -->
-    <section class="container py-5 text-center hero-section">
+      <div class="bravo-home-official-inner">
 
-  <div class="hero-overlay">
+        <div class="bravo-home-official-left">
 
-    <h1 class="fw-bold display-4 text-white">
-      Smart Tourism Portal of Jharkhand
-    </h1>
+          <span class="bravo-home-official-label">
+            <i class="fa-solid fa-landmark" aria-hidden="true"></i>
+            Official Tourism Information
+          </span>
 
-    <p class="lead text-white mb-5">
-      Discover waterfalls, wildlife, temples, festivals and AI-powered travel experiences.
-    </p>
-    <div class="hero-search mt-4">
+          <span class="bravo-home-official-divider"
+                aria-hidden="true"></span>
 
-    <input
-
-        id="globalSearch"
-
-        type="text"
-
-        class="form-control"
-
-        placeholder="🔍 Search places, hotels, waterfalls, wildlife..."
-
-    >
-
-    <div id="searchSuggestions"></div>
-
-</div>
-
-  </div>
-
-  <!-- AI SMART PLANNER -->
-  <div class="ai-planner-card">
-
-    <h2>🤖 AI Smart Trip Planner</h2>
-
-    <p>
-      Plan your Jharkhand journey instantly
-    </p>
-
-    <form action="/planner" method="POST">
-
-      <div class="row g-3">
-
-        <div class="col-md-5">
-        <input
-            type="text"
-            class="form-control"
-            name="destination"
-            placeholder="Family trip to waterfalls"
-            required
+          <a
+            href="tel:06512438866"
+            class="bravo-home-official-link"
+            aria-label="JTDC Reservation phone number"
           >
+            <i class="fa-solid fa-phone" aria-hidden="true"></i>
+            0651-2438866
+          </a>
+
+          <a
+            href="tel:2438002"
+            class="bravo-home-official-link"
+            aria-label="JTDC Reservation alternate phone number"
+          >
+            2438002
+          </a>
+
+          <a
+            href="tel:1364"
+            class="bravo-home-official-link"
+            aria-label="Tourism helpline 1364"
+          >
+            <i class="fa-solid fa-headset" aria-hidden="true"></i>
+            1364 Tourism Helpline
+          </a>
+
         </div>
 
-        <div class="col-md-2">
-          <input
-            type="number"
-            class="form-control"
-            name="days"
-            min="1"
-            max="15"
-            placeholder="Days"
-            required
-          >
-        </div>
 
-        <div class="col-md-3">
-          <input
-            type="number"
-            class="form-control"
-            name="budget"
-            placeholder="Budget ₹"
-            required
-          >
-        </div>
+        <div class="bravo-home-official-right">
 
-        <div class="col-md-2">
-          <button
-            type="submit"
-            class="btn btn-success w-100"
+          <form
+            action="/lang"
+            method="POST"
+            class="bravo-home-language-form"
           >
-            Generate
-          </button>
+
+            <label
+              for="bravoLanguage"
+              class="visually-hidden"
+            >
+              Select language
+            </label>
+
+            <i
+              class="fa-solid fa-language"
+              aria-hidden="true"
+            ></i>
+
+            <select
+              id="bravoLanguage"
+              name="lang"
+              onchange="this.form.submit()"
+              aria-label="Select language"
+            >
+
+              <option
+                value="en"
+                <%= homeLang === "en" ? "selected" : "" %>
+              >
+                English
+              </option>
+
+              <option
+                value="hi"
+                <%= homeLang === "hi" ? "selected" : "" %>
+              >
+                हिन्दी
+              </option>
+
+            </select>
+
+          </form>
+
+
+          <a
+            href="/accessibility"
+            class="bravo-home-official-link"
+          >
+            <i
+              class="fa-solid fa-universal-access"
+              aria-hidden="true"
+            ></i>
+            <span>
+              <%= homeT.access || "Accessibility" %>
+            </span>
+          </a>
+
+
+          <a
+            href="/sitemap.xml"
+            class="bravo-home-official-link"
+          >
+            <i
+              class="fa-solid fa-sitemap"
+              aria-hidden="true"
+            ></i>
+            <span>
+              <%= homeT.sitemap || "Sitemap" %>
+            </span>
+          </a>
+
         </div>
 
       </div>
 
-    </form>
+    </div>
 
-  </div>
+  </section>
 
-  <div class="mt-4">
-    <a href="/smart-tourism" class="btn btn-lg btn-primary smart-cta">
-      Explore Smart Tourism
-    </a>
-  </div>
 
-</section>
-<!-- ===================================== -->
-<!-- SMART TOURISM DASHBOARD -->
-<!-- ===================================== -->
+  <!-- =======================================================
+       ANNOUNCEMENTS
+  ======================================================== -->
 
-<section class="container my-5">
+  <section
+    class="bravo-home-announcement"
+    aria-label="Tourism announcements"
+  >
 
-    <div class="row g-4">
+    <div class="bravo-container">
 
-        <div class="col-lg-3 col-md-6">
+      <div class="bravo-home-announcement-inner">
 
-            <div class="dashboard-card">
+        <span class="bravo-home-announcement-label">
 
-                <div class="dashboard-icon">📍</div>
+          <i
+            class="fa-solid fa-bullhorn"
+            aria-hidden="true"
+          ></i>
 
-                <h2>250+</h2>
+          Updates
 
-                <p>Tourist Places</p>
+        </span>
 
-            </div>
 
-        </div>
+        <div class="bravo-home-announcement-track">
 
-        <div class="col-lg-3 col-md-6">
+          <div class="bravo-home-announcement-content">
 
-            <div class="dashboard-card">
+            <span>
+              Circular - Updated Tariff for JTDC Hotels
+            </span>
 
-                <div class="dashboard-icon">🏨</div>
+            <span aria-hidden="true">•</span>
 
-                <h2>120+</h2>
+            <span>
+              Tender - Eco Resort at Netarhat
+            </span>
 
-                <p>Hotels</p>
+            <span aria-hidden="true">•</span>
 
-            </div>
+            <span>
+              Jharkhand Monsoon on a Plate
+            </span>
 
-        </div>
+            <span aria-hidden="true">•</span>
 
-        <div class="col-lg-3 col-md-6">
+            <span>
+              Patratu Valley Ropeway Project
+            </span>
 
-            <div class="dashboard-card">
+            <span aria-hidden="true">•</span>
 
-                <div class="dashboard-icon">🤖</div>
+            <span>
+              Jharkhand – India’s Green Tourism Pioneer
+            </span>
 
-                <h2>AI</h2>
+            <span aria-hidden="true">•</span>
 
-                <p>Trip Planner</p>
+            <span>
+              Trek to Lodh Falls - Winter 2025
+            </span>
 
-            </div>
-
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-
-            <div class="dashboard-card">
-
-                <div class="dashboard-icon">🌿</div>
-
-                <h2>Eco</h2>
-
-                <p>Smart Tourism</p>
-
-            </div>
+          </div>
 
         </div>
+
+      </div>
 
     </div>
 
-</section>
-<!-- ====================================== -->
-<!-- FEATURED EXPERIENCES -->
-<!-- ====================================== -->
+  </section>
 
-<section class="container my-5">
 
-    <div class="text-center mb-5">
+  <!-- =======================================================
+       HERO
+  ======================================================== -->
 
-        <h2 class="section-title">
+  <section
+    class="bravo-home-hero"
+    aria-labelledby="bravoHeroTitle"
+  >
 
-            Experience Jharkhand
 
+    <!-- Existing local project image.
+         No external production image is introduced. -->
+
+    <div class="bravo-home-hero-media">
+
+      <img
+        src="/images/discover/patratu.jpg"
+        alt="Scenic Patratu Valley in Jharkhand"
+        loading="eager"
+        fetchpriority="high"
+      >
+
+    </div>
+
+
+    <div class="bravo-container">
+
+      <div class="bravo-home-hero-content">
+
+        <div class="bravo-home-hero-grid">
+
+
+          <!-- HERO COPY -->
+
+          <div class="bravo-home-hero-copy bravo-reveal">
+
+            <div class="bravo-home-hero-eyebrow">
+
+              <i
+                class="fa-solid fa-leaf"
+                aria-hidden="true"
+              ></i>
+
+              Explore • Experience • Preserve
+
+            </div>
+
+
+            <h1
+              id="bravoHeroTitle"
+              class="bravo-home-hero-title"
+            >
+
+              Discover
+
+              <span>Jharkhand</span>
+
+            </h1>
+
+
+            <p class="bravo-home-hero-description">
+
+              Discover waterfalls, wildlife, temples, festivals
+              and immersive travel experiences through a smarter
+              way to explore Jharkhand.
+
+            </p>
+
+
+            <div class="bravo-home-hero-actions">
+
+              <a
+                href="/places"
+                class="bravo-home-hero-primary bravo-btn"
+              >
+
+                <i
+                  class="fa-solid fa-compass"
+                  aria-hidden="true"
+                ></i>
+
+                Explore Places
+
+              </a>
+
+
+              <a
+                href="/planner"
+                class="bravo-home-hero-secondary bravo-btn"
+              >
+
+                <i
+                  class="fa-solid fa-wand-magic-sparkles"
+                  aria-hidden="true"
+                ></i>
+
+                Plan My Journey
+
+              </a>
+
+            </div>
+
+          </div>
+
+
+          <!-- HERO SEARCH / SMART PLANNER PANEL -->
+
+          <div
+            class="bravo-home-search-panel bravo-reveal"
+          >
+
+            <div
+              class="bravo-home-search-panel-header"
+            >
+
+              <div
+                class="bravo-home-search-panel-icon"
+              >
+
+                <i
+                  class="fa-solid fa-location-dot"
+                  aria-hidden="true"
+                ></i>
+
+              </div>
+
+
+              <div>
+
+                <strong>
+                  Start exploring
+                </strong>
+
+                <small>
+                  Search destinations, districts and experiences
+                </small>
+
+              </div>
+
+            </div>
+
+
+            <!-- Existing place search functionality.
+                 /places expects q=... -->
+
+            <form
+              action="/places"
+              method="GET"
+              class="bravo-home-search"
+              role="search"
+              aria-label="Search Jharkhand destinations"
+            >
+
+              <i
+                class="fa-solid fa-magnifying-glass"
+                aria-hidden="true"
+              ></i>
+
+
+              <label
+                for="globalSearch"
+                class="visually-hidden"
+              >
+                Search places, hotels, waterfalls and wildlife
+              </label>
+
+
+              <input
+                id="globalSearch"
+                type="search"
+                name="q"
+                autocomplete="off"
+                placeholder="Search places, waterfalls, wildlife..."
+                aria-describedby="searchSuggestions"
+              >
+
+
+              <button
+                type="submit"
+                aria-label="Search"
+              >
+
+                <i
+                  class="fa-solid fa-arrow-right"
+                  aria-hidden="true"
+                ></i>
+
+              </button>
+
+            </form>
+
+
+            <div
+              id="searchSuggestions"
+              class="bravo-home-search-suggestions"
+              aria-live="polite"
+            >
+
+              <span
+                class="bravo-home-search-suggestion"
+                data-search="Waterfalls"
+              >
+                Waterfalls
+              </span>
+
+              <span
+                class="bravo-home-search-suggestion"
+                data-search="Wildlife"
+              >
+                Wildlife
+              </span>
+
+              <span
+                class="bravo-home-search-suggestion"
+                data-search="Temples"
+              >
+                Temples
+              </span>
+
+              <span
+                class="bravo-home-search-suggestion"
+                data-search="Patratu"
+              >
+                Patratu
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- HERO STATS -->
+
+    <div class="bravo-home-hero-stats">
+
+      <div class="bravo-container">
+
+        <div class="bravo-home-hero-stats-inner">
+
+
+          <div class="bravo-home-hero-stat">
+
+            <div class="bravo-home-hero-stat-icon">
+
+              <i
+                class="fa-solid fa-location-dot"
+                aria-hidden="true"
+              ></i>
+
+            </div>
+
+            <div>
+
+              <strong>
+                <%= touristPlacesCount %>
+              </strong>
+
+              <small>
+                Tourist Places
+              </small>
+
+            </div>
+
+          </div>
+
+
+          <div class="bravo-home-hero-stat">
+
+            <div class="bravo-home-hero-stat-icon">
+
+              <i
+                class="fa-solid fa-hotel"
+                aria-hidden="true"
+              ></i>
+
+            </div>
+
+            <div>
+
+              <strong>
+                <%= hotelsCount %>
+              </strong>
+
+              <small>
+                Hotels & Stays
+              </small>
+
+            </div>
+
+          </div>
+
+
+          <div class="bravo-home-hero-stat">
+
+            <div class="bravo-home-hero-stat-icon">
+
+              <i
+                class="fa-solid fa-robot"
+                aria-hidden="true"
+              ></i>
+
+            </div>
+
+            <div>
+
+              <strong>
+                AI
+              </strong>
+
+              <small>
+                Smart Trip Planner
+              </small>
+
+            </div>
+
+          </div>
+
+
+          <div class="bravo-home-hero-stat">
+
+            <div class="bravo-home-hero-stat-icon">
+
+              <i
+                class="fa-solid fa-seedling"
+                aria-hidden="true"
+              ></i>
+
+            </div>
+
+            <div>
+
+              <strong>
+                Eco
+              </strong>
+
+              <small>
+                Sustainable Tourism
+              </small>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       TRUST / PLATFORM STRIP
+  ======================================================== -->
+
+  <section
+    class="bravo-home-trust"
+    aria-label="Platform capabilities"
+  >
+
+    <div class="bravo-container">
+
+      <div class="bravo-home-trust-inner">
+
+        <span class="bravo-home-trust-label">
+          A smarter way to travel
+        </span>
+
+
+        <div class="bravo-home-trust-items">
+
+          <span class="bravo-home-trust-item">
+
+            <i
+              class="fa-solid fa-map-location-dot"
+              aria-hidden="true"
+            ></i>
+
+            Discover
+
+          </span>
+
+
+          <span class="bravo-home-trust-item">
+
+            <i
+              class="fa-solid fa-route"
+              aria-hidden="true"
+            ></i>
+
+            Plan
+
+          </span>
+
+
+          <span class="bravo-home-trust-item">
+
+            <i
+              class="fa-solid fa-leaf"
+              aria-hidden="true"
+            ></i>
+
+            Travel Responsibly
+
+          </span>
+
+
+          <span class="bravo-home-trust-item">
+
+            <i
+              class="fa-solid fa-people-group"
+              aria-hidden="true"
+            ></i>
+
+            Connect Locally
+
+          </span>
+
+
+          <span class="bravo-home-trust-item">
+
+            <i
+              class="fa-solid fa-wand-magic-sparkles"
+              aria-hidden="true"
+            ></i>
+
+            Travel Smarter
+
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       FEATURED DESTINATIONS
+  ======================================================== -->
+
+  <section
+    class="bravo-section bravo-home-destinations"
+    aria-labelledby="featuredDestinationsTitle"
+  >
+
+    <div class="bravo-container">
+
+
+      <div class="bravo-section-header bravo-reveal">
+
+        <span class="bravo-section-badge">
+
+          <i
+            class="fa-solid fa-compass"
+            aria-hidden="true"
+          ></i>
+
+          Featured destinations
+
+        </span>
+
+
+        <h2
+          id="featuredDestinationsTitle"
+          class="bravo-section-title"
+        >
+          Places worth discovering
         </h2>
 
-        <p class="text-muted">
 
-            Explore the best experiences curated for every traveler.
-
+        <p class="bravo-section-description">
+          Start with some of Jharkhand's most recognizable
+          natural and cultural experiences.
         </p>
 
+      </div>
+
+
+      <div class="bravo-home-destination-grid">
+
+
+        <!-- LODH FALLS -->
+
+        <a
+          href="/places?q=Lodh"
+          class="bravo-home-destination-card bravo-reveal"
+        >
+
+          <img
+            src="/images/discover/lodh-falls.jpg"
+            alt="Lodh Falls"
+            loading="lazy"
+          >
+
+
+          <span class="bravo-home-destination-arrow">
+
+            <i
+              class="fa-solid fa-arrow-up-right-from-square"
+              aria-hidden="true"
+            ></i>
+
+          </span>
+
+
+          <div class="bravo-home-destination-content">
+
+            <span class="bravo-home-destination-category">
+
+              <i
+                class="fa-solid fa-water"
+                aria-hidden="true"
+              ></i>
+
+              Waterfall
+
+            </span>
+
+
+            <h3>
+              Lodh Falls
+            </h3>
+
+
+            <p>
+              A scenic waterfall surrounded by dense forest
+              landscapes.
+            </p>
+
+          </div>
+
+        </a>
+
+
+        <!-- BETLA -->
+
+        <a
+          href="/places?q=Betla"
+          class="bravo-home-destination-card bravo-reveal"
+        >
+
+          <img
+            src="/images/discover/betla.jpg"
+            alt="Betla National Park"
+            loading="lazy"
+          >
+
+
+          <span class="bravo-home-destination-arrow">
+
+            <i
+              class="fa-solid fa-arrow-up-right-from-square"
+              aria-hidden="true"
+            ></i>
+
+          </span>
+
+
+          <div class="bravo-home-destination-content">
+
+            <span class="bravo-home-destination-category">
+
+              <i
+                class="fa-solid fa-paw"
+                aria-hidden="true"
+              ></i>
+
+              Wildlife
+
+            </span>
+
+
+            <h3>
+              Betla National Park
+            </h3>
+
+
+            <p>
+              Forest landscapes and wildlife experiences.
+            </p>
+
+          </div>
+
+        </a>
+
+
+        <!-- PATRATU -->
+
+        <a
+          href="/places?q=Patratu"
+          class="bravo-home-destination-card bravo-reveal"
+        >
+
+          <img
+            src="/images/discover/patratu.jpg"
+            alt="Patratu Valley"
+            loading="lazy"
+          >
+
+
+          <span class="bravo-home-destination-arrow">
+
+            <i
+              class="fa-solid fa-arrow-up-right-from-square"
+              aria-hidden="true"
+            ></i>
+
+          </span>
+
+
+          <div class="bravo-home-destination-content">
+
+            <span class="bravo-home-destination-category">
+
+              <i
+                class="fa-solid fa-mountain-sun"
+                aria-hidden="true"
+              ></i>
+
+              Valley
+
+            </span>
+
+
+            <h3>
+              Patratu Valley
+            </h3>
+
+
+            <p>
+              Winding roads and panoramic valley views.
+            </p>
+
+          </div>
+
+        </a>
+
+
+        <!-- EXPLORE ALL -->
+
+        <a
+          href="/places"
+          class="bravo-home-destination-card bravo-reveal"
+        >
+
+          <img
+            src="/images/what-to-see/adventure.jpg"
+            alt="Explore more destinations in Jharkhand"
+            loading="lazy"
+          >
+
+
+          <span class="bravo-home-destination-arrow">
+
+            <i
+              class="fa-solid fa-arrow-right"
+              aria-hidden="true"
+            ></i>
+
+          </span>
+
+
+          <div class="bravo-home-destination-content">
+
+            <span class="bravo-home-destination-category">
+
+              <i
+                class="fa-solid fa-map"
+                aria-hidden="true"
+              ></i>
+
+              Explore
+
+            </span>
+
+
+            <h3>
+              Explore More Places
+            </h3>
+
+
+            <p>
+              Browse destinations and discover your next
+              Jharkhand experience.
+            </p>
+
+          </div>
+
+        </a>
+
+
+      </div>
+
     </div>
 
-    <div class="row g-4">
+  </section>
 
-        <div class="col-lg-4">
 
-            <div class="experience-card">
+  <!-- =======================================================
+       AI SMART PLANNER
+  ======================================================== -->
 
-                <img src="/images/discover/lodh-falls.jpg" alt="Waterfalls">
+  <section
+    class="bravo-section bravo-home-smart"
+    aria-labelledby="smartPlannerTitle"
+  >
 
-                <div class="experience-overlay">
+    <div class="bravo-container">
 
-                    <h3>🌊 Waterfalls</h3>
+      <div class="bravo-home-smart-grid">
 
-                    <a href="/places" class="btn btn-light">
 
-                        Explore
+        <div class="bravo-home-smart-copy bravo-reveal">
 
-                    </a>
 
-                </div>
+          <span class="bravo-section-badge">
+
+            <i
+              class="fa-solid fa-wand-magic-sparkles"
+              aria-hidden="true"
+            ></i>
+
+            Smart Tourism
+
+          </span>
+
+
+          <h2
+            id="smartPlannerTitle"
+            class="bravo-section-title"
+          >
+            Plan a better journey with AI
+          </h2>
+
+
+          <p class="bravo-section-description">
+            Tell Bravo where you want to go, how long you have
+            and your budget. The existing AI planner can build
+            a personalized Jharkhand travel plan.
+          </p>
+
+
+          <div class="bravo-home-smart-features">
+
+
+            <div class="bravo-home-smart-feature">
+
+              <div class="bravo-home-smart-feature-icon">
+
+                <i
+                  class="fa-solid fa-route"
+                  aria-hidden="true"
+                ></i>
+
+              </div>
+
+              <strong>
+                Personalized itinerary
+              </strong>
+
+              <small>
+                Build a trip around your destination and time.
+              </small>
 
             </div>
 
-        </div>
 
-        <div class="col-lg-4">
+            <div class="bravo-home-smart-feature">
 
-            <div class="experience-card">
+              <div class="bravo-home-smart-feature-icon">
 
-                <img src="/images/discover/betla.jpg" alt="Wildlife">
+                <i
+                  class="fa-solid fa-wallet"
+                  aria-hidden="true"
+                ></i>
 
-                <div class="experience-overlay">
+              </div>
 
-                    <h3>🦁 Wildlife</h3>
+              <strong>
+                Budget-aware planning
+              </strong>
 
-                    <a href="/places" class="btn btn-light">
-
-                        Explore
-
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="col-lg-4">
-
-            <div class="experience-card">
-
-                <img src="/images/discover/patratu.jpg" alt="Adventure">
-
-                <div class="experience-overlay">
-
-                    <h3>🥾 Adventure</h3>
-
-                    <a href="/places" class="btn btn-light">
-
-                        Explore
-
-                    </a>
-
-                </div>
+              <small>
+                Plan around the budget you provide.
+              </small>
 
             </div>
 
+
+            <div class="bravo-home-smart-feature">
+
+              <div class="bravo-home-smart-feature-icon">
+
+                <i
+                  class="fa-solid fa-cloud-sun"
+                  aria-hidden="true"
+                ></i>
+
+              </div>
+
+              <strong>
+                Travel context
+              </strong>
+
+              <small>
+                Bring weather and destination insights together.
+              </small>
+
+            </div>
+
+
+            <div class="bravo-home-smart-feature">
+
+              <div class="bravo-home-smart-feature-icon">
+
+                <i
+                  class="fa-solid fa-leaf"
+                  aria-hidden="true"
+                ></i>
+
+              </div>
+
+              <strong>
+                Eco-aware travel
+              </strong>
+
+              <small>
+                Keep sustainable tourism in the journey.
+              </small>
+
+            </div>
+
+
+          </div>
+
+
+          <a
+            href="/planner"
+            class="bravo-btn bravo-btn-primary"
+          >
+
+            <i
+              class="fa-solid fa-wand-magic-sparkles"
+              aria-hidden="true"
+            ></i>
+
+            Open AI Planner
+
+          </a>
+
+
         </div>
+
+
+        <div class="bravo-home-smart-visual bravo-reveal">
+
+
+          <div class="bravo-home-smart-image">
+
+            <img
+              src="/images/discover/patratu.jpg"
+              alt="Jharkhand travel landscape"
+              loading="lazy"
+            >
+
+          </div>
+
+
+          <div class="bravo-home-smart-floating-card">
+
+            <div class="bravo-home-smart-floating-top">
+
+              <strong>
+                Smart Travel
+              </strong>
+
+              <span class="bravo-home-smart-score">
+                ECO READY
+              </span>
+
+            </div>
+
+
+            <div class="bravo-home-smart-progress">
+              <span></span>
+            </div>
+
+
+            <p class="bravo-home-smart-floating-caption">
+              Explore • Plan • Experience
+            </p>
+
+          </div>
+
+
+        </div>
+
+      </div>
 
     </div>
 
-</section>
-<div class="container mt-5" id="main">
-  <h2 class="section-title text-center mb-4">DISCOVER JHARKHAND</h2>
+  </section>
 
-  <div class="row g-4">
 
-    <!-- 🌊 Lodh Falls -->
-    <div class="col-md-4">
-      <div class="card tour-card">
-        <img
-          src="/images/discover/lodh-falls.jpg"
-          class="card-img-top"
-          alt="Lodh Falls"
-          loading="lazy"
+  <!-- =======================================================
+       EXPERIENCE JHARKHAND
+  ======================================================== -->
+
+  <section
+    class="bravo-section bravo-home-experiences"
+    aria-labelledby="experienceTitle"
+  >
+
+    <div class="bravo-container">
+
+
+      <div class="bravo-section-header center bravo-reveal">
+
+        <span class="bravo-section-badge">
+
+          <i
+            class="fa-solid fa-star"
+            aria-hidden="true"
+          ></i>
+
+          Experiences
+
+        </span>
+
+
+        <h2
+          id="experienceTitle"
+          class="bravo-section-title"
         >
-        <div class="card-body">
-          <h5 class="card-title">Lodh Falls</h5>
-          <p class="card-text">
-            One of Jharkhand’s tallest and most scenic waterfalls surrounded by dense forest.
-          </p>
-        </div>
-      </div>
-    </div>
+          Experience Jharkhand
+        </h2>
 
-    <!-- 🌲 Betla National Park -->
-    <div class="col-md-4">
-      <div class="card tour-card">
-        <img
-          src="/images/discover/betla.jpg"
-          class="card-img-top"
-          alt="Betla National Park"
-          loading="lazy"
+
+        <p class="bravo-section-description">
+          Explore nature, wildlife, adventure and culture
+          through one connected tourism experience.
+        </p>
+
+      </div>
+
+
+      <div class="bravo-home-experience-grid">
+
+
+        <a
+          href="/places?category=Waterfall"
+          class="bravo-home-experience-card bravo-reveal"
         >
-        <div class="card-body">
-          <h5 class="card-title">Betla National Park</h5>
-          <p class="card-text">
-            A wildlife lover’s paradise — explore sal forests, elephants and scenic beauty.
-          </p>
-        </div>
-      </div>
-    </div>
 
-    <!-- 🏞️ Patratu Valley -->
-    <div class="col-md-4">
-      <div class="card tour-card">
-        <img
-          src="/images/discover/patratu.jpg"
-          class="card-img-top"
-          alt="Patratu Valley"
-          loading="lazy"
+          <img
+            src="/images/discover/lodh-falls.jpg"
+            alt="Jharkhand waterfalls"
+            loading="lazy"
+          >
+
+
+          <div class="bravo-home-experience-content">
+
+            <div class="bravo-home-experience-icon">
+
+              <i
+                class="fa-solid fa-water"
+                aria-hidden="true"
+              ></i>
+
+            </div>
+
+            <h3>
+              Waterfalls
+            </h3>
+
+            <p>
+              Forests, streams and dramatic falls.
+            </p>
+
+          </div>
+
+        </a>
+
+
+        <a
+          href="/places?category=Wildlife"
+          class="bravo-home-experience-card bravo-reveal"
         >
-        <div class="card-body">
-          <h5 class="card-title">Patratu Valley</h5>
-          <p class="card-text">
-            A breathtaking drive through winding roads with panoramic views of the valley.
-          </p>
-        </div>
+
+          <img
+            src="/images/discover/betla.jpg"
+            alt="Jharkhand wildlife"
+            loading="lazy"
+          >
+
+
+          <div class="bravo-home-experience-content">
+
+            <div class="bravo-home-experience-icon">
+
+              <i
+                class="fa-solid fa-paw"
+                aria-hidden="true"
+              ></i>
+
+            </div>
+
+            <h3>
+              Wildlife
+            </h3>
+
+            <p>
+              Explore forests and wildlife destinations.
+            </p>
+
+          </div>
+
+        </a>
+
+
+        <a
+          href="/places?category=Adventure"
+          class="bravo-home-experience-card bravo-reveal"
+        >
+
+          <img
+            src="/images/what-to-see/adventure.jpg"
+            alt="Adventure and trekking in Jharkhand"
+            loading="lazy"
+          >
+
+
+          <div class="bravo-home-experience-content">
+
+            <div class="bravo-home-experience-icon">
+
+              <i
+                class="fa-solid fa-person-hiking"
+                aria-hidden="true"
+              ></i>
+
+            </div>
+
+            <h3>
+              Adventure
+            </h3>
+
+            <p>
+              Trekking and outdoor exploration.
+            </p>
+
+          </div>
+
+        </a>
+
+
+        <a
+          href="/festivals"
+          class="bravo-home-experience-card bravo-reveal"
+        >
+
+          <img
+            src="/images/what-to-see/festival.jpg"
+            alt="Jharkhand festivals and culture"
+            loading="lazy"
+          >
+
+
+          <div class="bravo-home-experience-content">
+
+            <div class="bravo-home-experience-icon">
+
+              <i
+                class="fa-solid fa-drum"
+                aria-hidden="true"
+              ></i>
+
+            </div>
+
+            <h3>
+              Festivals & Culture
+            </h3>
+
+            <p>
+              Discover traditions and cultural celebrations.
+            </p>
+
+          </div>
+
+        </a>
+
+
       </div>
+
     </div>
 
-  </div>
-</div>
+  </section>
 
 
-<!-- 🌤️ What to See -->
-<div class="container mt-5">
-  <h2 class="section-title text-center mb-4">WHAT TO SEE</h2>
+  <!-- =======================================================
+       DISCOVER JHARKHAND
+  ======================================================== -->
 
-  <div class="row g-4">
+  <section
+    class="bravo-section bravo-home-destinations"
+    aria-labelledby="discoverTitle"
+  >
 
-    <!-- 🛕 Temples & Heritage -->
-    <div class="col-md-3">
-      <div class="card tour-card">
-        <img src="/images/what-to-see/temple.jpg" class="card-img-top" alt="Temples & Heritage">
-        <div class="card-body text-center">
-          <h6>Temples & Heritage</h6>
-        </div>
+    <div class="bravo-container">
+
+
+      <div class="bravo-section-header center bravo-reveal">
+
+        <span class="bravo-section-badge">
+
+          <i
+            class="fa-solid fa-map-location-dot"
+            aria-hidden="true"
+          ></i>
+
+          Discover
+
+        </span>
+
+
+        <h2
+          id="discoverTitle"
+          class="bravo-section-title"
+        >
+          Discover Jharkhand
+        </h2>
+
+
+        <p class="bravo-section-description">
+          Start with iconic destinations and then explore
+          the wider place catalogue.
+        </p>
+
       </div>
-    </div>
 
-    <!-- 🌲 Nature & Wildlife -->
-    <div class="col-md-3">
-      <div class="card tour-card">
-        <img src="/images/what-to-see/wildlife.jpg" class="card-img-top" alt="Nature & Wildlife">
-        <div class="card-body text-center">
-          <h6>Nature & Wildlife</h6>
-        </div>
+
+      <div class="bravo-home-stay-grid">
+
+
+        <a
+          href="/places?q=Lodh"
+          class="bravo-home-stay-card bravo-reveal"
+          style="text-decoration:none;"
+        >
+
+          <div class="bravo-home-stay-image">
+
+            <img
+              src="/images/discover/lodh-falls.jpg"
+              alt="Lodh Falls"
+              loading="lazy"
+            >
+
+            <span class="bravo-home-stay-badge bravo-badge bravo-badge-green">
+
+              <i
+                class="fa-solid fa-water"
+                aria-hidden="true"
+              ></i>
+
+              Nature
+
+            </span>
+
+          </div>
+
+
+          <div class="bravo-home-stay-body">
+
+            <h3>
+              Lodh Falls
+            </h3>
+
+            <div class="bravo-home-stay-location">
+
+              <i
+                class="fa-solid fa-location-dot"
+                aria-hidden="true"
+              ></i>
+
+              Jharkhand
+
+            </div>
+
+
+            <div class="bravo-home-stay-meta">
+
+              <span class="bravo-home-stay-price">
+                Explore destination
+              </span>
+
+              <i
+                class="fa-solid fa-arrow-right"
+                aria-hidden="true"
+              ></i>
+
+            </div>
+
+          </div>
+
+        </a>
+
+
+        <a
+          href="/places?q=Betla"
+          class="bravo-home-stay-card bravo-reveal"
+          style="text-decoration:none;"
+        >
+
+          <div class="bravo-home-stay-image">
+
+            <img
+              src="/images/discover/betla.jpg"
+              alt="Betla National Park"
+              loading="lazy"
+            >
+
+            <span class="bravo-home-stay-badge bravo-badge bravo-badge-green">
+
+              <i
+                class="fa-solid fa-paw"
+                aria-hidden="true"
+              ></i>
+
+              Wildlife
+
+            </span>
+
+          </div>
+
+
+          <div class="bravo-home-stay-body">
+
+            <h3>
+              Betla National Park
+            </h3>
+
+            <div class="bravo-home-stay-location">
+
+              <i
+                class="fa-solid fa-location-dot"
+                aria-hidden="true"
+              ></i>
+
+              Jharkhand
+
+            </div>
+
+
+            <div class="bravo-home-stay-meta">
+
+              <span class="bravo-home-stay-price">
+                Explore destination
+              </span>
+
+              <i
+                class="fa-solid fa-arrow-right"
+                aria-hidden="true"
+              ></i>
+
+            </div>
+
+          </div>
+
+        </a>
+
+
+        <a
+          href="/places?q=Patratu"
+          class="bravo-home-stay-card bravo-reveal"
+          style="text-decoration:none;"
+        >
+
+          <div class="bravo-home-stay-image">
+
+            <img
+              src="/images/discover/patratu.jpg"
+              alt="Patratu Valley"
+              loading="lazy"
+            >
+
+            <span class="bravo-home-stay-badge bravo-badge bravo-badge-earth">
+
+              <i
+                class="fa-solid fa-mountain-sun"
+                aria-hidden="true"
+              ></i>
+
+              Valley
+
+            </span>
+
+          </div>
+
+
+          <div class="bravo-home-stay-body">
+
+            <h3>
+              Patratu Valley
+            </h3>
+
+            <div class="bravo-home-stay-location">
+
+              <i
+                class="fa-solid fa-location-dot"
+                aria-hidden="true"
+              ></i>
+
+              Jharkhand
+
+            </div>
+
+
+            <div class="bravo-home-stay-meta">
+
+              <span class="bravo-home-stay-price">
+                Explore destination
+              </span>
+
+              <i
+                class="fa-solid fa-arrow-right"
+                aria-hidden="true"
+              ></i>
+
+            </div>
+
+          </div>
+
+        </a>
+
+
       </div>
-    </div>
 
-    <!-- 🧗 Adventure & Trekking -->
-    <div class="col-md-3">
-      <div class="card tour-card">
-        <img src="/images/what-to-see/adventure.jpg" class="card-img-top" alt="Adventure & Trekking">
-        <div class="card-body text-center">
-          <h6>Adventure & Trekking</h6>
-        </div>
+
+      <div class="text-center mt-4">
+
       </div>
+
     </div>
 
-    <!-- 🎉 Festivals & Culture -->
-    <div class="col-md-3">
-      <div class="card tour-card">
-        <img src="/images/what-to-see/festival.jpg" class="card-img-top" alt="Festivals & Culture">
-        <div class="card-body text-center">
-          <h6>Festivals & Culture</h6>
-        </div>
+  </section>
+
+
+  <!-- =======================================================
+       WHAT TO SEE
+  ======================================================== -->
+
+  <section
+    class="bravo-section bravo-home-culture"
+    aria-labelledby="whatToSeeTitle"
+  >
+
+    <div class="bravo-container">
+
+
+      <div class="bravo-section-header center bravo-reveal">
+
+        <span class="bravo-section-badge">
+
+          <i
+            class="fa-solid fa-layer-group"
+            aria-hidden="true"
+          ></i>
+
+          Explore by interest
+
+        </span>
+
+
+        <h2
+          id="whatToSeeTitle"
+          class="bravo-section-title"
+        >
+          What to see
+        </h2>
+
+
+        <p class="bravo-section-description">
+          Choose the kind of experience you want and continue
+          exploring the existing destination catalogue.
+        </p>
+
       </div>
+
+
+      <div class="bravo-home-culture-grid">
+
+
+        <a
+          href="/places?category=Temple"
+          class="bravo-home-culture-feature bravo-reveal"
+          style="text-decoration:none;"
+        >
+
+          <img
+            src="/images/what-to-see/temple.jpg"
+            alt="Temples and heritage in Jharkhand"
+            loading="lazy"
+          >
+
+
+          <div class="bravo-home-culture-feature-content">
+
+            <span class="bravo-badge bravo-badge-earth mb-2">
+              Heritage
+            </span>
+
+            <h3>
+              Temples & Heritage
+            </h3>
+
+            <p>
+              Explore places connected to Jharkhand's
+              cultural and spiritual landscape.
+            </p>
+
+          </div>
+
+        </a>
+
+
+        <div class="bravo-home-culture-list">
+
+
+          <a
+            href="/places?category=Wildlife"
+            class="bravo-home-culture-card bravo-reveal"
+            style="text-decoration:none;"
+          >
+
+            <div class="bravo-home-culture-card-icon">
+
+              <i
+                class="fa-solid fa-paw"
+                aria-hidden="true"
+              ></i>
+
+            </div>
+
+            <h3>
+              Nature & Wildlife
+            </h3>
+
+            <p>
+              Explore forests, sanctuaries and wildlife
+              destinations.
+            </p>
+
+          </a>
+
+
+          <a
+            href="/places?category=Adventure"
+            class="bravo-home-culture-card bravo-reveal"
+            style="text-decoration:none;"
+          >
+
+            <div class="bravo-home-culture-card-icon">
+
+              <i
+                class="fa-solid fa-person-hiking"
+                aria-hidden="true"
+              ></i>
+
+            </div>
+
+            <h3>
+              Adventure & Trekking
+            </h3>
+
+            <p>
+              Find outdoor experiences and places suited
+              to adventurous travel.
+            </p>
+
+          </a>
+
+
+          <a
+            href="/festivals"
+            class="bravo-home-culture-card bravo-reveal"
+            style="text-decoration:none;"
+          >
+
+            <div class="bravo-home-culture-card-icon">
+
+              <i
+                class="fa-solid fa-drum"
+                aria-hidden="true"
+              ></i>
+
+            </div>
+
+            <h3>
+              Festivals & Culture
+            </h3>
+
+            <p>
+              Discover festivals, traditions and cultural
+              experiences across the state.
+            </p>
+
+          </a>
+
+
+          <a
+            href="/gallery"
+            class="bravo-home-culture-card bravo-reveal"
+            style="text-decoration:none;"
+          >
+
+            <div class="bravo-home-culture-card-icon">
+
+              <i
+                class="fa-solid fa-images"
+                aria-hidden="true"
+              ></i>
+
+            </div>
+
+            <h3>
+              Visual Gallery
+            </h3>
+
+            <p>
+              Browse the existing gallery and experience
+              Jharkhand visually.
+            </p>
+
+          </a>
+
+
+        </div>
+
+      </div>
+
     </div>
 
-  </div>
-</div>
+  </section>
 
 
-  <!-- 📰 Latest Updates -->
-  <div class="container mt-5 mb-5">
-    <h2 class="section-title">Latest Updates</h2>
-    <div class="list-group">
-      <a href="#" class="list-group-item list-group-item-action">📅 Deepotsav 2025 lights up Ranchi and Deoghar with festive fervour - Oct 27, 2025</a>
-      <a href="#" class="list-group-item list-group-item-action">🌍 Jharkhand Tourism showcases at ITB Asia 2025 - Oct 18, 2025</a>
-      <a href="#" class="list-group-item list-group-item-action">🗺️ Roadmap for Eco Tourism in Jharkhand unveiled - Oct 15, 2025</a>
-      <a href="#" class="list-group-item list-group-item-action">🎉 Winter Carnival 2025 announced at Netarhat - Oct 10, 2025</a>
+  <!-- =======================================================
+       SMART TOURISM CAPABILITIES
+  ======================================================== -->
+
+  <section
+    class="bravo-section bravo-home-smart"
+    aria-labelledby="smartTourismTitle"
+  >
+
+    <div class="bravo-container">
+
+
+      <div class="bravo-home-connect-panel">
+
+        <div class="bravo-home-connect-grid">
+
+
+          <div class="bravo-reveal">
+
+            <span class="bravo-section-badge">
+
+              <i
+                class="fa-solid fa-microchip"
+                aria-hidden="true"
+              ></i>
+
+              Smart Tourism
+
+            </span>
+
+
+            <h2
+              id="smartTourismTitle"
+              class="bravo-section-title"
+            >
+              More than a destination directory
+            </h2>
+
+
+            <p class="bravo-section-description">
+              Explore the wider Smart Tourism experience,
+              including intelligent planning, maps, cultural
+              discovery and sustainability-oriented features.
+            </p>
+
+
+            <a
+              href="/smart-tourism"
+              class="bravo-btn bravo-btn-accent mt-3"
+            >
+
+              Explore Smart Tourism
+
+              <i
+                class="fa-solid fa-arrow-right"
+                aria-hidden="true"
+              ></i>
+
+            </a>
+
+          </div>
+
+
+          <div class="bravo-home-connect-cards">
+
+
+            <div class="bravo-home-connect-card bravo-reveal">
+
+              <div class="bravo-home-connect-card-icon">
+
+                <i
+                  class="fa-solid fa-route"
+                  aria-hidden="true"
+                ></i>
+
+              </div>
+
+              <strong>
+                AI Trip Recommender
+              </strong>
+
+              <small>
+                Intelligent travel planning and recommendations.
+              </small>
+
+            </div>
+
+
+            <div class="bravo-home-connect-card bravo-reveal">
+
+              <div class="bravo-home-connect-card-icon">
+
+                <i
+                  class="fa-solid fa-map-location-dot"
+                  aria-hidden="true"
+                ></i>
+
+              </div>
+
+              <strong>
+                Interactive Smart Map
+              </strong>
+
+              <small>
+                Explore destinations through location-based
+                discovery.
+              </small>
+
+            </div>
+
+
+            <div class="bravo-home-connect-card bravo-reveal">
+
+              <div class="bravo-home-connect-card-icon">
+
+                <i
+                  class="fa-solid fa-landmark"
+                  aria-hidden="true"
+                ></i>
+
+              </div>
+
+              <strong>
+                Cultural Hub
+              </strong>
+
+              <small>
+                Connect with heritage, culture and festivals.
+              </small>
+
+            </div>
+
+
+            <div class="bravo-home-connect-card bravo-reveal">
+
+              <div class="bravo-home-connect-card-icon">
+
+                <i
+                  class="fa-solid fa-seedling"
+                  aria-hidden="true"
+                ></i>
+
+              </div>
+
+              <strong>
+                EcoScore
+              </strong>
+
+              <small>
+                Bring sustainability into the travel experience.
+              </small>
+
+            </div>
+
+
+            <div class="bravo-home-connect-card bravo-reveal">
+
+              <div class="bravo-home-connect-card-icon">
+
+                <i
+                  class="fa-solid fa-vr-cardboard"
+                  aria-hidden="true"
+                ></i>
+
+              </div>
+
+              <strong>
+                AR / VR Heritage
+              </strong>
+
+              <small>
+                Experience heritage through immersive technology.
+              </small>
+
+            </div>
+
+
+            <div class="bravo-home-connect-card bravo-reveal">
+
+              <div class="bravo-home-connect-card-icon">
+
+                <i
+                  class="fa-solid fa-people-arrows"
+                  aria-hidden="true"
+                ></i>
+
+              </div>
+
+              <strong>
+                Tourist–Local Connect
+              </strong>
+
+              <small>
+                Encourage meaningful local travel connections.
+              </small>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
-  </div>
 
- <!-- ========================================= -->
-<!-- PREMIUM FOOTER -->
-<!-- ========================================= -->
+  </section>
 
-<footer class="premium-footer">
 
-<div class="container">
+  <!-- =======================================================
+       LATEST UPDATES
+  ======================================================== -->
 
-<div class="row gy-5">
+  <section
+    class="bravo-section bravo-home-testimonials"
+    aria-labelledby="latestUpdatesTitle"
+  >
 
-<div class="col-lg-4">
+    <div class="bravo-container">
 
-<h3>🌿 Jharkhand Tourism</h3>
 
-<p>
+      <div class="bravo-section-header bravo-reveal">
 
-Explore waterfalls, forests, wildlife, temples and unforgettable AI-powered travel experiences across Jharkhand.
+        <span class="bravo-section-badge">
 
-</p>
+          <i
+            class="fa-solid fa-newspaper"
+            aria-hidden="true"
+          ></i>
 
-<div class="social-icons">
+          Tourism updates
 
-<a href="#"><i class="fab fa-facebook-f"></i></a>
+        </span>
 
-<a href="#"><i class="fab fa-instagram"></i></a>
 
-<a href="#"><i class="fab fa-twitter"></i></a>
+        <h2
+          id="latestUpdatesTitle"
+          class="bravo-section-title"
+        >
+          Latest updates
+        </h2>
 
-<a href="#"><i class="fab fa-youtube"></i></a>
+
+        <p class="bravo-section-description">
+          Keep the existing tourism announcements visible while
+          the platform grows into a richer digital experience.
+        </p>
+
+      </div>
+
+
+      <div class="bravo-home-update-list">
+
+
+        <article class="bravo-home-update-item bravo-reveal">
+
+          <div class="bravo-home-update-icon">
+
+            <i
+              class="fa-solid fa-calendar-days"
+              aria-hidden="true"
+            ></i>
+
+          </div>
+
+          <div>
+
+            <span>
+              Tourism Update
+            </span>
+
+            <h3>
+              Deepotsav 2025 lights up Ranchi and Deoghar
+              with festive fervour
+            </h3>
+
+            <small>
+              Oct 27, 2025
+            </small>
+
+          </div>
+
+        </article>
+
+
+        <article class="bravo-home-update-item bravo-reveal">
+
+          <div class="bravo-home-update-icon">
+
+            <i
+              class="fa-solid fa-earth-asia"
+              aria-hidden="true"
+            ></i>
+
+          </div>
+
+          <div>
+
+            <span>
+              Tourism Showcase
+            </span>
+
+            <h3>
+              Jharkhand Tourism showcases at ITB Asia 2025
+            </h3>
+
+            <small>
+              Oct 18, 2025
+            </small>
+
+          </div>
+
+        </article>
+
+
+        <article class="bravo-home-update-item bravo-reveal">
+
+          <div class="bravo-home-update-icon">
+
+            <i
+              class="fa-solid fa-leaf"
+              aria-hidden="true"
+            ></i>
+
+          </div>
+
+          <div>
+
+            <span>
+              Eco Tourism
+            </span>
+
+            <h3>
+              Roadmap for Eco Tourism in Jharkhand unveiled
+            </h3>
+
+            <small>
+              Oct 15, 2025
+            </small>
+
+          </div>
+
+        </article>
+
+
+        <article class="bravo-home-update-item bravo-reveal">
+
+          <div class="bravo-home-update-icon">
+
+            <i
+              class="fa-solid fa-masks-theater"
+              aria-hidden="true"
+            ></i>
+
+          </div>
+
+          <div>
+
+            <span>
+              Festival
+            </span>
+
+            <h3>
+              Winter Carnival 2025 announced at Netarhat
+            </h3>
+
+            <small>
+              Oct 10, 2025
+            </small>
+
+          </div>
+
+        </article>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       FINAL CTA
+  ======================================================== -->
+
+  <section
+    class="bravo-home-cta"
+    aria-labelledby="homeCtaTitle"
+  >
+
+    <div class="bravo-container">
+
+      <div class="bravo-home-cta-panel">
+
+        <div class="bravo-home-cta-content bravo-reveal">
+
+
+          <span class="bravo-section-badge">
+
+            <i
+              class="fa-solid fa-compass"
+              aria-hidden="true"
+            ></i>
+
+            Your Jharkhand journey starts here
+
+          </span>
+
+
+          <h2 id="homeCtaTitle">
+            Ready to explore?
+          </h2>
+
+
+            <p>
+              Discover destinations, plan your itinerary and
+              experience Jharkhand through a connected digital
+              tourism platform built for smarter travel.
+            </p>
+
+          <div class="bravo-home-cta-actions">
+
+
+            <a
+              href="/places"
+              class="bravo-home-cta-primary bravo-btn"
+            >
+
+              Explore Places
+
+              <i
+                class="fa-solid fa-arrow-right"
+                aria-hidden="true"
+              ></i>
+
+            </a>
+
+
+            <a
+              href="/planner"
+              class="bravo-home-cta-secondary bravo-btn"
+            >
+
+              Build My Trip
+
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
 
 </div>
-
-</div>
-
-<div class="col-lg-2">
-
-<h5>Quick Links</h5>
-
-<ul>
-
-<li><a href="/">Home</a></li>
-
-<li><a href="/places">Places</a></li>
-
-<li><a href="/hotels">Hotels</a></li>
-
-<li><a href="/planner">AI Planner</a></li>
-
-<li><a href="/chatbot">AI Assistant</a></li>
-
-</ul>
-
-</div>
-
-<div class="col-lg-3">
-
-<h5>Tourism Help</h5>
-
-<ul>
-
-<li>📞 1364</li>
-
-<li>📧 tourism@jharkhand.gov.in</li>
-
-<li>📍 Ranchi, Jharkhand</li>
-
-<li>🕒 24×7 Support</li>
-
-</ul>
-
-</div>
-
-<div class="col-lg-3">
-
-<h5>Newsletter</h5>
-
-<p>
-
-Get travel updates & festival alerts.
-
-</p>
-
-<form>
-
-<input
-
-type="email"
-
-class="form-control mb-3"
-
-placeholder="Email Address"
-
->
-
-<button class="btn btn-success w-100">
-
-Subscribe
-
-</button>
-
-</form>
-
-</div>
-
-</div>
-
-<hr>
-
-<div class="text-center">
-
-<p>
-
-© 2026 Jharkhand Tourism Development Corporation
-
-</p>
-
-<p>
-
-Developed by Siddharth Chaturvedi
-
-</p>
-
-</div>
-
-</div>
-
-</footer>
-
-  
-<!-- Smart Tourism button -->
-<!-- <a href="/smart-tourism" class="smart-tourism-btn">Explore Smart Tourism</a> -->
-
-
-
-
-
-<style>
-  .smart-cta { transition: transform .15s ease, box-shadow .15s ease; }
-  .smart-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(13,110,253,.35); }
-  
-  
-</style>
-
-
-<script src="/js/home.js"></script>
-</body>
-</html>

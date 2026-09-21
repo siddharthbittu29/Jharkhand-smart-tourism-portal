@@ -1,0 +1,900 @@
+/* =========================================================
+   JHARKHAND TOURISM — CONTACT
+   Premium editorial contact experience
+   ========================================================= */
+
+:root {
+  --contact-green: #164a3a;
+  --contact-green-deep: #0c3025;
+  --contact-green-soft: #eaf1ed;
+  --contact-gold: #c89b3c;
+  --contact-cream: #f7f4ed;
+  --contact-paper: #fbfaf7;
+  --contact-ink: #18221e;
+  --contact-muted: #68736d;
+  --contact-border: rgba(24, 34, 30, 0.12);
+  --contact-shadow: 0 24px 65px rgba(13, 51, 40, 0.12);
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.jt-contact-page {
+  background: var(--contact-paper);
+  color: var(--contact-ink);
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.jt-contact-hero {
+  position: relative;
+  min-height: 555px;
+
+  display: flex;
+  align-items: flex-end;
+
+  isolation: isolate;
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(7, 27, 21, 0.22),
+      rgba(7, 27, 21, 0.82)
+    ),
+    url("/images/discover/patratu.jpg")
+      center / cover no-repeat;
+}
+
+.jt-contact-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(8, 30, 23, 0.65) 0%,
+      rgba(8, 30, 23, 0.25) 58%,
+      transparent 100%
+    );
+}
+
+.jt-contact-hero::after {
+  content: "";
+
+  position: absolute;
+  right: -150px;
+  top: -170px;
+
+  width: 470px;
+  height: 470px;
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.jt-contact-hero-inner {
+  position: relative;
+  z-index: 2;
+
+  width: min(1240px, calc(100% - 48px));
+  margin: 0 auto;
+
+  padding: 105px 0 75px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  gap: 50px;
+}
+
+.jt-contact-hero-copy {
+  max-width: 800px;
+}
+
+.jt-contact-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-bottom: 22px;
+
+  color: rgba(255, 255, 255, 0.86);
+
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.jt-contact-eyebrow::before {
+  content: "";
+
+  width: 34px;
+  height: 1px;
+
+  background: var(--contact-gold);
+}
+
+.jt-contact-hero h1 {
+  margin: 0;
+
+  color: #fff;
+
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(3.3rem, 7vw, 6.4rem);
+  font-weight: 600;
+  line-height: 0.94;
+  letter-spacing: -0.045em;
+}
+
+.jt-contact-hero h1 em {
+  display: block;
+
+  color: #e7d4a2;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.jt-contact-hero p {
+  max-width: 620px;
+
+  margin: 27px 0 0;
+
+  color: rgba(255, 255, 255, 0.82);
+
+  font-size: 1.03rem;
+  line-height: 1.8;
+}
+
+.jt-contact-hero-mark {
+  flex: 0 0 auto;
+
+  width: 88px;
+  height: 88px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: 50%;
+
+  color: rgba(255, 255, 255, 0.9);
+
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.2rem;
+  letter-spacing: 0.04em;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.jt-contact-content {
+  padding: 105px 0 115px;
+
+  background: var(--contact-paper);
+}
+
+.jt-contact-content-inner {
+  width: min(1240px, calc(100% - 48px));
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+
+  gap: 90px;
+  align-items: start;
+}
+
+
+/* =========================================================
+   CONTACT INFORMATION
+   ========================================================= */
+
+.jt-contact-info {
+  padding-top: 8px;
+}
+
+.jt-contact-kicker {
+  display: inline-block;
+
+  margin-bottom: 17px;
+
+  color: var(--contact-green);
+
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.jt-contact-info h2 {
+  max-width: 570px;
+
+  margin: 0;
+
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2.6rem, 4.7vw, 4.4rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.jt-contact-intro {
+  max-width: 520px;
+
+  margin: 24px 0 0;
+
+  color: var(--contact-muted);
+
+  font-size: 1rem;
+  line-height: 1.85;
+}
+
+
+/* =========================================================
+   CONTACT DETAILS
+   ========================================================= */
+
+.jt-contact-details {
+  margin-top: 43px;
+
+  border-top: 1px solid var(--contact-border);
+}
+
+.jt-contact-detail {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+
+  padding: 21px 0;
+
+  border-bottom: 1px solid var(--contact-border);
+
+  color: inherit;
+  text-decoration: none;
+
+  transition:
+    padding-left 250ms ease,
+    color 250ms ease;
+}
+
+a.jt-contact-detail:hover {
+  padding-left: 7px;
+  color: var(--contact-green);
+}
+
+.jt-contact-detail-icon {
+  flex: 0 0 auto;
+
+  width: 45px;
+  height: 45px;
+
+  display: grid;
+  place-items: center;
+
+  background: var(--contact-green-soft);
+
+  border-radius: 50%;
+
+  color: var(--contact-green);
+  font-size: 0.95rem;
+}
+
+.jt-contact-detail strong {
+  display: block;
+
+  margin-bottom: 4px;
+
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.jt-contact-detail small {
+  display: block;
+
+  color: var(--contact-muted);
+
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   CONTACT NOTE
+   ========================================================= */
+
+.jt-contact-note {
+  display: flex;
+  gap: 14px;
+
+  margin-top: 34px;
+  padding: 20px;
+
+  background: var(--contact-cream);
+
+  border-left: 3px solid var(--contact-gold);
+}
+
+.jt-contact-note > i {
+  flex: 0 0 auto;
+
+  margin-top: 4px;
+
+  color: var(--contact-gold);
+}
+
+.jt-contact-note p {
+  margin: 0;
+
+  color: var(--contact-muted);
+
+  font-size: 0.84rem;
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   FORM CARD
+   ========================================================= */
+
+.jt-contact-form-wrap {
+  padding: 48px;
+
+  background: #fff;
+
+  border: 1px solid var(--contact-border);
+
+  box-shadow: var(--contact-shadow);
+}
+
+.jt-contact-form-heading {
+  margin-bottom: 34px;
+}
+
+.jt-contact-form-heading span {
+  display: block;
+
+  margin-bottom: 9px;
+
+  color: var(--contact-green);
+
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.jt-contact-form-heading h3 {
+  margin: 0;
+
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 600;
+  line-height: 1.05;
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.jt-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.jt-contact-form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.jt-contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.jt-contact-field label {
+  color: var(--contact-ink);
+
+  font-size: 0.79rem;
+  font-weight: 700;
+}
+
+.jt-contact-field input,
+.jt-contact-field textarea {
+  width: 100%;
+
+  padding: 14px 15px;
+
+  border: 1px solid rgba(24, 34, 30, 0.16);
+  border-radius: 2px;
+
+  background: #fff;
+
+  color: var(--contact-ink);
+
+  font-family: inherit;
+  font-size: 0.9rem;
+
+  outline: none;
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.jt-contact-field textarea {
+  min-height: 155px;
+  resize: vertical;
+}
+
+.jt-contact-field input::placeholder,
+.jt-contact-field textarea::placeholder {
+  color: #9aa29d;
+}
+
+.jt-contact-field input:hover,
+.jt-contact-field textarea:hover {
+  border-color: rgba(22, 74, 58, 0.35);
+}
+
+.jt-contact-field input:focus,
+.jt-contact-field textarea:focus {
+  border-color: var(--contact-green);
+
+  box-shadow:
+    0 0 0 3px rgba(22, 74, 58, 0.1);
+
+  background: #fcfdfc;
+}
+
+
+/* =========================================================
+   FORM FOOTER
+   ========================================================= */
+
+.jt-contact-form-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 25px;
+
+  padding-top: 7px;
+}
+
+.jt-contact-form-bottom p {
+  max-width: 300px;
+
+  margin: 0;
+
+  color: var(--contact-muted);
+
+  font-size: 0.74rem;
+  line-height: 1.6;
+}
+
+.jt-contact-form-bottom p i {
+  margin-right: 5px;
+
+  color: var(--contact-green);
+}
+
+.jt-contact-form-bottom .jt-btn {
+  flex: 0 0 auto;
+}
+
+
+/* =========================================================
+   EXPLORE CTA
+   ========================================================= */
+
+.jt-contact-explore {
+  position: relative;
+
+  width: min(1240px, calc(100% - 48px));
+
+  margin: 0 auto 110px;
+
+  overflow: hidden;
+
+  background: var(--contact-green);
+
+  color: #fff;
+}
+
+.jt-contact-explore::before {
+  content: "";
+
+  position: absolute;
+
+  width: 440px;
+  height: 440px;
+
+  right: -175px;
+  top: -210px;
+
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 50%;
+}
+
+.jt-contact-explore::after {
+  content: "";
+
+  position: absolute;
+
+  width: 190px;
+  height: 190px;
+
+  right: 90px;
+  bottom: -130px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+.jt-contact-explore-inner {
+  position: relative;
+  z-index: 2;
+
+  min-height: 300px;
+
+  padding: 58px 68px;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+
+  align-items: center;
+
+  gap: 55px;
+}
+
+.jt-contact-explore-label {
+  display: inline-block;
+
+  margin-bottom: 13px;
+
+  color: #e6d19b;
+
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.jt-contact-explore h2 {
+  max-width: 700px;
+
+  margin: 0;
+
+  color: #fff;
+
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2.3rem, 4.3vw, 4.2rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.jt-contact-explore p {
+  max-width: 600px;
+
+  margin: 19px 0 0;
+
+  color: rgba(255, 255, 255, 0.73);
+
+  line-height: 1.75;
+}
+
+.jt-contact-explore-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.jt-contact-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  color: rgba(255, 255, 255, 0.85);
+
+  font-size: 0.85rem;
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition: color 180ms ease;
+}
+
+.jt-contact-text-link:hover {
+  color: #fff;
+}
+
+.jt-contact-text-link i {
+  font-size: 0.72rem;
+}
+
+
+/* =========================================================
+   RESPONSIVE — 1100px
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+  .jt-contact-content-inner {
+    gap: 55px;
+  }
+
+  .jt-contact-form-wrap {
+    padding: 38px;
+  }
+
+  .jt-contact-explore-inner {
+    padding: 52px;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 900px
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .jt-contact-hero {
+    min-height: 520px;
+  }
+
+  .jt-contact-hero-inner {
+    width: min(100% - 36px, 760px);
+    padding: 90px 0 65px;
+  }
+
+  .jt-contact-hero-mark {
+    display: none;
+  }
+
+  .jt-contact-content {
+    padding: 80px 0 85px;
+  }
+
+  .jt-contact-content-inner {
+    width: min(100% - 36px, 760px);
+
+    grid-template-columns: 1fr;
+
+    gap: 65px;
+  }
+
+  .jt-contact-info h2 {
+    max-width: 650px;
+  }
+
+  .jt-contact-intro {
+    max-width: 650px;
+  }
+
+  .jt-contact-form-wrap {
+    padding: 42px;
+  }
+
+  .jt-contact-explore {
+    width: min(100% - 36px, 760px);
+    margin-bottom: 80px;
+  }
+
+  .jt-contact-explore-inner {
+    grid-template-columns: 1fr;
+
+    gap: 32px;
+
+    padding: 52px;
+  }
+
+  .jt-contact-explore-actions {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 680px
+   ========================================================= */
+
+@media (max-width: 680px) {
+
+  .jt-contact-hero {
+    min-height: 500px;
+  }
+
+  .jt-contact-hero-inner {
+    padding: 75px 0 54px;
+  }
+
+  .jt-contact-hero h1 {
+    font-size: clamp(3rem, 13vw, 4.5rem);
+  }
+
+  .jt-contact-hero p {
+    margin-top: 21px;
+
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .jt-contact-content {
+    padding: 65px 0 70px;
+  }
+
+  .jt-contact-content-inner,
+  .jt-contact-explore {
+    width: calc(100% - 28px);
+  }
+
+  .jt-contact-info h2 {
+    font-size: clamp(2.5rem, 11vw, 3.7rem);
+  }
+
+  .jt-contact-details {
+    margin-top: 34px;
+  }
+
+  .jt-contact-form-wrap {
+    padding: 30px 22px;
+  }
+
+  .jt-contact-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .jt-contact-form-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .jt-contact-form-bottom .jt-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .jt-contact-explore {
+    margin-bottom: 65px;
+  }
+
+  .jt-contact-explore-inner {
+    padding: 42px 27px;
+  }
+
+  .jt-contact-explore h2 {
+    font-size: clamp(2.25rem, 10vw, 3.3rem);
+  }
+
+  .jt-contact-explore-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .jt-contact-explore-actions .jt-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 440px
+   ========================================================= */
+
+@media (max-width: 440px) {
+
+  .jt-contact-hero {
+    min-height: 485px;
+  }
+
+  .jt-contact-eyebrow {
+    font-size: 0.65rem;
+  }
+
+  .jt-contact-info h2 {
+    font-size: 2.45rem;
+  }
+
+  .jt-contact-detail {
+    gap: 13px;
+  }
+
+  .jt-contact-detail-icon {
+    width: 41px;
+    height: 41px;
+  }
+
+  .jt-contact-note {
+    padding: 17px;
+  }
+
+  .jt-contact-form-wrap {
+    padding: 26px 18px;
+  }
+
+  .jt-contact-explore-inner {
+    padding: 36px 21px;
+  }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+.jt-contact-field input:focus-visible,
+.jt-contact-field textarea:focus-visible,
+.jt-contact-detail:focus-visible,
+.jt-contact-text-link:focus-visible {
+  outline: 3px solid rgba(200, 155, 60, 0.55);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .jt-contact-detail,
+  .jt-contact-field input,
+  .jt-contact-field textarea,
+  .jt-contact-text-link {
+    transition: none;
+  }
+
+}
+
+
+/* =========================================================
+   PRINT
+   ========================================================= */
+
+@media print {
+
+  .jt-contact-hero {
+    min-height: auto;
+    background: none;
+  }
+
+  .jt-contact-hero h1,
+  .jt-contact-hero p,
+  .jt-contact-eyebrow {
+    color: #000;
+  }
+
+  .jt-contact-hero-mark,
+  .jt-contact-explore {
+    display: none;
+  }
+
+  .jt-contact-form-wrap {
+    box-shadow: none;
+  }
+
+}

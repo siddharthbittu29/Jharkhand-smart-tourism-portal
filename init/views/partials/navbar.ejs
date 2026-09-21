@@ -1,89 +1,1028 @@
-<nav class="navbar navbar-expand-lg navbar-dark shadow-sm" style="background:#1b5e20;">
-  <div class="container">
+<%
+/*
+ * ============================================================
+ * JHARKHAND TOURISM — MAIN NAVIGATION
+ * File: init/views/partials/navbar.ejs
+ * ============================================================
+ */
 
-    <a class="navbar-brand d-flex align-items-center gap-2" href="/">
-      <img
-        src="/images/jharkhand_tourism_logo_final.png"
-        alt="Jharkhand Tourism"
-        style="height:55px;background:#fff;border-radius:8px;padding:4px;"
-      >
-      <div>
-        <div class="fw-bold">Jharkhand Tourism</div>
-        <small class="text-light opacity-75">
-          Explore • Experience • Discover
-        </small>
+const navPath =
+  typeof currentPath !== "undefined"
+    ? currentPath
+    : "";
+
+const navUser =
+  typeof user !== "undefined" && user
+    ? user
+    : (
+        typeof currentUser !== "undefined" && currentUser
+          ? currentUser
+          : null
+      );
+
+const isActive = (path) => {
+
+  if (path === "/") {
+    return navPath === "/";
+  }
+
+  return (
+    navPath === path ||
+    navPath.startsWith(`${path}/`)
+  );
+
+};
+
+const isExploreActive =
+  isActive("/places") ||
+  isActive("/gallery") ||
+  isActive("/festivals");
+
+const isPlanActive =
+  isActive("/planner");
+
+%>
+
+
+<!-- ============================================================
+     UTILITY BAR
+============================================================ -->
+
+<div class="jt-utility-bar">
+
+  <div class="jt-container">
+
+    <div class="jt-utility-inner">
+
+      <div class="jt-utility-left">
+
+        <span class="jt-utility-item">
+
+          <i
+            class="fa-solid fa-leaf"
+            aria-hidden="true">
+          </i>
+
+          Explore Responsibly
+
+        </span>
+
+
+        <span
+          class="jt-utility-divider"
+          aria-hidden="true">
+        </span>
+
+
+        <span class="jt-utility-item">
+
+          <i
+            class="fa-solid fa-location-dot"
+            aria-hidden="true">
+          </i>
+
+          Jharkhand, India
+
+        </span>
+
       </div>
-    </a>
 
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#mainNav"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
 
-    <div class="collapse navbar-collapse" id="mainNav">
+      <div class="jt-utility-right">
 
-      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <a href="/smart-tourism">
+          Smart Tourism
+        </a>
 
-        <li class="nav-item">
-          <a class="nav-link <%= currentPath==='/'?'active':'' %>" href="/">
-            Home
-          </a>
-        </li>
+        <a href="/downloads">
+          Resources
+        </a>
 
-        <li class="nav-item">
-          <a class="nav-link <%= currentPath.startsWith('/places')?'active':'' %>" href="/places">
-            Places
-          </a>
-        </li>
+        <a href="/contact">
+          Contact
+        </a>
 
-        <li class="nav-item">
-          <a class="nav-link <%= currentPath.startsWith('/book-hotels')?'active':'' %>" href="/book-hotels">
-            Hotels
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link <%= currentPath.startsWith('/festivals')?'active':'' %>" href="/festivals">
-            Festivals
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link <%= currentPath.startsWith('/gallery')?'active':'' %>" href="/gallery">
-            Gallery
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link <%= currentPath.startsWith('/smart-tourism')?'active':'' %>" href="/smart-tourism">
-            Smart Tourism
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link <%= currentPath.startsWith('/contact')?'active':'' %>" href="/contact">
-            Contact
-          </a>
-        </li>
-
-        <li class="nav-item ms-lg-3">
-          <a href="/auth/login" class="btn btn-outline-light btn-sm">
-            Login
-          </a>
-        </li>
-
-        <li class="nav-item ms-lg-2">
-          <a href="/auth/register" class="btn btn-warning btn-sm">
-            Register
-          </a>
-        </li>
-
-      </ul>
+      </div>
 
     </div>
+
   </div>
-</nav>
+
+</div>
+
+
+<!-- ============================================================
+     MAIN NAVIGATION
+============================================================ -->
+
+<header
+  class="jt-navbar"
+  id="mainNavigation">
+
+  <div class="jt-container">
+
+    <nav
+      class="jt-navbar-inner"
+      aria-label="Main navigation">
+
+
+      <!-- ======================================================
+           BRAND
+      ======================================================= -->
+
+      <a
+        href="/"
+        class="jt-brand"
+        aria-label="Jharkhand Tourism home">
+
+        <span
+          class="jt-brand-mark"
+          aria-hidden="true">
+
+          <i class="fa-solid fa-mountain-sun"></i>
+
+        </span>
+
+
+        <span class="jt-brand-text">
+
+          <strong>
+            JHARKHAND
+          </strong>
+
+          <small>
+            Tourism
+          </small>
+
+        </span>
+
+      </a>
+
+
+      <!-- ======================================================
+           MOBILE TOGGLE
+      ======================================================= -->
+
+      <button
+        type="button"
+        class="jt-mobile-toggle"
+        id="jtMobileToggle"
+        aria-controls="jtMainMenu"
+        aria-expanded="false"
+        aria-label="Open navigation menu">
+
+        <i
+          class="fa-solid fa-bars"
+          aria-hidden="true">
+        </i>
+
+      </button>
+
+
+      <!-- ======================================================
+           MAIN MENU
+      ======================================================= -->
+
+      <div
+        class="jt-navbar-menu"
+        id="jtMainMenu">
+
+
+        <!-- ====================================================
+             HOME
+        ===================================================== -->
+
+        <a
+          href="/"
+          class="jt-nav-link <%= isActive("/") ? "active" : "" %>">
+
+          <i
+            class="fa-solid fa-house"
+            aria-hidden="true">
+          </i>
+
+          <span>
+            Home
+          </span>
+
+        </a>
+
+
+        <!-- ====================================================
+             EXPLORE
+        ===================================================== -->
+
+        <div
+          class="jt-nav-dropdown <%= isExploreActive ? "active-parent" : "" %>">
+
+          <button
+            type="button"
+            class="jt-nav-link jt-nav-dropdown-toggle <%= isExploreActive ? "active" : "" %>"
+            aria-expanded="false"
+            aria-haspopup="true">
+
+            <i
+              class="fa-solid fa-compass"
+              aria-hidden="true">
+            </i>
+
+            <span>
+              Explore
+            </span>
+
+            <i
+              class="fa-solid fa-chevron-down jt-dropdown-chevron"
+              aria-hidden="true">
+            </i>
+
+          </button>
+
+
+          <div
+            class="jt-dropdown-menu"
+            role="menu">
+
+            <a
+              href="/places"
+              role="menuitem">
+
+              <i
+                class="fa-solid fa-location-dot"
+                aria-hidden="true">
+              </i>
+
+              <span>
+
+                <strong>
+                  Destinations
+                </strong>
+
+                <small>
+                  Discover places
+                </small>
+
+              </span>
+
+            </a>
+
+
+            <a
+              href="/gallery"
+              role="menuitem">
+
+              <i
+                class="fa-solid fa-images"
+                aria-hidden="true">
+              </i>
+
+              <span>
+
+                <strong>
+                  Gallery
+                </strong>
+
+                <small>
+                  See Jharkhand
+                </small>
+
+              </span>
+
+            </a>
+
+
+            <a
+              href="/festivals"
+              role="menuitem">
+
+              <i
+                class="fa-solid fa-drum"
+                aria-hidden="true">
+              </i>
+
+              <span>
+
+                <strong>
+                  Festivals
+                </strong>
+
+                <small>
+                  Culture & celebrations
+                </small>
+
+              </span>
+
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- ====================================================
+             STAY
+        ===================================================== -->
+
+        <a
+          href="/hotels"
+          class="jt-nav-link <%= isActive("/hotels") ? "active" : "" %>">
+
+          <i
+            class="fa-solid fa-hotel"
+            aria-hidden="true">
+          </i>
+
+          <span>
+            Stay
+          </span>
+
+        </a>
+
+
+        <!-- ====================================================
+             SMART TOURISM
+        ===================================================== -->
+
+        <a
+          href="/smart-tourism"
+          class="jt-nav-link <%= isActive("/smart-tourism") ? "active" : "" %>">
+
+          <i
+            class="fa-solid fa-wand-magic-sparkles"
+            aria-hidden="true">
+          </i>
+
+          <span>
+            Smart Tourism
+          </span>
+
+        </a>
+
+
+        <!-- ====================================================
+             PLAN
+        ===================================================== -->
+
+        <div
+          class="jt-nav-dropdown <%= isPlanActive ? "active-parent" : "" %>">
+
+          <button
+            type="button"
+            class="jt-nav-link jt-nav-dropdown-toggle <%= isPlanActive ? "active" : "" %>"
+            aria-expanded="false"
+            aria-haspopup="true">
+
+            <i
+              class="fa-solid fa-route"
+              aria-hidden="true">
+            </i>
+
+            <span>
+              Plan
+            </span>
+
+            <i
+              class="fa-solid fa-chevron-down jt-dropdown-chevron"
+              aria-hidden="true">
+            </i>
+
+          </button>
+
+
+          <div
+            class="jt-dropdown-menu"
+            role="menu">
+
+            <a
+              href="/planner"
+              role="menuitem">
+
+              <i
+                class="fa-solid fa-wand-magic-sparkles"
+                aria-hidden="true">
+              </i>
+
+              <span>
+
+                <strong>
+                  AI Trip Planner
+                </strong>
+
+                <small>
+                  Build your itinerary
+                </small>
+
+              </span>
+
+            </a>
+
+
+            <a
+              href="/hotels"
+              role="menuitem">
+
+              <i
+                class="fa-solid fa-bed"
+                aria-hidden="true">
+              </i>
+
+              <span>
+
+                <strong>
+                  Find Hotels
+                </strong>
+
+                <small>
+                  Plan your stay
+                </small>
+
+              </span>
+
+            </a>
+
+
+            <a
+              href="/places"
+              role="menuitem">
+
+              <i
+                class="fa-solid fa-map"
+                aria-hidden="true">
+              </i>
+
+              <span>
+
+                <strong>
+                  Explore Places
+                </strong>
+
+                <small>
+                  Choose destinations
+                </small>
+
+              </span>
+
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- ====================================================
+             SEARCH
+        ===================================================== -->
+
+        <a
+          href="/places"
+          class="jt-nav-search"
+          aria-label="Search destinations"
+          title="Search destinations">
+
+          <i
+            class="fa-solid fa-magnifying-glass"
+            aria-hidden="true">
+          </i>
+
+        </a>
+
+
+        <!-- ====================================================
+             AI ASSISTANT
+        ===================================================== -->
+
+        <a
+          href="/chatbot"
+          class="jt-ai-button <%= isActive("/chatbot") ? "active" : "" %>"
+          aria-label="Open AI Tourism Assistant">
+
+          <span
+            class="jt-ai-icon"
+            aria-hidden="true">
+
+            <i class="fa-solid fa-robot"></i>
+
+          </span>
+
+
+          <span class="jt-ai-label">
+
+            <strong>
+              AI Assistant
+            </strong>
+
+            <small>
+              Ask Tourism AI
+            </small>
+
+          </span>
+
+        </a>
+
+
+        <!-- ====================================================
+             AUTHENTICATED USER
+        ===================================================== -->
+
+        <% if (navUser) { %>
+
+          <div class="jt-user-menu">
+
+            <a
+              href="/dashboard"
+              class="jt-login-link <%= isActive("/dashboard") ? "active" : "" %>">
+
+              <i
+                class="fa-regular fa-user"
+                aria-hidden="true">
+              </i>
+
+              <span>
+                Dashboard
+              </span>
+
+            </a>
+
+
+            <a
+              href="/wishlist"
+              class="jt-wishlist-link <%= isActive("/wishlist") ? "active" : "" %>"
+              aria-label="Wishlist"
+              title="Wishlist">
+
+              <i
+                class="fa-regular fa-heart"
+                aria-hidden="true">
+              </i>
+
+            </a>
+
+
+            <a
+              href="/auth/logout"
+              class="jt-get-started">
+
+              <span>
+                Sign Out
+              </span>
+
+              <i
+                class="fa-solid fa-arrow-right"
+                aria-hidden="true">
+              </i>
+
+            </a>
+
+          </div>
+
+
+        <% } else { %>
+
+
+          <!-- ==================================================
+               GUEST AUTH
+          =================================================== -->
+
+          <a
+            href="/auth/login"
+            class="jt-login-link <%= isActive("/auth/login") ? "active" : "" %>">
+
+            Login
+
+          </a>
+
+
+          <a
+            href="/auth/register"
+            class="jt-get-started <%= isActive("/auth/register") ? "active" : "" %>">
+
+            <span>
+              Get Started
+            </span>
+
+            <i
+              class="fa-solid fa-arrow-right"
+              aria-hidden="true">
+            </i>
+
+          </a>
+
+        <% } %>
+
+
+      </div>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+<!-- ============================================================
+     NAVIGATION BEHAVIOR
+============================================================ -->
+
+<script>
+(() => {
+
+  "use strict";
+
+
+  const navbar =
+    document.getElementById("mainNavigation");
+
+  const toggle =
+    document.getElementById("jtMobileToggle");
+
+  const menu =
+    document.getElementById("jtMainMenu");
+
+
+  if (!navbar) {
+    return;
+  }
+
+
+  /* ==========================================================
+     SCROLL STATE
+  ========================================================== */
+
+  const updateScrollState = () => {
+
+    navbar.classList.toggle(
+      "is-scrolled",
+      window.scrollY > 12
+    );
+
+  };
+
+
+  updateScrollState();
+
+
+  window.addEventListener(
+    "scroll",
+    updateScrollState,
+    { passive: true }
+  );
+
+
+  /* ==========================================================
+     MOBILE MENU
+  ========================================================== */
+
+  const closeMobileMenu = () => {
+
+    if (!toggle || !menu) {
+      return;
+    }
+
+    menu.classList.remove("is-open");
+
+    toggle.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+
+    toggle.setAttribute(
+      "aria-label",
+      "Open navigation menu"
+    );
+
+    toggle.innerHTML =
+      '<i class="fa-solid fa-bars" aria-hidden="true"></i>';
+
+    document.body.classList.remove(
+      "jt-menu-open"
+    );
+
+  };
+
+
+  const openMobileMenu = () => {
+
+    if (!toggle || !menu) {
+      return;
+    }
+
+    menu.classList.add("is-open");
+
+    toggle.setAttribute(
+      "aria-expanded",
+      "true"
+    );
+
+    toggle.setAttribute(
+      "aria-label",
+      "Close navigation menu"
+    );
+
+    toggle.innerHTML =
+      '<i class="fa-solid fa-xmark" aria-hidden="true"></i>';
+
+    document.body.classList.add(
+      "jt-menu-open"
+    );
+
+  };
+
+
+  if (toggle && menu) {
+
+    toggle.addEventListener(
+      "click",
+      () => {
+
+        const open =
+          menu.classList.contains("is-open");
+
+        if (open) {
+          closeMobileMenu();
+        } else {
+          openMobileMenu();
+        }
+
+      }
+    );
+
+
+    window.addEventListener(
+      "resize",
+      () => {
+
+        if (window.innerWidth > 991) {
+          closeMobileMenu();
+        }
+
+      }
+    );
+
+  }
+
+
+  /* ==========================================================
+     DROPDOWNS
+  ========================================================== */
+
+  const dropdowns =
+    Array.from(
+      document.querySelectorAll(
+        ".jt-nav-dropdown"
+      )
+    );
+
+
+  const closeAllDropdowns = (
+    except = null
+  ) => {
+
+    dropdowns.forEach(
+      (dropdown) => {
+
+        if (dropdown === except) {
+          return;
+        }
+
+        dropdown.classList.remove(
+          "is-open"
+        );
+
+        const button =
+          dropdown.querySelector(
+            ".jt-nav-dropdown-toggle"
+          );
+
+        if (button) {
+
+          button.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+
+        }
+
+      }
+    );
+
+  };
+
+
+  dropdowns.forEach(
+    (dropdown) => {
+
+      const button =
+        dropdown.querySelector(
+          ".jt-nav-dropdown-toggle"
+        );
+
+      if (!button) {
+        return;
+      }
+
+
+      button.addEventListener(
+        "click",
+        (event) => {
+
+          event.preventDefault();
+          event.stopPropagation();
+
+          const open =
+            dropdown.classList.contains(
+              "is-open"
+            );
+
+          closeAllDropdowns(
+            dropdown
+          );
+
+          dropdown.classList.toggle(
+            "is-open",
+            !open
+          );
+
+          button.setAttribute(
+            "aria-expanded",
+            String(!open)
+          );
+
+        }
+      );
+
+
+      button.addEventListener(
+        "keydown",
+        (event) => {
+
+          if (
+            event.key !== "ArrowDown"
+          ) {
+            return;
+          }
+
+          event.preventDefault();
+
+          closeAllDropdowns(
+            dropdown
+          );
+
+          dropdown.classList.add(
+            "is-open"
+          );
+
+          button.setAttribute(
+            "aria-expanded",
+            "true"
+          );
+
+          const firstLink =
+            dropdown.querySelector(
+              ".jt-dropdown-menu a"
+            );
+
+          if (firstLink) {
+            firstLink.focus();
+          }
+
+        }
+      );
+
+    }
+  );
+
+
+  /* ==========================================================
+     OUTSIDE CLICK
+  ========================================================== */
+
+  document.addEventListener(
+    "click",
+    (event) => {
+
+      if (
+        event.target.closest(
+          ".jt-nav-dropdown"
+        )
+      ) {
+        return;
+      }
+
+      closeAllDropdowns();
+
+    }
+  );
+
+
+  /* ==========================================================
+     ESCAPE
+  ========================================================== */
+
+  document.addEventListener(
+    "keydown",
+    (event) => {
+
+      if (
+        event.key !== "Escape"
+      ) {
+        return;
+      }
+
+      closeAllDropdowns();
+
+      if (
+        menu &&
+        menu.classList.contains(
+          "is-open"
+        )
+      ) {
+
+        closeMobileMenu();
+
+        if (toggle) {
+          toggle.focus();
+        }
+
+      }
+
+    }
+  );
+
+
+  /* ==========================================================
+     CLOSE MOBILE MENU AFTER NAVIGATION
+  ========================================================== */
+
+  if (menu) {
+
+    menu
+      .querySelectorAll("a")
+      .forEach(
+        (link) => {
+
+          link.addEventListener(
+            "click",
+            () => {
+
+              if (
+                window.innerWidth <= 991
+              ) {
+
+                closeMobileMenu();
+
+              }
+
+              closeAllDropdowns();
+
+            }
+          );
+
+        }
+      );
+
+  }
+
+
+  /* ==========================================================
+     CLOSE MENU WHEN MOBILE WIDTH CHANGES
+  ========================================================== */
+
+  const mobileMedia =
+    window.matchMedia(
+      "(max-width: 991px)"
+    );
+
+
+  const syncMenuState = () => {
+
+    if (!mobileMedia.matches) {
+
+      document.body.classList.remove(
+        "jt-menu-open"
+      );
+
+    }
+
+  };
+
+
+  if (
+    typeof mobileMedia.addEventListener ===
+    "function"
+  ) {
+
+    mobileMedia.addEventListener(
+      "change",
+      syncMenuState
+    );
+
+  } else {
+
+    mobileMedia.addListener(
+      syncMenuState
+    );
+
+  }
+
+
+})();
+</script>

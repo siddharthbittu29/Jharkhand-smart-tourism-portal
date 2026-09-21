@@ -1,69 +1,212 @@
+// =========================================================
+// JHARKHAND TOURISM — HOTEL RECOMMENDATION SERVICE
+// =========================================================
+//
+// Responsibilities:
+// - Recommend hotels for itinerary destinations
+// - Match hotels by district
+// - Prefer unused hotels
+// - Prefer higher-rated hotels
+// - Use lower price as the tie-breaker
+// - Preserve the existing { place, hotel } contract
+//
+// Data source:
+// - ../models/hotels
+//
+// No production hotel data is created here.
+// =========================================================
+
 const hotels = require("../models/hotels");
+
+
+// =========================================================
+// HELPERS
+// =========================================================
+
+function getRating(hotel) {
+    const rating = Number(hotel?.rating);
+
+    return Number.isFinite(rating)
+        ? rating
+        : 0;
+}
+
+
+function getPrice(hotel) {
+    const price = Number(hotel?.price_from);
+
+    return Number.isFinite(price)
+        ? price
+        : Number.POSITIVE_INFINITY;
+}
+
+
+function getHotelId(hotel) {
+    return String(hotel?.id || "");
+}
+
+
+// =========================================================
+// RECOMMEND HOTELS
+// =========================================================
 
 const recommendHotels = (itinerary) => {
 
+    // Always return an array.
+    if (!Array.isArray(itinerary)) {
+        return [];
+    }
+
+
+    // Track hotels already recommended during this plan.
     const usedHotels = new Set();
 
-    return itinerary.map(item => {
 
-        const districtHotels = hotels.filter(
+    return itinerary.map((item) => {
 
-            hotel => hotel.district === item.hotelDistrict
+        const hotelDistrict =
+            String(item?.hotelDistrict || "").trim();
 
-        );
 
-        if (districtHotels.length === 0) {
+        // -----------------------------------------------------
+        // No district available
+        // -----------------------------------------------------
+
+        if (!hotelDistrict) {
 
             return {
-
-                place: item.place,
-
+                place: item?.place || "",
                 hotel: null
-
             };
 
         }
 
-        // Prefer hotels that haven't been used yet
-        let availableHotels = districtHotels.filter(
 
-            hotel => !usedHotels.has(hotel.id)
+        // -----------------------------------------------------
+        // Find hotels in the itinerary destination district
+        // -----------------------------------------------------
 
-        );
+        const districtHotels = hotels.filter((hotel) => {
 
-        // If every hotel has already been used,
-        // allow reuse.
-        if (availableHotels.length === 0) {
+            return (
+                String(hotel?.district || "").trim() ===
+                hotelDistrict
+            );
 
-            availableHotels = districtHotels;
+        });
+
+
+        // -----------------------------------------------------
+        // No matching hotel
+        // -----------------------------------------------------
+
+        if (districtHotels.length === 0) {
+
+            return {
+                place: item?.place || "",
+                hotel: null
+            };
 
         }
 
-        // Highest rated hotel first
+
+        // -----------------------------------------------------
+        // Prefer hotels that have not already been used
+        // -----------------------------------------------------
+
+        let availableHotels =
+            districtHotels.filter((hotel) => {
+
+                return !usedHotels.has(
+                    getHotelId(hotel)
+                );
+
+            });
+
+
+        // -----------------------------------------------------
+        // If every hotel in this district was already used,
+        // allow reuse.
+        //
+        // This keeps the planner functional even when a district
+        // has fewer hotels than itinerary days.
+        // -----------------------------------------------------
+
+        if (availableHotels.length === 0) {
+
+            availableHotels = [
+                ...districtHotels
+            ];
+
+        }
+
+
+        // -----------------------------------------------------
+        // Ranking logic
+        //
+        // 1. Higher rating
+        // 2. Lower starting price when ratings match
+        //
+        // The source dataset is never mutated.
+        // -----------------------------------------------------
+
         availableHotels.sort((a, b) => {
 
-    // Higher rating first
-    if (b.rating !== a.rating) {
-        return b.rating - a.rating;
-    }
+            const ratingDifference =
+                getRating(b) - getRating(a);
 
-    // If same rating, cheaper hotel first
-    return a.price_from - b.price_from;
 
-});
+            if (ratingDifference !== 0) {
 
-        const recommendedHotel = availableHotels[0];
-        console.log(
-    `Recommended for ${item.place}: ${recommendedHotel.name}`
-);
+                return ratingDifference;
 
-        usedHotels.add(recommendedHotel.id);
+            }
+
+
+            return (
+                getPrice(a) -
+                getPrice(b)
+            );
+
+        });
+
+
+        // -----------------------------------------------------
+        // Select recommendation
+        // -----------------------------------------------------
+
+        const recommendedHotel =
+            availableHotels[0] || null;
+
+
+        // -----------------------------------------------------
+        // Track selected hotel
+        // -----------------------------------------------------
+
+        if (recommendedHotel) {
+
+            const hotelId =
+                getHotelId(recommendedHotel);
+
+
+            if (hotelId) {
+
+                usedHotels.add(hotelId);
+
+            }
+
+        }
+
+
+        // -----------------------------------------------------
+        // Preserve existing service contract
+        // -----------------------------------------------------
 
         return {
 
-            place:item.place,
+            place: item?.place || "",
 
-            hotel:recommendedHotel
+            hotel: recommendedHotel
 
         };
 
@@ -71,6 +214,10 @@ const recommendHotels = (itinerary) => {
 
 };
 
+
+// =========================================================
+// EXPORT
+// =========================================================
 
 module.exports = {
 

@@ -1,56 +1,140 @@
+// =========================================================
+// JHARKHAND TOURISM — DESTINATION HIGHLIGHTS SERVICE
+// =========================================================
+//
+// Provides destination highlights for:
+// - Planner Highlights section
+// - PDF Trip Report
+// - AI Planner fallback data
+//
+// Existing destination groups and values are preserved.
+// =========================================================
+
+
+// =========================================================
+// DEFAULT HIGHLIGHTS
+// =========================================================
+
+const DEFAULT_HIGHLIGHTS = [
+
+    "Patratu Valley",
+
+    "Netarhat",
+
+    "Deoghar",
+
+    "Ranchi Lake"
+
+];
+
+
+// =========================================================
+// WATERFALL HIGHLIGHTS
+// =========================================================
+
+const WATERFALL_HIGHLIGHTS = [
+
+    "Hundru Falls",
+
+    "Dassam Falls",
+
+    "Jonha Falls",
+
+    "Lodh Falls"
+
+];
+
+
+// =========================================================
+// WILDLIFE HIGHLIGHTS
+// =========================================================
+
+const WILDLIFE_HIGHLIGHTS = [
+
+    "Betla National Park",
+
+    "Dalma Sanctuary",
+
+    "Hazaribagh Wildlife Sanctuary",
+
+    "Palamu Tiger Reserve"
+
+];
+
+
+// =========================================================
+// DESTINATION NORMALIZATION
+// =========================================================
+
+function normalizeDestination(destination) {
+
+    if (
+        typeof destination !== "string"
+    ) {
+        return "";
+    }
+
+    return destination
+        .trim()
+        .toLowerCase();
+
+}
+
+
+// =========================================================
+// GET DESTINATION HIGHLIGHTS
+// =========================================================
+
 const getDestinationHighlights = (destination) => {
 
+    const normalizedDestination =
+        normalizeDestination(destination);
+
+
+    // -----------------------------------------------------
+    // Waterfall destinations
+    // -----------------------------------------------------
+
     if (
-        destination &&
-        destination.toLowerCase().includes("waterfall")
+        normalizedDestination.includes("waterfall")
     ) {
 
         return [
-
-            "Hundru Falls",
-
-            "Dassam Falls",
-
-            "Jonha Falls",
-
-            "Lodh Falls"
-
+            ...WATERFALL_HIGHLIGHTS
         ];
 
     }
 
+
+    // -----------------------------------------------------
+    // Wildlife destinations
+    // -----------------------------------------------------
+
     if (
-        destination &&
-        destination.toLowerCase().includes("wildlife")
+        normalizedDestination.includes("wildlife")
     ) {
 
         return [
-
-            "Betla National Park",
-
-            "Dalma Sanctuary",
-
-            "Hazaribagh Wildlife Sanctuary",
-
-            "Palamu Tiger Reserve"
-
+            ...WILDLIFE_HIGHLIGHTS
         ];
 
     }
+
+
+    // -----------------------------------------------------
+    // General tourism
+    // -----------------------------------------------------
 
     return [
-
-        "Patratu Valley",
-
-        "Netarhat",
-
-        "Deoghar",
-
-        "Ranchi Lake"
-
+        ...DEFAULT_HIGHLIGHTS
     ];
 
 };
+
+
+// =========================================================
+// EXPORT
+// =========================================================
 
 module.exports = {
 

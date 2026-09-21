@@ -1,148 +1,535 @@
-// init/routes/places.js
 const express = require('express');
 const router = express.Router();
 
-// Try to use your Mongoose Place model if it exists
+/*
+ * Jharkhand Tourism
+ * -----------------
+ * Places discovery + place details
+ *
+ * Core behavior preserved:
+ * - MongoDB/Mongoose Place model when available
+ * - Static dataset fallback
+ * - Search
+ * - Category filtering
+ * - District filtering
+ * - Pagination
+ * - Place details
+ * - Nearby places
+ * - Nearby hotels
+ */
+
+// ------------------------------------------------------------
+// DATA SOURCES
+// ------------------------------------------------------------
+
 let PlaceModel = null;
+
 try {
   PlaceModel = require('../models/place');
-} catch (e) {
-  PlaceModel = null;
+} catch (error) {
+  console.warn(
+    'places router: Place model unavailable, using fallback dataset.'
+  );
 }
 
-// Fallback static dataset (make sure file exists)
 let fallbackData = [];
+
 try {
   fallbackData = require('../data/places_data');
-} catch (e) {
-  fallbackData = [];
+} catch (error) {
+  console.warn(
+    'places router: fallback places dataset unavailable.'
+  );
 }
 
-// Optional hotels dataset for "nearby hotels" (not required)
 let hotelsList = [];
+
 try {
-  hotelsList = require('../models/hotels'); // if present, it's an array
-} catch (e) {
-  hotelsList = [];
+  hotelsList = require('../models/hotels');
+} catch (error) {
+  console.warn(
+    'places router: hotels dataset unavailable.'
+  );
 }
 
-// Helper: read places from DB if available, otherwise fallback dataset
+// ------------------------------------------------------------
+// CONSTANTS
+// ------------------------------------------------------------
+
+const DEFAULT_PAGE = 1;
+const ITEMS_PER_PAGE = 12;
+
+// ------------------------------------------------------------
+// HELPERS
+// ------------------------------------------------------------
+
+function cleanString(value, fallback = '') {
+  if (value === undefined || value === null) {
+    return fallback;
+  }
+
+  return String(value).trim();
+}
+
+function normalize(value) {
+  return cleanString(value).toLowerCase();
+}
+
+function getPlaceImage(place) {
+  if (!place) {
+    return '/images/placeholder.jpg';
+  }
+
+  if (Array.isArray(place.images) && place.images.length > 0) {
+    const firstImage = place.images[0];
+
+    if (typeof firstImage === 'string' && firstImage.trim()) {
+      return firstImage;
+    }
+
+    if (
+      firstImage &&
+      typeof firstImage === 'object' &&
+      firstImage.url
+    ) {
+      return firstImage.url;
+    }
+  }
+
+  return (
+    place.image ||
+    place.thumbnail ||
+    '/images/placeholder.jpg'
+  );
+}
+
+function transformPlace(place) {
+  if (!place) {
+    return null;
+  }
+
+  const description =
+    cleanString(place.description) ||
+    cleanString(place.long_desc) ||
+    cleanString(place.short_desc);
+
+  const shortDescription =
+    cleanString(place.short_desc) ||
+    description.slice(0, 160);
+
+  let googleMap = cleanString(place.google_map);
+
+  if (
+    !googleMap &&
+    place.coordinates &&
+    typeof place.coordinates === 'object'
+  ) {
+    const lat = place.coordinates.lat;
+    const lng = place.coordinates.lng;
+
+    if (
+      lat !== undefined &&
+      lat !== null &&
+      lng !== undefined &&
+      lng !== null
+    ) {
+      googleMap = `https://www.google.com/maps?q=${encodeURIComponent(
+        `${lat},${lng}`
+      )}`;
+    }
+  }
+
+  return {
+    ...place,
+
+    place_id:
+      cleanString(place.place_id) ||
+      cleanString(place._id),
+
+    name: cleanString(place.name, 'Unnamed Destination'),
+
+    district: cleanString(
+      place.district,
+      'Jharkhand'
+    ),
+
+    category: cleanString(
+      place.category,
+      'Other'
+    ),
+
+    short_desc: shortDescription,
+
+    long_desc: description,
+
+    google_map: googleMap,
+
+    image: getPlaceImage(place)
+  };
+}
+
+// ------------------------------------------------------------
+// FETCH PLACES
+// ------------------------------------------------------------
+
 async function fetchPlacesFromSource() {
   if (PlaceModel) {
     try {
       const count = await PlaceModel.countDocuments();
+
       if (count > 0) {
-        const docs = await PlaceModel.find().sort({ createdAt: -1 }).lean();
-        return docs.map(d => ({
-          place_id: d.place_id || String(d._id),
-          name: d.name,
-          district: d.district,
-          category: d.category,
-          short_desc: d.description ? d.description.slice(0, 140) : (d.short_desc || ''),
-          long_desc: d.description || d.long_desc || '',
-          google_map: d.google_map || (d.coordinates ? `https://www.google.com/maps?q=${d.coordinates.lat},${d.coordinates.lng}` : ''),
-          image: (d.images && d.images.length) ? (d.images[0].url || d.images[0]) : (d.thumbnail || '/images/placeholder.jpg'),
-        }));
+        const documents = await PlaceModel
+          .find()
+          .sort({ createdAt: -1 })
+          .lean();
+
+        return documents
+          .map(transformPlace)
+          .filter(Boolean);
       }
-    } catch (err) {
-      console.warn('places router: DB read failed, falling back to static dataset:', err && err.message);
+    } catch (error) {
+      console.warn(
+        'places router: database read failed; using fallback dataset:',
+        error?.message || error
+      );
     }
   }
-  // fallback to static dataset (already shaped suitably)
-  return Array.isArray(fallbackData) ? fallbackData : [];
+
+  return Array.isArray(fallbackData)
+    ? fallbackData
+        .map(transformPlace)
+        .filter(Boolean)
+    : [];
 }
 
-// Simple filter/search helper
-function applyFilters(list, { q, category, district }) {
-  let out = list;
-  if (q) {
-    const ql = q.toLowerCase();
-    out = out.filter(p =>
-      (p.name && p.name.toLowerCase().includes(ql)) ||
-      (p.district && p.district.toLowerCase().includes(ql)) ||
-      (p.short_desc && p.short_desc.toLowerCase().includes(ql))
+// ------------------------------------------------------------
+// FILTERING
+// ------------------------------------------------------------
+
+function applyFilters(
+  list,
+  {
+    q = '',
+    category = 'all',
+    district = 'all'
+  } = {}
+) {
+  let result = Array.isArray(list)
+    ? [...list]
+    : [];
+
+  const searchTerm = normalize(q);
+  const selectedCategory = normalize(category);
+  const selectedDistrict = normalize(district);
+
+  // Search
+  if (searchTerm) {
+    result = result.filter((place) => {
+      const searchableText = [
+        place.name,
+        place.district,
+        place.category,
+        place.short_desc,
+        place.long_desc,
+        Array.isArray(place.tags)
+          ? place.tags.join(' ')
+          : place.tags
+      ]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase();
+
+      return searchableText.includes(searchTerm);
+    });
+  }
+
+  // Category
+  if (
+    selectedCategory &&
+    selectedCategory !== 'all'
+  ) {
+    result = result.filter(
+      (place) =>
+        normalize(place.category) ===
+        selectedCategory
     );
   }
-  if (category && category !== 'all') {
-    out = out.filter(p => (p.category || '').toLowerCase() === category.toLowerCase());
+
+  // District
+  if (
+    selectedDistrict &&
+    selectedDistrict !== 'all'
+  ) {
+    result = result.filter(
+      (place) =>
+        normalize(place.district) ===
+        selectedDistrict
+    );
   }
-  if (district && district !== 'all') {
-    out = out.filter(p => (p.district || '').toLowerCase() === district.toLowerCase());
-  }
-  return out;
+
+  return result;
 }
 
-// LIST: /places?page=1&q=...&category=...
+// ------------------------------------------------------------
+// FILTER OPTIONS
+// ------------------------------------------------------------
+
+function getFilterOptions(places) {
+  const categories = Array.from(
+    new Set(
+      places
+        .map((place) => cleanString(place.category))
+        .filter(Boolean)
+    )
+  ).sort((a, b) =>
+    a.localeCompare(b)
+  );
+
+  const districts = Array.from(
+    new Set(
+      places
+        .map((place) => cleanString(place.district))
+        .filter(Boolean)
+    )
+  ).sort((a, b) =>
+    a.localeCompare(b)
+  );
+
+  return {
+    categories,
+    districts
+  };
+}
+
+// ------------------------------------------------------------
+// LIST — GET /places
+// ------------------------------------------------------------
+
 router.get('/', async (req, res) => {
   try {
-    const page = Math.max(1, parseInt(req.query.page || '1', 10));
-    const perPage = 12;
-    const q = req.query.q || '';
-    const category = req.query.category || 'all';
-    const district = req.query.district || 'all';
+    const requestedPage = Number.parseInt(
+      req.query.page,
+      10
+    );
 
-    const all = await fetchPlacesFromSource();
-    const safeAll = Array.isArray(all) ? all : [];
+    const page =
+      Number.isFinite(requestedPage) &&
+      requestedPage > 0
+        ? requestedPage
+        : DEFAULT_PAGE;
 
-    const filtered = applyFilters(safeAll, { q, category, district });
+    const q = cleanString(req.query.q);
 
-    const total = filtered.length;
-    const totalPages = Math.max(1, Math.ceil(total / perPage));
-    const start = (page - 1) * perPage;
-    const pagePlaces = filtered.slice(start, start + perPage);
+    const category = cleanString(
+      req.query.category,
+      'all'
+    ) || 'all';
 
-    // derive categories & districts for filter UI safely
-    const categories = Array.from(new Set(safeAll.map(p => p.category).filter(Boolean))).sort();
-    const districts = Array.from(new Set(safeAll.map(p => p.district).filter(Boolean))).sort();
+    const district = cleanString(
+      req.query.district,
+      'all'
+    ) || 'all';
 
-    // Defensive: ensure view always receives defined variables
-    return res.render('places/index', {
-      places: Array.isArray(pagePlaces) ? pagePlaces : [],
-      page: page || 1,
-      totalPages: totalPages || 1,
-      total: total || 0,
-      q: q || '',
-      selectedCategory: category || 'all',
-      selectedDistrict: district || 'all',
-      categories: categories || [],
-      districts: districts || []
-    });
-  } catch (err) {
-    console.error('Error in GET /places:', err);
-    return res.status(500).send('Server error');
+    const allPlaces =
+      await fetchPlacesFromSource();
+
+    const safePlaces = Array.isArray(allPlaces)
+      ? allPlaces
+      : [];
+
+    const filteredPlaces = applyFilters(
+      safePlaces,
+      {
+        q,
+        category,
+        district
+      }
+    );
+
+    const total = filteredPlaces.length;
+
+    const totalPages = Math.max(
+      1,
+      Math.ceil(total / ITEMS_PER_PAGE)
+    );
+
+    // Prevent requests beyond the last page
+    const safePage = Math.min(
+      page,
+      totalPages
+    );
+
+    const start =
+      (safePage - 1) * ITEMS_PER_PAGE;
+
+    const pagePlaces =
+      filteredPlaces.slice(
+        start,
+        start + ITEMS_PER_PAGE
+      );
+
+    const {
+      categories,
+      districts
+    } = getFilterOptions(safePlaces);
+
+    return res.render(
+      'places/index',
+      {
+        places: pagePlaces,
+
+        page: safePage,
+
+        totalPages,
+
+        total,
+
+        q,
+
+        selectedCategory: category,
+
+        selectedDistrict: district,
+
+        categories,
+
+        districts
+      }
+    );
+  } catch (error) {
+    console.error(
+      'Error in GET /places:',
+      error
+    );
+
+    return res.status(500).render(
+      '404',
+      {
+        message:
+          'Unable to load destinations right now.'
+      }
+    );
   }
 });
 
-// DETAIL: /places/:id
+// ------------------------------------------------------------
+// DETAIL — GET /places/:id
+// ------------------------------------------------------------
+
 router.get('/:id', async (req, res) => {
   try {
-    const id = req.params.id;
-    const all = await fetchPlacesFromSource();
-    const safeAll = Array.isArray(all) ? all : [];
+    const requestedId =
+      cleanString(req.params.id);
 
-    // find the place by place_id or by _id string
-    const place = safeAll.find(p => p.place_id === id || String(p.place_id) === id || String(p._id) === id);
+    if (!requestedId) {
+      return res.status(404).render(
+        '404',
+        {
+          message:
+            'Destination not found.'
+        }
+      );
+    }
+
+    const allPlaces =
+      await fetchPlacesFromSource();
+
+    const safePlaces = Array.isArray(allPlaces)
+      ? allPlaces
+      : [];
+
+    const place = safePlaces.find(
+      (item) =>
+        cleanString(item.place_id) ===
+        requestedId ||
+        cleanString(item._id) ===
+        requestedId
+    );
+
     if (!place) {
-      return res.status(404).render('404', { message: 'Place not found' });
+      return res.status(404).render(
+        '404',
+        {
+          message:
+            'Destination not found.'
+        }
+      );
     }
 
-    // Nearby places (existing logic) — e.g. same district or same category
-    const nearbyPlaces = safeAll.filter(p => p.place_id !== place.place_id && (p.district === place.district || p.category === place.category)).slice(0, 6);
+    // --------------------------------------------------------
+    // Nearby places
+    // --------------------------------------------------------
 
-    // Compute nearby hotels safely (only if hotelsList loaded)
+    const nearbyPlaces = safePlaces
+      .filter((item) => {
+        if (
+          cleanString(item.place_id) ===
+          cleanString(place.place_id)
+        ) {
+          return false;
+        }
+
+        const sameDistrict =
+          normalize(item.district) ===
+          normalize(place.district);
+
+        const sameCategory =
+          normalize(item.category) ===
+          normalize(place.category);
+
+        return (
+          sameDistrict ||
+          sameCategory
+        );
+      })
+      .slice(0, 6);
+
+    // --------------------------------------------------------
+    // Nearby hotels
+    // --------------------------------------------------------
+
     let nearbyHotels = [];
-    if (Array.isArray(hotelsList) && hotelsList.length > 0) {
-      // Match by district (case-insensitive)
-      const pd = (place.district || '').toLowerCase();
-      nearbyHotels = hotelsList.filter(h => (h.district || '').toLowerCase() === pd).slice(0, 4);
+
+    if (
+      Array.isArray(hotelsList) &&
+      hotelsList.length > 0
+    ) {
+      const placeDistrict =
+        normalize(place.district);
+
+      nearbyHotels = hotelsList
+        .filter((hotel) => {
+          return (
+            normalize(hotel?.district) ===
+            placeDistrict
+          );
+        })
+        .slice(0, 4);
     }
 
-    return res.render('places/show', { place, nearby: nearbyPlaces, nearbyHotels });
-  } catch (err) {
-    console.error('Error in GET /places/:id', err);
-    return res.status(500).send('Server error');
+    return res.render(
+      'places/show',
+      {
+        place,
+
+        nearby: nearbyPlaces,
+
+        nearbyHotels
+      }
+    );
+  } catch (error) {
+    console.error(
+      'Error in GET /places/:id:',
+      error
+    );
+
+    return res.status(500).render(
+      '404',
+      {
+        message:
+          'Unable to load this destination right now.'
+      }
+    );
   }
 });
-
 
 module.exports = router;

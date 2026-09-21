@@ -1,67 +1,292 @@
-<div class="brand text-center mb-4">
-  <img
-    src="/images/jharkhand_tourism_logo_final.png"
-    alt="Jharkhand Tourism"
-    style="height:90px;"
-  >
+<main class="jt-auth-page">
 
-  <h2 class="mt-3 fw-bold text-success">
-    Create Tourist Account
-  </h2>
+  <!-- =====================================================
+       VISUAL PANEL
+       ===================================================== -->
 
-  <p class="text-muted">
-    Join Jharkhand Smart Tourism Platform
-  </p>
-</div>
+  <section class="jt-auth-visual">
 
-<form method="POST" action="/auth/register">
+    <div class="jt-auth-visual-image"></div>
 
-  <div class="mb-3">
-    <label class="form-label">Full Name</label>
-    <input
-      type="text"
-      name="name"
-      class="form-control"
-      required
-    >
-  </div>
+    <div class="jt-auth-visual-overlay"></div>
 
-  <div class="mb-3">
-    <label class="form-label">Email Address</label>
-    <input
-      type="email"
-      name="email"
-      class="form-control"
-      required
-    >
-  </div>
+    <div class="jt-auth-visual-content">
 
-  <div class="mb-3">
-    <label class="form-label">Password</label>
-    <input
-      type="password"
-      name="password"
-      class="form-control"
-      minlength="6"
-      required
-    >
-  </div>
+      <a
+        href="/"
+        class="jt-auth-brand"
+        aria-label="Jharkhand Tourism home"
+      >
+        <img
+          src="/images/jharkhand_tourism_logo_final.png"
+          alt="Jharkhand Tourism"
+        >
+      </a>
 
-  <button
-    type="submit"
-    class="btn btn-tourism w-100"
-  >
-    Create Account
-  </button>
+      <span class="jt-auth-eyebrow">
+        JHARKHAND TOURISM
+      </span>
 
-</form>
+      <h1>
+        Discover more.
+        <em>Experience Jharkhand.</em>
+      </h1>
 
-<div class="text-center mt-4">
+      <p>
+        Create your account and unlock a more personal way
+        to explore destinations, culture and unforgettable journeys.
+      </p>
 
-  Already have an account?
+      <div class="jt-auth-visual-meta">
 
-  <a href="/auth/login">
-    Login
-  </a>
+        <span>
+          <i class="fa-solid fa-map-location-dot"></i>
+          Discover
+        </span>
 
-</div>
+        <span>
+          <i class="fa-solid fa-compass"></i>
+          Travel
+        </span>
+
+        <span>
+          <i class="fa-solid fa-heart"></i>
+          Save
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       REGISTER PANEL
+       ===================================================== -->
+
+  <section class="jt-auth-form-panel">
+
+    <div class="jt-auth-form-container">
+
+      <div class="jt-auth-mobile-brand">
+
+        <a
+          href="/"
+          aria-label="Jharkhand Tourism home"
+        >
+          <img
+            src="/images/jharkhand_tourism_logo_final.png"
+            alt="Jharkhand Tourism"
+          >
+        </a>
+
+      </div>
+
+
+      <!-- Heading -->
+
+      <div class="jt-auth-heading">
+
+        <span class="jt-auth-kicker">
+          CREATE YOUR ACCOUNT
+        </span>
+
+        <h2>
+          Start exploring.
+        </h2>
+
+        <p>
+          Join Jharkhand Tourism and make your travel
+          experience more personal.
+        </p>
+
+      </div>
+
+
+      <!-- Registration form -->
+
+      <form
+        method="POST"
+        action="/auth/register"
+        class="jt-auth-form"
+      >
+
+        <!-- Name -->
+
+        <div class="jt-auth-field">
+
+          <label for="registerName">
+            Full name
+          </label>
+
+          <div class="jt-auth-input-wrap">
+
+            <i
+              class="fa-regular fa-user"
+              aria-hidden="true"
+            ></i>
+
+            <input
+              type="text"
+              id="registerName"
+              name="name"
+              placeholder="Enter your full name"
+              autocomplete="name"
+              required
+            >
+
+          </div>
+
+        </div>
+
+
+        <!-- Email -->
+
+        <div class="jt-auth-field">
+
+          <label for="registerEmail">
+            Email address
+          </label>
+
+          <div class="jt-auth-input-wrap">
+
+            <i
+              class="fa-regular fa-envelope"
+              aria-hidden="true"
+            ></i>
+
+            <input
+              type="email"
+              id="registerEmail"
+              name="email"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+            >
+
+          </div>
+
+        </div>
+
+
+        <!-- Password -->
+
+        <div class="jt-auth-field">
+
+          <label for="registerPassword">
+            Password
+          </label>
+
+          <div class="jt-auth-input-wrap">
+
+            <i
+              class="fa-solid fa-lock"
+              aria-hidden="true"
+            ></i>
+
+            <input
+              type="password"
+              id="registerPassword"
+              name="password"
+              placeholder="Create a password"
+              autocomplete="new-password"
+              minlength="6"
+              required
+            >
+
+            <button
+              type="button"
+              class="jt-auth-password-toggle"
+              data-password-target="registerPassword"
+              aria-label="Show password"
+            >
+              <i class="fa-regular fa-eye"></i>
+            </button>
+
+          </div>
+
+          <div class="jt-auth-helper">
+            Minimum 6 characters
+          </div>
+
+        </div>
+
+
+        <!-- Submit -->
+
+        <button
+          type="submit"
+          class="jt-auth-submit"
+        >
+
+          <span>
+            Create account
+          </span>
+
+          <i
+            class="fa-solid fa-arrow-right"
+            aria-hidden="true"
+          ></i>
+
+        </button>
+
+      </form>
+
+
+      <!-- Login link -->
+
+      <div class="jt-auth-switch">
+
+        <span>
+          Already have an account?
+        </span>
+
+        <a href="/auth/login">
+          Sign in
+          <i
+            class="fa-solid fa-arrow-up-right-from-square"
+            aria-hidden="true"
+          ></i>
+        </a>
+
+      </div>
+
+
+      <!-- Security note -->
+
+      <div class="jt-auth-security">
+
+        <i
+          class="fa-solid fa-shield-halved"
+          aria-hidden="true"
+        ></i>
+
+        <span>
+          Your account information is handled through secure authentication.
+        </span>
+
+      </div>
+
+
+      <!-- Back -->
+
+      <a
+        href="/"
+        class="jt-auth-back"
+      >
+
+        <i
+          class="fa-solid fa-arrow-left"
+          aria-hidden="true"
+        ></i>
+
+        Back to Jharkhand Tourism
+
+      </a>
+
+    </div>
+
+  </section>
+
+</main>

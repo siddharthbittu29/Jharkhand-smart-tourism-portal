@@ -1,0 +1,823 @@
+<%
+  const pageTitle = title || "AI Trip Planner";
+%>
+
+<!-- =========================================================
+     JHARKHAND TOURISM
+     PREMIUM AI TRIP PLANNER
+     LANDING PAGE
+========================================================= -->
+
+<link
+  rel="stylesheet"
+  href="/css/planner-landing.css?v=4"
+>
+
+<section class="jt-planner-page">
+
+  <!-- =======================================================
+       HERO
+  ======================================================== -->
+
+  <section class="jt-planner-hero">
+
+    <div class="jt-planner-hero-image"></div>
+
+    <div class="jt-planner-hero-overlay"></div>
+
+    <div class="jt-planner-hero-pattern"></div>
+
+
+    <div class="jt-container jt-planner-hero-inner">
+
+      <!-- LEFT -->
+      <div class="jt-planner-hero-copy">
+
+        <div class="jt-planner-eyebrow">
+
+          <span class="jt-planner-eyebrow-line"></span>
+
+          <span>
+            AI POWERED SMART TOURISM
+          </span>
+
+        </div>
+
+
+        <h1>
+          Plan a journey
+          <span>worth remembering.</span>
+        </h1>
+
+
+        <p class="jt-planner-hero-description">
+
+          Build a personalised Jharkhand travel plan around
+          your destination, time and budget — with smart
+          itineraries, stays, costs, weather and travel insights.
+
+        </p>
+
+
+        <!-- HERO FEATURES -->
+
+        <div class="jt-planner-hero-features">
+
+          <div class="jt-planner-hero-feature">
+
+            <span>
+              <i class="fa-solid fa-route"></i>
+            </span>
+
+            <div>
+              <strong>
+                Smart itinerary
+              </strong>
+
+              <small>
+                Day-by-day planning
+              </small>
+            </div>
+
+          </div>
+
+
+          <div class="jt-planner-hero-feature">
+
+            <span>
+              <i class="fa-solid fa-hotel"></i>
+            </span>
+
+            <div>
+              <strong>
+                Stay suggestions
+              </strong>
+
+              <small>
+                Destination-based hotels
+              </small>
+            </div>
+
+          </div>
+
+
+          <div class="jt-planner-hero-feature">
+
+            <span>
+              <i class="fa-solid fa-chart-pie"></i>
+            </span>
+
+            <div>
+              <strong>
+                Budget intelligence
+              </strong>
+
+              <small>
+                Estimated trip costs
+              </small>
+            </div>
+
+          </div>
+
+
+          <div class="jt-planner-hero-feature">
+
+            <span>
+              <i class="fa-solid fa-leaf"></i>
+            </span>
+
+            <div>
+              <strong>
+                Eco insights
+              </strong>
+
+              <small>
+                Sustainable travel view
+              </small>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- TRUST STRIP -->
+
+        <div class="jt-planner-trust">
+
+          <i class="fa-solid fa-circle-check"></i>
+
+          <span>
+            Designed for exploring Jharkhand responsibly
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           PLANNER CARD
+      ================================================== -->
+
+      <div class="jt-planner-form-card">
+
+        <!-- CARD TOP -->
+
+        <div class="jt-planner-card-top">
+
+          <div class="jt-planner-card-icon">
+
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+          </div>
+
+          <div>
+
+            <span>
+              AI TRIP PLANNER
+            </span>
+
+            <h2>
+              Build your itinerary
+            </h2>
+
+            <p>
+              Start with three simple details.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- PROGRESS -->
+
+        <div class="jt-planner-card-progress">
+
+          <div class="jt-planner-progress-step active">
+            <span>1</span>
+            <small>Trip</small>
+          </div>
+
+          <div class="jt-planner-progress-line"></div>
+
+          <div class="jt-planner-progress-step">
+            <span>2</span>
+            <small>Plan</small>
+          </div>
+
+          <div class="jt-planner-progress-line"></div>
+
+          <div class="jt-planner-progress-step">
+            <span>3</span>
+            <small>Explore</small>
+          </div>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <form
+          action="/planner"
+          method="POST"
+          class="jt-planner-form"
+        >
+
+          <!-- DESTINATION -->
+
+          <div class="jt-planner-field">
+
+            <label for="plannerDestination">
+              Where are you going?
+            </label>
+
+            <div class="jt-planner-input">
+
+              <span class="jt-planner-input-icon">
+                <i class="fa-solid fa-location-dot"></i>
+              </span>
+
+              <input
+                id="plannerDestination"
+                type="text"
+                name="destination"
+                placeholder="Ranchi, Netarhat, waterfalls..."
+                autocomplete="off"
+                required
+              >
+
+            </div>
+
+            <small>
+              Enter a destination, region or travel theme.
+            </small>
+
+          </div>
+
+
+          <!-- DAYS + BUDGET -->
+
+          <div class="jt-planner-input-grid">
+
+            <div class="jt-planner-field">
+
+              <label for="plannerDays">
+                Duration
+              </label>
+
+              <div class="jt-planner-input">
+
+                <span class="jt-planner-input-icon">
+                  <i class="fa-regular fa-calendar-days"></i>
+                </span>
+
+                <input
+                  id="plannerDays"
+                  type="number"
+                  name="days"
+                  min="1"
+                  max="15"
+                  value="4"
+                  required
+                >
+
+                <span class="jt-planner-input-suffix">
+                  days
+                </span>
+
+              </div>
+
+              <small>
+                1–15 days
+              </small>
+
+            </div>
+
+
+            <div class="jt-planner-field">
+
+              <label for="plannerBudget">
+                Budget
+              </label>
+
+              <div class="jt-planner-input">
+
+                <span class="jt-planner-input-currency">
+                  ₹
+                </span>
+
+                <input
+                  id="plannerBudget"
+                  type="number"
+                  name="budget"
+                  min="1"
+                  step="500"
+                  placeholder="10000"
+                  required
+                >
+
+              </div>
+
+              <small>
+                Total trip budget
+              </small>
+
+            </div>
+
+          </div>
+
+
+          <!-- SUBMIT -->
+
+          <button
+            type="submit"
+            class="jt-planner-generate"
+          >
+
+            <span>
+
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+              Generate my travel plan
+
+            </span>
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+          </button>
+
+
+          <!-- CARD FOOTER -->
+
+          <div class="jt-planner-card-footer">
+
+            <span>
+
+              <i class="fa-solid fa-shield-halved"></i>
+
+              Your inputs are used to build your trip plan.
+
+            </span>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+
+
+    <!-- HERO BOTTOM -->
+
+    <div class="jt-planner-scroll">
+
+      <span>
+        Discover smarter travel
+      </span>
+
+      <i class="fa-solid fa-arrow-down"></i>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       INTRO
+  ======================================================== -->
+
+  <section class="jt-planner-intro">
+
+    <div class="jt-container">
+
+      <div class="jt-planner-intro-grid">
+
+        <div>
+
+          <span class="jt-planner-section-label">
+            HOW IT WORKS
+          </span>
+
+          <h2>
+            From an idea
+            <span>to a complete journey.</span>
+          </h2>
+
+        </div>
+
+
+        <div>
+
+          <p>
+            Give the planner the basics of your trip.
+            It then brings your itinerary, destination
+            suggestions, budget information and travel
+            guidance together in one structured experience.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       STEPS
+  ======================================================== -->
+
+  <section class="jt-planner-steps">
+
+    <div class="jt-container">
+
+      <div class="jt-planner-step-grid">
+
+
+        <!-- STEP 01 -->
+
+        <article class="jt-planner-step-card">
+
+          <div class="jt-planner-step-top">
+
+            <span class="jt-planner-step-number">
+              01
+            </span>
+
+            <div class="jt-planner-step-icon">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+
+          </div>
+
+          <div>
+
+            <span class="jt-planner-step-label">
+              DESTINATION
+            </span>
+
+            <h3>
+              Choose where to go
+            </h3>
+
+            <p>
+              Enter a destination, district, region or
+              travel theme that interests you.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- STEP 02 -->
+
+        <article class="jt-planner-step-card">
+
+          <div class="jt-planner-step-top">
+
+            <span class="jt-planner-step-number">
+              02
+            </span>
+
+            <div class="jt-planner-step-icon">
+              <i class="fa-regular fa-calendar-days"></i>
+            </div>
+
+          </div>
+
+          <div>
+
+            <span class="jt-planner-step-label">
+              TRIP DETAILS
+            </span>
+
+            <h3>
+              Set your time & budget
+            </h3>
+
+            <p>
+              Tell the planner how many days you have
+              and the budget you want to work with.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- STEP 03 -->
+
+        <article class="jt-planner-step-card jt-planner-step-card-dark">
+
+          <div class="jt-planner-step-top">
+
+            <span class="jt-planner-step-number">
+              03
+            </span>
+
+            <div class="jt-planner-step-icon">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </div>
+
+          </div>
+
+          <div>
+
+            <span class="jt-planner-step-label">
+              SMART PLAN
+            </span>
+
+            <h3>
+              Explore your journey
+            </h3>
+
+            <p>
+              Receive your structured trip plan with
+              itinerary, costs, stays and travel insights.
+            </p>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       FEATURES
+  ======================================================== -->
+
+  <section class="jt-planner-capabilities">
+
+    <div class="jt-container">
+
+      <div class="jt-planner-section-heading">
+
+        <div>
+
+          <span class="jt-planner-section-label">
+            INSIDE YOUR PLAN
+          </span>
+
+          <h2>
+            More than
+            <span>a simple itinerary.</span>
+          </h2>
+
+        </div>
+
+        <p>
+          Every generated plan brings several travel
+          dimensions together so you can understand
+          the journey before you start it.
+        </p>
+
+      </div>
+
+
+      <div class="jt-planner-capability-grid">
+
+
+        <article class="jt-planner-capability-card large">
+
+          <div class="jt-planner-capability-icon">
+            <i class="fa-solid fa-route"></i>
+          </div>
+
+          <span>
+            01
+          </span>
+
+          <h3>
+            Day-by-day itinerary
+          </h3>
+
+          <p>
+            Organise destinations and experiences
+            into a structured travel sequence.
+          </p>
+
+          <div class="jt-planner-capability-arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+
+        </article>
+
+
+        <article class="jt-planner-capability-card">
+
+          <div class="jt-planner-capability-icon gold">
+            <i class="fa-solid fa-hotel"></i>
+          </div>
+
+          <span>
+            02
+          </span>
+
+          <h3>
+            Hotel suggestions
+          </h3>
+
+          <p>
+            Discover stay suggestions associated
+            with the destinations in your plan.
+          </p>
+
+        </article>
+
+
+        <article class="jt-planner-capability-card">
+
+          <div class="jt-planner-capability-icon blue">
+            <i class="fa-solid fa-chart-pie"></i>
+          </div>
+
+          <span>
+            03
+          </span>
+
+          <h3>
+            Budget intelligence
+          </h3>
+
+          <p>
+            Understand estimated hotel, food,
+            transport and total trip costs.
+          </p>
+
+        </article>
+
+
+        <article class="jt-planner-capability-card">
+
+          <div class="jt-planner-capability-icon sky">
+            <i class="fa-solid fa-cloud-sun"></i>
+          </div>
+
+          <span>
+            04
+          </span>
+
+          <h3>
+            Weather insights
+          </h3>
+
+          <p>
+            Keep useful weather and travel conditions
+            visible while planning.
+          </p>
+
+        </article>
+
+
+        <article class="jt-planner-capability-card">
+
+          <div class="jt-planner-capability-icon leaf">
+            <i class="fa-solid fa-leaf"></i>
+          </div>
+
+          <span>
+            05
+          </span>
+
+          <h3>
+            Eco score
+          </h3>
+
+          <p>
+            See a sustainability-oriented view of
+            your planned journey.
+          </p>
+
+        </article>
+
+
+        <article class="jt-planner-capability-card">
+
+          <div class="jt-planner-capability-icon purple">
+            <i class="fa-solid fa-lightbulb"></i>
+          </div>
+
+          <span>
+            06
+          </span>
+
+          <h3>
+            Travel insights
+          </h3>
+
+          <p>
+            Get highlights, tips and practical
+            travel guidance for your plan.
+          </p>
+
+        </article>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       VISUAL DESTINATION STRIP
+  ======================================================== -->
+
+  <section class="jt-planner-visual">
+
+    <div class="jt-container">
+
+      <div class="jt-planner-visual-card">
+
+        <div class="jt-planner-visual-image"></div>
+
+        <div class="jt-planner-visual-content">
+
+          <span class="jt-planner-section-label light">
+            JHARKHAND AWAITS
+          </span>
+
+          <h2>
+            Forests.
+            <br>
+            Waterfalls.
+            <br>
+            Culture.
+          </h2>
+
+          <p>
+            Build your route around the experiences
+            that make Jharkhand distinctive.
+          </p>
+
+          <a
+            href="/places"
+            class="jt-planner-outline-button"
+          >
+
+            Explore destinations
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       FINAL CTA
+  ======================================================== -->
+
+  <section class="jt-planner-final">
+
+    <div class="jt-container">
+
+      <div class="jt-planner-final-inner">
+
+        <div>
+
+          <span class="jt-planner-section-label">
+            READY WHEN YOU ARE
+          </span>
+
+          <h2>
+            Your next Jharkhand
+            <span>journey starts here.</span>
+          </h2>
+
+        </div>
+
+        <a
+          href="#main-content"
+          class="jt-planner-final-button"
+        >
+
+          Start planning
+
+          <i class="fa-solid fa-arrow-up"></i>
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</section>

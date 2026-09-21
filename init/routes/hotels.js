@@ -1,88 +1,317 @@
-// init/routes/hotels.js
-const express = require('express');
+// =========================================================
+// JHARKHAND TOURISM — HOTEL ROUTES
+// =========================================================
+
+const express = require("express");
 const router = express.Router();
 
 let hotelsData = [];
+
 try {
-  hotelsData = require('../models/hotels'); // the file above
-} catch (e) {
-  console.error('Hotels dataset not found', e);
+  hotelsData = require("../models/hotels");
+} catch (error) {
+  console.error("Hotels dataset not found", error);
   hotelsData = [];
 }
 
-// Helper: safe copy
+
+// ---------------------------------------------------------
+// Data helper
+// ---------------------------------------------------------
+
 function getAllHotels() {
-  return Array.isArray(hotelsData) ? hotelsData : [];
+  return Array.isArray(hotelsData)
+    ? hotelsData
+    : [];
 }
 
-// Listing: /hotels?page=1&district=&q=&price=min-max&rating=4+
-router.get('/', (req, res) => {
+
+// ---------------------------------------------------------
+// GET /hotels
+// Hotel listing + filters + pagination
+// ---------------------------------------------------------
+
+router.get("/", (req, res) => {
   try {
-    let page = Math.max(1, parseInt(req.query.page || '1', 10));
+    let page = Math.max(
+      1,
+      parseInt(req.query.page || "1", 10)
+    );
+
     const perPage = 12;
-    const q = (req.query.q || '').toLowerCase();
-    const district = (req.query.district || '').toLowerCase();
-    const priceRange = req.query.price || ''; // ex: 0-3000
-    const minRating = parseFloat(req.query.rating || '0');
-    const availability = (req.query.availability || '').toLowerCase();
+
+    const q = String(
+      req.query.q || ""
+    ).trim().toLowerCase();
+
+    const district = String(
+      req.query.district || ""
+    ).trim().toLowerCase();
+
+    const priceRange = String(
+      req.query.price || ""
+    ).trim();
+
+    const ratingQuery = String(
+      req.query.rating || ""
+    ).trim();
+
+    const availability = String(
+      req.query.availability || ""
+    ).trim().toLowerCase();
+
 
     let list = getAllHotels();
 
-    // filters
+
+    // -----------------------------------------------------
+    // Search
+    // -----------------------------------------------------
+
     if (q) {
-      list = list.filter(h => (h.name||'').toLowerCase().includes(q) || (h.address||'').toLowerCase().includes(q));
+      list = list.filter((hotel) => {
+        const name = String(
+          hotel.name || ""
+        ).toLowerCase();
+
+        const address = String(
+          hotel.address || ""
+        ).toLowerCase();
+
+        const hotelDistrict = String(
+          hotel.district || ""
+        ).toLowerCase();
+
+        return (
+          name.includes(q) ||
+          address.includes(q) ||
+          hotelDistrict.includes(q)
+        );
+      });
     }
+
+
+    // -----------------------------------------------------
+    // District
+    // -----------------------------------------------------
+
     if (district) {
-      list = list.filter(h => (h.district||'').toLowerCase() === district);
+      list = list.filter((hotel) => {
+        return String(
+          hotel.district || ""
+        ).toLowerCase() === district;
+      });
     }
+
+
+    // -----------------------------------------------------
+    // Price
+    // -----------------------------------------------------
+
     if (priceRange) {
-      const parts = priceRange.split('-').map(v=>parseFloat(v)||0);
-      list = list.filter(h => h.price_from >= parts[0] && h.price_from <= (parts[1] || 1e9));
+      const parts = priceRange
+        .split("-")
+        .map((value) => {
+          const parsed = parseFloat(value);
+          return Number.isFinite(parsed)
+            ? parsed
+            : 0;
+        });
+
+      const minPrice = parts[0] || 0;
+      const maxPrice =
+        parts[1] || Number.POSITIVE_INFINITY;
+
+      list = list.filter((hotel) => {
+        const price = Number(
+          hotel.price_from
+        );
+
+        if (!Number.isFinite(price)) {
+          return false;
+        }
+
+        return (
+          price >= minPrice &&
+          price <= maxPrice
+        );
+      });
     }
-    if (!isNaN(minRating) && minRating > 0) {
-      list = list.filter(h => (h.rating || 0) >= minRating);
+
+
+    // -----------------------------------------------------
+    // Rating
+    // -----------------------------------------------------
+
+    const minRating = parseFloat(
+      ratingQuery || "0"
+    );
+
+    if (
+      Number.isFinite(minRating) &&
+      minRating > 0
+    ) {
+      list = list.filter((hotel) => {
+        const rating = Number(
+          hotel.rating || 0
+        );
+
+        return rating >= minRating;
+      });
     }
+
+
+    // -----------------------------------------------------
+    // Availability
+    // -----------------------------------------------------
+
     if (availability) {
-      list = list.filter(h => (h.availability || '').toLowerCase() === availability);
+      list = list.filter((hotel) => {
+        return String(
+          hotel.availability || ""
+        ).toLowerCase() === availability;
+      });
     }
+
+
+    // -----------------------------------------------------
+    // Pagination
+    // -----------------------------------------------------
 
     const total = list.length;
-    const totalPages = Math.max(1, Math.ceil(total/perPage));
-    if (page > totalPages) page = totalPages;
-    const paged = list.slice((page-1)*perPage, page*perPage);
 
-    // derive distinct districts for filter UI
-    const districts = Array.from(new Set(getAllHotels().map(h=>h.district).filter(Boolean))).sort();
+    const totalPages = Math.max(
+      1,
+      Math.ceil(total / perPage)
+    );
 
-    res.render('hotels/index', {
+    if (page > totalPages) {
+      page = totalPages;
+    }
+
+    const startIndex =
+      (page - 1) * perPage;
+
+    const endIndex =
+      startIndex + perPage;
+
+    const paged = list.slice(
+      startIndex,
+      endIndex
+    );
+
+
+    // -----------------------------------------------------
+    // District options
+    // -----------------------------------------------------
+
+    const districts = Array.from(
+      new Set(
+        getAllHotels()
+          .map((hotel) => hotel.district)
+          .filter(Boolean)
+      )
+    ).sort();
+
+
+    // -----------------------------------------------------
+    // Render
+    // -----------------------------------------------------
+
+    res.render("hotels/index", {
       hotels: paged,
-      page, totalPages, total,
-      q: req.query.q || '',
+
+      page,
+      totalPages,
+      total,
+
+      q: req.query.q || "",
+
       districts,
-      selectedDistrict: req.query.district || '',
-      selectedAvailability: req.query.availability || ''
+
+      selectedDistrict:
+        req.query.district || "",
+
+      selectedPrice:
+        req.query.price || "",
+
+      selectedRating:
+        req.query.rating || "",
+
+      selectedAvailability:
+        req.query.availability || ""
     });
-  } catch (err) {
-    console.error('GET /hotels error', err);
-    res.status(500).send('Server error');
+
+  } catch (error) {
+    console.error(
+      "GET /hotels error",
+      error
+    );
+
+    res.status(500).send(
+      "Server error"
+    );
   }
 });
 
-// /hotels/:id
-router.get('/:id', (req, res) => {
+
+// ---------------------------------------------------------
+// GET /hotels/:id
+// Hotel detail
+// ---------------------------------------------------------
+
+router.get("/:id", (req, res) => {
   try {
     const id = req.params.id;
-    const list = getAllHotels();
-    const hotel = list.find(h => h.id === id || h.id === decodeURIComponent(id));
-    if (!hotel) return res.status(404).render('404', { message: 'Hotel not found' });
 
-    // nearby hotels: same district, exclude self, limit 4
-    const nearby = list.filter(h => h.id !== hotel.id && h.district === hotel.district).slice(0,4);
-    res.render('hotels/show', { hotel, nearby });
-  } catch (err) {
-    console.error('GET /hotels/:id error', err);
-    res.status(500).send('Server error');
+    const list = getAllHotels();
+
+    const hotel = list.find((item) => {
+      return (
+        item.id === id ||
+        item.id === decodeURIComponent(id)
+      );
+    });
+
+    if (!hotel) {
+      return res
+        .status(404)
+        .render("404", {
+          message: "Hotel not found"
+        });
+    }
+
+
+    // -----------------------------------------------------
+    // Nearby hotels
+    // -----------------------------------------------------
+
+    const nearby = list
+      .filter((item) => {
+        return (
+          item.id !== hotel.id &&
+          item.district === hotel.district
+        );
+      })
+      .slice(0, 4);
+
+
+    res.render("hotels/show", {
+      hotel,
+      nearby
+    });
+
+  } catch (error) {
+    console.error(
+      "GET /hotels/:id error",
+      error
+    );
+
+    res.status(500).send(
+      "Server error"
+    );
   }
 });
+
 
 module.exports = router;

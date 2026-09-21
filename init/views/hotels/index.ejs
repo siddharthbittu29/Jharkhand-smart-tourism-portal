@@ -1,79 +1,1423 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Book Hotels — Jharkhand</title>
-  <meta name="description" content="Find and book hotels across Jharkhand.">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/css/hotels.css">
-</head>
-<body>
-<% hotels = hotels || []; page = page || 1; totalPages = totalPages || 1; total = total || hotels.length; %>
+<%
+  // ============================================================
+  // JHARKHAND TOURISM
+  // Hotels Explorer
+  // ============================================================
 
-<main class="container">
-  <h1>Book Hotels</h1>
-  <p class="muted">Find and book government-operated and partner hotels across Jharkhand.</p>
+  const hotelList =
+    Array.isArray(hotels)
+      ? hotels
+      : [];
 
-  <section class="searchpanel glass">
-    <div class="row">
-      <input id="hotelSearch" placeholder="Search by hotel name or address" value="<%= q || '' %>">
-      <select id="filterDistrict">
-        <option value="">All Districts</option>
-        <% (districts || []).forEach(function(d){ %>
-          <option value="<%= d %>" <%= (selectedDistrict===d) ? 'selected' : '' %>><%= d %></option>
-        <% }) %>
-      </select>
-      <select id="filterAvailability">
-        <option value="">Any Availability</option>
-        <option value="Available" <%= (selectedAvailability==='Available') ? 'selected' : '' %>>Available</option>
-        <option value="Few Rooms Left" <%= (selectedAvailability==='Few Rooms Left') ? 'selected' : '' %>>Few Rooms Left</option>
-        <option value="Sold Out" <%= (selectedAvailability==='Sold Out') ? 'selected' : '' %>>Sold Out</option>
-      </select>
-      <button id="doFilter" class="btn">Search</button>
+  const hotelDistricts =
+    Array.isArray(districts)
+      ? districts
+      : [];
+
+  const currentPage =
+    Number(page) || 1;
+
+  const pages =
+    Number(totalPages) || 1;
+
+  const hotelTotal =
+    Number(total) || hotelList.length;
+
+  const searchQuery =
+    typeof q !== "undefined"
+      ? q
+      : "";
+
+  const activeDistrict =
+    typeof selectedDistrict !== "undefined"
+      ? selectedDistrict
+      : "";
+
+  const activePrice =
+    typeof selectedPrice !== "undefined"
+      ? selectedPrice
+      : "";
+
+  const activeRating =
+    typeof selectedRating !== "undefined"
+      ? selectedRating
+      : "";
+
+  const activeAvailability =
+    typeof selectedAvailability !== "undefined"
+      ? selectedAvailability
+      : "";
+
+  const hasActiveFilters =
+    Boolean(
+      searchQuery ||
+      activeDistrict ||
+      activePrice ||
+      activeRating ||
+      activeAvailability
+    );
+
+  const buildHotelPageUrl = (targetPage) => {
+    const params = new URLSearchParams();
+
+    params.set(
+      "page",
+      String(targetPage)
+    );
+
+    if (searchQuery) {
+      params.set(
+        "q",
+        searchQuery
+      );
+    }
+
+    if (activeDistrict) {
+      params.set(
+        "district",
+        activeDistrict
+      );
+    }
+
+    if (activePrice) {
+      params.set(
+        "price",
+        activePrice
+      );
+    }
+
+    if (activeRating) {
+      params.set(
+        "rating",
+        activeRating
+      );
+    }
+
+    if (activeAvailability) {
+      params.set(
+        "availability",
+        activeAvailability
+      );
+    }
+
+    return `/hotels?${params.toString()}`;
+  };
+%>
+
+
+<main class="jt-hotels-page">
+
+
+  <!-- ==========================================================
+       HERO
+       ========================================================== -->
+
+  <section class="jt-hotels-hero">
+
+    <div class="jt-hotels-hero-background">
+
+      <div class="jt-hotels-hero-image">
+
+        <img
+          src="/images/discover/patratu.jpg"
+          alt="Stay and explore Jharkhand"
+          loading="eager"
+        >
+
+      </div>
+
+      <div class="jt-hotels-hero-overlay"></div>
+
     </div>
-  </section>
 
-  <section id="hotels-grid" class="grid">
-    <% if (!hotels || hotels.length===0) { %>
-      <div class="empty">No hotels found.</div>
-    <% } else { %>
-      <% hotels.forEach(function(h){ %>
-        <article class="hotel-card glass" data-id="<%= h.id %>">
- <div class="media">
-  <img
-    src="<%= h.image ? h.image : '/images/placeholder-hotel.jpg' %>"
-    alt="<%= h.name %>"
-    onerror="this.onerror=null; this.src='/images/placeholder-hotel.jpg'; this.classList.add('img-broken');"
-    style="width:100%;height:100%;object-fit:cover;display:block"
-    data-original="<%= h.image %>"
-  />
-</div>
-         <div class="body">
-            <h3><%= h.name %></h3>
-            <div class="meta"><span class="badge"><%= h.rating %> ★</span> <span class="muted">• <%= h.district %></span></div>
-            <p class="addr"><%= h.address %></p>
-            <div class="card-footer">
-              <div class="price">₹ <strong><%= h.price_from %></strong> / night</div>
-              <div>
-                <a class="btn small" href="/hotels/<%= h.id %>">View Details</a>
-                <button class="btn small ghost fav" data-id="<%= h.id %>">♡</button>
-              </div>
-            </div>
+
+    <div class="jt-container jt-hotels-hero-container">
+
+      <div class="jt-hotels-hero-content">
+
+        <nav
+          class="jt-hotels-breadcrumb"
+          aria-label="Breadcrumb"
+        >
+
+          <a href="/">
+            Home
+          </a>
+
+          <i
+            class="fa-solid fa-chevron-right"
+            aria-hidden="true"
+          ></i>
+
+          <span>
+            Hotels
+          </span>
+
+        </nav>
+
+
+        <span class="jt-hotels-eyebrow">
+
+          <i
+            class="fa-solid fa-hotel"
+            aria-hidden="true"
+          ></i>
+
+          Stay in Jharkhand
+
+        </span>
+
+
+        <h1>
+          Find your stay<br>
+          across Jharkhand.
+        </h1>
+
+
+        <p>
+          Discover hotels and accommodation options
+          for your journey through Jharkhand's
+          cities, hills, forests and cultural destinations.
+        </p>
+
+
+        <div class="jt-hotels-hero-stats">
+
+          <div class="jt-hotels-stat">
+
+            <strong>
+              <%= hotelTotal %>
+            </strong>
+
+            <span>
+              Hotels
+            </span>
+
           </div>
-        </article>
-      <% }) %>
-    <% } %>
+
+
+          <div
+            class="jt-hotels-stat-divider"
+            aria-hidden="true"
+          ></div>
+
+
+          <div class="jt-hotels-stat">
+
+            <strong>
+              <%= hotelDistricts.length %>
+            </strong>
+
+            <span>
+              Districts
+            </span>
+
+          </div>
+
+
+          <div
+            class="jt-hotels-stat-divider"
+            aria-hidden="true"
+          ></div>
+
+
+          <div class="jt-hotels-stat">
+
+            <strong>
+              24/7
+            </strong>
+
+            <span>
+              Trip planning
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
   </section>
 
-  <nav class="pagination">
-    <% if (page>1) { %>
-      <a class="page" href="/hotels?page=<%= page-1 %>">&larr; Prev</a>
-    <% } else { %><span class="page disabled">&larr; Prev</span><% } %>
-    <span class="page-info">Page <%= page %> of <%= totalPages %> — <%= total %> hotels</span>
-    <% if (page<totalPages) { %><a class="page" href="/hotels?page=<%= page+1 %>">Next &rarr;</a><% } else { %><span class="page disabled">Next &rarr;</span><% } %>
-  </nav>
+
+  <!-- ==========================================================
+       MAIN CONTENT
+       ========================================================== -->
+
+  <section class="jt-section jt-hotels-main">
+
+    <div class="jt-container">
+
+
+      <!-- ======================================================
+           SEARCH / FILTER PANEL
+           ====================================================== -->
+
+      <div class="jt-hotels-filter-card">
+
+        <div class="jt-hotels-filter-heading">
+
+          <div>
+
+            <span class="jt-hotels-section-label">
+
+              <i
+                class="fa-solid fa-sliders"
+                aria-hidden="true"
+              ></i>
+
+              Find your stay
+
+            </span>
+
+            <h2>
+              Search & filter hotels
+            </h2>
+
+          </div>
+
+
+          <span class="jt-hotels-result-count">
+
+            <strong>
+              <%= hotelTotal %>
+            </strong>
+
+            results
+
+          </span>
+
+        </div>
+
+
+        <form
+          id="hotelFilterForm"
+          class="jt-hotels-filter-form"
+          method="GET"
+          action="/hotels"
+        >
+
+
+          <!-- ==================================================
+               SEARCH
+               ================================================== -->
+
+          <div class="jt-hotel-field jt-hotel-field-search">
+
+            <label
+              for="hotelSearch"
+              class="jt-hotel-field-label"
+            >
+              Search
+            </label>
+
+            <div class="jt-hotel-input-wrap">
+
+              <i
+                class="fa-solid fa-magnifying-glass"
+                aria-hidden="true"
+              ></i>
+
+              <input
+                id="hotelSearch"
+                name="q"
+                type="search"
+                value="<%= searchQuery %>"
+                placeholder="Hotel name or location..."
+                autocomplete="off"
+              >
+
+            </div>
+
+          </div>
+
+
+          <!-- ==================================================
+               DISTRICT
+               ================================================== -->
+
+          <div class="jt-hotel-field">
+
+            <label
+              for="filterDistrict"
+              class="jt-hotel-field-label"
+            >
+              District
+            </label>
+
+            <div class="jt-hotel-select-wrap">
+
+              <i
+                class="fa-solid fa-location-dot"
+                aria-hidden="true"
+              ></i>
+
+              <select
+                id="filterDistrict"
+                name="district"
+              >
+
+                <option value="">
+                  All districts
+                </option>
+
+                <% hotelDistricts.forEach(function(district) { %>
+
+                  <option
+                    value="<%= district %>"
+                    <%= activeDistrict === district ? "selected" : "" %>
+                  >
+                    <%= district %>
+                  </option>
+
+                <% }); %>
+
+              </select>
+
+            </div>
+
+          </div>
+
+
+          <!-- ==================================================
+               PRICE
+               ================================================== -->
+
+          <div class="jt-hotel-field">
+
+            <label
+              for="filterPrice"
+              class="jt-hotel-field-label"
+            >
+              Price range
+            </label>
+
+            <div class="jt-hotel-select-wrap">
+
+              <i
+                class="fa-solid fa-indian-rupee-sign"
+                aria-hidden="true"
+              ></i>
+
+              <select
+                id="filterPrice"
+                name="price"
+              >
+
+                <option
+                  value=""
+                  <%= activePrice === "" ? "selected" : "" %>
+                >
+                  Any price
+                </option>
+
+                <option
+                  value="0-1500"
+                  <%= activePrice === "0-1500" ? "selected" : "" %>
+                >
+                  Under ₹1,500
+                </option>
+
+                <option
+                  value="1500-3000"
+                  <%= activePrice === "1500-3000" ? "selected" : "" %>
+                >
+                  ₹1,500 – ₹3,000
+                </option>
+
+                <option
+                  value="3000-5000"
+                  <%= activePrice === "3000-5000" ? "selected" : "" %>
+                >
+                  ₹3,000 – ₹5,000
+                </option>
+
+                <option
+                  value="5000-100000"
+                  <%= activePrice === "5000-100000" ? "selected" : "" %>
+                >
+                  ₹5,000+
+                </option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+
+          <!-- ==================================================
+               RATING
+               ================================================== -->
+
+          <div class="jt-hotel-field">
+
+            <label
+              for="filterRating"
+              class="jt-hotel-field-label"
+            >
+              Rating
+            </label>
+
+            <div class="jt-hotel-select-wrap">
+
+              <i
+                class="fa-solid fa-star"
+                aria-hidden="true"
+              ></i>
+
+              <select
+                id="filterRating"
+                name="rating"
+              >
+
+                <option
+                  value=""
+                  <%= activeRating === "" ? "selected" : "" %>
+                >
+                  Any rating
+                </option>
+
+                <option
+                  value="4"
+                  <%= activeRating === "4" ? "selected" : "" %>
+                >
+                  4★ & above
+                </option>
+
+                <option
+                  value="4.5"
+                  <%= activeRating === "4.5" ? "selected" : "" %>
+                >
+                  4.5★ & above
+                </option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+
+          <!-- ==================================================
+               AVAILABILITY
+               ================================================== -->
+
+          <div class="jt-hotel-field">
+
+            <label
+              for="filterAvailability"
+              class="jt-hotel-field-label"
+            >
+              Availability
+            </label>
+
+            <div class="jt-hotel-select-wrap">
+
+              <i
+                class="fa-solid fa-bed"
+                aria-hidden="true"
+              ></i>
+
+              <select
+                id="filterAvailability"
+                name="availability"
+              >
+
+                <option value="">
+                  Any availability
+                </option>
+
+                <option
+                  value="Available"
+                  <%= activeAvailability === "Available" ? "selected" : "" %>
+                >
+                  Available
+                </option>
+
+                <option
+                  value="Few Rooms Left"
+                  <%= activeAvailability === "Few Rooms Left" ? "selected" : "" %>
+                >
+                  Few rooms left
+                </option>
+
+                <option
+                  value="Sold Out"
+                  <%= activeAvailability === "Sold Out" ? "selected" : "" %>
+                >
+                  Sold out
+                </option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+
+          <!-- ==================================================
+               SUBMIT
+               ================================================== -->
+
+          <button
+            type="submit"
+            id="doFilter"
+            class="jt-hotel-search-button"
+          >
+
+            <i
+              class="fa-solid fa-magnifying-glass"
+              aria-hidden="true"
+            ></i>
+
+            Search
+
+          </button>
+
+
+          <!-- ==================================================
+               CLEAR
+               ================================================== -->
+
+          <% if (hasActiveFilters) { %>
+
+            <a
+              href="/hotels"
+              class="jt-hotel-clear-button"
+            >
+              Clear
+            </a>
+
+          <% } %>
+
+
+        </form>
+
+      </div>
+
+
+      <!-- ======================================================
+           ACTIVE FILTER SUMMARY
+           ====================================================== -->
+
+      <% if (hasActiveFilters) { %>
+
+        <div
+          class="jt-hotels-active-filters"
+          aria-label="Active hotel filters"
+        >
+
+          <span class="jt-hotels-active-label">
+            <i
+              class="fa-solid fa-filter"
+              aria-hidden="true"
+            ></i>
+            Active filters
+          </span>
+
+
+          <% if (searchQuery) { %>
+
+            <span class="jt-hotels-filter-chip">
+
+              <i
+                class="fa-solid fa-magnifying-glass"
+                aria-hidden="true"
+              ></i>
+
+              <%= searchQuery %>
+
+            </span>
+
+          <% } %>
+
+
+          <% if (activeDistrict) { %>
+
+            <span class="jt-hotels-filter-chip">
+
+              <i
+                class="fa-solid fa-location-dot"
+                aria-hidden="true"
+              ></i>
+
+              <%= activeDistrict %>
+
+            </span>
+
+          <% } %>
+
+
+          <% if (activePrice) { %>
+
+            <span class="jt-hotels-filter-chip">
+
+              <i
+                class="fa-solid fa-indian-rupee-sign"
+                aria-hidden="true"
+              ></i>
+
+              <%
+                const priceLabels = {
+                  "0-1500": "Under ₹1,500",
+                  "1500-3000": "₹1,500 – ₹3,000",
+                  "3000-5000": "₹3,000 – ₹5,000",
+                  "5000-100000": "₹5,000+"
+                };
+              %>
+
+              <%= priceLabels[activePrice] || activePrice %>
+
+            </span>
+
+          <% } %>
+
+
+          <% if (activeRating) { %>
+
+            <span class="jt-hotels-filter-chip">
+
+              <i
+                class="fa-solid fa-star"
+                aria-hidden="true"
+              ></i>
+
+              <%= activeRating %>★ & above
+
+            </span>
+
+          <% } %>
+
+
+          <% if (activeAvailability) { %>
+
+            <span class="jt-hotels-filter-chip">
+
+              <i
+                class="fa-solid fa-bed"
+                aria-hidden="true"
+              ></i>
+
+              <%= activeAvailability %>
+
+            </span>
+
+          <% } %>
+
+        </div>
+
+      <% } %>
+
+
+      <!-- ======================================================
+           RESULTS HEADER
+           ====================================================== -->
+
+      <div class="jt-hotels-results-header">
+
+        <div>
+
+          <span class="jt-hotels-section-label">
+
+            <i
+              class="fa-solid fa-bed"
+              aria-hidden="true"
+            ></i>
+
+            Accommodation
+
+          </span>
+
+          <h2>
+            Places to stay
+          </h2>
+
+        </div>
+
+
+        <div class="jt-hotels-view-note">
+
+          <i
+            class="fa-solid fa-shield-heart"
+            aria-hidden="true"
+          ></i>
+
+          Explore available stays across Jharkhand
+
+        </div>
+
+      </div>
+
+
+      <!-- ======================================================
+           HOTEL GRID
+           ====================================================== -->
+
+      <section
+        id="hotels-grid"
+        class="jt-hotels-grid"
+        aria-label="Hotels"
+      >
+
+
+        <% if (hotelList.length === 0) { %>
+
+          <!-- ==================================================
+               EMPTY STATE
+               ================================================== -->
+
+          <div class="jt-hotels-empty">
+
+            <div class="jt-hotels-empty-icon">
+
+              <i
+                class="fa-solid fa-hotel"
+                aria-hidden="true"
+              ></i>
+
+            </div>
+
+
+            <h3>
+              No hotels found
+            </h3>
+
+
+            <p>
+              Try changing your search or filter
+              options to find more stays.
+            </p>
+
+
+            <div class="jt-hotels-empty-actions">
+
+              <a
+                href="/hotels"
+                class="jt-btn jt-btn-green"
+              >
+                View all hotels
+              </a>
+
+              <a
+                href="/planner"
+                class="jt-btn jt-btn-secondary"
+              >
+                Plan a trip
+              </a>
+
+            </div>
+
+          </div>
+
+
+        <% } else { %>
+
+
+          <% hotelList.forEach(function(hotel) { %>
+
+            <article
+              class="jt-hotel-card"
+              data-id="<%= hotel.id %>"
+            >
+
+
+              <!-- ==================================================
+                   IMAGE
+                   ================================================== -->
+
+              <a
+                href="/hotels/<%= encodeURIComponent(hotel.id) %>"
+                class="jt-hotel-card-media"
+              >
+
+                <img
+                  src="<%= hotel.image || '/images/placeholder-hotel.jpg' %>"
+                  alt="<%= hotel.name %>"
+                  loading="lazy"
+                  onerror="this.onerror=null;this.src='/images/placeholder-hotel.jpg';"
+                >
+
+
+                <span
+                  class="jt-hotel-card-image-overlay"
+                  aria-hidden="true"
+                ></span>
+
+
+                <% if (hotel.rating) { %>
+
+                  <span class="jt-hotel-rating">
+
+                    <i
+                      class="fa-solid fa-star"
+                      aria-hidden="true"
+                    ></i>
+
+                    <%= hotel.rating %>
+
+                  </span>
+
+                <% } %>
+
+
+                <% if (hotel.availability) { %>
+
+                  <span
+                    class="jt-hotel-availability
+                    <%= hotel.availability === 'Sold Out'
+                      ? 'is-sold-out'
+                      : hotel.availability === 'Few Rooms Left'
+                        ? 'is-limited'
+                        : 'is-available' %>"
+                  >
+
+                    <%= hotel.availability %>
+
+                  </span>
+
+                <% } %>
+
+              </a>
+
+
+              <!-- ==================================================
+                   CONTENT
+                   ================================================== -->
+
+              <div class="jt-hotel-card-body">
+
+
+                <div class="jt-hotel-card-location">
+
+                  <i
+                    class="fa-solid fa-location-dot"
+                    aria-hidden="true"
+                  ></i>
+
+                  <%= hotel.district || "Jharkhand" %>
+
+                </div>
+
+
+                <h3>
+
+                  <a
+                    href="/hotels/<%= encodeURIComponent(hotel.id) %>"
+                  >
+                    <%= hotel.name %>
+                  </a>
+
+                </h3>
+
+
+                <% if (hotel.address) { %>
+
+                  <p class="jt-hotel-address">
+
+                    <i
+                      class="fa-solid fa-location-crosshairs"
+                      aria-hidden="true"
+                    ></i>
+
+                    <%= hotel.address %>
+
+                  </p>
+
+                <% } %>
+
+
+                <div class="jt-hotel-card-footer">
+
+
+                  <div class="jt-hotel-price">
+
+                    <span>
+                      Starting from
+                    </span>
+
+                    <strong>
+                      ₹<%= hotel.price_from || "—" %>
+                    </strong>
+
+                    <small>
+                      / night
+                    </small>
+
+                  </div>
+
+
+                  <div class="jt-hotel-card-actions">
+
+
+                    <!--
+                      This is intentionally UI-only.
+                      No fake persistence endpoint is introduced.
+                    -->
+
+                    <button
+                      type="button"
+                      class="jt-hotel-favorite"
+                      data-id="<%= hotel.id %>"
+                      aria-label="Save <%= hotel.name %>"
+                      aria-pressed="false"
+                    >
+
+                      <i
+                        class="fa-regular fa-heart"
+                        aria-hidden="true"
+                      ></i>
+
+                    </button>
+
+
+                    <a
+                      href="/hotels/<%= encodeURIComponent(hotel.id) %>"
+                      class="jt-hotel-details-link"
+                    >
+
+                      View details
+
+                      <i
+                        class="fa-solid fa-arrow-right"
+                        aria-hidden="true"
+                      ></i>
+
+                    </a>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </article>
+
+          <% }); %>
+
+
+        <% } %>
+
+      </section>
+
+
+      <!-- ======================================================
+           PAGINATION
+           ====================================================== -->
+
+      <% if (pages > 1) { %>
+
+        <nav
+          class="jt-hotels-pagination"
+          aria-label="Hotel pagination"
+        >
+
+
+          <% if (currentPage > 1) { %>
+
+            <a
+              class="jt-hotels-page-link"
+              href="<%= buildHotelPageUrl(currentPage - 1) %>"
+              aria-label="Go to previous hotel results page"
+            >
+
+              <i
+                class="fa-solid fa-arrow-left"
+                aria-hidden="true"
+              ></i>
+
+              Previous
+
+            </a>
+
+          <% } else { %>
+
+            <span
+              class="jt-hotels-page-link is-disabled"
+              aria-disabled="true"
+            >
+
+              <i
+                class="fa-solid fa-arrow-left"
+                aria-hidden="true"
+              ></i>
+
+              Previous
+
+            </span>
+
+          <% } %>
+
+
+          <span class="jt-hotels-page-info">
+
+            Page
+
+            <strong>
+              <%= currentPage %>
+            </strong>
+
+            of
+
+            <strong>
+              <%= pages %>
+            </strong>
+
+          </span>
+
+
+          <% if (currentPage < pages) { %>
+
+            <a
+              class="jt-hotels-page-link"
+              href="<%= buildHotelPageUrl(currentPage + 1) %>"
+              aria-label="Go to next hotel results page"
+            >
+
+              Next
+
+              <i
+                class="fa-solid fa-arrow-right"
+                aria-hidden="true"
+              ></i>
+
+            </a>
+
+          <% } else { %>
+
+            <span
+              class="jt-hotels-page-link is-disabled"
+              aria-disabled="true"
+            >
+
+              Next
+
+              <i
+                class="fa-solid fa-arrow-right"
+                aria-hidden="true"
+              ></i>
+
+            </span>
+
+          <% } %>
+
+
+        </nav>
+
+      <% } %>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- ==========================================================
+       PLANNER CTA
+       ========================================================== -->
+
+  <section class="jt-hotels-planner-cta">
+
+    <div class="jt-container">
+
+      <div class="jt-hotels-planner-inner">
+
+        <div class="jt-hotels-planner-icon">
+
+          <i
+            class="fa-solid fa-wand-magic-sparkles"
+            aria-hidden="true"
+          ></i>
+
+        </div>
+
+
+        <div class="jt-hotels-planner-content">
+
+          <span>
+            Smart Tourism
+          </span>
+
+          <h2>
+            Not sure where to stay?
+          </h2>
+
+          <p>
+            Use the AI Trip Planner to build a
+            personalized Jharkhand itinerary
+            around your destinations and preferences.
+          </p>
+
+        </div>
+
+
+        <a
+          href="/planner"
+          class="jt-btn jt-btn-light"
+        >
+
+          Plan my trip
+
+          <i
+            class="fa-solid fa-arrow-right"
+            aria-hidden="true"
+          ></i>
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
 </main>
 
-<script src="/js/hotels.js" defer></script>
-</body>
-</html>
+
+<!-- ============================================================
+     HOTEL LISTING JAVASCRIPT
+     ============================================================ -->
+
+<script>
+(function () {
+
+  "use strict";
+
+
+  /* ==========================================================
+     01. FAVORITE BUTTONS
+     ==========================================================
+
+     Existing hotel listing provides favorite buttons.
+     There is currently no hotel wishlist backend contract,
+     so this remains visual-only and does not claim persistence.
+  ========================================================== */
+
+  const favoriteButtons =
+    document.querySelectorAll(
+      ".jt-hotel-favorite"
+    );
+
+
+  favoriteButtons.forEach(
+    function (button) {
+
+      button.addEventListener(
+        "click",
+        function () {
+
+          const pressed =
+            this.getAttribute(
+              "aria-pressed"
+            ) === "true";
+
+
+          const nextState =
+            !pressed;
+
+
+          this.setAttribute(
+            "aria-pressed",
+            String(nextState)
+          );
+
+
+          const icon =
+            this.querySelector("i");
+
+
+          if (icon) {
+
+            icon.classList.toggle(
+              "fa-regular",
+              !nextState
+            );
+
+            icon.classList.toggle(
+              "fa-solid",
+              nextState
+            );
+
+          }
+
+
+          this.classList.toggle(
+            "is-saved",
+            nextState
+          );
+
+
+          const hotelName =
+            this.closest(
+              ".jt-hotel-card"
+            )?.querySelector(
+              ".jt-hotel-card-body h3 a"
+            )?.textContent
+              ?.trim();
+
+
+          this.setAttribute(
+            "aria-label",
+            nextState
+              ? `Remove ${hotelName || "hotel"} from saved`
+              : `Save ${hotelName || "hotel"}`
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+  /* ==========================================================
+     02. IMAGE FALLBACK
+  ========================================================== */
+
+  const hotelImages =
+    document.querySelectorAll(
+      ".jt-hotel-card img"
+    );
+
+
+  hotelImages.forEach(
+    function (image) {
+
+      image.addEventListener(
+        "error",
+        function () {
+
+          if (
+            this.dataset.fallbackApplied ===
+            "true"
+          ) {
+            return;
+          }
+
+
+          this.dataset.fallbackApplied =
+            "true";
+
+
+          this.src =
+            "/images/placeholder-hotel.jpg";
+
+        }
+      );
+
+    }
+  );
+
+
+  /* ==========================================================
+     03. FILTER FORM UX
+  ========================================================== */
+
+  const filterForm =
+    document.getElementById(
+      "hotelFilterForm"
+    );
+
+
+  const submitButton =
+    document.getElementById(
+      "doFilter"
+    );
+
+
+  if (
+    filterForm &&
+    submitButton
+  ) {
+
+    filterForm.addEventListener(
+      "submit",
+      function () {
+
+        submitButton.disabled =
+          true;
+
+
+        const icon =
+          submitButton.querySelector(
+            "i"
+          );
+
+
+        if (icon) {
+
+          icon.classList.remove(
+            "fa-magnifying-glass"
+          );
+
+          icon.classList.add(
+            "fa-spinner",
+            "fa-spin"
+          );
+
+        }
+
+
+        const textNodes =
+          Array.from(
+            submitButton.childNodes
+          );
+
+
+        textNodes.forEach(
+          function (node) {
+
+            if (
+              node.nodeType ===
+              Node.TEXT_NODE &&
+              node.textContent.trim()
+            ) {
+
+              node.textContent =
+                " Searching...";
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+  }
+
+
+  /* ==========================================================
+     04. KEYBOARD SUPPORT FOR FAVORITES
+  ========================================================== */
+
+  favoriteButtons.forEach(
+    function (button) {
+
+      button.addEventListener(
+        "keydown",
+        function (event) {
+
+          if (
+            event.key === "Enter" ||
+            event.key === " "
+          ) {
+
+            event.preventDefault();
+
+            this.click();
+
+          }
+
+        }
+      );
+
+    }
+  );
+
+
+})();
+</script>

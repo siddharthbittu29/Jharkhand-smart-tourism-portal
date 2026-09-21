@@ -1,95 +1,2075 @@
 <%- include('./partials/nav') %>
 
-
-
-
-<section class="my-4">
-  <h1 class="h3 fw-bold mb-3">Objectives & Government Vision</h1>
-  <p class="text-muted mb-4">
-    Building a smart, inclusive, and sustainable tourism ecosystem for Jharkhand—powered by digital services, green practices, and community-led growth.
-  </p>
-
-  <!-- Objectives -->
-  <div class="row g-3">
-    <% [
-      ["1 Digital First","Unified portal for discovery, bookings, payments, and feedback across destinations and experiences."],
-      ["2 Sustainable Growth","Eco-certifications, waste & water management, and carbon-conscious itineraries at key sites."],
-      ["3 Inclusive Tourism","SHGs & local artisans integrated into value chains; accessibility-first design for all travelers."],
-      ["4 Smart Ops","IoT-based footfall, dynamic pricing pilots, and command dashboards for decision-making."],
-      ["5 Safety & Trust","Verified operators, SOS integrations, and grievance redressal with SLA tracking."],
-      ["6 Brand Jharkhand","Always-on campaigns, UGC drives, and creator partnerships to amplify reach."]
-    ].forEach(([t,d]) => { %>
-      <div class="col-md-6 col-lg-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title mb-2"><%= t %></h5>
-            <p class="mb-0"><%= d %></p>
-          </div>
-        </div>
-      </div>
-    <% }) %>
-  </div>
-
-  <!-- Government Vision -->
-  <div class="mt-5">
-    <h2 class="h4 fw-semibold mb-3">Government Vision (3-Year Horizon)</h2>
-    <div class="timeline">
-      <% [
-        ["Year 1: Foundation","Unified portal MVP, core destination pages, online booking for 30% inventory, pilot digital pass."],
-        ["Year 2: Scale","80% inventory online, artisan marketplace, smart signage/QR trails, accessibility audits completed."],
-        ["Year 3: Optimize","Command dashboard, dynamic pricing pilots, multi-lingual concierge bot, green certification program."]
-      ].forEach(([h, d]) => { %>
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <h6 class="mb-1"><%= h %></h6>
-            <p class="mb-0"><%= d %></p>
-          </div>
-        </div>
-      <% }) %>
-    </div>
-  </div>
-
-  <!-- KPIs -->
-  <div class="row g-3 mt-4">
-    <% [
-      ["3.0","Mn Annual Visitors", true],
-      ["80","% Inventory Online", false],
-      ["25","Green Sites", false],
-      ["4.6","Avg Rating", true]
-    ].forEach(([v,l,isFloat]) => { %>
-      <div class="col-6 col-md-3">
-        <div class="kpi">
-          <div class="kpi-value" data-target="<%= v %>" data-float="<%= isFloat %>">0</div>
-          <div class="kpi-label"><%= l %></div>
-        </div>
-      </div>
-    <% }) %>
-  </div>
-</section>
-
-<%- include('../partials/scripts') %>
-
-<script>
-  document.querySelectorAll('.kpi-value').forEach(el => {
-    const target = parseFloat(el.getAttribute('data-target'));
-    const isFloat = el.getAttribute('data-float') === 'true';
-    const duration = 1200, start = performance.now();
-    (function tick(now){
-      const p = Math.min((now - start) / duration, 1);
-      const val = target * p;
-      el.textContent = isFloat ? val.toFixed(1) : Math.floor(val).toString();
-      if (p < 1) requestAnimationFrame(tick);
-    })(start);
-  });
-</script>
-
 <style>
-  .timeline { position: relative; padding-left: 1.25rem; }
-  .timeline::before { content:''; position:absolute; left:8px; top:0; bottom:0; width:2px; background:#e5e7eb; }
-  .timeline-item { position:relative; padding-left:1rem; margin-bottom:1rem; }
-  .timeline-dot { position:absolute; left:0; top:4px; width:12px; height:12px; border-radius:50%; background:#0d6efd; }
-  .kpi { background:#f8f9fa; border:1px solid #e9ecef; border-radius:.75rem; padding:1rem; text-align:center; }
-  .kpi-value { font-size:1.6rem; font-weight:700; line-height:1; }
-  .kpi-label { font-size:.9rem; color:#6c757d; margin-top:.25rem; }
+  /* ============================================================
+     JHARKHAND TOURISM
+     SMART TOURISM — OBJECTIVES & GOVERNMENT VISION
+  ============================================================ */
+
+  .jt-objectives-page {
+    --jt-deep: #0d3928;
+    --jt-deep-2: #123f2e;
+    --jt-green: #236044;
+    --jt-green-2: #2f7a56;
+    --jt-mint: #b6dfc4;
+    --jt-cream: #f7f3e8;
+    --jt-sand: #e9dfca;
+    --jt-ink: #19342a;
+    --jt-muted: #66776f;
+    --jt-line: rgba(18,60,43,0.11);
+    --jt-white: #ffffff;
+    --jt-soft: #eef5ef;
+    --jt-shadow: 0 18px 48px rgba(13,57,40,0.11);
+
+    width: 100%;
+    color: var(--jt-ink);
+    background:
+      #f7f8f4;
+  }
+
+  /* ============================================================
+     HERO
+  ============================================================ */
+
+  .jt-objectives-hero {
+    position:
+      relative;
+
+    overflow:
+      hidden;
+
+    background:
+      linear-gradient(
+        100deg,
+        #0d3928 0%,
+        #164b35 62%,
+        #1d6548 100%
+      );
+
+    color:
+      #ffffff;
+  }
+
+  .jt-objectives-hero::before {
+    content:
+      "";
+
+    position:
+      absolute;
+
+    width:
+      430px;
+
+    height:
+      430px;
+
+    right:
+      -120px;
+
+    top:
+      -180px;
+
+    border:
+      1px solid
+      rgba(255,255,255,0.08);
+
+    border-radius:
+      50%;
+  }
+
+  .jt-objectives-hero::after {
+    content:
+      "";
+
+    position:
+      absolute;
+
+    width:
+      260px;
+
+    height:
+      260px;
+
+    right:
+      170px;
+
+    bottom:
+      -170px;
+
+    border:
+      1px solid
+      rgba(255,255,255,0.06);
+
+    border-radius:
+      50%;
+  }
+
+  .jt-objectives-hero-inner {
+    position:
+      relative;
+
+    z-index:
+      1;
+
+    width:
+      min(1240px, calc(100% - 40px));
+
+    margin:
+      0 auto;
+
+    padding:
+      58px 0 52px;
+  }
+
+  .jt-objectives-eyebrow {
+    display:
+      inline-flex;
+
+    align-items:
+      center;
+
+    gap:
+      8px;
+
+    padding:
+      7px 11px;
+
+    border:
+      1px solid
+      rgba(255,255,255,0.18);
+
+    border-radius:
+      999px;
+
+    background:
+      rgba(255,255,255,0.08);
+
+    color:
+      #e7f1ea;
+
+    font-size:
+      9px;
+
+    font-weight:
+      900;
+
+    letter-spacing:
+      0.13em;
+
+    text-transform:
+      uppercase;
+  }
+
+  .jt-objectives-eyebrow i {
+    color:
+      var(--jt-mint);
+  }
+
+  .jt-objectives-title {
+    max-width:
+      840px;
+
+    margin:
+      17px 0 0;
+
+    color:
+      #ffffff;
+
+    font-size:
+      clamp(34px, 5vw, 58px);
+
+    line-height:
+      1.02;
+
+    font-weight:
+      900;
+
+    letter-spacing:
+      -0.045em;
+  }
+
+  .jt-objectives-subtitle {
+    max-width:
+      820px;
+
+    margin:
+      16px 0 0;
+
+    color:
+      rgba(255,255,255,0.76);
+
+    font-size:
+      15px;
+
+    line-height:
+      1.7;
+  }
+
+  .jt-objectives-hero-meta {
+    display:
+      flex;
+
+    flex-wrap:
+      wrap;
+
+    gap:
+      8px;
+
+    margin-top:
+      22px;
+  }
+
+  .jt-objectives-hero-meta span {
+    display:
+      inline-flex;
+
+    align-items:
+      center;
+
+    gap:
+      7px;
+
+    padding:
+      8px 10px;
+
+    border:
+      1px solid
+      rgba(255,255,255,0.10);
+
+    border-radius:
+      10px;
+
+    background:
+      rgba(255,255,255,0.06);
+
+    color:
+      rgba(255,255,255,0.76);
+
+    font-size:
+      10px;
+
+    font-weight:
+      700;
+  }
+
+  .jt-objectives-hero-meta i {
+    color:
+      var(--jt-mint);
+  }
+
+  /* ============================================================
+     SHELL
+  ============================================================ */
+
+  .jt-objectives-shell {
+    width:
+      min(1240px, calc(100% - 40px));
+
+    margin:
+      0 auto;
+
+    padding:
+      58px 0 74px;
+  }
+
+  .jt-objectives-section-head {
+    margin-bottom:
+      23px;
+  }
+
+  .jt-objectives-kicker {
+    color:
+      var(--jt-green);
+
+    font-size:
+      9px;
+
+    font-weight:
+      900;
+
+    letter-spacing:
+      0.13em;
+
+    text-transform:
+      uppercase;
+  }
+
+  .jt-objectives-section-title {
+    margin:
+      5px 0 0;
+
+    color:
+      var(--jt-deep);
+
+    font-size:
+      clamp(26px, 3.4vw, 38px);
+
+    line-height:
+      1.08;
+
+    font-weight:
+      900;
+
+    letter-spacing:
+      -0.035em;
+  }
+
+  .jt-objectives-section-copy {
+    max-width:
+      720px;
+
+    margin:
+      8px 0 0;
+
+    color:
+      var(--jt-muted);
+
+    font-size:
+      13px;
+
+    line-height:
+      1.65;
+  }
+
+  /* ============================================================
+     OBJECTIVE GRID
+  ============================================================ */
+
+  .jt-objectives-grid {
+    display:
+      grid;
+
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+
+    gap:
+      14px;
+  }
+
+  .jt-objective-card {
+    position:
+      relative;
+
+    min-height:
+      230px;
+
+    padding:
+      21px;
+
+    overflow:
+      hidden;
+
+    border:
+      1px solid
+      var(--jt-line);
+
+    border-radius:
+      19px;
+
+    background:
+      #ffffff;
+
+    box-shadow:
+      var(--jt-shadow);
+
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .jt-objective-card:hover {
+    transform:
+      translateY(-4px);
+
+    border-color:
+      rgba(35,96,68,0.20);
+
+    box-shadow:
+      0 19px 38px
+      rgba(13,57,40,0.14);
+  }
+
+  .jt-objective-number {
+    position:
+      absolute;
+
+    top:
+      16px;
+
+    right:
+      17px;
+
+    color:
+      #c5cec8;
+
+    font-size:
+      10px;
+
+    font-weight:
+      900;
+
+    letter-spacing:
+      0.08em;
+  }
+
+  .jt-objective-icon {
+    width:
+      44px;
+
+    height:
+      44px;
+
+    display:
+      grid;
+
+    place-items:
+      center;
+
+    border:
+      1px solid
+      rgba(35,96,68,0.12);
+
+    border-radius:
+      13px;
+
+    background:
+      #edf6ef;
+
+    color:
+      var(--jt-green);
+
+    font-size:
+      15px;
+  }
+
+  .jt-objective-card h3 {
+    max-width:
+      240px;
+
+    margin:
+      17px 0 0;
+
+    color:
+      var(--jt-deep);
+
+    font-size:
+      16px;
+
+    line-height:
+      1.25;
+
+    font-weight:
+      900;
+  }
+
+  .jt-objective-card p {
+    margin:
+      8px 0 0;
+
+    color:
+      var(--jt-muted);
+
+    font-size:
+      11px;
+
+    line-height:
+      1.68;
+  }
+
+  .jt-objective-bottom-line {
+    position:
+      absolute;
+
+    left:
+      21px;
+
+    right:
+      21px;
+
+    bottom:
+      14px;
+
+    height:
+      2px;
+
+    border-radius:
+      2px;
+
+    background:
+      linear-gradient(
+        90deg,
+        #8ec7a0,
+        transparent
+      );
+  }
+
+  /* ============================================================
+     VISION PANEL
+  ============================================================ */
+
+  .jt-objectives-vision {
+    display:
+      grid;
+
+    grid-template-columns:
+      minmax(0, 0.95fr)
+      minmax(0, 1.05fr);
+
+    gap:
+      16px;
+
+    margin-top:
+      58px;
+  }
+
+  .jt-objectives-vision-intro {
+    position:
+      relative;
+
+    overflow:
+      hidden;
+
+    padding:
+      28px;
+
+    border-radius:
+      22px;
+
+    background:
+      linear-gradient(
+        145deg,
+        #113d2b,
+        #1e6346
+      );
+
+    color:
+      #ffffff;
+
+    box-shadow:
+      var(--jt-shadow);
+  }
+
+  .jt-objectives-vision-intro::after {
+    content:
+      "";
+
+    position:
+      absolute;
+
+    width:
+      210px;
+
+    height:
+      210px;
+
+    right:
+      -85px;
+
+    bottom:
+      -110px;
+
+    border:
+      1px solid
+      rgba(255,255,255,0.10);
+
+    border-radius:
+      50%;
+  }
+
+  .jt-objectives-vision-intro-label {
+    position:
+      relative;
+
+    z-index:
+      1;
+
+    color:
+      #bee2c8;
+
+    font-size:
+      9px;
+
+    font-weight:
+      900;
+
+    letter-spacing:
+      0.12em;
+
+    text-transform:
+      uppercase;
+  }
+
+  .jt-objectives-vision-intro h2 {
+    position:
+      relative;
+
+    z-index:
+      1;
+
+    max-width:
+      460px;
+
+    margin:
+      11px 0 0;
+
+    color:
+      #ffffff;
+
+    font-size:
+      31px;
+
+    line-height:
+      1.12;
+
+    font-weight:
+      900;
+
+    letter-spacing:
+      -0.03em;
+  }
+
+  .jt-objectives-vision-intro p {
+    position:
+      relative;
+
+    z-index:
+      1;
+
+    margin:
+      13px 0 0;
+
+    color:
+      rgba(255,255,255,0.72);
+
+    font-size:
+      12px;
+
+    line-height:
+      1.7;
+  }
+
+  .jt-objectives-vision-pillars {
+    position:
+      relative;
+
+    z-index:
+      1;
+
+    display:
+      grid;
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap:
+      8px;
+
+    margin-top:
+      20px;
+  }
+
+  .jt-objectives-vision-pillar {
+    padding:
+      11px;
+
+    border:
+      1px solid
+      rgba(255,255,255,0.09);
+
+    border-radius:
+      12px;
+
+    background:
+      rgba(255,255,255,0.05);
+  }
+
+  .jt-objectives-vision-pillar i {
+    color:
+      #b8ddc4;
+
+    font-size:
+      12px;
+  }
+
+  .jt-objectives-vision-pillar strong {
+    display:
+      block;
+
+    margin-top:
+      6px;
+
+    color:
+      #ffffff;
+
+    font-size:
+      10px;
+
+    line-height:
+      1.3;
+  }
+
+  .jt-objectives-vision-pillar span {
+    display:
+      block;
+
+    margin-top:
+      3px;
+
+    color:
+      rgba(255,255,255,0.56);
+
+    font-size:
+      8px;
+
+    line-height:
+      1.4;
+  }
+
+  /* ============================================================
+     VISION DETAIL
+  ============================================================ */
+
+  .jt-objectives-vision-detail {
+    padding:
+      26px;
+
+    border:
+      1px solid
+      var(--jt-line);
+
+    border-radius:
+      22px;
+
+    background:
+      #ffffff;
+
+    box-shadow:
+      var(--jt-shadow);
+  }
+
+  .jt-objectives-vision-detail-head {
+    display:
+      flex;
+
+    align-items:
+      center;
+
+    justify-content:
+      space-between;
+
+    gap:
+      18px;
+  }
+
+  .jt-objectives-vision-detail h3 {
+    margin:
+      0;
+
+    color:
+      var(--jt-deep);
+
+    font-size:
+      18px;
+
+    font-weight:
+      900;
+  }
+
+  .jt-objectives-vision-detail-badge {
+    padding:
+      7px 9px;
+
+    border:
+      1px solid
+      rgba(35,96,68,0.12);
+
+    border-radius:
+      999px;
+
+    background:
+      #edf6ef;
+
+    color:
+      var(--jt-green);
+
+    font-size:
+      9px;
+
+    font-weight:
+      900;
+  }
+
+  .jt-objectives-vision-description {
+    margin:
+      8px 0 0;
+
+    color:
+      var(--jt-muted);
+
+    font-size:
+      11px;
+
+    line-height:
+      1.6;
+  }
+
+  .jt-objectives-principles {
+    display:
+      grid;
+
+    gap:
+      10px;
+
+    margin-top:
+      20px;
+  }
+
+  .jt-objectives-principle {
+    display:
+      grid;
+
+    grid-template-columns:
+      36px 1fr;
+
+    gap:
+      10px;
+
+    align-items:
+      start;
+
+    padding:
+      10px 0;
+
+    border-bottom:
+      1px solid
+      #edf1ed;
+  }
+
+  .jt-objectives-principle:last-child {
+    border-bottom:
+      0;
+  }
+
+  .jt-objectives-principle-icon {
+    width:
+      34px;
+
+    height:
+      34px;
+
+    display:
+      grid;
+
+    place-items:
+      center;
+
+    border-radius:
+      10px;
+
+    background:
+      #edf6ef;
+
+    color:
+      var(--jt-green);
+
+    font-size:
+      12px;
+  }
+
+  .jt-objectives-principle strong {
+    display:
+      block;
+
+    color:
+      var(--jt-deep);
+
+    font-size:
+      11px;
+
+    font-weight:
+      900;
+  }
+
+  .jt-objectives-principle span {
+    display:
+      block;
+
+    margin-top:
+      3px;
+
+    color:
+      var(--jt-muted);
+
+    font-size:
+      10px;
+
+    line-height:
+      1.55;
+  }
+
+  /* ============================================================
+     THREE YEAR ROADMAP
+  ============================================================ */
+
+  .jt-objectives-roadmap {
+    margin-top:
+      58px;
+
+    padding:
+      27px;
+
+    border:
+      1px solid
+      var(--jt-line);
+
+    border-radius:
+      22px;
+
+    background:
+      #ffffff;
+
+    box-shadow:
+      var(--jt-shadow);
+  }
+
+  .jt-objectives-roadmap-head {
+    display:
+      flex;
+
+    align-items:
+      flex-end;
+
+    justify-content:
+      space-between;
+
+    gap:
+      24px;
+  }
+
+  .jt-objectives-roadmap-head h2 {
+    margin:
+      5px 0 0;
+
+    color:
+      var(--jt-deep);
+
+    font-size:
+      28px;
+
+    line-height:
+      1.1;
+
+    font-weight:
+      900;
+
+    letter-spacing:
+      -0.03em;
+  }
+
+  .jt-objectives-roadmap-head p {
+    max-width:
+      510px;
+
+    margin:
+      0;
+
+    color:
+      var(--jt-muted);
+
+    font-size:
+      11px;
+
+    line-height:
+      1.6;
+  }
+
+  .jt-objectives-roadmap-track {
+    display:
+      grid;
+
+    grid-template-columns:
+      repeat(3, minmax(0,1fr));
+
+    gap:
+      12px;
+
+    margin-top:
+      22px;
+  }
+
+  .jt-roadmap-card {
+    position:
+      relative;
+
+    padding:
+      20px;
+
+    border:
+      1px solid
+      rgba(18,60,43,0.10);
+
+    border-radius:
+      18px;
+
+    background:
+      #f8faf7;
+  }
+
+  .jt-roadmap-card::before {
+    content:
+      "";
+
+    position:
+      absolute;
+
+    left:
+      20px;
+
+    top:
+      0;
+
+    width:
+      42px;
+
+    height:
+      3px;
+
+    border-radius:
+      0 0 4px 4px;
+
+    background:
+      var(--jt-green);
+  }
+
+  .jt-roadmap-card-year {
+    display:
+      inline-flex;
+
+    margin-top:
+      2px;
+
+    padding:
+      6px 8px;
+
+    border-radius:
+      999px;
+
+    background:
+      #eaf3ec;
+
+    color:
+      var(--jt-green);
+
+    font-size:
+      8px;
+
+    font-weight:
+      900;
+
+    letter-spacing:
+      0.08em;
+
+    text-transform:
+      uppercase;
+  }
+
+  .jt-roadmap-card h3 {
+    margin:
+      14px 0 0;
+
+    color:
+      var(--jt-deep);
+
+    font-size:
+      15px;
+
+    font-weight:
+      900;
+  }
+
+  .jt-roadmap-card p {
+    margin:
+      7px 0 0;
+
+    color:
+      var(--jt-muted);
+
+    font-size:
+      10px;
+
+    line-height:
+      1.65;
+  }
+
+  /* ============================================================
+     KPI STRIP
+  ============================================================ */
+
+  .jt-objectives-kpis {
+    display:
+      grid;
+
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr));
+
+    gap:
+      10px;
+
+    margin-top:
+      18px;
+  }
+
+  .jt-objectives-kpi {
+    padding:
+      18px 14px;
+
+    text-align:
+      center;
+
+    border:
+      1px solid
+      var(--jt-line);
+
+    border-radius:
+      16px;
+
+    background:
+      #ffffff;
+  }
+
+  .jt-objectives-kpi-value {
+    color:
+      var(--jt-deep);
+
+    font-size:
+      27px;
+
+    line-height:
+      1;
+
+    font-weight:
+      900;
+  }
+
+  .jt-objectives-kpi-label {
+    margin-top:
+      6px;
+
+    color:
+      var(--jt-muted);
+
+    font-size:
+      9px;
+
+    font-weight:
+      800;
+
+    line-height:
+      1.35;
+  }
+
+  /* ============================================================
+     CTA
+  ============================================================ */
+
+  .jt-objectives-final {
+    display:
+      flex;
+
+    align-items:
+      center;
+
+    justify-content:
+      space-between;
+
+    gap:
+      24px;
+
+    margin-top:
+      48px;
+
+    padding:
+      24px 26px;
+
+    border-radius:
+      20px;
+
+    background:
+      #eff5f0;
+
+    border:
+      1px solid
+      rgba(35,96,68,0.10);
+  }
+
+  .jt-objectives-final h2 {
+    margin:
+      0;
+
+    color:
+      var(--jt-deep);
+
+    font-size:
+      22px;
+
+    font-weight:
+      900;
+  }
+
+  .jt-objectives-final p {
+    margin:
+      6px 0 0;
+
+    color:
+      var(--jt-muted);
+
+    font-size:
+      10px;
+
+    line-height:
+      1.5;
+  }
+
+  .jt-objectives-final-link {
+    flex:
+      0 0 auto;
+
+    display:
+      inline-flex;
+
+    align-items:
+      center;
+
+    gap:
+      8px;
+
+    min-height:
+      42px;
+
+    padding:
+      10px 14px;
+
+    border-radius:
+      11px;
+
+    background:
+      var(--jt-green);
+
+    color:
+      #ffffff;
+
+    text-decoration:
+      none;
+
+    font-size:
+      11px;
+
+    font-weight:
+      900;
+  }
+
+  .jt-objectives-final-link:hover {
+    background:
+      var(--jt-green-2);
+
+    color:
+      #ffffff;
+
+    text-decoration:
+      none;
+  }
+
+  /* ============================================================
+     RESPONSIVE
+  ============================================================ */
+
+  @media (max-width: 980px) {
+    .jt-objectives-grid {
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    }
+
+    .jt-objectives-vision {
+      grid-template-columns:
+        1fr;
+    }
+
+    .jt-objectives-roadmap-track {
+      grid-template-columns:
+        1fr;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .jt-objectives-shell,
+    .jt-objectives-hero-inner {
+      width:
+        min(100% - 22px, 1240px);
+    }
+
+    .jt-objectives-title {
+      font-size:
+        clamp(34px, 10vw, 47px);
+    }
+
+    .jt-objectives-grid {
+      grid-template-columns:
+        1fr;
+    }
+
+    .jt-objectives-vision-intro,
+    .jt-objectives-vision-detail,
+    .jt-objectives-roadmap {
+      padding:
+        21px;
+    }
+
+    .jt-objectives-vision-pillars {
+      grid-template-columns:
+        1fr;
+    }
+
+    .jt-objectives-roadmap-head {
+      align-items:
+        flex-start;
+
+      flex-direction:
+        column;
+    }
+
+    .jt-objectives-kpis {
+      grid-template-columns:
+        repeat(2, minmax(0,1fr));
+    }
+
+    .jt-objectives-final {
+      align-items:
+        flex-start;
+
+      flex-direction:
+        column;
+    }
+
+    .jt-objectives-final-link {
+      width:
+        100%;
+
+      justify-content:
+        center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .jt-objective-card {
+      transition:
+        none !important;
+    }
+  }
 </style>
+
+
+<main
+  class="jt-objectives-page"
+  aria-labelledby="objectivesTitle"
+>
+
+  <!-- ==========================================================
+       HERO
+  =========================================================== -->
+
+  <section class="jt-objectives-hero">
+
+    <div class="jt-objectives-hero-inner">
+
+      <span class="jt-objectives-eyebrow">
+
+        <i
+          class="fa-solid fa-bullseye"
+          aria-hidden="true"
+        ></i>
+
+        Strategy & Vision
+
+      </span>
+
+
+      <h1
+        id="objectivesTitle"
+        class="jt-objectives-title"
+      >
+        Objectives for a smarter,
+        more inclusive
+        tourism ecosystem.
+      </h1>
+
+
+      <p class="jt-objectives-subtitle">
+        Building a smart, inclusive and sustainable tourism ecosystem
+        for Jharkhand through digital services, green practices,
+        safety, accessibility and community-led growth.
+      </p>
+
+
+      <div class="jt-objectives-hero-meta">
+
+        <span>
+          <i
+            class="fa-solid fa-mobile-screen-button"
+            aria-hidden="true"
+          ></i>
+
+          Digital-first services
+        </span>
+
+        <span>
+          <i
+            class="fa-solid fa-leaf"
+            aria-hidden="true"
+          ></i>
+
+          Sustainable growth
+        </span>
+
+        <span>
+          <i
+            class="fa-solid fa-people-group"
+            aria-hidden="true"
+          ></i>
+
+          Inclusive tourism
+        </span>
+
+        <span>
+          <i
+            class="fa-solid fa-shield-heart"
+            aria-hidden="true"
+          ></i>
+
+          Safety & trust
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <div class="jt-objectives-shell">
+
+    <!-- ========================================================
+         OBJECTIVES
+    ========================================================= -->
+
+    <section
+      aria-labelledby="objectiveGridTitle"
+    >
+
+      <div class="jt-objectives-section-head">
+
+        <div class="jt-objectives-kicker">
+          Six priorities
+        </div>
+
+        <h2
+          id="objectiveGridTitle"
+          class="jt-objectives-section-title"
+        >
+          The objectives guiding Smart Tourism.
+        </h2>
+
+        <p class="jt-objectives-section-copy">
+          The platform is organised around six connected priorities
+          spanning discovery, sustainability, inclusion, operations,
+          safety and destination identity.
+        </p>
+
+      </div>
+
+
+      <div class="jt-objectives-grid">
+
+        <article class="jt-objective-card">
+
+          <span class="jt-objective-number">
+            01
+          </span>
+
+          <div class="jt-objective-icon">
+            <i
+              class="fa-solid fa-mobile-screen-button"
+              aria-hidden="true"
+            ></i>
+          </div>
+
+          <h3>
+            Digital First
+          </h3>
+
+          <p>
+            Unified portal for discovery, bookings, payments and
+            feedback across destinations and tourism experiences.
+          </p>
+
+          <div class="jt-objective-bottom-line"></div>
+
+        </article>
+
+
+        <article class="jt-objective-card">
+
+          <span class="jt-objective-number">
+            02
+          </span>
+
+          <div class="jt-objective-icon">
+            <i
+              class="fa-solid fa-leaf"
+              aria-hidden="true"
+            ></i>
+          </div>
+
+          <h3>
+            Sustainable Growth
+          </h3>
+
+          <p>
+            Eco-certifications, waste and water management, and
+            carbon-conscious itineraries across key tourism sites.
+          </p>
+
+          <div class="jt-objective-bottom-line"></div>
+
+        </article>
+
+
+        <article class="jt-objective-card">
+
+          <span class="jt-objective-number">
+            03
+          </span>
+
+          <div class="jt-objective-icon">
+            <i
+              class="fa-solid fa-people-group"
+              aria-hidden="true"
+            ></i>
+          </div>
+
+          <h3>
+            Inclusive Tourism
+          </h3>
+
+          <p>
+            SHGs and local artisans integrated into value chains,
+            with accessibility-first thinking across the experience.
+          </p>
+
+          <div class="jt-objective-bottom-line"></div>
+
+        </article>
+
+
+        <article class="jt-objective-card">
+
+          <span class="jt-objective-number">
+            04
+          </span>
+
+          <div class="jt-objective-icon">
+            <i
+              class="fa-solid fa-chart-line"
+              aria-hidden="true"
+            ></i>
+          </div>
+
+          <h3>
+            Smart Operations
+          </h3>
+
+          <p>
+            IoT-based footfall insights, dynamic pricing pilots and
+            command dashboards supporting tourism decision-making.
+          </p>
+
+          <div class="jt-objective-bottom-line"></div>
+
+        </article>
+
+
+        <article class="jt-objective-card">
+
+          <span class="jt-objective-number">
+            05
+          </span>
+
+          <div class="jt-objective-icon">
+            <i
+              class="fa-solid fa-shield-halved"
+              aria-hidden="true"
+            ></i>
+          </div>
+
+          <h3>
+            Safety & Trust
+          </h3>
+
+          <p>
+            Verified operators, SOS integrations and grievance
+            redressal with clearer service-level visibility.
+          </p>
+
+          <div class="jt-objective-bottom-line"></div>
+
+        </article>
+
+
+        <article class="jt-objective-card">
+
+          <span class="jt-objective-number">
+            06
+          </span>
+
+          <div class="jt-objective-icon">
+            <i
+              class="fa-solid fa-bullhorn"
+              aria-hidden="true"
+            ></i>
+          </div>
+
+          <h3>
+            Brand Jharkhand
+          </h3>
+
+          <p>
+            Always-on campaigns, user-generated content and creator
+            partnerships to strengthen destination visibility.
+          </p>
+
+          <div class="jt-objective-bottom-line"></div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================================
+         GOVERNMENT VISION
+    ========================================================= -->
+
+    <section
+      class="jt-objectives-vision"
+      aria-labelledby="governmentVisionTitle"
+    >
+
+      <div class="jt-objectives-vision-intro">
+
+        <div class="jt-objectives-vision-intro-label">
+          Government vision
+        </div>
+
+        <h2
+          id="governmentVisionTitle"
+        >
+          Smart, sustainable and inclusive tourism.
+        </h2>
+
+        <p>
+          A connected tourism model that preserves culture,
+          protects natural assets and expands opportunities
+          for local communities.
+        </p>
+
+
+        <div class="jt-objectives-vision-pillars">
+
+          <div class="jt-objectives-vision-pillar">
+
+            <i
+              class="fa-solid fa-globe"
+              aria-hidden="true"
+            ></i>
+
+            <strong>
+              One portal
+            </strong>
+
+            <span>
+              One connected digital tourism experience
+            </span>
+
+          </div>
+
+
+          <div class="jt-objectives-vision-pillar">
+
+            <i
+              class="fa-solid fa-shield-heart"
+              aria-hidden="true"
+            ></i>
+
+            <strong>
+              Safety first
+            </strong>
+
+            <span>
+              Support, verification and grievance pathways
+            </span>
+
+          </div>
+
+
+          <div class="jt-objectives-vision-pillar">
+
+            <i
+              class="fa-solid fa-tree"
+              aria-hidden="true"
+            ></i>
+
+            <strong>
+              Green standards
+            </strong>
+
+            <span>
+              Sustainable destinations and events
+            </span>
+
+          </div>
+
+
+          <div class="jt-objectives-vision-pillar">
+
+            <i
+              class="fa-solid fa-hands-holding-circle"
+              aria-hidden="true"
+            ></i>
+
+            <strong>
+              Local livelihoods
+            </strong>
+
+            <span>
+              Skills and opportunities for communities
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="jt-objectives-vision-detail">
+
+        <div class="jt-objectives-vision-detail-head">
+
+          <h3>
+            Vision in practice
+          </h3>
+
+          <span class="jt-objectives-vision-detail-badge">
+            Connected ecosystem
+          </span>
+
+        </div>
+
+
+        <p class="jt-objectives-vision-description">
+          The existing Smart Tourism vision brings together content,
+          maps, tickets, passes, analytics, safety, green standards,
+          local skills and community participation.
+        </p>
+
+
+        <div class="jt-objectives-principles">
+
+          <div class="jt-objectives-principle">
+
+            <div class="jt-objectives-principle-icon">
+              <i
+                class="fa-solid fa-globe"
+                aria-hidden="true"
+              ></i>
+            </div>
+
+            <div>
+              <strong>
+                Unified digital stack
+              </strong>
+
+              <span>
+                Content, maps, tickets, passes and analytics working
+                as connected parts of the tourism ecosystem.
+              </span>
+            </div>
+
+          </div>
+
+
+          <div class="jt-objectives-principle">
+
+            <div class="jt-objectives-principle-icon">
+              <i
+                class="fa-solid fa-shield-check"
+                aria-hidden="true"
+              ></i>
+            </div>
+
+            <div>
+              <strong>
+                Safety-first services
+              </strong>
+
+              <span>
+                SOS support, verified operators and clearer
+                grievance redressal.
+              </span>
+            </div>
+
+          </div>
+
+
+          <div class="jt-objectives-principle">
+
+            <div class="jt-objectives-principle-icon">
+              <i
+                class="fa-solid fa-tree"
+                aria-hidden="true"
+              ></i>
+            </div>
+
+            <div>
+              <strong>
+                Green standards
+              </strong>
+
+              <span>
+                Sustainability-oriented standards across destinations
+                and tourism events.
+              </span>
+            </div>
+
+          </div>
+
+
+          <div class="jt-objectives-principle">
+
+            <div class="jt-objectives-principle-icon">
+              <i
+                class="fa-solid fa-users"
+                aria-hidden="true"
+              ></i>
+            </div>
+
+            <div>
+              <strong>
+                Community participation
+              </strong>
+
+              <span>
+                Support for local youth, SHGs, artisans and community-led
+                tourism value chains.
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================================
+         3-YEAR HORIZON
+    ========================================================= -->
+
+    <section
+      class="jt-objectives-roadmap"
+      aria-labelledby="threeYearTitle"
+    >
+
+      <div class="jt-objectives-roadmap-head">
+
+        <div>
+
+          <div class="jt-objectives-kicker">
+            3-year horizon
+          </div>
+
+          <h2 id="threeYearTitle">
+            From foundation to optimisation.
+          </h2>
+
+        </div>
+
+        <p>
+          A staged progression based on the existing Smart Tourism
+          roadmap content.
+        </p>
+
+      </div>
+
+
+      <div class="jt-objectives-roadmap-track">
+
+        <article class="jt-roadmap-card">
+
+          <span class="jt-roadmap-card-year">
+            Year 1 · Foundation
+          </span>
+
+          <h3>
+            Establish the digital base
+          </h3>
+
+          <p>
+            Unified portal MVP, core destination pages, online booking
+            for initial inventory and a pilot digital pass.
+          </p>
+
+        </article>
+
+
+        <article class="jt-roadmap-card">
+
+          <span class="jt-roadmap-card-year">
+            Year 2 · Scale
+          </span>
+
+          <h3>
+            Expand participation
+          </h3>
+
+          <p>
+            Wider online inventory, artisan marketplace, smart
+            signage, QR trails and accessibility audits.
+          </p>
+
+        </article>
+
+
+        <article class="jt-roadmap-card">
+
+          <span class="jt-roadmap-card-year">
+            Year 3 · Optimise
+          </span>
+
+          <h3>
+            Connect intelligence
+          </h3>
+
+          <p>
+            Command dashboards, dynamic pricing pilots,
+            multilingual assistance and green certification.
+          </p>
+
+        </article>
+
+      </div>
+
+
+      <!-- KPI values preserved from the existing page -->
+
+      <div class="jt-objectives-kpis">
+
+        <div class="jt-objectives-kpi">
+
+          <div class="jt-objectives-kpi-value">
+            3.0M
+          </div>
+
+          <div class="jt-objectives-kpi-label">
+            Annual Visitors
+          </div>
+
+        </div>
+
+
+        <div class="jt-objectives-kpi">
+
+          <div class="jt-objectives-kpi-value">
+            80%
+          </div>
+
+          <div class="jt-objectives-kpi-label">
+            Inventory Online
+          </div>
+
+        </div>
+
+
+        <div class="jt-objectives-kpi">
+
+          <div class="jt-objectives-kpi-value">
+            25
+          </div>
+
+          <div class="jt-objectives-kpi-label">
+            Green Sites
+          </div>
+
+        </div>
+
+
+        <div class="jt-objectives-kpi">
+
+          <div class="jt-objectives-kpi-value">
+            4.6
+          </div>
+
+          <div class="jt-objectives-kpi-label">
+            Average Rating
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================================
+         NEXT
+    ========================================================= -->
+
+    <section
+      class="jt-objectives-final"
+      aria-label="Continue Smart Tourism exploration"
+    >
+
+      <div>
+
+        <h2>
+          See how these objectives become platform features.
+        </h2>
+
+        <p>
+          Continue into the Features section or explore the interactive
+          Core Features showcase.
+        </p>
+
+      </div>
+
+
+      <a
+        href="/smart-tourism/features"
+        class="jt-objectives-final-link"
+      >
+        Explore Features
+
+        <i
+          class="fa-solid fa-arrow-right"
+          aria-hidden="true"
+        ></i>
+      </a>
+
+    </section>
+
+  </div>
+
+</main>

@@ -1,31 +1,137 @@
-// init/controllers/placeController.js
-const mongoose = require('mongoose');
-const Place = require('../models/place');
+// ============================================================
+// JHARKHAND TOURISM — PLACE CONTROLLER
+// File: init/controllers/placeController.js
+//
+// Responsibilities:
+// - List tourism destinations
+// - Show a single destination
+//
+// Existing route/view contracts are preserved.
+// ============================================================
+
+const Place =
+  require("../models/place");
+
+
+// ============================================================
+// GET /places
+// List all destinations
+// ============================================================
 
 exports.listPlaces = async (req, res) => {
+
   try {
-    // NOTE: your schema doesn't have `published` so we query all places.
-    // If you later add published flag, change query accordingly.
-    const places = await Place.find().sort({ createdAt: -1 }).lean();
-    console.log('DEBUG listPlaces - found', places.length, 'places');
-    return res.render('places/index', { places }); // render view at init/views/places/index.ejs
-  } catch (err) {
-    console.error('ERROR in listPlaces:', err);
-    return res.status(500).send('Server error');
+
+    /*
+     * Keep the existing data contract.
+     *
+     * The current Place schema does not use a `published`
+     * filter, so all stored places are returned.
+     */
+    const places =
+      await Place
+        .find()
+        .sort({
+          createdAt: -1
+        })
+        .lean();
+
+
+    return res.render(
+      "places/index",
+      {
+        places
+      }
+    );
+
+  } catch (error) {
+
+    console.error(
+      "❌ Error loading places:",
+      error
+    );
+
+    return res.status(500).send(
+      "Unable to load destinations right now."
+    );
   }
 };
 
+
+// ============================================================
+// GET /places/:id
+// Show one destination
+//
+// Accepts:
+// - place_id
+// - slug
+// - name
+// ============================================================
+
 exports.showPlace = async (req, res) => {
+
   try {
-    // Using place_id in schema; we'll accept either place_id or slug-like param
-    const id = req.params.id;
-    const place = await Place.findOne({
-      $or: [{ place_id: id }, { slug: id }, { name: id }]
-    }).lean();
-    if (!place) return res.status(404).send('Place not found');
-    return res.render('places/show', { place });
-  } catch (err) {
-    console.error('ERROR in showPlace:', err);
-    return res.status(500).send('Server error');
+
+    const id =
+      String(
+        req.params.id || ""
+      ).trim();
+
+
+    if (!id) {
+
+      return res.status(404).send(
+        "Place not found"
+      );
+    }
+
+
+    /*
+     * Preserve compatibility with the
+     * existing Place schema.
+     */
+    const place =
+      await Place
+        .findOne({
+          $or: [
+            {
+              place_id: id
+            },
+            {
+              slug: id
+            },
+            {
+              name: id
+            }
+          ]
+        })
+        .lean();
+
+
+    if (!place) {
+
+      return res.status(404).send(
+        "Place not found"
+      );
+    }
+
+
+    return res.render(
+      "places/show",
+      {
+        place
+      }
+    );
+
+  } catch (error) {
+
+    console.error(
+      "❌ Error loading destination:",
+      error
+    );
+
+    return res.status(500).send(
+      "Unable to load this destination right now."
+    );
   }
 };

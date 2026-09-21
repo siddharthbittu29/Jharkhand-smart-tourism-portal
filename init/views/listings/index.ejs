@@ -1,17 +1,1084 @@
+<%
+  /*
+   * ============================================================
+   * JHARKHAND TOURISM
+   * TOUR PACKAGES / LISTINGS DIRECTORY
+   *
+   * File:
+   * init/views/listings/index.ejs
+   *
+   * Existing variables preserved:
+   * - listings
+   * ============================================================
+   */
 
-<h1>Tour Packages</h1>
-<div class="grid">
-<% listings.forEach(l => { %>
-<a class="card" href="/listings/<%= l._id %>">
-<img src="<%= l.image || 'https://placehold.co/600x400' %>" alt="<%= l.title %>">
-<div class="card-body">
-<h3><%= l.title %></h3>
-<p><%= l.location %></p>
-<strong>₹<%= l.price %></strong>
-</div>
-</a>
-<% }) %>
-<% if (listings.length === 0) { %>
-<p>No listings yet. <a href="/listings/new">Create one</a>.</p>
-<% } %>
-</div>
+  const listingItems =
+    Array.isArray(listings) ? listings : [];
+
+  const getListingImage = (item) => {
+    if (
+      item &&
+      typeof item.image === "string" &&
+      item.image.trim()
+    ) {
+      return item.image.trim();
+    }
+
+    return "/images/placeholder.jpg";
+  };
+%>
+
+
+<style>
+  /* ============================================================
+     LISTINGS INDEX
+  ============================================================ */
+
+  .jt-listings-index {
+    --jt-deep: #123b2a;
+    --jt-deep-2: #0d3022;
+    --jt-green: #26724a;
+    --jt-green-soft: #edf6ef;
+    --jt-earth: #a17746;
+    --jt-cream: #f7f4ec;
+    --jt-ink: #19352a;
+    --jt-muted: #6b7770;
+    --jt-line: rgba(18, 59, 42, 0.11);
+
+    min-height: 100vh;
+
+    background:
+      linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #f7faf8 100%
+      );
+
+    color: var(--jt-ink);
+  }
+
+
+  .jt-listings-shell {
+    width:
+      min(1180px, calc(100% - 36px));
+
+    margin:
+      0 auto;
+  }
+
+
+  /* ============================================================
+     HERO
+  ============================================================ */
+
+  .jt-listings-index-hero {
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+      linear-gradient(
+        100deg,
+        #0b3323 0%,
+        #154b35 55%,
+        #236044 100%
+      );
+
+    color: #ffffff;
+  }
+
+
+  .jt-listings-index-hero::before {
+    content: "";
+
+    position: absolute;
+
+    right: -100px;
+    top: -150px;
+
+    width: 390px;
+    height: 390px;
+
+    border:
+      1px solid
+      rgba(255,255,255,0.08);
+
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 0 45px rgba(255,255,255,0.025),
+      0 0 0 90px rgba(255,255,255,0.015);
+
+    pointer-events: none;
+  }
+
+
+  .jt-listings-index-hero-inner {
+    position: relative;
+
+    z-index: 1;
+
+    display: grid;
+
+    grid-template-columns:
+      minmax(0, 1fr)
+      auto;
+
+    align-items: end;
+
+    gap: 25px;
+
+    padding:
+      58px 0 72px;
+  }
+
+
+  .jt-listings-index-eyebrow {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding:
+      8px 11px;
+
+    border:
+      1px solid
+      rgba(255,255,255,0.17);
+
+    border-radius:
+      999px;
+
+    background:
+      rgba(255,255,255,0.06);
+
+    color:
+      rgba(255,255,255,0.88);
+
+    font-size:
+      9px;
+
+    font-weight:
+      900;
+
+    letter-spacing:
+      0.13em;
+
+    text-transform:
+      uppercase;
+  }
+
+
+  .jt-listings-index-eyebrow i {
+    color:
+      #bde1c7;
+  }
+
+
+  .jt-listings-index-title {
+    max-width:
+      720px;
+
+    margin:
+      16px 0 0;
+
+    color:
+      #ffffff;
+
+    font-size:
+      clamp(2.45rem, 5.4vw, 4.5rem);
+
+    line-height:
+      0.99;
+
+    font-weight:
+      900;
+
+    letter-spacing:
+      -0.045em;
+  }
+
+
+  .jt-listings-index-title span {
+    color:
+      #b9dfc4;
+  }
+
+
+  .jt-listings-index-subtitle {
+    max-width:
+      680px;
+
+    margin:
+      17px 0 0;
+
+    color:
+      rgba(255,255,255,0.73);
+
+    font-size:
+      0.91rem;
+
+    line-height:
+      1.75;
+  }
+
+
+  .jt-listings-index-count {
+    display:
+      inline-flex;
+
+    align-items:
+      center;
+
+    gap:
+      8px;
+
+    padding:
+      11px 13px;
+
+    border:
+      1px solid
+      rgba(255,255,255,0.14);
+
+    border-radius:
+      14px;
+
+    background:
+      rgba(255,255,255,0.055);
+
+    color:
+      rgba(255,255,255,0.9);
+
+    font-size:
+      0.72rem;
+
+    font-weight:
+      900;
+
+    white-space:
+      nowrap;
+  }
+
+
+  /* ============================================================
+     CONTENT
+  ============================================================ */
+
+  .jt-listings-index-content {
+    padding:
+      62px 0 75px;
+  }
+
+
+  .jt-listings-index-heading {
+    display:
+      flex;
+
+    align-items:
+      flex-end;
+
+    justify-content:
+      space-between;
+
+    gap:
+      20px;
+
+    margin-bottom:
+      25px;
+  }
+
+
+  .jt-listings-index-kicker {
+    color:
+      var(--jt-green);
+
+    font-size:
+      9px;
+
+    font-weight:
+      900;
+
+    letter-spacing:
+      0.14em;
+
+    text-transform:
+      uppercase;
+  }
+
+
+  .jt-listings-index-heading h2 {
+    margin:
+      6px 0 0;
+
+    color:
+      var(--jt-deep);
+
+    font-size:
+      clamp(1.9rem, 3vw, 2.8rem);
+
+    line-height:
+      1.05;
+
+    font-weight:
+      900;
+
+    letter-spacing:
+      -0.035em;
+  }
+
+
+  .jt-listings-index-heading p {
+    max-width:
+      640px;
+
+    margin:
+      9px 0 0;
+
+    color:
+      var(--jt-muted);
+
+    font-size:
+      0.82rem;
+
+    line-height:
+      1.7;
+  }
+
+
+  .jt-listings-index-result {
+    flex:
+      0 0 auto;
+
+    padding:
+      8px 11px;
+
+    border:
+      1px solid
+      rgba(38,114,74,0.1);
+
+    border-radius:
+      999px;
+
+    background:
+      var(--jt-green-soft);
+
+    color:
+      var(--jt-green);
+
+    font-size:
+      0.68rem;
+
+    font-weight:
+      900;
+
+    white-space:
+      nowrap;
+  }
+
+
+  /* ============================================================
+     GRID
+  ============================================================ */
+
+  .jt-listings-index-grid {
+    display:
+      grid;
+
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+
+    gap:
+      16px;
+  }
+
+
+  .jt-listings-index-card {
+    display:
+      block;
+
+    overflow:
+      hidden;
+
+    border:
+      1px solid
+      var(--jt-line);
+
+    border-radius:
+      19px;
+
+    background:
+      #ffffff;
+
+    color:
+      inherit;
+
+    text-decoration:
+      none;
+
+    box-shadow:
+      0 10px 29px
+      rgba(18,59,42,0.055);
+
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+
+  .jt-listings-index-card:hover {
+    color:
+      inherit;
+
+    text-decoration:
+      none;
+
+    transform:
+      translateY(-5px);
+
+    box-shadow:
+      0 18px 40px
+      rgba(18,59,42,0.11);
+  }
+
+
+  .jt-listings-index-image-wrap {
+    position:
+      relative;
+
+    height:
+      225px;
+
+    overflow:
+      hidden;
+
+    background:
+      #e7eee8;
+  }
+
+
+  .jt-listings-index-image {
+    width:
+      100%;
+
+    height:
+      100%;
+
+    display:
+      block;
+
+    object-fit:
+      cover;
+
+    transition:
+      transform 350ms ease;
+  }
+
+
+  .jt-listings-index-card:hover
+    .jt-listings-index-image {
+    transform:
+      scale(1.045);
+  }
+
+
+  .jt-listings-index-number {
+    position:
+      absolute;
+
+    top:
+      12px;
+
+    right:
+      12px;
+
+    width:
+      34px;
+
+    height:
+      34px;
+
+    display:
+      grid;
+
+    place-items:
+      center;
+
+    border:
+      1px solid
+      rgba(255,255,255,0.18);
+
+    border-radius:
+      10px;
+
+    background:
+      rgba(7,30,20,0.63);
+
+    color:
+      #ffffff;
+
+    backdrop-filter:
+      blur(7px);
+
+    font-size:
+      0.64rem;
+
+    font-weight:
+      900;
+  }
+
+
+  .jt-listings-index-card-body {
+    padding:
+      17px;
+  }
+
+
+  .jt-listings-index-location {
+    display:
+      inline-flex;
+
+    align-items:
+      center;
+
+    gap:
+      6px;
+
+    color:
+      var(--jt-earth);
+
+    font-size:
+      0.65rem;
+
+    font-weight:
+      900;
+
+    letter-spacing:
+      0.06em;
+
+    text-transform:
+      uppercase;
+  }
+
+
+  .jt-listings-index-location i {
+    color:
+      var(--jt-green);
+  }
+
+
+  .jt-listings-index-card h3 {
+    margin:
+      8px 0 0;
+
+    color:
+      var(--jt-deep);
+
+    font-size:
+      1.05rem;
+
+    line-height:
+      1.25;
+
+    font-weight:
+      900;
+  }
+
+
+  .jt-listings-index-footer {
+    display:
+      flex;
+
+    align-items:
+      center;
+
+    justify-content:
+      space-between;
+
+    gap:
+      12px;
+
+    margin-top:
+      15px;
+  }
+
+
+  .jt-listings-index-price {
+    color:
+      var(--jt-deep);
+
+    font-size:
+      1rem;
+
+    font-weight:
+      900;
+  }
+
+
+  .jt-listings-index-open {
+    display:
+      inline-flex;
+
+    align-items:
+      center;
+
+    gap:
+      6px;
+
+    color:
+      var(--jt-green);
+
+    font-size:
+      0.68rem;
+
+    font-weight:
+      900;
+  }
+
+
+  /* ============================================================
+     EMPTY STATE
+  ============================================================ */
+
+  .jt-listings-index-empty {
+    padding:
+      55px 25px;
+
+    border:
+      1px dashed
+      rgba(38,114,74,0.2);
+
+    border-radius:
+      20px;
+
+    background:
+      #f8fbf8;
+
+    text-align:
+      center;
+  }
+
+
+  .jt-listings-index-empty-icon {
+    width:
+      56px;
+
+    height:
+      56px;
+
+    display:
+      grid;
+
+    place-items:
+      center;
+
+    margin:
+      0 auto 15px;
+
+    border-radius:
+      16px;
+
+    background:
+      var(--jt-green-soft);
+
+    color:
+      var(--jt-green);
+
+    font-size:
+      1.18rem;
+  }
+
+
+  .jt-listings-index-empty h3 {
+    margin:
+      0;
+
+    color:
+      var(--jt-deep);
+
+    font-size:
+      1.2rem;
+
+    font-weight:
+      900;
+  }
+
+
+  .jt-listings-index-empty p {
+    max-width:
+      480px;
+
+    margin:
+      8px auto 18px;
+
+    color:
+      var(--jt-muted);
+
+    font-size:
+      0.8rem;
+
+    line-height:
+      1.7;
+  }
+
+
+  .jt-listings-index-create {
+    display:
+      inline-flex;
+
+    align-items:
+      center;
+
+    gap:
+      7px;
+
+    min-height:
+      42px;
+
+    padding:
+      10px 14px;
+
+    border-radius:
+      11px;
+
+    background:
+      var(--jt-deep);
+
+    color:
+      #ffffff;
+
+    text-decoration:
+      none;
+
+    font-size:
+      0.72rem;
+
+    font-weight:
+      900;
+  }
+
+
+  .jt-listings-index-create:hover {
+    background:
+      var(--jt-deep-2);
+
+    color:
+      #ffffff;
+
+    text-decoration:
+      none;
+  }
+
+
+  /* ============================================================
+     RESPONSIVE
+  ============================================================ */
+
+  @media (max-width: 1000px) {
+
+    .jt-listings-index-grid {
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    }
+
+  }
+
+
+  @media (max-width: 720px) {
+
+    .jt-listings-shell {
+      width:
+        min(100% - 22px, 1180px);
+    }
+
+
+    .jt-listings-index-hero-inner {
+      grid-template-columns:
+        1fr;
+
+      padding:
+        48px 0 67px;
+    }
+
+
+    .jt-listings-index-heading {
+      align-items:
+        flex-start;
+
+      flex-direction:
+        column;
+    }
+
+
+    .jt-listings-index-content {
+      padding:
+        50px 0 60px;
+    }
+
+
+    .jt-listings-index-grid {
+      grid-template-columns:
+        1fr;
+    }
+
+  }
+
+
+  @media (max-width: 520px) {
+
+    .jt-listings-index-image-wrap {
+      height:
+        245px;
+    }
+
+  }
+
+
+  @media (prefers-reduced-motion: reduce) {
+
+    .jt-listings-index-card,
+    .jt-listings-index-image {
+      transition:
+        none !important;
+    }
+
+  }
+</style>
+
+
+<section
+  class="jt-listings-index"
+  aria-labelledby="listingsPageTitle"
+>
+
+  <!-- ==========================================================
+       HERO
+  =========================================================== -->
+
+  <section class="jt-listings-index-hero">
+
+    <div class="jt-listings-shell">
+
+      <div class="jt-listings-index-hero-inner">
+
+        <div>
+
+          <span class="jt-listings-index-eyebrow">
+
+            <i
+              class="fa-solid fa-route"
+              aria-hidden="true"
+            ></i>
+
+            Tourism experiences
+
+          </span>
+
+
+          <h1
+            id="listingsPageTitle"
+            class="jt-listings-index-title"
+          >
+            Explore
+            <span>tour packages.</span>
+          </h1>
+
+
+          <p class="jt-listings-index-subtitle">
+            Discover travel experiences, packages and activities
+            available through the Jharkhand Tourism platform.
+          </p>
+
+        </div>
+
+
+        <div class="jt-listings-index-count">
+
+          <i
+            class="fa-solid fa-compass"
+            aria-hidden="true"
+          ></i>
+
+          <span>
+            <%= listingItems.length %>
+            experience<%= listingItems.length === 1 ? "" : "s" %>
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==========================================================
+       DIRECTORY
+  =========================================================== -->
+
+  <section class="jt-listings-index-content">
+
+    <div class="jt-listings-shell">
+
+      <div class="jt-listings-index-heading">
+
+        <div>
+
+          <div class="jt-listings-index-kicker">
+            Explore
+          </div>
+
+
+          <h2>
+            Experiences across Jharkhand
+          </h2>
+
+
+          <p>
+            Open a package to view its location, pricing,
+            description and available management actions.
+          </p>
+
+        </div>
+
+
+        <span class="jt-listings-index-result">
+
+          <%= listingItems.length %>
+          available
+
+        </span>
+
+      </div>
+
+
+      <% if (listingItems.length > 0) { %>
+
+        <div class="jt-listings-index-grid">
+
+          <% listingItems.forEach((item, index) => { %>
+
+            <a
+              class="jt-listings-index-card"
+              href="/listings/<%= item._id %>"
+              aria-label="View <%= item.title %>"
+            >
+
+              <div class="jt-listings-index-image-wrap">
+
+                <img
+                  src="<%= getListingImage(item) %>"
+                  alt="<%= item.title %>"
+                  class="jt-listings-index-image"
+                  loading="lazy"
+                  onerror="this.onerror=null;this.src='/images/placeholder.jpg';"
+                >
+
+
+                <span class="jt-listings-index-number">
+
+                  <%= String(index + 1).padStart(2, "0") %>
+
+                </span>
+
+              </div>
+
+
+              <div class="jt-listings-index-card-body">
+
+                <span class="jt-listings-index-location">
+
+                  <i
+                    class="fa-solid fa-location-dot"
+                    aria-hidden="true"
+                  ></i>
+
+                  <%= item.location || "Jharkhand" %>
+
+                </span>
+
+
+                <h3>
+                  <%= item.title %>
+                </h3>
+
+
+                <div class="jt-listings-index-footer">
+
+                  <strong class="jt-listings-index-price">
+
+                    ₹<%= item.price || 0 %>
+
+                  </strong>
+
+
+                  <span class="jt-listings-index-open">
+
+                    View details
+
+                    <i
+                      class="fa-solid fa-arrow-right"
+                      aria-hidden="true"
+                    ></i>
+
+                  </span>
+
+                </div>
+
+              </div>
+
+            </a>
+
+          <% }) %>
+
+        </div>
+
+      <% } else { %>
+
+        <div class="jt-listings-index-empty">
+
+          <div class="jt-listings-index-empty-icon">
+
+            <i
+              class="fa-regular fa-compass"
+              aria-hidden="true"
+            ></i>
+
+          </div>
+
+
+          <h3>
+            No listings yet
+          </h3>
+
+
+          <p>
+            There are currently no tour packages in the listing
+            directory. Create a listing to start building the collection.
+          </p>
+
+
+          <a
+            href="/listings/new"
+            class="jt-listings-index-create"
+          >
+
+            <i
+              class="fa-solid fa-plus"
+              aria-hidden="true"
+            ></i>
+
+            Create listing
+
+          </a>
+
+        </div>
+
+      <% } %>
+
+    </div>
+
+  </section>
+
+</section>

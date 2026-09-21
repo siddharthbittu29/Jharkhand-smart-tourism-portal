@@ -1,173 +1,274 @@
-<!-- ========================================= -->
-<!-- WEATHER & TRAVEL INTELLIGENCE -->
-<!-- ========================================= -->
+<!-- =========================================================
+     JHARKHAND TOURISM — WEATHER & TRAVEL INTELLIGENCE
+========================================================= -->
 
-<section class="weather-section">
+<section class="weather-section" aria-labelledby="weather-section-title">
 
     <div class="section-heading">
 
         <span class="section-badge">
-
-            🌤 AI Travel Intelligence
-
+            <i class="fa-solid fa-cloud-sun" aria-hidden="true"></i>
+            AI Travel Intelligence
         </span>
 
-        <h2>
-
+        <h2 id="weather-section-title">
             Weather & Travel Insights
-
         </h2>
 
         <p>
-
-            Live travel intelligence generated for your destination.
-
+            Destination-specific intelligence to help you understand
+            the conditions, timing and travel experience ahead.
         </p>
 
     </div>
 
+
     <div class="weather-grid">
 
-        <!-- WEATHER -->
 
-        <div class="weather-card">
+        <!-- =============================================
+             CURRENT WEATHER
+        ============================================== -->
 
-            <div class="weather-icon">
+        <article class="weather-card weather-card-weather">
 
-                ☀️
+            <div class="weather-icon" aria-hidden="true">
+                <i class="fa-solid fa-sun"></i>
+            </div>
+
+            <div class="weather-content">
+
+                <span class="weather-kicker">
+                    Conditions
+                </span>
+
+                <h3>
+                    <%= weatherInfo && weatherInfo.condition
+                        ? weatherInfo.condition
+                        : "Pleasant" %>
+                </h3>
+
+                <p>
+                    Current Weather
+                </p>
 
             </div>
 
-            <h3>
+            <div class="weather-card-decoration" aria-hidden="true">
+                <i class="fa-solid fa-cloud-sun"></i>
+            </div>
 
-                <%= weatherInfo.condition || "Pleasant" %>
+        </article>
 
-            </h3>
 
-            <p>
+        <!-- =============================================
+             BEST SEASON
+        ============================================== -->
 
-                Current Weather
+        <article class="weather-card weather-card-season">
 
-            </p>
+            <div class="weather-icon" aria-hidden="true">
+                <i class="fa-solid fa-tree"></i>
+            </div>
 
+            <div class="weather-content">
+
+                <span class="weather-kicker">
+                    Travel Timing
+                </span>
+
+                <h3>
+                    <%= tripInsights && tripInsights.bestSeason
+                        ? tripInsights.bestSeason
+                        : "October - March" %>
+                </h3>
+
+                <p>
+                    Best Season
+                </p>
+
+            </div>
+
+            <div class="weather-card-decoration" aria-hidden="true">
+                <i class="fa-solid fa-leaf"></i>
+            </div>
+
+        </article>
+
+
+        <!-- =============================================
+             RECOMMENDED TRANSPORT
+        ============================================== -->
+
+        <article class="weather-card weather-card-transport">
+
+            <div class="weather-icon" aria-hidden="true">
+                <i class="fa-solid fa-car-side"></i>
+            </div>
+
+            <div class="weather-content">
+
+                <span class="weather-kicker">
+                    Getting Around
+                </span>
+
+                <h3>
+                    <%= tripInsights && tripInsights.recommendedTransport
+                        ? tripInsights.recommendedTransport
+                        : "Local transport" %>
+                </h3>
+
+                <p>
+                    Recommended Transport
+                </p>
+
+            </div>
+
+            <div class="weather-card-decoration" aria-hidden="true">
+                <i class="fa-solid fa-route"></i>
+            </div>
+
+        </article>
+
+
+        <!-- =============================================
+             CROWD LEVEL
+        ============================================== -->
+
+        <article class="weather-card weather-card-crowd">
+
+            <div class="weather-icon" aria-hidden="true">
+                <i class="fa-solid fa-users"></i>
+            </div>
+
+            <div class="weather-content">
+
+                <span class="weather-kicker">
+                    Visitor Activity
+                </span>
+
+                <h3>
+                    <%= tripInsights && tripInsights.crowdLevel
+                        ? tripInsights.crowdLevel
+                        : "Moderate" %>
+                </h3>
+
+                <p>
+                    Crowd Level
+                </p>
+
+            </div>
+
+            <div class="weather-card-decoration" aria-hidden="true">
+                <i class="fa-solid fa-people-group"></i>
+            </div>
+
+        </article>
+
+
+        <!-- =============================================
+             TRAVEL DIFFICULTY
+        ============================================== -->
+
+        <article class="weather-card weather-card-difficulty">
+
+            <div class="weather-icon" aria-hidden="true">
+                <i class="fa-solid fa-person-hiking"></i>
+            </div>
+
+            <div class="weather-content">
+
+                <span class="weather-kicker">
+                    Activity Level
+                </span>
+
+                <h3>
+                    <%= tripInsights && tripInsights.travelDifficulty
+                        ? tripInsights.travelDifficulty
+                        : "Easy" %>
+                </h3>
+
+                <p>
+                    Travel Difficulty
+                </p>
+
+            </div>
+
+            <div class="weather-card-decoration" aria-hidden="true">
+                <i class="fa-solid fa-mountain-sun"></i>
+            </div>
+
+        </article>
+
+
+        <!-- =============================================
+             SUSTAINABILITY SCORE
+        ============================================== -->
+
+        <article class="weather-card weather-card-eco">
+
+            <div class="weather-icon" aria-hidden="true">
+                <i class="fa-solid fa-seedling"></i>
+            </div>
+
+            <div class="weather-content">
+
+                <span class="weather-kicker">
+                    Sustainable Travel
+                </span>
+
+                <h3>
+                    <%= Number(ecoScore || 0) %><small>/100</small>
+                </h3>
+
+                <p>
+                    Sustainability Score
+                </p>
+
+                <div
+                    class="weather-progress"
+                    role="progressbar"
+                    aria-label="Sustainability score"
+                    aria-valuenow="<%= Number(ecoScore || 0) %>"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                >
+                    <span
+                        style="width:<%= Math.min(100, Math.max(0, Number(ecoScore || 0))) %>%">
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="weather-card-decoration" aria-hidden="true">
+                <i class="fa-solid fa-earth-asia"></i>
+            </div>
+
+        </article>
+
+    </div>
+
+
+    <!-- =============================================
+         INTELLIGENCE NOTE
+    ============================================== -->
+
+    <div class="weather-intelligence-note">
+
+        <div class="weather-note-icon" aria-hidden="true">
+            <i class="fa-solid fa-lightbulb"></i>
         </div>
 
-        <!-- BEST SEASON -->
+        <div>
 
-        <div class="weather-card">
-
-            <div class="weather-icon">
-
-                🌳
-
-            </div>
-
-            <h3>
-
-                <%= tripInsights.bestSeason || "October - March" %>
-
-            </h3>
+            <strong>
+                Travel smarter
+            </strong>
 
             <p>
-
-                Best Season
-
-            </p>
-
-        </div>
-
-        <!-- TRANSPORT -->
-
-        <div class="weather-card">
-
-            <div class="weather-icon">
-
-                🚗
-
-            </div>
-
-            <h3>
-
-                <%= tripInsights.recommendedTransport %>
-
-            </h3>
-
-            <p>
-
-                Recommended Transport
-
-            </p>
-
-        </div>
-
-        <!-- CROWD -->
-
-        <div class="weather-card">
-
-            <div class="weather-icon">
-
-                👥
-
-            </div>
-
-            <h3>
-
-                <%= tripInsights.crowdLevel || "Moderate" %>
-
-            </h3>
-
-            <p>
-
-                Crowd Level
-
-            </p>
-
-        </div>
-
-        <!-- DIFFICULTY -->
-
-        <div class="weather-card">
-
-            <div class="weather-icon">
-
-                🥾
-
-            </div>
-
-            <h3>
-
-                <%= tripInsights.travelDifficulty || "Easy" %>
-
-            </h3>
-
-            <p>
-
-                Travel Difficulty
-
-            </p>
-
-        </div>
-
-        <!-- ECO -->
-
-        <div class="weather-card">
-
-            <div class="weather-icon">
-
-                🌱
-
-            </div>
-
-            <h3>
-
-                <%= ecoScore %>/100
-
-            </h3>
-
-            <p>
-
-                Sustainability Score
-
+                Use these insights alongside your itinerary, budget and
+                destination recommendations to make better-informed
+                travel decisions throughout your journey.
             </p>
 
         </div>

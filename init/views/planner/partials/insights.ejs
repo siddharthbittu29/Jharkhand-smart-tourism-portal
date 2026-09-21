@@ -1,226 +1,456 @@
-<!-- ========================================= -->
-<!-- AI TRAVEL INSIGHTS -->
-<!-- ========================================= -->
+<!-- =========================================================
+     JHARKHAND TOURISM — AI TRAVEL INSIGHTS
+========================================================= -->
 
-<section class="insights-section">
+<%
+    const insights = tripInsights || {};
+
+    const comfortScore =
+        insights.comfortScore || "90%";
+
+    const difficulty =
+        insights.difficulty ||
+        insights.travelDifficulty ||
+        "Easy";
+
+    const photography =
+        insights.photography ||
+        "Excellent";
+
+    const carbonFootprint =
+        insights.carbonFootprint ||
+        "Low";
+
+    const walkingDistance =
+        insights.walkingDistance ||
+        "Moderate";
+
+    const mobileNetwork =
+        insights.mobileNetwork ||
+        "Good";
+
+    const suitableFor =
+        insights.suitableFor ||
+        "Everyone";
+
+    const adventure =
+        insights.adventure ||
+        "Medium";
+
+    const connectivity =
+        insights.connectivity ||
+        "Good";
+
+    const crowdLevel =
+        insights.crowdLevel ||
+        "Moderate";
+%>
+
+
+<section
+    class="insights-section"
+    aria-labelledby="insights-section-title"
+>
+
+    <!-- =====================================================
+         SECTION INTRO
+    ====================================================== -->
 
     <div class="section-heading">
 
         <span class="section-badge">
-
-            📊 AI Travel Intelligence
-
+            <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+            AI Travel Intelligence
         </span>
 
-        <h2>
-
-            Trip Insights Dashboard
-
+        <h2 id="insights-section-title">
+            Trip insights dashboard
         </h2>
 
         <p>
-
-            AI generated analytics to help you better understand your trip.
-
+            A broader view of the travel experience, helping you
+            understand comfort, accessibility, connectivity,
+            activity level and sustainability.
         </p>
 
     </div>
 
-    <!-- Comfort Score -->
 
-    <div class="comfort-card">
+    <!-- =====================================================
+         COMFORT SCORE
+    ====================================================== -->
 
-        <div class="comfort-circle">
+    <article class="comfort-card">
 
-            <span>
+        <div class="comfort-visual">
 
-                <%= tripInsights.comfortScore || "90%" %>
+            <div
+                class="comfort-circle"
+                aria-label="Overall comfort score: <%= comfortScore %>"
+            >
 
-            </span>
+                <div class="comfort-circle-inner">
+
+                    <span>
+                        <%= comfortScore %>
+                    </span>
+
+                    <small>
+                        Comfort
+                    </small>
+
+                </div>
+
+            </div>
 
         </div>
+
 
         <div class="comfort-info">
 
+            <span class="comfort-kicker">
+                <i
+                    class="fa-solid fa-heart-pulse"
+                    aria-hidden="true">
+                </i>
+                Journey Experience
+            </span>
+
             <h3>
-
                 Overall Comfort Score
-
             </h3>
 
             <p>
-
                 Based on accessibility, weather, travel duration,
-                accommodation quality and AI travel analysis.
-
+                accommodation quality and the available AI travel
+                analysis for this journey.
             </p>
+
+
+            <div class="comfort-highlights">
+
+                <span>
+                    <i
+                        class="fa-solid fa-check"
+                        aria-hidden="true">
+                    </i>
+                    Accessibility
+                </span>
+
+                <span>
+                    <i
+                        class="fa-solid fa-cloud-sun"
+                        aria-hidden="true">
+                    </i>
+                    Weather
+                </span>
+
+                <span>
+                    <i
+                        class="fa-solid fa-bed"
+                        aria-hidden="true">
+                    </i>
+                    Accommodation
+                </span>
+
+                <span>
+                    <i
+                        class="fa-solid fa-clock"
+                        aria-hidden="true">
+                    </i>
+                    Duration
+                </span>
+
+            </div>
 
         </div>
 
-    </div>
 
-    <!-- Analytics -->
+        <div
+            class="comfort-card-decoration"
+            aria-hidden="true"
+        >
+            <i class="fa-solid fa-compass"></i>
+        </div>
+
+    </article>
+
+
+    <!-- =====================================================
+         ANALYTICS GRID
+    ====================================================== -->
 
     <div class="insight-grid">
 
-        <div class="insight-card">
 
-            🥾
+        <!-- Difficulty -->
 
-            <h4>
+        <article class="insight-card insight-card-difficulty">
 
-                Difficulty
+            <div class="insight-icon" aria-hidden="true">
+                <i class="fa-solid fa-person-hiking"></i>
+            </div>
 
-            </h4>
+            <div class="insight-content">
 
-            <p>
+                <span class="insight-kicker">
+                    Activity
+                </span>
 
-                <%= tripInsights.difficulty || "Easy" %>
+                <h4>
+                    Difficulty
+                </h4>
 
-            </p>
+                <p>
+                    <%= difficulty %>
+                </p>
 
+            </div>
+
+        </article>
+
+
+        <!-- Photography -->
+
+        <article class="insight-card insight-card-photography">
+
+            <div class="insight-icon" aria-hidden="true">
+                <i class="fa-solid fa-camera"></i>
+            </div>
+
+            <div class="insight-content">
+
+                <span class="insight-kicker">
+                    Visual Experience
+                </span>
+
+                <h4>
+                    Photography
+                </h4>
+
+                <p>
+                    <%= photography %>
+                </p>
+
+            </div>
+
+        </article>
+
+
+        <!-- Carbon Footprint -->
+
+        <article class="insight-card insight-card-carbon">
+
+            <div class="insight-icon" aria-hidden="true">
+                <i class="fa-solid fa-leaf"></i>
+            </div>
+
+            <div class="insight-content">
+
+                <span class="insight-kicker">
+                    Sustainability
+                </span>
+
+                <h4>
+                    Carbon Footprint
+                </h4>
+
+                <p>
+                    <%= carbonFootprint %>
+                </p>
+
+            </div>
+
+        </article>
+
+
+        <!-- Walking Distance -->
+
+        <article class="insight-card insight-card-walking">
+
+            <div class="insight-icon" aria-hidden="true">
+                <i class="fa-solid fa-person-walking"></i>
+            </div>
+
+            <div class="insight-content">
+
+                <span class="insight-kicker">
+                    Mobility
+                </span>
+
+                <h4>
+                    Walking Distance
+                </h4>
+
+                <p>
+                    <%= walkingDistance %>
+                </p>
+
+            </div>
+
+        </article>
+
+
+        <!-- Mobile Network -->
+
+        <article class="insight-card insight-card-network">
+
+            <div class="insight-icon" aria-hidden="true">
+                <i class="fa-solid fa-signal"></i>
+            </div>
+
+            <div class="insight-content">
+
+                <span class="insight-kicker">
+                    Connectivity
+                </span>
+
+                <h4>
+                    Mobile Network
+                </h4>
+
+                <p>
+                    <%= mobileNetwork %>
+                </p>
+
+            </div>
+
+        </article>
+
+
+        <!-- Suitable For -->
+
+        <article class="insight-card insight-card-suitable">
+
+            <div class="insight-icon" aria-hidden="true">
+                <i class="fa-solid fa-user-group"></i>
+            </div>
+
+            <div class="insight-content">
+
+                <span class="insight-kicker">
+                    Travel Style
+                </span>
+
+                <h4>
+                    Suitable For
+                </h4>
+
+                <p>
+                    <%= suitableFor %>
+                </p>
+
+            </div>
+
+        </article>
+
+
+        <!-- Adventure -->
+
+        <article class="insight-card insight-card-adventure">
+
+            <div class="insight-icon" aria-hidden="true">
+                <i class="fa-solid fa-mountain-sun"></i>
+            </div>
+
+            <div class="insight-content">
+
+                <span class="insight-kicker">
+                    Experience
+                </span>
+
+                <h4>
+                    Adventure Level
+                </h4>
+
+                <p>
+                    <%= adventure %>
+                </p>
+
+            </div>
+
+        </article>
+
+
+        <!-- Connectivity -->
+
+        <article class="insight-card insight-card-connectivity">
+
+            <div class="insight-icon" aria-hidden="true">
+                <i class="fa-solid fa-tower-cell"></i>
+            </div>
+
+            <div class="insight-content">
+
+                <span class="insight-kicker">
+                    Digital Access
+                </span>
+
+                <h4>
+                    Connectivity
+                </h4>
+
+                <p>
+                    <%= connectivity %>
+                </p>
+
+            </div>
+
+        </article>
+
+
+        <!-- Crowd Level -->
+
+        <article class="insight-card insight-card-crowd">
+
+            <div class="insight-icon" aria-hidden="true">
+                <i class="fa-solid fa-users"></i>
+            </div>
+
+            <div class="insight-content">
+
+                <span class="insight-kicker">
+                    Visitor Activity
+                </span>
+
+                <h4>
+                    Crowd Level
+                </h4>
+
+                <p>
+                    <%= crowdLevel %>
+                </p>
+
+            </div>
+
+        </article>
+
+    </div>
+
+
+    <!-- =====================================================
+         INSIGHTS FOOTER
+    ====================================================== -->
+
+    <div class="insights-footer">
+
+        <div
+            class="insights-footer-icon"
+            aria-hidden="true"
+        >
+            <i class="fa-solid fa-chart-simple"></i>
         </div>
 
-        <div class="insight-card">
+        <div>
 
-            📸
-
-            <h4>
-
-                Photography
-
-            </h4>
+            <strong>
+                Your trip at a glance
+            </strong>
 
             <p>
-
-                <%= tripInsights.photography || "Excellent" %>
-
-            </p>
-
-        </div>
-
-        <div class="insight-card">
-
-            🌱
-
-            <h4>
-
-                Carbon Footprint
-
-            </h4>
-
-            <p>
-
-                <%= tripInsights.carbonFootprint || "Low" %>
-
-            </p>
-
-        </div>
-
-        <div class="insight-card">
-
-            🚶
-
-            <h4>
-
-                Walking Distance
-
-            </h4>
-
-            <p>
-
-                <%= tripInsights.walkingDistance || "Moderate" %>
-
-            </p>
-
-        </div>
-
-        <div class="insight-card">
-
-            📶
-
-            <h4>
-
-                Mobile Network
-
-            </h4>
-
-            <p>
-
-                <%= tripInsights.mobileNetwork || "Good" %>
-
-            </p>
-
-        </div>
-
-        <div class="insight-card">
-
-            🎯
-
-            <h4>
-
-                Suitable For
-
-            </h4>
-
-            <p>
-
-                <%= tripInsights.suitableFor || "Everyone" %>
-
-            </p>
-
-        </div>
-
-        <div class="insight-card">
-
-            🧭
-
-            <h4>
-
-                Adventure Level
-
-            </h4>
-
-            <p>
-
-                <%= tripInsights.adventure || "Medium" %>
-
-            </p>
-
-        </div>
-
-        <div class="insight-card">
-
-            📡
-
-            <h4>
-
-                Connectivity
-
-            </h4>
-
-            <p>
-
-                <%= tripInsights.connectivity || "Good" %>
-
-            </p>
-
-        </div>
-
-        <div class="insight-card">
-
-            👥
-
-            <h4>
-
-                Crowd Level
-
-            </h4>
-
-            <p>
-
-                <%= tripInsights.crowdLevel || "Moderate" %>
-
+                Use these insights together with your itinerary,
+                weather information, budget and travel tips when
+                preparing for your journey.
             </p>
 
         </div>

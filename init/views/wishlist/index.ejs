@@ -1,0 +1,565 @@
+<main class="jt-wishlist-page">
+
+  <!-- =====================================================
+       HERO
+       ===================================================== -->
+
+  <section class="jt-wishlist-hero">
+
+    <div class="jt-wishlist-hero-image"></div>
+    <div class="jt-wishlist-hero-overlay"></div>
+
+    <div class="jt-wishlist-container">
+
+      <div class="jt-wishlist-hero-content">
+
+        <span class="jt-wishlist-eyebrow">
+          <i class="fa-regular fa-heart"></i>
+          YOUR SAVED PLACES
+        </span>
+
+        <h1>
+          Places worth
+          <em>remembering.</em>
+        </h1>
+
+        <p>
+          Keep the destinations that caught your eye close at hand
+          and return to them whenever you're ready to explore.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       MAIN
+       ===================================================== -->
+
+  <section class="jt-wishlist-main">
+
+    <div class="jt-wishlist-container">
+
+
+      <!-- =================================================
+           HEADER
+           ================================================= -->
+
+      <div class="jt-wishlist-heading">
+
+        <div>
+
+          <span class="jt-wishlist-kicker">
+            MY WISHLIST
+          </span>
+
+          <h2>
+            Your saved destinations
+          </h2>
+
+        </div>
+
+        <div class="jt-wishlist-count">
+
+          <strong>
+            <%= Array.isArray(wishlist) ? wishlist.length : 0 %>
+          </strong>
+
+          <span>
+            <%= Array.isArray(wishlist) && wishlist.length === 1
+              ? "PLACE"
+              : "PLACES" %>
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <% if (Array.isArray(wishlist) && wishlist.length > 0) { %>
+
+
+        <!-- =================================================
+             WISHLIST GRID
+             ================================================= -->
+
+        <div class="jt-wishlist-grid">
+
+          <% wishlist.forEach(function(item) { %>
+
+            <article
+              class="jt-wishlist-card"
+              data-place-id="<%= item.placeId %>"
+            >
+
+              <!-- Image -->
+
+              <div class="jt-wishlist-card-image">
+
+                <% if (item.image) { %>
+
+                  <img
+                    src="<%= item.image %>"
+                    alt="<%= item.placeName %>"
+                    loading="lazy"
+                    onerror="this.onerror=null;this.src='/images/placeholder.jpg';"
+                  >
+
+                <% } else { %>
+
+                  <div class="jt-wishlist-image-fallback">
+
+                    <i class="fa-solid fa-mountain-sun"></i>
+
+                  </div>
+
+                <% } %>
+
+
+                <div class="jt-wishlist-card-image-overlay"></div>
+
+
+                <!-- Saved indicator -->
+
+                <span class="jt-wishlist-saved">
+
+                  <i class="fa-solid fa-heart"></i>
+
+                </span>
+
+              </div>
+
+
+              <!-- Content -->
+
+              <div class="jt-wishlist-card-content">
+
+                <span class="jt-wishlist-card-label">
+                  SAVED DESTINATION
+                </span>
+
+                <h3>
+                  <%= item.placeName %>
+                </h3>
+
+
+                <% if (item.district) { %>
+
+                  <div class="jt-wishlist-location">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <span>
+                      <%= item.district %>
+                    </span>
+
+                  </div>
+
+                <% } %>
+
+
+                <div class="jt-wishlist-card-footer">
+
+                  <a
+                    href="/places/<%= item.placeId %>"
+                    class="jt-wishlist-view"
+                  >
+
+                    Explore place
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                  </a>
+
+
+                  <button
+                    type="button"
+                    class="jt-wishlist-remove"
+                    data-place-id="<%= item.placeId %>"
+                    aria-label="Remove <%= item.placeName %> from wishlist"
+                  >
+
+                    <i class="fa-regular fa-trash-can"></i>
+
+                  </button>
+
+                </div>
+
+              </div>
+
+            </article>
+
+          <% }); %>
+
+        </div>
+
+
+      <% } else { %>
+
+
+        <!-- =================================================
+             EMPTY STATE
+             ================================================= -->
+
+        <section class="jt-wishlist-empty">
+
+          <div class="jt-wishlist-empty-icon">
+
+            <i class="fa-regular fa-heart"></i>
+
+          </div>
+
+          <span class="jt-wishlist-kicker">
+            NOTHING SAVED YET
+          </span>
+
+          <h2>
+            Your next favourite place
+            could be here.
+          </h2>
+
+          <p>
+            Explore Jharkhand's destinations and save the places
+            you'd like to visit. They'll appear here for easy access.
+          </p>
+
+          <a
+            href="/places"
+            class="jt-wishlist-primary-btn"
+          >
+
+            <i class="fa-solid fa-compass"></i>
+
+            Explore destinations
+
+          </a>
+
+        </section>
+
+
+      <% } %>
+
+
+      <!-- =================================================
+           BOTTOM CTA
+           ================================================= -->
+
+      <section class="jt-wishlist-cta">
+
+        <div class="jt-wishlist-cta-copy">
+
+          <span class="jt-wishlist-kicker">
+            KEEP EXPLORING
+          </span>
+
+          <h2>
+            There is always another
+            story to discover.
+          </h2>
+
+          <p>
+            Browse more destinations, discover local culture
+            and find your next Jharkhand experience.
+          </p>
+
+        </div>
+
+        <a
+          href="/places"
+          class="jt-wishlist-secondary-btn"
+        >
+
+          Explore Jharkhand
+
+          <i class="fa-solid fa-arrow-right"></i>
+
+        </a>
+
+      </section>
+
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- =========================================================
+     WISHLIST INTERACTIONS
+     ========================================================= -->
+
+<script>
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+      const removeButtons =
+        document.querySelectorAll(
+          ".jt-wishlist-remove"
+        );
+
+
+      removeButtons.forEach(
+        function (button) {
+
+          button.addEventListener(
+            "click",
+            async function () {
+
+              const placeId =
+                button.dataset.placeId;
+
+              const card =
+                button.closest(
+                  ".jt-wishlist-card"
+                );
+
+
+              if (!placeId || !card) {
+                return;
+              }
+
+
+              const confirmed =
+                window.confirm(
+                  "Remove this place from your wishlist?"
+                );
+
+
+              if (!confirmed) {
+                return;
+              }
+
+
+              button.disabled = true;
+
+              button.classList.add(
+                "is-removing"
+              );
+
+
+              try {
+
+                const response =
+                  await fetch(
+                    "/wishlist/remove/" +
+                    encodeURIComponent(placeId),
+                    {
+                      method: "POST",
+                      headers: {
+                        "Accept":
+                          "application/json"
+                      }
+                    }
+                  );
+
+
+                const data =
+                  await response.json();
+
+
+                if (!response.ok || !data.success) {
+
+                  throw new Error(
+                    data.message ||
+                    "Unable to remove this place."
+                  );
+
+                }
+
+
+                card.classList.add(
+                  "is-removed"
+                );
+
+
+                setTimeout(
+                  function () {
+
+                    card.remove();
+
+                    updateWishlistCount();
+
+                    showEmptyStateIfNeeded();
+
+                  },
+                  260
+                );
+
+
+              } catch (error) {
+
+                console.error(
+                  "Wishlist remove error:",
+                  error
+                );
+
+                button.disabled = false;
+
+                button.classList.remove(
+                  "is-removing"
+                );
+
+                window.alert(
+                  error.message ||
+                  "Unable to remove this place."
+                );
+
+              }
+
+            }
+          );
+
+        }
+      );
+
+
+      function updateWishlistCount() {
+
+        const countElement =
+          document.querySelector(
+            ".jt-wishlist-count strong"
+          );
+
+        const labelElement =
+          document.querySelector(
+            ".jt-wishlist-count span"
+          );
+
+        const cards =
+          document.querySelectorAll(
+            ".jt-wishlist-card"
+          );
+
+
+        if (!countElement) {
+          return;
+        }
+
+
+        const count = cards.length;
+
+
+        countElement.textContent =
+          count;
+
+
+        if (labelElement) {
+
+          labelElement.textContent =
+            count === 1
+              ? "PLACE"
+              : "PLACES";
+
+        }
+
+      }
+
+
+      function showEmptyStateIfNeeded() {
+
+        const cards =
+          document.querySelectorAll(
+            ".jt-wishlist-card"
+          );
+
+
+        if (cards.length > 0) {
+          return;
+        }
+
+
+        const grid =
+          document.querySelector(
+            ".jt-wishlist-grid"
+          );
+
+
+        if (grid) {
+          grid.remove();
+        }
+
+
+        const existingEmpty =
+          document.querySelector(
+            ".jt-wishlist-empty"
+          );
+
+
+        if (existingEmpty) {
+          return;
+        }
+
+
+        const container =
+          document.querySelector(
+            ".jt-wishlist-container"
+          );
+
+
+        const cta =
+          document.querySelector(
+            ".jt-wishlist-cta"
+          );
+
+
+        if (!container || !cta) {
+          return;
+        }
+
+
+        const empty =
+          document.createElement(
+            "section"
+          );
+
+
+        empty.className =
+          "jt-wishlist-empty";
+
+
+        empty.innerHTML = `
+          <div class="jt-wishlist-empty-icon">
+            <i class="fa-regular fa-heart"></i>
+          </div>
+
+          <span class="jt-wishlist-kicker">
+            NOTHING SAVED YET
+          </span>
+
+          <h2>
+            Your next favourite place
+            could be here.
+          </h2>
+
+          <p>
+            Explore Jharkhand's destinations and save the places
+            you'd like to visit. They'll appear here for easy access.
+          </p>
+
+          <a
+            href="/places"
+            class="jt-wishlist-primary-btn"
+          >
+            <i class="fa-solid fa-compass"></i>
+            Explore destinations
+          </a>
+        `;
+
+
+        container.insertBefore(
+          empty,
+          cta
+        );
+
+      }
+
+    }
+  );
+
+</script>

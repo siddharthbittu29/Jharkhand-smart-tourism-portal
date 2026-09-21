@@ -1,0 +1,944 @@
+/* =========================================================
+   JHARKHAND TOURISM
+   AUTHENTICATION — LOGIN / REGISTER
+   ========================================================= */
+
+:root {
+  --jt-auth-green-950: #12352b;
+  --jt-auth-green-900: #174b3c;
+  --jt-auth-green-800: #1d624c;
+  --jt-auth-green-700: #28785a;
+  --jt-auth-green-600: #348d68;
+
+  --jt-auth-gold: #c79a4b;
+  --jt-auth-cream: #f7f4ed;
+  --jt-auth-paper: #fffefa;
+
+  --jt-auth-text: #18352d;
+  --jt-auth-muted: #718078;
+  --jt-auth-border: #dfe6e1;
+
+  --jt-auth-shadow:
+    0 30px 80px rgba(18, 53, 43, 0.14);
+
+  --jt-auth-radius: 28px;
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.jt-auth-page {
+  min-height: 100vh;
+  min-height: 100svh;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(420px, 0.92fr);
+
+  background: var(--jt-auth-cream);
+}
+
+
+/* =========================================================
+   VISUAL PANEL
+   ========================================================= */
+
+.jt-auth-visual {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: flex-end;
+
+  isolation: isolate;
+
+  background:
+    #173f32;
+}
+
+.jt-auth-visual-image {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+
+  background-image:
+    url("/images/discover/patratu.jpg");
+
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.015);
+}
+
+.jt-auth-visual-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(12, 38, 31, 0.18) 0%,
+      rgba(12, 38, 31, 0.26) 35%,
+      rgba(12, 38, 31, 0.86) 100%
+    );
+}
+
+.jt-auth-visual-overlay::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(10, 35, 28, 0.2),
+      transparent 70%
+    );
+}
+
+.jt-auth-visual-content {
+  width: min(620px, 100%);
+
+  padding:
+    clamp(42px, 6vw, 86px)
+    clamp(38px, 6vw, 86px)
+    clamp(46px, 7vw, 92px);
+
+  color: #fff;
+}
+
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.jt-auth-brand {
+  display: inline-flex;
+  align-items: center;
+
+  margin-bottom: 34px;
+
+  text-decoration: none;
+}
+
+.jt-auth-brand img {
+  width: auto;
+  height: 72px;
+
+  display: block;
+
+  object-fit: contain;
+
+  filter:
+    drop-shadow(0 8px 22px rgba(0, 0, 0, 0.18));
+}
+
+
+/* =========================================================
+   VISUAL COPY
+   ========================================================= */
+
+.jt-auth-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-bottom: 18px;
+
+  color: rgba(255, 255, 255, 0.76);
+
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.jt-auth-eyebrow::before {
+  content: "";
+
+  width: 28px;
+  height: 1px;
+
+  background: var(--jt-auth-gold);
+}
+
+.jt-auth-visual-content h1 {
+  max-width: 580px;
+
+  margin: 0;
+
+  color: #fff;
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size: clamp(3rem, 5vw, 5.5rem);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+
+.jt-auth-visual-content h1 em {
+  display: block;
+
+  color: #f0d39a;
+
+  font-style: italic;
+  font-weight: 400;
+}
+
+.jt-auth-visual-content > p {
+  max-width: 520px;
+
+  margin: 28px 0 0;
+
+  color: rgba(255, 255, 255, 0.78);
+
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+
+/* =========================================================
+   VISUAL META
+   ========================================================= */
+
+.jt-auth-visual-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+
+  margin-top: 34px;
+}
+
+.jt-auth-visual-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  color: rgba(255, 255, 255, 0.9);
+
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.jt-auth-visual-meta i {
+  color: #e2bb72;
+}
+
+
+/* =========================================================
+   FORM PANEL
+   ========================================================= */
+
+.jt-auth-form-panel {
+  min-width: 0;
+  min-height: 100vh;
+  min-height: 100svh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    clamp(32px, 5vw, 76px)
+    clamp(28px, 5vw, 80px);
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(52, 141, 104, 0.08),
+      transparent 34%
+    ),
+    var(--jt-auth-paper);
+}
+
+.jt-auth-form-container {
+  width: min(100%, 480px);
+}
+
+
+/* =========================================================
+   MOBILE BRAND
+   ========================================================= */
+
+.jt-auth-mobile-brand {
+  display: none;
+
+  margin-bottom: 32px;
+}
+
+.jt-auth-mobile-brand a {
+  display: inline-flex;
+}
+
+.jt-auth-mobile-brand img {
+  width: auto;
+  height: 62px;
+
+  display: block;
+  object-fit: contain;
+}
+
+
+/* =========================================================
+   HEADING
+   ========================================================= */
+
+.jt-auth-heading {
+  margin-bottom: 34px;
+}
+
+.jt-auth-kicker {
+  display: block;
+
+  margin-bottom: 13px;
+
+  color: var(--jt-auth-green-700);
+
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.18em;
+}
+
+.jt-auth-heading h2 {
+  margin: 0;
+
+  color: var(--jt-auth-text);
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size: clamp(2.25rem, 4vw, 3.45rem);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+
+.jt-auth-heading p {
+  max-width: 430px;
+
+  margin: 16px 0 0;
+
+  color: var(--jt-auth-muted);
+
+  font-size: 0.94rem;
+  line-height: 1.75;
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.jt-auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+}
+
+.jt-auth-field {
+  min-width: 0;
+}
+
+.jt-auth-field label {
+  display: block;
+
+  margin-bottom: 9px;
+
+  color: var(--jt-auth-text);
+
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.jt-auth-input-wrap {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+}
+
+.jt-auth-input-wrap > i {
+  position: absolute;
+  left: 17px;
+  z-index: 2;
+
+  color: #84928b;
+
+  font-size: 0.9rem;
+
+  pointer-events: none;
+}
+
+.jt-auth-input-wrap input {
+  width: 100%;
+  height: 56px;
+
+  padding:
+    0 48px
+    0 46px;
+
+  border: 1px solid var(--jt-auth-border);
+  border-radius: 13px;
+
+  outline: none;
+
+  color: var(--jt-auth-text);
+  background: #fff;
+
+  font-family: inherit;
+  font-size: 0.9rem;
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.jt-auth-input-wrap input::placeholder {
+  color: #a2aca7;
+}
+
+.jt-auth-input-wrap input:hover {
+  border-color: #c7d4cd;
+}
+
+.jt-auth-input-wrap input:focus {
+  border-color: var(--jt-auth-green-600);
+
+  background: #fff;
+
+  box-shadow:
+    0 0 0 4px rgba(52, 141, 104, 0.11);
+}
+
+
+/* =========================================================
+   PASSWORD TOGGLE
+   ========================================================= */
+
+.jt-auth-password-toggle {
+  position: absolute;
+  right: 10px;
+
+  width: 38px;
+  height: 38px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  border-radius: 9px;
+
+  color: #718078;
+  background: transparent;
+
+  cursor: pointer;
+
+  transition:
+    color 160ms ease,
+    background 160ms ease;
+}
+
+.jt-auth-password-toggle:hover {
+  color: var(--jt-auth-green-700);
+  background: rgba(52, 141, 104, 0.08);
+}
+
+.jt-auth-password-toggle:focus-visible {
+  outline: 2px solid var(--jt-auth-green-600);
+  outline-offset: 2px;
+}
+
+
+/* =========================================================
+   HELPER
+   ========================================================= */
+
+.jt-auth-helper {
+  margin-top: 7px;
+
+  color: #8a9690;
+
+  font-size: 0.72rem;
+}
+
+
+/* =========================================================
+   SUBMIT BUTTON
+   ========================================================= */
+
+.jt-auth-submit {
+  width: 100%;
+  min-height: 56px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  margin-top: 7px;
+  padding: 0 20px 0 23px;
+
+  border: 1px solid var(--jt-auth-green-800);
+  border-radius: 13px;
+
+  color: #fff;
+  background: var(--jt-auth-green-800);
+
+  font-family: inherit;
+  font-size: 0.86rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 25px rgba(29, 98, 76, 0.18);
+
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.jt-auth-submit i {
+  width: 34px;
+  height: 34px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  color: var(--jt-auth-green-900);
+  background: #fff;
+
+  transition: transform 180ms ease;
+}
+
+.jt-auth-submit:hover {
+  border-color: var(--jt-auth-green-900);
+  background: var(--jt-auth-green-900);
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 14px 30px rgba(29, 98, 76, 0.22);
+}
+
+.jt-auth-submit:hover i {
+  transform: translateX(3px);
+}
+
+.jt-auth-submit:active {
+  transform: translateY(0);
+}
+
+.jt-auth-submit:focus-visible {
+  outline: 3px solid rgba(52, 141, 104, 0.22);
+  outline-offset: 3px;
+}
+
+
+/* =========================================================
+   LOGIN / REGISTER SWITCH
+   ========================================================= */
+
+.jt-auth-switch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5px;
+
+  margin-top: 25px;
+
+  color: var(--jt-auth-muted);
+
+  font-size: 0.82rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.jt-auth-switch a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  color: var(--jt-auth-green-800);
+
+  font-weight: 800;
+  text-decoration: none;
+
+  transition: color 160ms ease;
+}
+
+.jt-auth-switch a:hover {
+  color: var(--jt-auth-green-600);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.jt-auth-switch a i {
+  font-size: 0.63rem;
+}
+
+
+/* =========================================================
+   SECURITY NOTE
+   ========================================================= */
+
+.jt-auth-security {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+
+  margin-top: 25px;
+  padding: 13px 15px;
+
+  border: 1px solid #e6ebe7;
+  border-radius: 11px;
+
+  color: #77847d;
+  background: #f8faf8;
+
+  font-size: 0.7rem;
+  line-height: 1.55;
+}
+
+.jt-auth-security i {
+  flex: 0 0 auto;
+
+  margin-top: 2px;
+
+  color: var(--jt-auth-green-700);
+}
+
+
+/* =========================================================
+   BACK LINK
+   ========================================================= */
+
+.jt-auth-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  margin-top: 25px;
+
+  color: #7b8781;
+
+  font-size: 0.76rem;
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition:
+    color 160ms ease,
+    gap 160ms ease;
+}
+
+.jt-auth-back:hover {
+  gap: 11px;
+
+  color: var(--jt-auth-green-800);
+}
+
+
+/* =========================================================
+   RESPONSIVE — LARGE TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+  .jt-auth-page {
+    grid-template-columns:
+      minmax(0, 0.9fr)
+      minmax(400px, 1.1fr);
+  }
+
+  .jt-auth-visual-content {
+    padding: 54px;
+  }
+
+  .jt-auth-visual-content h1 {
+    font-size: clamp(2.8rem, 5vw, 4.3rem);
+  }
+
+  .jt-auth-form-panel {
+    padding-inline: 50px;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET / MOBILE
+   ========================================================= */
+
+@media (max-width: 820px) {
+
+  .jt-auth-page {
+    display: block;
+
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+
+  .jt-auth-visual {
+    min-height: 380px;
+    height: 45svh;
+    max-height: 500px;
+
+    align-items: flex-end;
+  }
+
+  .jt-auth-visual-content {
+    padding: 38px 30px 42px;
+  }
+
+  .jt-auth-brand {
+    margin-bottom: 20px;
+  }
+
+  .jt-auth-brand img {
+    height: 55px;
+  }
+
+  .jt-auth-eyebrow {
+    margin-bottom: 12px;
+  }
+
+  .jt-auth-visual-content h1 {
+    font-size: clamp(2.35rem, 8vw, 3.8rem);
+  }
+
+  .jt-auth-visual-content > p {
+    margin-top: 17px;
+
+    font-size: 0.88rem;
+    line-height: 1.65;
+  }
+
+  .jt-auth-visual-meta {
+    gap: 15px;
+
+    margin-top: 20px;
+  }
+
+  .jt-auth-visual-meta span {
+    font-size: 0.7rem;
+  }
+
+  .jt-auth-form-panel {
+    min-height: auto;
+
+    padding:
+      48px
+      30px
+      55px;
+  }
+
+  .jt-auth-form-container {
+    width: min(100%, 520px);
+    margin-inline: auto;
+  }
+
+  .jt-auth-mobile-brand {
+    display: none;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 560px) {
+
+  .jt-auth-visual {
+    min-height: 340px;
+    height: 52svh;
+  }
+
+  .jt-auth-visual-image {
+    background-position: 55% center;
+  }
+
+  .jt-auth-visual-content {
+    padding:
+      28px
+      22px
+      30px;
+  }
+
+  .jt-auth-brand img {
+    height: 48px;
+  }
+
+  .jt-auth-eyebrow {
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+  }
+
+  .jt-auth-eyebrow::before {
+    width: 20px;
+  }
+
+  .jt-auth-visual-content h1 {
+    font-size: clamp(2.25rem, 12vw, 3.2rem);
+  }
+
+  .jt-auth-visual-content > p {
+    display: none;
+  }
+
+  .jt-auth-visual-meta {
+    gap: 13px;
+  }
+
+  .jt-auth-form-panel {
+    padding:
+      38px
+      22px
+      46px;
+  }
+
+  .jt-auth-heading {
+    margin-bottom: 28px;
+  }
+
+  .jt-auth-heading h2 {
+    font-size: 2.35rem;
+  }
+
+  .jt-auth-heading p {
+    margin-top: 13px;
+
+    font-size: 0.85rem;
+  }
+
+  .jt-auth-form {
+    gap: 18px;
+  }
+
+  .jt-auth-input-wrap input {
+    height: 54px;
+  }
+
+  .jt-auth-submit {
+    min-height: 54px;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL DEVICES
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+  .jt-auth-visual {
+    min-height: 315px;
+  }
+
+  .jt-auth-visual-content {
+    padding-inline: 18px;
+  }
+
+  .jt-auth-form-panel {
+    padding-inline: 18px;
+  }
+
+  .jt-auth-heading h2 {
+    font-size: 2.05rem;
+  }
+
+  .jt-auth-visual-meta {
+    gap: 10px;
+  }
+
+  .jt-auth-visual-meta span {
+    font-size: 0.64rem;
+  }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+.jt-auth-page a:focus-visible,
+.jt-auth-page button:focus-visible,
+.jt-auth-page input:focus-visible {
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .jt-auth-page *,
+  .jt-auth-page *::before,
+  .jt-auth-page *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .jt-auth-submit:hover {
+    transform: none;
+  }
+
+  .jt-auth-submit:hover i {
+    transform: none;
+  }
+
+}
+
+
+/* =========================================================
+   PRINT
+   ========================================================= */
+
+@media print {
+
+  .jt-auth-visual {
+    display: none;
+  }
+
+  .jt-auth-page {
+    display: block;
+    min-height: auto;
+  }
+
+  .jt-auth-form-panel {
+    min-height: auto;
+    padding: 20px;
+  }
+
+  .jt-auth-submit,
+  .jt-auth-security,
+  .jt-auth-back {
+    box-shadow: none;
+  }
+
+}

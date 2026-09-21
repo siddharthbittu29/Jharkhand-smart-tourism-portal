@@ -1,85 +1,827 @@
 <%- include('./partials/nav') %>
 
-
-<section class="py-4">
-  <div class="container">
-
-    <h1 class="display-6 fw-semibold mb-2">Tourist Journey Overview</h1>
-    <p class="text-muted mb-4">
-      How a visitor interacts with the Smart Tourism platform from first awareness to experience sharing.
-    </p>
-
-    <div class="timeline-flow">
-
-      <% [
-        ["Discover Destinations", "User discovers Jharkhand tourism via website, social media, campaigns, or referrals.", "bi-search"],
-        ["Plan the Trip", "User reads details, checks photos, compares places, navigates maps, and creates a wishlist.", "bi-list-check"],
-        ["Book Experiences", "User books hotels, homestays, transport, guides, and festival/event passes.", "bi-ticket-perforated"],
-        ["Travel & Navigate", "User arrives and follows QR trail guides, local directions, and smart signage prompts.", "bi-geo-alt"],
-        ["Experience & Support", "User enjoys the visit with access to real-time help, SOS, and local service providers.", "bi-heart"],
-        ["Share & Review", "User uploads photos, shares stories, rates services, and recommends destinations.", "bi-share"]
-      ].forEach(([title,desc,icon]) => { %>
-
-        <div class="flow-step d-flex align-items-start gap-3 mb-4">
-          <div class="flow-icon">
-            <i class="bi <%= icon %>"></i>
-          </div>
-          <div>
-            <h5 class="fw-semibold mb-1"><%= title %></h5>
-            <p class="text-muted mb-0"><%= desc %></p>
-          </div>
-        </div>
-
-      <% }) %>
-
-    </div>
-
-
-   <div class="text-center mt-5">
-  <a href="/smart-tourism/features" class="btn btn-outline-primary me-2">← Back to Slide 4</a>
-  <a href="/smart-tourism/architecture" class="btn btn-primary">Go to Slide 6 →</a>
-</div>
-
-
-  </div>
-</section>
-
-<%- include('../partials/scripts') %>
-
 <style>
-  .timeline-flow {
-    border-left: 3px solid #0d6efd;
-    padding-left: 1.5rem;
-    margin-top: 1.5rem;
+  .jt-journey-page {
+    --journey-deep: #123b2a;
+    --journey-green: #23724a;
+    --journey-soft: #edf6ef;
+    --journey-earth: #9f7440;
+    --journey-cream: #f8f5ed;
+    --journey-text: #314139;
+    --journey-muted: #6d7871;
+    --journey-border: rgba(18, 59, 42, 0.11);
+    --journey-shadow: 0 18px 45px rgba(18, 59, 42, 0.08);
+
+    background:
+      linear-gradient(
+        180deg,
+        #f8f5ed 0,
+        #ffffff 270px,
+        #ffffff 100%
+      );
+
+    color: var(--journey-text);
+    padding-bottom: 72px;
   }
 
-  .flow-step {
+  .jt-journey-hero {
+    padding: 72px 0 52px;
+  }
+
+  .jt-journey-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 16px;
+    color: var(--journey-earth);
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .jt-journey-eyebrow i {
+    color: var(--journey-green);
+  }
+
+  .jt-journey-hero h1 {
+    max-width: 900px;
+    margin: 0;
+    color: var(--journey-deep);
+    font-size: clamp(2.3rem, 5vw, 4.2rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    font-weight: 800;
+  }
+
+  .jt-journey-hero p {
+    max-width: 760px;
+    margin: 19px 0 0;
+    color: var(--journey-muted);
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .jt-journey-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 26px;
+  }
+
+  .jt-journey-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 12px;
+    border: 1px solid var(--journey-border);
+    border-radius: 999px;
+    background: rgba(255,255,255,0.85);
+    color: var(--journey-deep);
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .jt-journey-pill i {
+    color: var(--journey-green);
+  }
+
+  .jt-journey-shell {
+    margin-top: 22px;
+  }
+
+  .jt-journey-intro-card {
+    margin-bottom: 28px;
+    padding: 26px;
+    border: 1px solid var(--journey-border);
+    border-radius: 22px;
+    background: #fff;
+    box-shadow: var(--journey-shadow);
+  }
+
+  .jt-journey-intro-card h2 {
+    margin: 0 0 8px;
+    color: var(--journey-deep);
+    font-size: 1.35rem;
+    font-weight: 800;
+  }
+
+  .jt-journey-intro-card p {
+    max-width: 780px;
+    margin: 0;
+    color: var(--journey-muted);
+    line-height: 1.75;
+    font-size: 0.92rem;
+  }
+
+  .jt-journey-timeline {
     position: relative;
+    margin: 0;
+    padding: 8px 0 8px 44px;
   }
 
-  .flow-step::before {
+  .jt-journey-timeline::before {
     content: "";
     position: absolute;
-    left: -1.64rem;
-    top: 0.5rem;
-    width: 12px;
-    height: 12px;
-    background: #0d6efd;
-    border-radius: 50%;
+    top: 24px;
+    bottom: 24px;
+    left: 18px;
+    width: 2px;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(35,114,74,0.18),
+        rgba(35,114,74,0.75),
+        rgba(159,116,64,0.32)
+      );
   }
 
-  .flow-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    background: #e8f1ff;
+  .jt-journey-step {
+    position: relative;
+    margin-bottom: 18px;
+  }
+
+  .jt-journey-step:last-child {
+    margin-bottom: 0;
+  }
+
+  .jt-journey-node {
+    position: absolute;
+    top: 24px;
+    left: -44px;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border: 5px solid #f8f5ed;
+    border-radius: 50%;
+    background: var(--journey-green);
+    box-shadow: 0 5px 15px rgba(35,114,74,0.18);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 800;
+  }
+
+  .jt-journey-card {
+    display: grid;
+    grid-template-columns: 58px 1fr auto;
+    gap: 18px;
+    align-items: center;
+    padding: 23px;
+    border: 1px solid var(--journey-border);
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0 9px 27px rgba(18,59,42,0.045);
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .jt-journey-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(35,114,74,0.20);
+    box-shadow: 0 17px 35px rgba(18,59,42,0.08);
+  }
+
+  .jt-journey-icon {
+    display: grid;
+    place-items: center;
+    width: 58px;
+    height: 58px;
+    border-radius: 16px;
+    background: var(--journey-soft);
+    color: var(--journey-green);
+    font-size: 1.18rem;
+  }
+
+  .jt-journey-copy h3 {
+    margin: 0 0 7px;
+    color: var(--journey-deep);
+    font-size: 1.04rem;
+    font-weight: 800;
+  }
+
+  .jt-journey-copy p {
+    margin: 0;
+    color: var(--journey-muted);
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+
+  .jt-journey-stage {
+    min-width: 96px;
+    padding: 8px 11px;
+    border-radius: 999px;
+    background: var(--journey-cream);
+    color: var(--journey-earth);
+    text-align: center;
+    font-size: 0.72rem;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .jt-journey-principles {
+    margin-top: 34px;
+    padding: 29px;
+    border-radius: 22px;
+    background: var(--journey-deep);
+    color: #fff;
+  }
+
+  .jt-journey-principles h2 {
+    margin: 0 0 8px;
+    font-size: 1.35rem;
+    font-weight: 800;
+  }
+
+  .jt-journey-principles > p {
+    max-width: 760px;
+    margin: 0 0 23px;
+    color: rgba(255,255,255,0.72);
+    font-size: 0.89rem;
+    line-height: 1.7;
+  }
+
+  .jt-journey-principle-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+
+  .jt-journey-principle {
+    padding: 17px;
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: 15px;
+    background: rgba(255,255,255,0.045);
+  }
+
+  .jt-journey-principle i {
+    display: inline-flex;
+    margin-bottom: 12px;
+    color: #d8bd85;
+  }
+
+  .jt-journey-principle strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #fff;
+    font-size: 0.83rem;
+  }
+
+  .jt-journey-principle span {
+    display: block;
+    color: rgba(255,255,255,0.64);
+    font-size: 0.75rem;
+    line-height: 1.55;
+  }
+
+  .jt-journey-navigation {
     display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 34px;
+  }
+
+  .jt-journey-nav-btn {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: #0d6efd;
-    font-size: 1.5rem;
+    gap: 8px;
+    min-height: 45px;
+    padding: 0 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 0.81rem;
+    font-weight: 800;
+    transition:
+      transform 160ms ease,
+      background 160ms ease,
+      border-color 160ms ease;
+  }
+
+  .jt-journey-nav-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .jt-journey-nav-btn-outline {
+    border: 1px solid var(--journey-border);
+    background: #fff;
+    color: var(--journey-deep);
+  }
+
+  .jt-journey-nav-btn-outline:hover {
+    border-color: var(--journey-green);
+    color: var(--journey-green);
+  }
+
+  .jt-journey-nav-btn-primary {
+    background: var(--journey-deep);
+    color: #fff;
+  }
+
+  .jt-journey-nav-btn-primary:hover {
+    color: #fff;
+    background: #0d3022;
+  }
+
+  @media (max-width: 991.98px) {
+    .jt-journey-principle-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .jt-journey-card {
+      grid-template-columns: 54px 1fr;
+    }
+
+    .jt-journey-stage {
+      grid-column: 2;
+      justify-self: start;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    .jt-journey-page {
+      padding-bottom: 56px;
+    }
+
+    .jt-journey-hero {
+      padding: 57px 0 38px;
+    }
+
+    .jt-journey-intro-card,
+    .jt-journey-principles {
+      padding: 22px;
+    }
+
+    .jt-journey-timeline {
+      padding-left: 34px;
+    }
+
+    .jt-journey-timeline::before {
+      left: 13px;
+    }
+
+    .jt-journey-node {
+      left: -34px;
+      width: 31px;
+      height: 31px;
+      border-width: 4px;
+      font-size: 0.64rem;
+    }
+
+    .jt-journey-card {
+      padding: 18px;
+      grid-template-columns: 48px 1fr;
+      gap: 14px;
+    }
+
+    .jt-journey-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 13px;
+    }
+
+    .jt-journey-principle-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .jt-journey-navigation {
+      flex-direction: column;
+    }
+
+    .jt-journey-nav-btn {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    .jt-journey-hero h1 {
+      font-size: 2.25rem;
+    }
+
+    .jt-journey-meta {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .jt-journey-card,
+    .jt-journey-nav-btn {
+      transition: none !important;
+    }
   }
 </style>
 
+<section class="jt-journey-page">
 
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
 
+  <section class="jt-journey-hero">
+    <div class="container">
+
+      <div class="jt-journey-eyebrow">
+        <i class="fa-solid fa-route"></i>
+        Smart Tourism · User Journey
+      </div>
+
+      <h1>
+        From inspiration to exploration — one connected journey.
+      </h1>
+
+      <p>
+        The Smart Tourism experience connects destination discovery,
+        trip planning, accommodation discovery, navigation, assistance,
+        sustainability and post-trip feedback into a structured visitor journey.
+      </p>
+
+      <div class="jt-journey-meta">
+        <span class="jt-journey-pill">
+          <i class="fa-solid fa-compass"></i>
+          Discover
+        </span>
+
+        <span class="jt-journey-pill">
+          <i class="fa-solid fa-route"></i>
+          Plan
+        </span>
+
+        <span class="jt-journey-pill">
+          <i class="fa-solid fa-hotel"></i>
+          Stay
+        </span>
+
+        <span class="jt-journey-pill">
+          <i class="fa-solid fa-map-location-dot"></i>
+          Navigate
+        </span>
+
+        <span class="jt-journey-pill">
+          <i class="fa-solid fa-leaf"></i>
+          Travel responsibly
+        </span>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="container jt-journey-shell">
+
+    <!-- ===================================================
+         INTRO
+    ==================================================== -->
+
+    <section class="jt-journey-intro-card">
+
+      <h2>
+        A visitor journey designed around real tourism actions.
+      </h2>
+
+      <p>
+        Instead of treating tourism features as isolated tools, the platform
+        organizes them around what a traveller naturally needs before, during
+        and after a journey.
+      </p>
+
+    </section>
+
+    <!-- ===================================================
+         TIMELINE
+    ==================================================== -->
+
+    <section
+      class="jt-journey-timeline"
+      aria-label="Tourist journey timeline"
+    >
+
+      <article class="jt-journey-step">
+
+        <div class="jt-journey-node">
+          01
+        </div>
+
+        <div class="jt-journey-card">
+
+          <div class="jt-journey-icon">
+            <i class="fa-solid fa-compass"></i>
+          </div>
+
+          <div class="jt-journey-copy">
+
+            <h3>
+              Discover destinations
+            </h3>
+
+            <p>
+              Visitors discover Jharkhand through destination listings,
+              rich imagery, categories, festivals, Smart Tourism features
+              and the wider tourism portal.
+            </p>
+
+          </div>
+
+          <span class="jt-journey-stage">
+            DISCOVER
+          </span>
+
+        </div>
+
+      </article>
+
+      <article class="jt-journey-step">
+
+        <div class="jt-journey-node">
+          02
+        </div>
+
+        <div class="jt-journey-card">
+
+          <div class="jt-journey-icon">
+            <i class="fa-solid fa-map-location-dot"></i>
+          </div>
+
+          <div class="jt-journey-copy">
+
+            <h3>
+              Research & compare
+            </h3>
+
+            <p>
+              Visitors open destination details, review descriptions,
+              locations, categories and available supporting information
+              before deciding where to go.
+            </p>
+
+          </div>
+
+          <span class="jt-journey-stage">
+            EXPLORE
+          </span>
+
+        </div>
+
+      </article>
+
+      <article class="jt-journey-step">
+
+        <div class="jt-journey-node">
+          03
+        </div>
+
+        <div class="jt-journey-card">
+
+          <div class="jt-journey-icon">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+          </div>
+
+          <div class="jt-journey-copy">
+
+            <h3>
+              Build a trip plan
+            </h3>
+
+            <p>
+              The AI Trip Planner uses destination preference, duration and
+              budget to produce a structured journey with itinerary,
+              stays, weather guidance, cost analysis, highlights and tips.
+            </p>
+
+          </div>
+
+          <span class="jt-journey-stage">
+            PLAN
+          </span>
+
+        </div>
+
+      </article>
+
+      <article class="jt-journey-step">
+
+        <div class="jt-journey-node">
+          04
+        </div>
+
+        <div class="jt-journey-card">
+
+          <div class="jt-journey-icon">
+            <i class="fa-solid fa-hotel"></i>
+          </div>
+
+          <div class="jt-journey-copy">
+
+            <h3>
+              Find a place to stay
+            </h3>
+
+            <p>
+              Visitors move from trip planning into the hotel directory,
+              where they can search and refine stays by destination,
+              price, rating and availability.
+            </p>
+
+          </div>
+
+          <span class="jt-journey-stage">
+            STAY
+          </span>
+
+        </div>
+
+      </article>
+
+      <article class="jt-journey-step">
+
+        <div class="jt-journey-node">
+          05
+        </div>
+
+        <div class="jt-journey-card">
+
+          <div class="jt-journey-icon">
+            <i class="fa-solid fa-map"></i>
+          </div>
+
+          <div class="jt-journey-copy">
+
+            <h3>
+              Navigate the journey
+            </h3>
+
+            <p>
+              The interactive journey map connects itinerary destinations
+              and recommended stays, helping travellers understand their
+              route spatially.
+            </p>
+
+          </div>
+
+          <span class="jt-journey-stage">
+            NAVIGATE
+          </span>
+
+        </div>
+
+      </article>
+
+      <article class="jt-journey-step">
+
+        <div class="jt-journey-node">
+          06
+        </div>
+
+        <div class="jt-journey-card">
+
+          <div class="jt-journey-icon">
+            <i class="fa-solid fa-leaf"></i>
+          </div>
+
+          <div class="jt-journey-copy">
+
+            <h3>
+              Experience responsibly
+            </h3>
+
+            <p>
+              Smart Tourism features bring together sustainability guidance,
+              cultural discovery, eco-oriented insights and responsible travel
+              practices throughout the experience.
+            </p>
+
+          </div>
+
+          <span class="jt-journey-stage">
+            EXPERIENCE
+          </span>
+
+        </div>
+
+      </article>
+
+      <article class="jt-journey-step">
+
+        <div class="jt-journey-node">
+          07
+        </div>
+
+        <div class="jt-journey-card">
+
+          <div class="jt-journey-icon">
+            <i class="fa-solid fa-comment-dots"></i>
+          </div>
+
+          <div class="jt-journey-copy">
+
+            <h3>
+              Return, review & remember
+            </h3>
+
+            <p>
+              Visitors can use feedback, likes, wishlist and other portal
+              touchpoints to retain favourite destinations and contribute
+              feedback after their journey.
+            </p>
+
+          </div>
+
+          <span class="jt-journey-stage">
+            CONNECT
+          </span>
+
+        </div>
+
+      </article>
+
+    </section>
+
+    <!-- ===================================================
+         EXPERIENCE PRINCIPLES
+    ==================================================== -->
+
+    <section class="jt-journey-principles">
+
+      <h2>
+        What keeps the journey connected
+      </h2>
+
+      <p>
+        Each stage is supported by shared tourism data, reusable interface
+        patterns and the existing Smart Tourism modules rather than separate
+        disconnected experiences.
+      </p>
+
+      <div class="jt-journey-principle-grid">
+
+        <article class="jt-journey-principle">
+          <i class="fa-solid fa-database"></i>
+          <strong>Shared destination data</strong>
+          <span>
+            Places, districts, categories and related tourism information
+            power multiple discovery surfaces.
+          </span>
+        </article>
+
+        <article class="jt-journey-principle">
+          <i class="fa-solid fa-link"></i>
+          <strong>Connected features</strong>
+          <span>
+            Places, hotels, planner, wishlist, maps and Smart Tourism
+            sections link naturally to one another.
+          </span>
+        </article>
+
+        <article class="jt-journey-principle">
+          <i class="fa-solid fa-mobile-screen-button"></i>
+          <strong>Cross-device experience</strong>
+          <span>
+            Responsive layouts keep the core journey usable across desktop,
+            tablet and mobile screens.
+          </span>
+        </article>
+
+        <article class="jt-journey-principle">
+          <i class="fa-solid fa-universal-access"></i>
+          <strong>Accessible interaction</strong>
+          <span>
+            Clear hierarchy, keyboard support, readable controls and
+            reduced-motion considerations support easier interaction.
+          </span>
+        </article>
+
+      </div>
+
+    </section>
+
+    <!-- ===================================================
+         NAVIGATION
+    ==================================================== -->
+
+    <div class="jt-journey-navigation">
+
+      <a
+        href="/smart-tourism/features"
+        class="jt-journey-nav-btn jt-journey-nav-btn-outline"
+      >
+        <i class="fa-solid fa-arrow-left"></i>
+        Back to Features
+      </a>
+
+      <a
+        href="/smart-tourism/architecture"
+        class="jt-journey-nav-btn jt-journey-nav-btn-primary"
+      >
+        Continue to Architecture
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+<%- include('../partials/scripts') %>

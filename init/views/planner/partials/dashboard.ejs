@@ -1,34 +1,537 @@
-<!-- ========================================= -->
-<!-- TRIP ANALYTICS DASHBOARD -->
-<!-- ========================================= -->
+<%
+/*
+=========================================================
+JHARKHAND TOURISM
+AI TRIP PLANNER — RESULT DASHBOARD
+=========================================================
+*/
 
-<section class="planner-dashboard">
+const safeHotelRecommendations =
+    Array.isArray(hotelRecommendations)
+        ? hotelRecommendations
+        : [];
 
-    <div class="dashboard-card">
+const safeInsights =
+    tripInsights && typeof tripInsights === "object"
+        ? tripInsights
+        : {};
 
-        <div class="dashboard-icon">
-            🌱
-        </div>
+const safeEcoScore =
+    Number.isFinite(Number(ecoScore))
+        ? Number(ecoScore)
+        : 0;
 
-        <div class="dashboard-content">
+const safeTripBudget =
+    Number.isFinite(Number(tripBudget))
+        ? Number(tripBudget)
+        : 0;
 
-            <h3>
+const safeTotalCost =
+    Number.isFinite(Number(totalCost))
+        ? Number(totalCost)
+        : 0;
 
-                <%= ecoScore %>/100
+const safeHotelCost =
+    Number.isFinite(Number(hotelCost))
+        ? Number(hotelCost)
+        : 0;
 
-            </h3>
+const safeFoodCost =
+    Number.isFinite(Number(foodCost))
+        ? Number(foodCost)
+        : 0;
+
+const safeTransportCost =
+    Number.isFinite(Number(transportCost))
+        ? Number(transportCost)
+        : 0;
+
+const safeTripDays =
+    Number.isFinite(Number(tripDays))
+        ? Number(tripDays)
+        : 0;
+
+const budgetUsage =
+    safeTripBudget > 0
+        ? Math.min(
+            100,
+            Math.round(
+                (safeTotalCost / safeTripBudget) * 100
+            )
+        )
+        : 0;
+
+const budgetRemaining =
+    Math.max(
+        0,
+        safeTripBudget - safeTotalCost
+    );
+
+const budgetExceeded =
+    safeTotalCost > safeTripBudget;
+
+const budgetStatusText =
+    budgetStatus ||
+    (
+        budgetExceeded
+            ? "Budget exceeded"
+            : "Within budget"
+    );
+
+const recommendedTransport =
+    safeInsights.recommendedTransport ||
+    safeInsights.transport ||
+    "Local transport";
+
+const difficulty =
+    safeInsights.difficulty ||
+    safeInsights.travelDifficulty ||
+    "Easy";
+
+%>
+
+
+<!-- =====================================================
+     DASHBOARD
+====================================================== -->
+
+<section
+    class="planner-dashboard-section"
+    aria-labelledby="planner-dashboard-title"
+>
+
+
+    <!-- SECTION HEADER -->
+
+    <div class="planner-result-section-heading">
+
+        <div>
+
+            <span class="planner-section-kicker">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                TRIP OVERVIEW
+
+            </span>
+
+            <h2 id="planner-dashboard-title">
+                Your journey at a glance
+            </h2>
 
             <p>
-
-                Eco Score
-
+                A quick overview of your planned duration,
+                budget, estimated costs and travel profile.
             </p>
 
-            <div class="progress">
+        </div>
+
+
+        <div class="planner-dashboard-status">
+
+            <span
+                class="
+                    planner-status-dot
+                    <%= budgetExceeded
+                        ? 'danger'
+                        : 'success'
+                    %>
+                "
+            ></span>
+
+            <span>
+                <%= budgetStatusText %>
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         PRIMARY STATS
+    ================================================== -->
+
+    <div class="planner-dashboard-grid">
+
+
+        <!-- DAYS -->
+
+        <article class="planner-dashboard-card">
+
+            <div class="planner-dashboard-card-top">
+
+                <span class="planner-dashboard-icon green">
+
+                    <i class="fa-regular fa-calendar-days"></i>
+
+                </span>
+
+                <span class="planner-dashboard-label">
+                    DURATION
+                </span>
+
+            </div>
+
+
+            <div class="planner-dashboard-value">
+
+                <strong>
+                    <%= safeTripDays %>
+                </strong>
+
+                <span>
+                    days
+                </span>
+
+            </div>
+
+
+            <p>
+                Planned travel duration
+            </p>
+
+        </article>
+
+
+        <!-- BUDGET -->
+
+        <article class="planner-dashboard-card">
+
+            <div class="planner-dashboard-card-top">
+
+                <span class="planner-dashboard-icon gold">
+
+                    <i class="fa-solid fa-wallet"></i>
+
+                </span>
+
+                <span class="planner-dashboard-label">
+                    TRIP BUDGET
+                </span>
+
+            </div>
+
+
+            <div class="planner-dashboard-value">
+
+                <strong>
+                    ₹<%= safeTripBudget.toLocaleString("en-IN") %>
+                </strong>
+
+            </div>
+
+
+            <p>
+                Your planned travel budget
+            </p>
+
+        </article>
+
+
+        <!-- ESTIMATED COST -->
+
+        <article class="planner-dashboard-card">
+
+            <div class="planner-dashboard-card-top">
+
+                <span class="planner-dashboard-icon blue">
+
+                    <i class="fa-solid fa-receipt"></i>
+
+                </span>
+
+                <span class="planner-dashboard-label">
+                    ESTIMATED COST
+                </span>
+
+            </div>
+
+
+            <div class="planner-dashboard-value">
+
+                <strong>
+                    ₹<%= safeTotalCost.toLocaleString("en-IN") %>
+                </strong>
+
+            </div>
+
+
+            <p>
+                Estimated complete trip cost
+            </p>
+
+        </article>
+
+
+        <!-- ECO SCORE -->
+
+        <article class="planner-dashboard-card">
+
+            <div class="planner-dashboard-card-top">
+
+                <span class="planner-dashboard-icon leaf">
+
+                    <i class="fa-solid fa-leaf"></i>
+
+                </span>
+
+                <span class="planner-dashboard-label">
+                    ECO SCORE
+                </span>
+
+            </div>
+
+
+            <div class="planner-dashboard-value">
+
+                <strong>
+                    <%= safeEcoScore %>
+                </strong>
+
+                <span>
+                    /100
+                </span>
+
+            </div>
+
+
+            <div class="planner-mini-progress">
+
+                <span
+                    style="width:<%= safeEcoScore %>%"
+                ></span>
+
+            </div>
+
+        </article>
+
+
+        <!-- HOTELS -->
+
+        <article class="planner-dashboard-card">
+
+            <div class="planner-dashboard-card-top">
+
+                <span class="planner-dashboard-icon purple">
+
+                    <i class="fa-solid fa-hotel"></i>
+
+                </span>
+
+                <span class="planner-dashboard-label">
+                    STAY OPTIONS
+                </span>
+
+            </div>
+
+
+            <div class="planner-dashboard-value">
+
+                <strong>
+                    <%= safeHotelRecommendations.length %>
+                </strong>
+
+                <span>
+                    options
+                </span>
+
+            </div>
+
+
+            <p>
+                Suggested stays for your journey
+            </p>
+
+        </article>
+
+
+        <!-- TRANSPORT -->
+
+        <article class="planner-dashboard-card">
+
+            <div class="planner-dashboard-card-top">
+
+                <span class="planner-dashboard-icon sky">
+
+                    <i class="fa-solid fa-route"></i>
+
+                </span>
+
+                <span class="planner-dashboard-label">
+                    TRANSPORT
+                </span>
+
+            </div>
+
+
+            <div class="planner-dashboard-value">
+
+                <strong>
+                    ₹<%= safeTransportCost.toLocaleString("en-IN") %>
+                </strong>
+
+            </div>
+
+
+            <p>
+                <%= recommendedTransport %>
+            </p>
+
+        </article>
+
+    </div>
+
+
+    <!-- =================================================
+         BUDGET INTELLIGENCE
+    ================================================== -->
+
+    <div class="planner-budget-overview">
+
+
+        <div class="planner-budget-main">
+
+            <div class="planner-budget-heading">
+
+                <div>
+
+                    <span class="planner-section-kicker">
+                        BUDGET INTELLIGENCE
+                    </span>
+
+                    <h3>
+                        How your budget is being used
+                    </h3>
+
+                </div>
+
+
+                <div class="planner-budget-total">
+
+                    <strong>
+                        ₹<%= safeTotalCost.toLocaleString("en-IN") %>
+                    </strong>
+
+                    <span>
+                        estimated
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- PROGRESS -->
+
+            <div class="planner-budget-progress">
 
                 <div
-                    class="progress-bar bg-success"
-                    style="width:<%= ecoScore %>%">
+                    class="planner-budget-progress-fill
+                    <%= budgetExceeded
+                        ? 'exceeded'
+                        : ''
+                    %>"
+                    style="width:<%= budgetUsage %>%"
+                ></div>
+
+            </div>
+
+
+            <div class="planner-budget-progress-meta">
+
+                <span>
+                    <%= budgetUsage %>% of budget planned
+                </span>
+
+                <strong>
+                    <% if (budgetExceeded) { %>
+
+                        ₹<%= Math.abs(budgetRemaining).toLocaleString("en-IN") %>
+                        over budget
+
+                    <% } else { %>
+
+                        ₹<%= budgetRemaining.toLocaleString("en-IN") %>
+                        remaining
+
+                    <% } %>
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- COST BREAKDOWN -->
+
+        <div class="planner-cost-breakdown">
+
+
+            <div class="planner-cost-item">
+
+                <span class="planner-cost-icon blue">
+
+                    <i class="fa-solid fa-hotel"></i>
+
+                </span>
+
+                <div>
+
+                    <small>
+                        Hotels
+                    </small>
+
+                    <strong>
+                        ₹<%= safeHotelCost.toLocaleString("en-IN") %>
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="planner-cost-item">
+
+                <span class="planner-cost-icon amber">
+
+                    <i class="fa-solid fa-utensils"></i>
+
+                </span>
+
+                <div>
+
+                    <small>
+                        Food
+                    </small>
+
+                    <strong>
+                        ₹<%= safeFoodCost.toLocaleString("en-IN") %>
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="planner-cost-item">
+
+                <span class="planner-cost-icon purple">
+
+                    <i class="fa-solid fa-car"></i>
+
+                </span>
+
+                <div>
+
+                    <small>
+                        Transport
+                    </small>
+
+                    <strong>
+                        ₹<%= safeTransportCost.toLocaleString("en-IN") %>
+                    </strong>
 
                 </div>
 
@@ -38,164 +541,127 @@
 
     </div>
 
-    <div class="dashboard-card">
 
-        <div class="dashboard-icon">
+    <!-- =================================================
+         TRIP PROFILE
+    ================================================== -->
 
-            💰
+    <div class="planner-profile-strip">
 
-        </div>
 
-        <div class="dashboard-content">
+        <div class="planner-profile-heading">
 
-            <h3>
+            <span class="planner-section-kicker">
+                TRIP PROFILE
+            </span>
 
-                ₹<%= totalCost.toLocaleString() %>
-
-            </h3>
-
-            <p>
-
-                Estimated Cost
-
-            </p>
-
-            <small class="<%= budgetStatus.includes('Within') ? 'text-success':'text-danger' %>">
-
-                <%= budgetStatus %>
-
-            </small>
+            <strong>
+                Built around your journey
+            </strong>
 
         </div>
 
-    </div>
 
-    <div class="dashboard-card">
+        <div class="planner-profile-items">
 
-        <div class="dashboard-icon">
 
-            🏨
+            <div class="planner-profile-item">
 
-        </div>
+                <i class="fa-solid fa-gauge-high"></i>
 
-        <div class="dashboard-content">
+                <div>
 
-            <h3>
+                    <small>
+                        Difficulty
+                    </small>
 
-                <%= hotelRecommendations.length %>
+                    <strong>
+                        <%= difficulty %>
+                    </strong>
 
-            </h3>
+                </div>
 
-            <p>
+            </div>
 
-                Hotels Available
 
-            </p>
+            <div class="planner-profile-item">
 
-            <small>
+                <i class="fa-solid fa-camera"></i>
 
-                AI Recommended
+                <div>
 
-            </small>
+                    <small>
+                        Photography
+                    </small>
 
-        </div>
+                    <strong>
+                        <%= safeInsights.photography || "Good" %>
+                    </strong>
 
-    </div>
+                </div>
 
-    <div class="dashboard-card">
+            </div>
 
-        <div class="dashboard-icon">
 
-            🚗
+            <div class="planner-profile-item">
 
-        </div>
+                <i class="fa-solid fa-users"></i>
 
-        <div class="dashboard-content">
+                <div>
 
-            <h3>
+                    <small>
+                        Suitable for
+                    </small>
 
-                ₹<%= transportCost.toLocaleString() %>
+                    <strong>
+                        <%= safeInsights.suitableFor || "Travellers" %>
+                    </strong>
 
-            </h3>
+                </div>
 
-            <p>
+            </div>
 
-                Transport
 
-            </p>
+            <div class="planner-profile-item">
 
-            <small>
+                <i class="fa-solid fa-wifi"></i>
 
-                <%= tripInsights.recommendedTransport %>
+                <div>
 
-            </small>
+                    <small>
+                        Connectivity
+                    </small>
 
-        </div>
+                    <strong>
+                        <%= safeInsights.connectivity || "Available" %>
+                    </strong>
 
-    </div>
+                </div>
 
-    <div class="dashboard-card">
+            </div>
 
-        <div class="dashboard-icon">
 
-            🍽
+            <div class="planner-profile-item">
 
-        </div>
+                <i class="fa-solid fa-signal"></i>
 
-        <div class="dashboard-content">
+                <div>
 
-            <h3>
+                    <small>
+                        Mobile network
+                    </small>
 
-                ₹<%= foodCost.toLocaleString() %>
+                    <strong>
+                        <%= safeInsights.mobileNetwork || "Varies" %>
+                    </strong>
 
-            </h3>
+                </div>
 
-            <p>
-
-                Food
-
-            </p>
-
-            <small>
-
-                Local Cuisine
-
-            </small>
+            </div>
 
         </div>
 
     </div>
 
-    <div class="dashboard-card">
-
-        <div class="dashboard-icon">
-
-            📅
-
-        </div>
-
-        <div class="dashboard-content">
-
-            <h3>
-
-                <%= tripDays %>
-
-            </h3>
-
-            <p>
-
-                Travel Days
-
-            </p>
-
-            <small>
-
-                Complete Plan
-
-            </small>
-
-        </div>
-
-    </div>
 
 </section>

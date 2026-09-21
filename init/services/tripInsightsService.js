@@ -1,5 +1,23 @@
-const getTripInsights = (destination) => {
-let tripInsights = {
+// =========================================================
+// JHARKHAND TOURISM — TRIP INSIGHTS SERVICE
+// =========================================================
+//
+// Provides destination-based planning insights used by:
+// - Planner Dashboard
+// - Weather / Conditions section
+// - Trip Insights section
+// - PDF Trip Report
+//
+// This is a deterministic planning service.
+// It does not claim to provide live analytics.
+// =========================================================
+
+
+// =========================================================
+// DEFAULT PROFILE
+// =========================================================
+
+const DEFAULT_INSIGHTS = {
 
     budgetEfficiency: "Good",
 
@@ -17,7 +35,8 @@ let tripInsights = {
 
     carbonFootprint: "Low",
 
-    suitableFor: "Families, Friends & Solo Travelers",
+    suitableFor:
+        "Families, Friends & Solo Travelers",
 
     connectivity: "Good",
 
@@ -35,102 +54,228 @@ let tripInsights = {
 
 };
 
-if (
 
-    destination &&
+// =========================================================
+// WATERFALL PROFILE
+// =========================================================
 
-    destination.toLowerCase().includes("waterfall")
+const WATERFALL_INSIGHTS = {
 
-){
+    budgetEfficiency: "Excellent",
 
-    tripInsights = {
+    ecoFriendliness: "Very High",
 
-        budgetEfficiency: "Excellent",
+    recommendedTransport:
+        "Cab / Private Vehicle",
 
-        ecoFriendliness: "Very High",
+    tripCategory:
+        "Nature & Adventure",
 
-        recommendedTransport: "Cab / Private Vehicle",
+    difficulty: "Moderate",
 
-        tripCategory: "Nature & Adventure",
+    photography: "Outstanding",
 
-        difficulty: "Moderate",
+    walkingDistance: "High",
 
-        photography: "Outstanding",
+    carbonFootprint: "Very Low",
 
-        walkingDistance: "High",
+    suitableFor:
+        "Adventure Lovers",
 
-        carbonFootprint: "Very Low",
+    connectivity: "Moderate",
 
-        suitableFor: "Adventure Lovers",
+    mobileNetwork: "Limited",
 
-        connectivity: "Moderate",
+    adventure: "High",
 
-        mobileNetwork: "Limited",
+    comfortScore: "88%",
 
-        adventure: "High",
+    crowdLevel: "Moderate",
 
-        comfortScore: "88%",
+    bestSeason: "July - February",
 
-        crowdLevel: "Moderate",
-
-        bestSeason: "July - February",
-
-        travelDifficulty: "Moderate"
-
-    };
-
-}
-
-else if(
-
-    destination &&
-
-    destination.toLowerCase().includes("wildlife")
-
-){
-
-    tripInsights = {
-
-        budgetEfficiency: "Good",
-
-        ecoFriendliness: "Excellent",
-
-        recommendedTransport: "Safari Vehicle",
-
-        tripCategory: "Wildlife Tourism",
-
-        difficulty: "Moderate",
-
-        photography: "Excellent",
-
-        walkingDistance: "Medium",
-
-        carbonFootprint: "Low",
-
-        suitableFor: "Nature Enthusiasts",
-
-        connectivity: "Limited",
-
-        mobileNetwork: "Weak",
-
-        adventure: "High",
-
-        comfortScore: "86%",
-
-        crowdLevel: "Low",
-
-        bestSeason: "November - March",
-
-        travelDifficulty: "Moderate"
-
-    };
-
-}
-
-return tripInsights;
+    travelDifficulty: "Moderate"
 
 };
 
+
+// =========================================================
+// WILDLIFE PROFILE
+// =========================================================
+
+const WILDLIFE_INSIGHTS = {
+
+    budgetEfficiency: "Good",
+
+    ecoFriendliness: "Excellent",
+
+    recommendedTransport:
+        "Safari Vehicle",
+
+    tripCategory:
+        "Wildlife Tourism",
+
+    difficulty: "Moderate",
+
+    photography: "Excellent",
+
+    walkingDistance: "Medium",
+
+    carbonFootprint: "Low",
+
+    suitableFor:
+        "Nature Enthusiasts",
+
+    connectivity: "Limited",
+
+    mobileNetwork: "Weak",
+
+    adventure: "High",
+
+    comfortScore: "86%",
+
+    crowdLevel: "Low",
+
+    bestSeason: "November - March",
+
+    travelDifficulty: "Moderate"
+
+};
+
+
+// =========================================================
+// DESTINATION NORMALIZATION
+// =========================================================
+
+function normalizeDestination(destination) {
+
+    if (
+        typeof destination !== "string"
+    ) {
+        return "";
+    }
+
+    return destination
+        .trim()
+        .toLowerCase();
+
+}
+
+
+// =========================================================
+// GET TRIP INSIGHTS
+// =========================================================
+
+const getTripInsights = (destination) => {
+
+    const normalizedDestination =
+        normalizeDestination(destination);
+
+
+    // -----------------------------------------------------
+    // Start with the general tourism profile.
+    // -----------------------------------------------------
+
+    let insights = {
+        ...DEFAULT_INSIGHTS
+    };
+
+
+    // -----------------------------------------------------
+    // Waterfall destinations
+    // -----------------------------------------------------
+
+    if (
+        normalizedDestination.includes("waterfall")
+    ) {
+
+        insights = {
+            ...WATERFALL_INSIGHTS
+        };
+
+    }
+
+
+    // -----------------------------------------------------
+    // Wildlife destinations
+    // -----------------------------------------------------
+
+    else if (
+        normalizedDestination.includes("wildlife")
+    ) {
+
+        insights = {
+            ...WILDLIFE_INSIGHTS
+        };
+
+    }
+
+
+    // -----------------------------------------------------
+    // Return a fresh object.
+    // -----------------------------------------------------
+
+    return {
+
+        budgetEfficiency:
+            insights.budgetEfficiency,
+
+        ecoFriendliness:
+            insights.ecoFriendliness,
+
+        recommendedTransport:
+            insights.recommendedTransport,
+
+        tripCategory:
+            insights.tripCategory,
+
+        difficulty:
+            insights.difficulty,
+
+        photography:
+            insights.photography,
+
+        walkingDistance:
+            insights.walkingDistance,
+
+        carbonFootprint:
+            insights.carbonFootprint,
+
+        suitableFor:
+            insights.suitableFor,
+
+        connectivity:
+            insights.connectivity,
+
+        mobileNetwork:
+            insights.mobileNetwork,
+
+        adventure:
+            insights.adventure,
+
+        comfortScore:
+            insights.comfortScore,
+
+        crowdLevel:
+            insights.crowdLevel,
+
+        bestSeason:
+            insights.bestSeason,
+
+        travelDifficulty:
+            insights.travelDifficulty
+
+    };
+
+};
+
+
+// =========================================================
+// EXPORT
+// =========================================================
+
 module.exports = {
+
     getTripInsights
+
 };

@@ -1,145 +1,972 @@
-<link rel="stylesheet" href="/css/chatbot.css">
+<!-- =========================================================
+     JHARKHAND TOURISM
+     AI TOURISM ASSISTANT
+     File: init/views/chatbot/index.ejs
 
-<div class="container-fluid py-5">
+     IMPORTANT
+     - Body/content view only.
+     - Global layout, navbar and footer remain controlled
+       by layout.ejs + shared partials.
+     - Existing chatbot IDs/classes required by chatbot.js
+       are preserved.
+     ========================================================= -->
 
-    <div class="chat-wrapper shadow-lg">
+<main
+    class="jt-chatbot-page"
+    aria-labelledby="chatbot-page-title"
+>
 
-        <!-- ================= HEADER ================= -->
 
-        <div class="chat-header">
+    <!-- =====================================================
+         PAGE INTRO
+         ===================================================== -->
 
-            <div class="d-flex align-items-center">
+    <section class="jt-chatbot-intro">
 
-                <div class="bot-avatar">
+        <div class="jt-chatbot-container">
 
-                    🤖
+            <div class="jt-chatbot-intro-grid">
+
+                <div class="jt-chatbot-intro-copy">
+
+                    <nav
+                        class="jt-chatbot-breadcrumb"
+                        aria-label="Breadcrumb"
+                    >
+
+                        <a href="/">
+                            Home
+                        </a>
+
+                        <span aria-hidden="true">
+                            /
+                        </span>
+
+                        <span>
+                            AI Assistant
+                        </span>
+
+                    </nav>
+
+
+                    <span class="jt-chatbot-eyebrow">
+
+                        <span
+                            class="jt-chatbot-eyebrow-dot"
+                            aria-hidden="true"
+                        ></span>
+
+                        SMART TRAVEL ASSISTANT
+
+                    </span>
+
+
+                    <h1 id="chatbot-page-title">
+
+                        Your Jharkhand
+                        <span>travel companion.</span>
+
+                    </h1>
+
+
+                    <p class="jt-chatbot-intro-text">
+
+                        Ask questions, discover places, explore local
+                        experiences and build a better Jharkhand
+                        journey with your AI tourism assistant.
+
+                    </p>
+
+
+                    <div class="jt-chatbot-intro-actions">
+
+                        <a
+                            href="/planner"
+                            class="jt-chatbot-intro-link jt-chatbot-intro-link-primary"
+                        >
+
+                            <i
+                                class="fa-solid fa-route"
+                                aria-hidden="true"
+                            ></i>
+
+                            Plan a trip
+
+                            <i
+                                class="fa-solid fa-arrow-right"
+                                aria-hidden="true"
+                            ></i>
+
+                        </a>
+
+
+                        <a
+                            href="/places"
+                            class="jt-chatbot-intro-link"
+                        >
+
+                            <i
+                                class="fa-solid fa-compass"
+                                aria-hidden="true"
+                            ></i>
+
+                            Explore places
+
+                        </a>
+
+                    </div>
 
                 </div>
 
-                <div class="ms-3">
 
-                    <h3 class="mb-1">
+                <!-- =================================================
+                     STATUS / CAPABILITY SUMMARY
+                     ================================================= -->
 
-                        Jharkhand AI Tourism Assistant
+                <div class="jt-chatbot-intro-summary">
 
-                    </h3>
+                    <div class="jt-chatbot-status-card">
 
-                    <small>
+                        <div class="jt-chatbot-status-icon">
 
-                        Online • Smart Tourism Platform
+                            <i
+                                class="fa-solid fa-robot"
+                                aria-hidden="true"
+                            ></i>
 
-                    </small>
+                        </div>
+
+
+                        <div class="jt-chatbot-status-copy">
+
+                            <span class="jt-chatbot-status-label">
+                                Assistant status
+                            </span>
+
+                            <strong>
+                                Online & ready
+                            </strong>
+
+                            <small>
+                                Smart Tourism platform
+                            </small>
+
+                        </div>
+
+
+                        <span
+                            class="jt-chatbot-live-dot"
+                            aria-label="Online"
+                        ></span>
+
+                    </div>
+
+
+                    <div class="jt-chatbot-capability-strip">
+
+                        <div>
+
+                            <strong>
+                                Discover
+                            </strong>
+
+                            <span>
+                                Places & experiences
+                            </span>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                Stay
+                            </strong>
+
+                            <span>
+                                Hotels & accommodation
+                            </span>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                Travel
+                            </strong>
+
+                            <span>
+                                Planning & practical help
+                            </span>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
             </div>
 
-            <div>
-
-                <button
-                    id="clearChat"
-                    class="btn btn-outline-light btn-sm">
-
-                    🗑 Clear
-
-                </button>
-
-            </div>
-
         </div>
 
-        <!-- ================= CHAT ================= -->
+    </section>
 
-        <div id="chat-box">
 
-            <div class="bot-message">
 
-                <h5>
+    <!-- =====================================================
+         CHAT APPLICATION
+         ===================================================== -->
 
-                    👋 Welcome!
+    <section
+        class="jt-chatbot-workspace-section"
+        aria-label="Jharkhand Tourism AI Assistant"
+    >
 
-                </h5>
+        <div class="jt-chatbot-container">
 
-                <p>
 
-                    I can help you plan your complete Jharkhand trip.
+            <div class="chat-wrapper">
 
-                </p>
 
-                <div class="feature-grid">
+                <!-- =================================================
+                     CHAT HEADER
+                     ================================================= -->
 
-                    <div class="feature-chip">🗺 Tourist Places</div>
+                <header class="chat-header">
 
-                    <div class="feature-chip">🏨 Hotels</div>
+                    <div class="jt-chatbot-header-identity">
 
-                    <div class="feature-chip">🍛 Local Food</div>
+                        <div
+                            class="bot-avatar"
+                            aria-hidden="true"
+                        >
+                            🤖
+                        </div>
 
-                    <div class="feature-chip">🎉 Festivals</div>
 
-                    <div class="feature-chip">🚗 Transport</div>
+                        <div class="jt-chatbot-header-copy">
 
-                    <div class="feature-chip">📅 AI Trip Planner</div>
+                            <div class="jt-chatbot-header-title-row">
 
-                    <div class="feature-chip">🌿 Eco Tourism</div>
+                                <h2>
+                                    Jharkhand AI Tourism Assistant
+                                </h2>
 
-                    <div class="feature-chip">📍 Hidden Gems</div>
+                                <span class="jt-chatbot-online-pill">
+
+                                    <span
+                                        aria-hidden="true"
+                                    ></span>
+
+                                    Online
+
+                                </span>
+
+                            </div>
+
+
+                            <p>
+                                Ask about destinations, stays,
+                                food, festivals and smart travel.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        id="clearChat"
+                        type="button"
+                        class="jt-chatbot-clear-button"
+                        aria-label="Clear conversation"
+                    >
+
+                        <i
+                            class="fa-solid fa-rotate-left"
+                            aria-hidden="true"
+                        ></i>
+
+                        <span>
+                            New chat
+                        </span>
+
+                    </button>
+
+                </header>
+
+
+
+                <!-- =================================================
+                     MAIN CHAT WORKSPACE
+                     ================================================= -->
+
+                <div class="jt-chatbot-workspace">
+
+
+                    <!-- =================================================
+                         CHAT COLUMN
+                         ================================================= -->
+
+                    <div class="jt-chatbot-chat-column">
+
+
+                        <!-- =================================================
+                             CHAT AREA
+                             ================================================= -->
+
+                        <div
+                            id="chat-box"
+                            role="log"
+                            aria-live="polite"
+                            aria-label="Tourism assistant conversation"
+                        >
+
+
+                            <!-- =================================================
+                                 INITIAL BOT MESSAGE
+                                 ================================================= -->
+
+                            <div class="bot-message jt-chatbot-welcome-message">
+
+
+                                <div class="jt-chatbot-message-top">
+
+                                    <span class="jt-chatbot-message-label">
+
+                                        <span
+                                            class="jt-chatbot-message-icon"
+                                            aria-hidden="true"
+                                        >
+                                            ✦
+                                        </span>
+
+                                        Tourism Assistant
+
+                                    </span>
+
+
+                                    <span class="jt-chatbot-message-badge">
+                                        READY
+                                    </span>
+
+                                </div>
+
+
+                                <h3>
+                                    Hello, traveller.
+                                </h3>
+
+
+                                <p>
+
+                                    I can help you explore Jharkhand
+                                    and plan your journey with practical
+                                    tourism information.
+
+                                </p>
+
+
+                                <p class="jt-chatbot-welcome-secondary">
+
+                                    Start with a quick topic below or
+                                    ask me a question in your own words.
+
+                                </p>
+
+
+                                <div class="feature-grid">
+
+                                    <span class="feature-chip">
+                                        <i
+                                            class="fa-solid fa-map-location-dot"
+                                            aria-hidden="true"
+                                        ></i>
+
+                                        Tourist Places
+                                    </span>
+
+
+                                    <span class="feature-chip">
+                                        <i
+                                            class="fa-solid fa-hotel"
+                                            aria-hidden="true"
+                                        ></i>
+
+                                        Hotels
+                                    </span>
+
+
+                                    <span class="feature-chip">
+                                        <i
+                                            class="fa-solid fa-utensils"
+                                            aria-hidden="true"
+                                        ></i>
+
+                                        Local Food
+                                    </span>
+
+
+                                    <span class="feature-chip">
+                                        <i
+                                            class="fa-solid fa-music"
+                                            aria-hidden="true"
+                                        ></i>
+
+                                        Festivals
+                                    </span>
+
+
+                                    <span class="feature-chip">
+                                        <i
+                                            class="fa-solid fa-car"
+                                            aria-hidden="true"
+                                        ></i>
+
+                                        Transport
+                                    </span>
+
+
+                                    <span class="feature-chip">
+                                        <i
+                                            class="fa-solid fa-route"
+                                            aria-hidden="true"
+                                        ></i>
+
+                                        AI Trip Planner
+                                    </span>
+
+
+                                    <span class="feature-chip">
+                                        <i
+                                            class="fa-solid fa-leaf"
+                                            aria-hidden="true"
+                                        ></i>
+
+                                        Eco Tourism
+                                    </span>
+
+
+                                    <span class="feature-chip">
+                                        <i
+                                            class="fa-solid fa-location-dot"
+                                            aria-hidden="true"
+                                        ></i>
+
+                                        Hidden Gems
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <!-- =================================================
+                             QUICK QUESTIONS
+                             ================================================= -->
+
+                        <div class="quick-questions">
+
+                            <div class="jt-chatbot-quick-heading">
+
+                                <span>
+                                    <i
+                                        class="fa-solid fa-bolt"
+                                        aria-hidden="true"
+                                    ></i>
+
+                                    Popular questions
+                                </span>
+
+                                <small>
+                                    Tap to ask instantly
+                                </small>
+
+                            </div>
+
+
+                            <div class="jt-chatbot-quick-list">
+
+
+                                <button
+                                    type="button"
+                                    class="quick-btn"
+                                >
+
+                                    <i
+                                        class="fa-solid fa-water"
+                                        aria-hidden="true"
+                                    ></i>
+
+                                    Best waterfalls
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="quick-btn"
+                                >
+
+                                    <i
+                                        class="fa-solid fa-hotel"
+                                        aria-hidden="true"
+                                    ></i>
+
+                                    Hotels in Ranchi
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="quick-btn"
+                                >
+
+                                    <i
+                                        class="fa-solid fa-utensils"
+                                        aria-hidden="true"
+                                    ></i>
+
+                                    Local food
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="quick-btn"
+                                >
+
+                                    <i
+                                        class="fa-solid fa-calendar-days"
+                                        aria-hidden="true"
+                                    ></i>
+
+                                    Festivals
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="quick-btn"
+                                >
+
+                                    <i
+                                        class="fa-solid fa-paw"
+                                        aria-hidden="true"
+                                    ></i>
+
+                                    Wildlife
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="quick-btn"
+                                >
+
+                                    <i
+                                        class="fa-solid fa-location-dot"
+                                        aria-hidden="true"
+                                    ></i>
+
+                                    Explore Ranchi
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="quick-btn"
+                                >
+
+                                    <i
+                                        class="fa-solid fa-route"
+                                        aria-hidden="true"
+                                    ></i>
+
+                                    Plan my trip
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="quick-btn"
+                                >
+
+                                    <i
+                                        class="fa-solid fa-compass"
+                                        aria-hidden="true"
+                                    ></i>
+
+                                    Best places
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- =================================================
+                             INPUT
+                             ================================================= -->
+
+                        <div class="chat-input-area">
+
+                            <div class="jt-chatbot-input-icon">
+
+                                <i
+                                    class="fa-regular fa-comment-dots"
+                                    aria-hidden="true"
+                                ></i>
+
+                            </div>
+
+
+                            <label
+                                for="userMessage"
+                                class="visually-hidden"
+                            >
+                                Ask the Jharkhand Tourism Assistant
+                            </label>
+
+
+                            <input
+                                id="userMessage"
+                                type="text"
+                                class="form-control"
+                                autocomplete="off"
+                                maxlength="1200"
+                                placeholder="Ask about places, hotels, food, festivals, transport..."
+                                aria-label="Ask the Jharkhand Tourism Assistant"
+                            >
+
+
+                            <button
+                                id="sendBtn"
+                                type="button"
+                                class="jt-chatbot-send-button"
+                                aria-label="Send message"
+                                title="Send message"
+                            >
+
+                                <i
+                                    class="fa-solid fa-arrow-up"
+                                    aria-hidden="true"
+                                ></i>
+
+                            </button>
+
+                        </div>
+
+
+                        <div class="jt-chatbot-input-note">
+
+                            <span>
+
+                                <i
+                                    class="fa-solid fa-shield-halved"
+                                    aria-hidden="true"
+                                ></i>
+
+                                Ask naturally — your conversation stays in this session.
+
+                            </span>
+
+                            <span>
+                                Enter ↵ to send
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         RIGHT INFORMATION PANEL
+                         ================================================= -->
+
+                    <aside
+                        class="jt-chatbot-help-panel"
+                        aria-label="AI assistant capabilities"
+                    >
+
+
+                        <div class="jt-chatbot-help-heading">
+
+                            <span class="jt-chatbot-section-kicker">
+                                WHAT I CAN DO
+                            </span>
+
+                            <h3>
+                                Make your journey easier.
+                            </h3>
+
+                            <p>
+                                Get useful guidance before,
+                                during or while planning your trip.
+                            </p>
+
+                        </div>
+
+
+                        <!-- HELP CARD 01 -->
+
+                        <article class="jt-chatbot-help-card">
+
+                            <div class="jt-chatbot-help-icon">
+
+                                <i
+                                    class="fa-solid fa-map-location-dot"
+                                    aria-hidden="true"
+                                ></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    Discover places
+                                </strong>
+
+                                <p>
+                                    Explore waterfalls, hills,
+                                    wildlife and heritage destinations.
+                                </p>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- HELP CARD 02 -->
+
+                        <article class="jt-chatbot-help-card">
+
+                            <div class="jt-chatbot-help-icon">
+
+                                <i
+                                    class="fa-solid fa-bed"
+                                    aria-hidden="true"
+                                ></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    Find a stay
+                                </strong>
+
+                                <p>
+                                    Get help finding hotels and
+                                    accommodation options.
+                                </p>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- HELP CARD 03 -->
+
+                        <article class="jt-chatbot-help-card">
+
+                            <div class="jt-chatbot-help-icon">
+
+                                <i
+                                    class="fa-solid fa-route"
+                                    aria-hidden="true"
+                                ></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    Plan your trip
+                                </strong>
+
+                                <p>
+                                    Start with destinations,
+                                    duration and travel preferences.
+                                </p>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- HELP CARD 04 -->
+
+                        <article class="jt-chatbot-help-card">
+
+                            <div class="jt-chatbot-help-icon">
+
+                                <i
+                                    class="fa-solid fa-leaf"
+                                    aria-hidden="true"
+                                ></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    Travel responsibly
+                                </strong>
+
+                                <p>
+                                    Learn about eco-tourism,
+                                    culture and respectful travel.
+                                </p>
+
+                            </div>
+
+                        </article>
+
+
+
+                        <!-- =================================================
+                             DIRECT LINKS
+                             ================================================= -->
+
+                        <div class="jt-chatbot-help-links">
+
+                            <a href="/planner">
+
+                                <span>
+
+                                    <i
+                                        class="fa-solid fa-wand-magic-sparkles"
+                                        aria-hidden="true"
+                                    ></i>
+
+                                    AI Trip Planner
+
+                                </span>
+
+                                <i
+                                    class="fa-solid fa-arrow-up-right-from-square"
+                                    aria-hidden="true"
+                                ></i>
+
+                            </a>
+
+
+                            <a href="/places">
+
+                                <span>
+
+                                    <i
+                                        class="fa-solid fa-compass"
+                                        aria-hidden="true"
+                                    ></i>
+
+                                    Explore Places
+
+                                </span>
+
+                                <i
+                                    class="fa-solid fa-arrow-up-right-from-square"
+                                    aria-hidden="true"
+                                ></i>
+
+                            </a>
+
+
+                            <a href="/hotels">
+
+                                <span>
+
+                                    <i
+                                        class="fa-solid fa-hotel"
+                                        aria-hidden="true"
+                                    ></i>
+
+                                    Find a Stay
+
+                                </span>
+
+                                <i
+                                    class="fa-solid fa-arrow-up-right-from-square"
+                                    aria-hidden="true"
+                                ></i>
+
+                            </a>
+
+                        </div>
+
+
+                    </aside>
+
 
                 </div>
 
+
+                <!-- =================================================
+                     FOOTNOTE
+                     ================================================= -->
+
+                <div class="jt-chatbot-footer-note">
+
+                    <div>
+
+                        <i
+                            class="fa-solid fa-sparkles"
+                            aria-hidden="true"
+                        ></i>
+
+                        <span>
+
+                            Smart Tourism
+                            <strong>
+                                •
+                            </strong>
+                            Discover
+                            <strong>
+                                •
+                            </strong>
+                            Plan
+                            <strong>
+                                •
+                            </strong>
+                            Experience
+
+                        </span>
+
+                    </div>
+
+
+                    <span>
+                        Jharkhand Tourism
+                    </span>
+
+                </div>
+
+
             </div>
 
         </div>
 
-        <!-- ================= QUICK QUESTIONS ================= -->
+    </section>
 
-        <div class="quick-questions">
 
-            <button class="quick-btn">🏞 Waterfalls</button>
+    <div class="jt-chatbot-bottom-space"></div>
 
-            <button class="quick-btn">🏨 Hotels</button>
 
-            <button class="quick-btn">🍛 Local Food</button>
-
-            <button class="quick-btn">🎉 Festivals</button>
-
-            <button class="quick-btn">🦁 Wildlife</button>
-
-            <button class="quick-btn">📍 Ranchi</button>
-
-            <button class="quick-btn">🧳 Plan My Trip</button>
-
-            <button class="quick-btn">🌄 Best Places</button>
-
-        </div>
-
-        <!-- ================= INPUT ================= -->
-
-        <div class="chat-input-area">
-
-            <input
-
-                id="userMessage"
-
-                class="form-control"
-
-                placeholder="Ask about destinations, hotels, weather, food, festivals..."
-
-            >
-
-            <button
-
-                id="sendBtn"
-
-                class="btn btn-success">
-
-                ➤
-
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-<script src="/js/chatbot.js"></script>
+</main>

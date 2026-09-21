@@ -1,575 +1,6459 @@
-/* ==========================================
-   AI SMART TRIP PLANNER
-========================================== */
+/* ============================================================
+   BRAVO — HOMEPAGE VISUAL SYSTEM
+   File: init/public/css/home.css
 
-.ai-planner-card{
-    background:#ffffff;
-    padding:35px;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,.12);
-    max-width:1100px;
-    margin:auto;
-    border-top:5px solid #198754;
+   Purpose:
+   Premium homepage presentation while keeping all existing
+   homepage functionality and server-rendered content intact.
+
+   Global tokens/components:
+   /styles.css
+
+   This file controls ONLY homepage-specific presentation.
+============================================================ */
+
+
+/* ============================================================
+   01. HOMEPAGE ROOT
+============================================================ */
+
+.bravo-home {
+  position: relative;
+  overflow: hidden;
+  background: var(--bravo-sand-50);
 }
 
-.ai-planner-card h2{
-    color:#0f5132;
-    font-weight:700;
-    margin-bottom:15px;
+
+/* ============================================================
+   02. HERO
+============================================================ */
+
+.bravo-home-hero {
+
+  position: relative;
+
+  min-height:
+    clamp(620px, 78vh, 820px);
+
+  display: flex;
+
+  align-items: center;
+
+  overflow: hidden;
+
+  isolation: isolate;
+
+  background:
+    var(--bravo-forest-900);
 }
 
-.ai-planner-card p{
-    color:#666;
-    margin-bottom:25px;
+
+.bravo-home-hero::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: -3;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(7, 30, 21, 0.92) 0%,
+      rgba(7, 30, 21, 0.72) 38%,
+      rgba(7, 30, 21, 0.30) 70%,
+      rgba(7, 30, 21, 0.18) 100%
+    );
 }
 
-.ai-planner-card input{
-    height:55px;
-    border-radius:12px;
+
+.bravo-home-hero::after {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: -2;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(7, 30, 21, 0.25) 0%,
+      transparent 40%,
+      rgba(7, 30, 21, 0.68) 100%
+    );
 }
 
-.ai-planner-card button{
-    height:55px;
-    border-radius:12px;
-    font-weight:600;
+
+.bravo-home-hero-media {
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: -4;
+
+  overflow: hidden;
 }
 
-/* ==========================================
-   SMART TOURISM BUTTON
-========================================== */
 
-.smart-cta{
-    transition:all .25s ease;
+.bravo-home-hero-media img {
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  object-position: center;
+
+  transform:
+    scale(1.02);
 }
 
-.smart-cta:hover{
-    transform:translateY(-3px);
-    box-shadow:0 10px 25px rgba(0,0,0,.2);
+
+.bravo-home-hero-content {
+
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+
+  padding:
+    110px 0 105px;
+
+  color:
+    var(--bravo-white);
 }
 
-.hero-section{
-    background:
-      linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
-      url('/images/discover/patratu.jpg');
 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+.bravo-home-hero-grid {
 
-    min-height: 700px;
+  display: grid;
 
-    padding: 120px 40px;
+  grid-template-columns:
+    minmax(0, 1.15fr)
+    minmax(320px, 0.85fr);
 
-    border-radius: 25px;
+  align-items: center;
 
-    color: white;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-}
-.hero-section h1{
-    color:white;
-    font-size:4rem;
-    font-weight:800;
-}
-.hero-section p{
-    color:#f5f5f5 !important;
-    font-size:1.3rem;
-}
-.ai-planner-card p{
-    color:#555 !important;
-    font-size:18px;
-    font-weight:500;
-}
-/*====================================*/
-/* FLOATING AI CHATBOT */
-/*====================================*/
-
-.floating-chatbot{
-
-position:fixed;
-
-bottom:28px;
-
-right:28px;
-
-width:72px;
-
-height:72px;
-
-border-radius:50%;
-
-background:linear-gradient(135deg,#198754,#0d6efd);
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-font-size:34px;
-
-color:white;
-
-text-decoration:none;
-
-box-shadow:0 15px 35px rgba(0,0,0,.35);
-
-z-index:9999;
-
-transition:.35s;
-
+  gap:
+    clamp(45px, 7vw, 100px);
 }
 
-.floating-chatbot:hover{
 
-transform:scale(1.12);
+.bravo-home-hero-copy {
 
-color:white;
+  max-width: 760px;
+}
+
+
+.bravo-home-hero-eyebrow {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  margin-bottom: 18px;
+
+  padding: 8px 12px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.20);
+
+  border-radius:
+    var(--bravo-radius-pill);
+
+  background:
+    rgba(255, 255, 255, 0.09);
+
+  color:
+    rgba(255, 255, 255, 0.90);
+
+  font-size:
+    0.68rem;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    0.13em;
+
+  text-transform:
+    uppercase;
+
+  backdrop-filter:
+    blur(10px);
+}
+
+
+.bravo-home-hero-eyebrow i {
+
+  color:
+    var(--bravo-gold-500);
+}
+
+
+.bravo-home-hero-title {
+
+  margin-bottom: 20px;
+
+  color:
+    var(--bravo-white);
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(3.2rem, 7vw, 6.7rem);
+
+  font-weight:
+    600;
+
+  line-height:
+    0.98;
+
+  letter-spacing:
+    -0.045em;
+}
+
+
+.bravo-home-hero-title span {
+
+  display: block;
+
+  color:
+    #E8C879;
+}
+
+
+.bravo-home-hero-description {
+
+  max-width:
+    650px;
+
+  margin-bottom:
+    28px;
+
+  color:
+    rgba(255, 255, 255, 0.78);
+
+  font-size:
+    clamp(0.98rem, 1.5vw, 1.13rem);
+
+  line-height:
+    1.75;
+}
+
+
+.bravo-home-hero-actions {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    11px;
+}
+
+
+.bravo-home-hero-primary {
+
+  min-height:
+    50px;
+
+  padding:
+    0 21px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius:
+    var(--bravo-radius-pill);
+
+  background:
+    var(--bravo-white);
+
+  color:
+    var(--bravo-forest-900);
+
+  font-size:
+    0.82rem;
+
+  font-weight:
+    900;
+
+  text-decoration:
+    none;
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.14);
+
+  transition:
+    transform var(--bravo-transition-fast),
+    box-shadow var(--bravo-transition-fast);
+}
+
+
+.bravo-home-hero-primary:hover {
+
+  color:
+    var(--bravo-forest-900);
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 16px 35px rgba(0, 0, 0, 0.22);
+}
+
+
+.bravo-home-hero-secondary {
+
+  min-height:
+    50px;
+
+  padding:
+    0 19px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.25);
+
+  border-radius:
+    var(--bravo-radius-pill);
+
+  background:
+    rgba(255, 255, 255, 0.08);
+
+  color:
+    var(--bravo-white);
+
+  font-size:
+    0.82rem;
+
+  font-weight:
+    800;
+
+  text-decoration:
+    none;
+
+  backdrop-filter:
+    blur(10px);
+
+  transition:
+    background-color var(--bravo-transition-fast),
+    transform var(--bravo-transition-fast);
+}
+
+
+.bravo-home-hero-secondary:hover {
+
+  color:
+    var(--bravo-white);
+
+  background:
+    rgba(255, 255, 255, 0.15);
+
+  transform:
+    translateY(-2px);
+}
+
+
+/* ============================================================
+   HERO — SEARCH PANEL
+============================================================ */
+
+.bravo-home-search-panel {
+
+  padding:
+    18px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.16);
+
+  border-radius:
+    var(--bravo-radius-xl);
+
+  background:
+    rgba(12, 43, 31, 0.70);
+
+  box-shadow:
+    0 25px 65px rgba(0, 0, 0, 0.20);
+
+  backdrop-filter:
+    blur(20px);
+}
+
+
+.bravo-home-search-panel-header {
+
+  display:
+    flex;
+
+  align-items:
+    flex-start;
+
+  gap:
+    11px;
+
+  margin-bottom:
+    14px;
+}
+
+
+.bravo-home-search-panel-icon {
+
+  width:
+    40px;
+
+  height:
+    40px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  flex-shrink:
+    0;
+
+  border-radius:
+    12px;
+
+  background:
+    rgba(255, 255, 255, 0.10);
+
+  color:
+    var(--bravo-gold-500);
+}
+
+
+.bravo-home-search-panel-header strong {
+
+  display:
+    block;
+
+  color:
+    var(--bravo-white);
+
+  font-size:
+    0.87rem;
+}
+
+
+.bravo-home-search-panel-header small {
+
+  display:
+    block;
+
+  margin-top:
+    2px;
+
+  color:
+    rgba(255, 255, 255, 0.56);
+
+  font-size:
+    0.68rem;
+}
+
+
+.bravo-home-search {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    8px;
+
+  min-height:
+    52px;
+
+  padding:
+    5px;
+
+  border-radius:
+    15px;
+
+  background:
+    var(--bravo-white);
+}
+
+
+.bravo-home-search input {
+
+  min-width:
+    0;
+
+  flex:
+    1;
+
+  height:
+    42px;
+
+  padding:
+    0 10px;
+
+  border:
+    0;
+
+  outline:
+    0;
+
+  background:
+    transparent;
+
+  color:
+    var(--bravo-ink-800);
+
+  font-size:
+    0.78rem;
+}
+
+
+.bravo-home-search button {
+
+  width:
+    42px;
+
+  height:
+    42px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  flex-shrink:
+    0;
+
+  border:
+    0;
+
+  border-radius:
+    11px;
+
+  background:
+    var(--bravo-forest-800);
+
+  color:
+    var(--bravo-white);
+}
+
+
+.bravo-home-search-suggestions {
+
+  display:
+    flex;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    6px;
+
+  margin-top:
+    11px;
+}
+
+
+.bravo-home-search-suggestion {
+
+  padding:
+    5px 8px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius:
+    var(--bravo-radius-pill);
+
+  background:
+    rgba(255, 255, 255, 0.06);
+
+  color:
+    rgba(255, 255, 255, 0.62);
+
+  font-size:
+    0.63rem;
+}
+
+
+/* ============================================================
+   HERO — BOTTOM STATS
+============================================================ */
+
+.bravo-home-hero-stats {
+
+  position:
+    absolute;
+
+  right:
+    0;
+
+  bottom:
+    0;
+
+  left:
+    0;
+
+  z-index:
+    3;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.12);
+
+  background:
+    rgba(7, 30, 21, 0.50);
+
+  backdrop-filter:
+    blur(14px);
+}
+
+
+.bravo-home-hero-stats-inner {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+}
+
+
+.bravo-home-hero-stat {
+
+  min-height:
+    82px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    11px;
+
+  padding:
+    12px 18px;
+
+  border-right:
+    1px solid rgba(255, 255, 255, 0.10);
+}
+
+
+.bravo-home-hero-stat:last-child {
+
+  border-right:
+    0;
+}
+
+
+.bravo-home-hero-stat-icon {
+
+  width:
+    34px;
+
+  height:
+    34px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border-radius:
+    10px;
+
+  background:
+    rgba(255, 255, 255, 0.08);
+
+  color:
+    var(--bravo-gold-500);
+
+  font-size:
+    0.78rem;
+}
+
+
+.bravo-home-hero-stat strong {
+
+  display:
+    block;
+
+  color:
+    var(--bravo-white);
+
+  font-size:
+    0.88rem;
+}
+
+
+.bravo-home-hero-stat small {
+
+  display:
+    block;
+
+  margin-top:
+    1px;
+
+  color:
+    rgba(255, 255, 255, 0.48);
+
+  font-size:
+    0.63rem;
+}
+
+
+/* ============================================================
+   03. TRUST STRIP
+============================================================ */
+
+.bravo-home-trust {
+
+  padding:
+    17px 0;
+
+  border-bottom:
+    1px solid var(--bravo-border-light);
+
+  background:
+    var(--bravo-white);
+}
+
+
+.bravo-home-trust-inner {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    20px;
+}
+
+
+.bravo-home-trust-label {
+
+  color:
+    var(--bravo-ink-400);
+
+  font-size:
+    0.64rem;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    0.10em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.bravo-home-trust-items {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    flex-end;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    19px;
+}
+
+
+.bravo-home-trust-item {
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    6px;
+
+  color:
+    var(--bravo-ink-500);
+
+  font-size:
+    0.70rem;
+
+  font-weight:
+    700;
+}
+
+
+.bravo-home-trust-item i {
+
+  color:
+    var(--bravo-emerald-600);
+
+  font-size:
+    0.67rem;
+}
+
+
+/* ============================================================
+   04. FEATURED DESTINATIONS
+============================================================ */
+
+.bravo-home-destinations {
+
+  background:
+    var(--bravo-sand-50);
+}
+
+
+.bravo-home-destination-grid {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    1.25fr
+    0.75fr
+    0.75fr;
+
+  grid-template-rows:
+    255px
+    255px;
+
+  gap:
+    16px;
+}
+
+
+.bravo-home-destination-card {
+
+  position:
+    relative;
+
+  min-height:
+    220px;
+
+  overflow:
+    hidden;
+
+  border-radius:
+    var(--bravo-radius-lg);
+
+  background:
+    var(--bravo-forest-900);
+
+  text-decoration:
+    none;
+
+  isolation:
+    isolate;
+}
+
+
+.bravo-home-destination-card:first-child {
+
+  grid-row:
+    span 2;
+}
+
+
+.bravo-home-destination-card img {
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  width:
+    100%;
+
+  height:
+    100%;
+
+  object-fit:
+    cover;
+
+  transition:
+    transform 700ms var(--bravo-ease);
+}
+
+
+.bravo-home-destination-card::before {
+
+  content:
+    "";
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  z-index:
+    1;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent 25%,
+      rgba(8, 28, 20, 0.84) 100%
+    );
+}
+
+
+.bravo-home-destination-card:hover img {
+
+  transform:
+    scale(1.055);
+}
+
+
+.bravo-home-destination-content {
+
+  position:
+    absolute;
+
+  right:
+    20px;
+
+  bottom:
+    18px;
+
+  left:
+    20px;
+
+  z-index:
+    2;
+
+  color:
+    var(--bravo-white);
+}
+
+
+.bravo-home-destination-category {
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    5px;
+
+  margin-bottom:
+    7px;
+
+  color:
+    rgba(255, 255, 255, 0.70);
+
+  font-size:
+    0.62rem;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    0.11em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.bravo-home-destination-content h3 {
+
+  margin:
+    0 0 5px;
+
+  color:
+    var(--bravo-white);
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(1.15rem, 2vw, 1.65rem);
+
+  letter-spacing:
+    -0.02em;
+}
+
+
+.bravo-home-destination-content p {
+
+  max-width:
+    480px;
+
+  margin:
+    0;
+
+  color:
+    rgba(255, 255, 255, 0.66);
+
+  font-size:
+    0.69rem;
+
+  line-height:
+    1.55;
+}
+
+
+.bravo-home-destination-arrow {
+
+  position:
+    absolute;
+
+  top:
+    17px;
+
+  right:
+    17px;
+
+  z-index:
+    3;
+
+  width:
+    34px;
+
+  height:
+    34px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.18);
+
+  border-radius:
+    50%;
+
+  background:
+    rgba(7, 30, 21, 0.28);
+
+  color:
+    var(--bravo-white);
+
+  opacity:
+    0;
+
+  transform:
+    translateY(5px);
+
+  transition:
+    opacity var(--bravo-transition-fast),
+    transform var(--bravo-transition-fast);
+}
+
+
+.bravo-home-destination-card:hover
+.bravo-home-destination-arrow {
+
+  opacity:
+    1;
+
+  transform:
+    translateY(0);
+}
+
+
+/* ============================================================
+   05. SMART TOURISM / AI FEATURE
+============================================================ */
+
+.bravo-home-smart {
+
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+  background:
+    var(--bravo-forest-900);
+
+  color:
+    rgba(255, 255, 255, 0.72);
+}
+
+
+.bravo-home-smart::before {
+
+  content:
+    "";
+
+  position:
+    absolute;
+
+  width:
+    500px;
+
+  height:
+    500px;
+
+  top:
+    -280px;
+
+  right:
+    -170px;
+
+  border-radius:
+    50%;
+
+  background:
+    rgba(62, 146, 112, 0.10);
+
+  pointer-events:
+    none;
+}
+
+
+.bravo-home-smart-grid {
+
+  position:
+    relative;
+
+  z-index:
+    1;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    0.9fr
+    1.1fr;
+
+  align-items:
+    center;
+
+  gap:
+    clamp(45px, 7vw, 100px);
+}
+
+
+.bravo-home-smart-copy {
+
+  max-width:
+    550px;
+}
+
+
+.bravo-home-smart .bravo-section-title {
+
+  color:
+    var(--bravo-white);
+}
+
+
+.bravo-home-smart .bravo-section-description {
+
+  color:
+    rgba(255, 255, 255, 0.62);
+}
+
+
+.bravo-home-smart-features {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap:
+    10px;
+
+  margin:
+    25px 0;
+}
+
+
+.bravo-home-smart-feature {
+
+  padding:
+    13px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.09);
+
+  border-radius:
+    var(--bravo-radius-md);
+
+  background:
+    rgba(255, 255, 255, 0.045);
+
+  transition:
+    background-color var(--bravo-transition-fast),
+    transform var(--bravo-transition-fast);
+}
+
+
+.bravo-home-smart-feature:hover {
+
+  background:
+    rgba(255, 255, 255, 0.08);
+
+  transform:
+    translateY(-2px);
+}
+
+
+.bravo-home-smart-feature-icon {
+
+  width:
+    32px;
+
+  height:
+    32px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  margin-bottom:
+    8px;
+
+  border-radius:
+    9px;
+
+  background:
+    rgba(255, 255, 255, 0.08);
+
+  color:
+    var(--bravo-gold-500);
+
+  font-size:
+    0.72rem;
+}
+
+
+.bravo-home-smart-feature strong {
+
+  display:
+    block;
+
+  color:
+    var(--bravo-white);
+
+  font-size:
+    0.76rem;
+}
+
+
+.bravo-home-smart-feature small {
+
+  display:
+    block;
+
+  margin-top:
+    3px;
+
+  color:
+    rgba(255, 255, 255, 0.45);
+
+  font-size:
+    0.63rem;
+
+  line-height:
+    1.45;
+}
+
+
+/* ============================================================
+   SMART TOURISM VISUAL PANEL
+============================================================ */
+
+.bravo-home-smart-visual {
+
+  position:
+    relative;
+
+  min-height:
+    500px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+}
+
+
+.bravo-home-smart-image {
+
+  width:
+    min(100%, 590px);
+
+  aspect-ratio:
+    1.12 / 1;
+
+  overflow:
+    hidden;
+
+  border:
+    8px solid rgba(255, 255, 255, 0.07);
+
+  border-radius:
+    32px;
+
+  background:
+    var(--bravo-forest-800);
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.28);
+
+  transform:
+    rotate(0deg);
+}
+
+
+.bravo-home-smart-image img {
+
+  width:
+    100%;
+
+  height:
+    100%;
+
+  object-fit:
+    cover;
+}
+
+
+.bravo-home-smart-floating-card {
+
+  position:
+    absolute;
+
+  right:
+    0;
+
+  bottom:
+    42px;
+
+  width:
+    220px;
+
+  padding:
+    15px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.13);
+
+  border-radius:
+    var(--bravo-radius-lg);
+
+  background:
+    rgba(10, 33, 24, 0.88);
+
+  box-shadow:
+    var(--bravo-shadow-xl);
+
+  backdrop-filter:
+    blur(18px);
+}
+
+
+.bravo-home-smart-floating-top {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    10px;
+
+  margin-bottom:
+    11px;
+}
+
+
+.bravo-home-smart-floating-top strong {
+
+  color:
+    var(--bravo-white);
+
+  font-size:
+    0.75rem;
+}
+
+
+.bravo-home-smart-score {
+
+  padding:
+    4px 7px;
+
+  border-radius:
+    var(--bravo-radius-pill);
+
+  background:
+    rgba(97, 194, 140, 0.13);
+
+  color:
+    #83D4A5;
+
+  font-size:
+    0.59rem;
+
+  font-weight:
+    900;
+}
+
+
+.bravo-home-smart-progress {
+
+  height:
+    6px;
+
+  overflow:
+    hidden;
+
+  border-radius:
+    10px;
+
+  background:
+    rgba(255, 255, 255, 0.08);
+}
+
+
+.bravo-home-smart-progress span {
+
+  display:
+    block;
+
+  width:
+    78%;
+
+  height:
+    100%;
+
+  border-radius:
+    inherit;
+
+  background:
+    var(--bravo-gold-500);
+}
+
+
+.bravo-home-smart-floating-caption {
+
+  margin:
+    8px 0 0;
+
+  color:
+    rgba(255, 255, 255, 0.42);
+
+  font-size:
+    0.59rem;
+}
+
+
+/* ============================================================
+   06. EXPERIENCE CATEGORIES
+============================================================ */
+
+.bravo-home-experiences {
+
+  background:
+    var(--bravo-white);
+}
+
+
+.bravo-home-experience-grid {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap:
+    13px;
+}
+
+
+.bravo-home-experience-card {
+
+  position:
+    relative;
+
+  min-height:
+    245px;
+
+  overflow:
+    hidden;
+
+  border-radius:
+    var(--bravo-radius-lg);
+
+  background:
+    var(--bravo-forest-900);
+
+  text-decoration:
+    none;
+}
+
+
+.bravo-home-experience-card img {
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  width:
+    100%;
+
+  height:
+    100%;
+
+  object-fit:
+    cover;
+
+  opacity:
+    0.86;
+
+  transition:
+    transform 650ms var(--bravo-ease),
+    opacity var(--bravo-transition);
+}
+
+
+.bravo-home-experience-card::after {
+
+  content:
+    "";
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent 20%,
+      rgba(8, 28, 20, 0.90) 100%
+    );
+}
+
+
+.bravo-home-experience-card:hover img {
+
+  transform:
+    scale(1.06);
+
+  opacity:
+    1;
+}
+
+
+.bravo-home-experience-content {
+
+  position:
+    absolute;
+
+  right:
+    17px;
+
+  bottom:
+    17px;
+
+  left:
+    17px;
+
+  z-index:
+    2;
+}
+
+
+.bravo-home-experience-icon {
+
+  width:
+    34px;
+
+  height:
+    34px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  margin-bottom:
+    9px;
+
+  border-radius:
+    10px;
+
+  background:
+    rgba(255, 255, 255, 0.11);
+
+  color:
+    var(--bravo-gold-500);
+
+  backdrop-filter:
+    blur(7px);
+}
+
+
+.bravo-home-experience-content h3 {
+
+  margin:
+    0 0 4px;
+
+  color:
+    var(--bravo-white);
+
+  font-size:
+    1rem;
+}
+
+
+.bravo-home-experience-content p {
+
+  margin:
+    0;
+
+  color:
+    rgba(255, 255, 255, 0.56);
+
+  font-size:
+    0.65rem;
+}
+
+
+/* ============================================================
+   07. INTERACTIVE MAP
+============================================================ */
+
+.bravo-home-map {
+
+  background:
+    var(--bravo-surface-muted);
+}
+
+
+.bravo-home-map-grid {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    0.78fr
+    1.22fr;
+
+  align-items:
+    stretch;
+
+  gap:
+    30px;
+}
+
+
+.bravo-home-map-copy {
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  justify-content:
+    center;
+
+  padding:
+    25px 0;
+}
+
+
+.bravo-home-map-points {
+
+  display:
+    grid;
+
+  gap:
+    8px;
+
+  margin:
+    22px 0 27px;
+}
+
+
+.bravo-home-map-point {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    10px;
+
+  padding:
+    10px;
+
+  border:
+    1px solid var(--bravo-border-light);
+
+  border-radius:
+    var(--bravo-radius-sm);
+
+  background:
+    var(--bravo-white);
+
+  color:
+    var(--bravo-ink-600);
+
+  font-size:
+    0.72rem;
+
+  font-weight:
+    700;
+}
+
+
+.bravo-home-map-point-icon {
+
+  width:
+    31px;
+
+  height:
+    31px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  flex-shrink:
+    0;
+
+  border-radius:
+    9px;
+
+  background:
+    var(--bravo-emerald-100);
+
+  color:
+    var(--bravo-emerald-700);
+}
+
+
+.bravo-home-map-frame {
+
+  position:
+    relative;
+
+  min-height:
+    500px;
+
+  overflow:
+    hidden;
+
+  border:
+    1px solid var(--bravo-border);
+
+  border-radius:
+    26px;
+
+  background:
+    #DCE8DC;
+
+  box-shadow:
+    var(--bravo-shadow-md);
+}
+
+
+.bravo-home-map-frame > * {
+
+  max-width:
+    100%;
+}
+
+
+.bravo-home-map-overlay {
+
+  position:
+    absolute;
+
+  left:
+    17px;
+
+  top:
+    17px;
+
+  z-index:
+    5;
+
+  padding:
+    10px 12px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.60);
+
+  border-radius:
+    11px;
+
+  background:
+    rgba(255, 255, 255, 0.90);
+
+  box-shadow:
+    var(--bravo-shadow-sm);
+
+  color:
+    var(--bravo-ink-700);
+
+  font-size:
+    0.68rem;
+
+  font-weight:
+    800;
+}
+
+
+/* ============================================================
+   08. CULTURAL HERITAGE
+============================================================ */
+
+.bravo-home-culture {
+
+  background:
+    var(--bravo-sand-50);
+}
+
+
+.bravo-home-culture-grid {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap:
+    24px;
+}
+
+
+.bravo-home-culture-feature {
+
+  position:
+    relative;
+
+  min-height:
+    480px;
+
+  overflow:
+    hidden;
+
+  border-radius:
+    var(--bravo-radius-xl);
+
+  background:
+    var(--bravo-forest-900);
+}
+
+
+.bravo-home-culture-feature img {
+
+  width:
+    100%;
+
+  height:
+    100%;
+
+  min-height:
+    480px;
+
+  object-fit:
+    cover;
+}
+
+
+.bravo-home-culture-feature::after {
+
+  content:
+    "";
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent 30%,
+      rgba(7, 30, 21, 0.92) 100%
+    );
+}
+
+
+.bravo-home-culture-feature-content {
+
+  position:
+    absolute;
+
+  right:
+    28px;
+
+  bottom:
+    27px;
+
+  left:
+    28px;
+
+  z-index:
+    2;
+}
+
+
+.bravo-home-culture-feature-content h3 {
+
+  margin:
+    0 0 7px;
+
+  color:
+    var(--bravo-white);
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size:
+    2rem;
+}
+
+
+.bravo-home-culture-feature-content p {
+
+  margin:
+    0;
+
+  color:
+    rgba(255, 255, 255, 0.63);
+
+  font-size:
+    0.75rem;
+}
+
+
+.bravo-home-culture-list {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap:
+    12px;
+}
+
+
+.bravo-home-culture-card {
+
+  min-height:
+    232px;
+
+  padding:
+    18px;
+
+  border:
+    1px solid var(--bravo-border-light);
+
+  border-radius:
+    var(--bravo-radius-lg);
+
+  background:
+    var(--bravo-white);
+
+  box-shadow:
+    var(--bravo-shadow-xs);
+
+  transition:
+    transform var(--bravo-transition),
+    box-shadow var(--bravo-transition);
+}
+
+
+.bravo-home-culture-card:hover {
+
+  transform:
+    translateY(-4px);
+
+  box-shadow:
+    var(--bravo-shadow-md);
+}
+
+
+.bravo-home-culture-card-icon {
+
+  width:
+    40px;
+
+  height:
+    40px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  margin-bottom:
+    14px;
+
+  border-radius:
+    12px;
+
+  background:
+    var(--bravo-gold-100);
+
+  color:
+    var(--bravo-earth-600);
+}
+
+
+.bravo-home-culture-card h3 {
+
+  margin:
+    0 0 6px;
+
+  font-size:
+    0.95rem;
+}
+
+
+.bravo-home-culture-card p {
+
+  margin:
+    0;
+
+  color:
+    var(--bravo-ink-500);
+
+  font-size:
+    0.67rem;
+
+  line-height:
+    1.6;
+}
+
+
+/* ============================================================
+   09. ECO TOURISM
+============================================================ */
+
+.bravo-home-eco {
+
+  background:
+    var(--bravo-white);
+}
+
+
+.bravo-home-eco-grid {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap:
+    28px;
+
+  align-items:
+    center;
+}
+
+
+.bravo-home-eco-visual {
+
+  position:
+    relative;
+
+  min-height:
+    460px;
+
+  overflow:
+    hidden;
+
+  border-radius:
+    var(--bravo-radius-xl);
+
+  background:
+    var(--bravo-forest-800);
+}
+
+
+.bravo-home-eco-visual img {
+
+  width:
+    100%;
+
+  height:
+    100%;
+
+  min-height:
+    460px;
+
+  object-fit:
+    cover;
+}
+
+
+.bravo-home-eco-score {
+
+  position:
+    absolute;
+
+  right:
+    18px;
+
+  bottom:
+    18px;
+
+  width:
+    180px;
+
+  padding:
+    15px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.16);
+
+  border-radius:
+    var(--bravo-radius-lg);
+
+  background:
+    rgba(10, 33, 24, 0.84);
+
+  box-shadow:
+    var(--bravo-shadow-lg);
+
+  backdrop-filter:
+    blur(16px);
+}
+
+
+.bravo-home-eco-score-top {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  margin-bottom:
+    9px;
+}
+
+
+.bravo-home-eco-score-top span {
+
+  color:
+    rgba(255, 255, 255, 0.55);
+
+  font-size:
+    0.63rem;
+
+  font-weight:
+    800;
+}
+
+
+.bravo-home-eco-score-top strong {
+
+  color:
+    #9BD9B2;
+
+  font-size:
+    1.1rem;
+}
+
+
+.bravo-home-eco-meter {
+
+  height:
+    7px;
+
+  overflow:
+    hidden;
+
+  border-radius:
+    10px;
+
+  background:
+    rgba(255, 255, 255, 0.08);
+}
+
+
+.bravo-home-eco-meter span {
+
+  display:
+    block;
+
+  width:
+    84%;
+
+  height:
+    100%;
+
+  border-radius:
+    inherit;
+
+  background:
+    #70C990;
+}
+
+
+.bravo-home-eco-score small {
+
+  display:
+    block;
+
+  margin-top:
+    7px;
+
+  color:
+    rgba(255, 255, 255, 0.40);
+
+  font-size:
+    0.58rem;
+}
+
+
+.bravo-home-eco-copy {
+
+  padding:
+    10px 0 10px 20px;
+}
+
+
+.bravo-home-eco-list {
+
+  display:
+    grid;
+
+  gap:
+    10px;
+
+  margin:
+    25px 0 28px;
+}
+
+
+.bravo-home-eco-item {
+
+  display:
+    flex;
+
+  align-items:
+    flex-start;
+
+  gap:
+    11px;
+}
+
+
+.bravo-home-eco-item-icon {
+
+  width:
+    35px;
+
+  height:
+    35px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  flex-shrink:
+    0;
+
+  border-radius:
+    10px;
+
+  background:
+    var(--bravo-emerald-100);
+
+  color:
+    var(--bravo-emerald-700);
+
+  font-size:
+    0.70rem;
+}
+
+
+.bravo-home-eco-item strong {
+
+  display:
+    block;
+
+  margin-bottom:
+    2px;
+
+  color:
+    var(--bravo-ink-800);
+
+  font-size:
+    0.77rem;
+}
+
+
+.bravo-home-eco-item p {
+
+  margin:
+    0;
+
+  color:
+    var(--bravo-ink-500);
+
+  font-size:
+    0.65rem;
+
+  line-height:
+    1.5;
+}
+
+
+/* ============================================================
+   10. HOTEL / STAY SECTION
+============================================================ */
+
+.bravo-home-stays {
+
+  background:
+    var(--bravo-surface-muted);
+}
+
+
+.bravo-home-stay-grid {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap:
+    16px;
+}
+
+
+.bravo-home-stay-card {
+
+  overflow:
+    hidden;
+
+  border:
+    1px solid var(--bravo-border-light);
+
+  border-radius:
+    var(--bravo-radius-lg);
+
+  background:
+    var(--bravo-white);
+
+  box-shadow:
+    var(--bravo-shadow-xs);
+
+  transition:
+    transform var(--bravo-transition),
+    box-shadow var(--bravo-transition);
+}
+
+
+.bravo-home-stay-card:hover {
+
+  transform:
+    translateY(-5px);
+
+  box-shadow:
+    var(--bravo-shadow-md);
+}
+
+
+.bravo-home-stay-image {
+
+  position:
+    relative;
+
+  height:
+    220px;
+
+  overflow:
+    hidden;
+}
+
+
+.bravo-home-stay-image img {
+
+  width:
+    100%;
+
+  height:
+    100%;
+
+  object-fit:
+    cover;
+
+  transition:
+    transform 650ms var(--bravo-ease);
+}
+
+
+.bravo-home-stay-card:hover
+.bravo-home-stay-image img {
+
+  transform:
+    scale(1.05);
+}
+
+
+.bravo-home-stay-badge {
+
+  position:
+    absolute;
+
+  top:
+    12px;
+
+  left:
+    12px;
+}
+
+
+.bravo-home-stay-body {
+
+  padding:
+    17px;
+}
+
+
+.bravo-home-stay-body h3 {
+
+  margin:
+    0 0 5px;
+
+  font-size:
+    1rem;
+}
+
+
+.bravo-home-stay-location {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    5px;
+
+  margin-bottom:
+    10px;
+
+  color:
+    var(--bravo-ink-500);
+
+  font-size:
+    0.66rem;
+}
+
+
+.bravo-home-stay-location i {
+
+  color:
+    var(--bravo-emerald-600);
+}
+
+
+.bravo-home-stay-meta {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  padding-top:
+    12px;
+
+  border-top:
+    1px solid var(--bravo-border-light);
+}
+
+
+.bravo-home-stay-price {
+
+  color:
+    var(--bravo-forest-800);
+
+  font-size:
+    0.82rem;
+
+  font-weight:
+    900;
+}
+
+
+.bravo-home-stay-price small {
+
+  color:
+    var(--bravo-ink-400);
+
+  font-size:
+    0.60rem;
+
+  font-weight:
+    600;
+}
+
+
+/* ============================================================
+   11. TOURIST — LOCAL CONNECT
+============================================================ */
+
+.bravo-home-connect {
+
+  background:
+    var(--bravo-sand-50);
+}
+
+
+.bravo-home-connect-panel {
+
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+  padding:
+    clamp(30px, 5vw, 55px);
+
+  border-radius:
+    var(--bravo-radius-xl);
+
+  background:
+    var(--bravo-forest-900);
+
+  color:
+    rgba(255, 255, 255, 0.72);
+}
+
+
+.bravo-home-connect-panel::before {
+
+  content:
+    "";
+
+  position:
+    absolute;
+
+  width:
+    420px;
+
+  height:
+    420px;
+
+  top:
+    -250px;
+
+  right:
+    -120px;
+
+  border-radius:
+    50%;
+
+  background:
+    rgba(214, 167, 86, 0.10);
+}
+
+
+.bravo-home-connect-grid {
+
+  position:
+    relative;
+
+  z-index:
+    1;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap:
+    50px;
+
+  align-items:
+    center;
+}
+
+
+.bravo-home-connect .bravo-section-title {
+
+  color:
+    var(--bravo-white);
+}
+
+
+.bravo-home-connect .bravo-section-description {
+
+  color:
+    rgba(255, 255, 255, 0.58);
+}
+
+
+.bravo-home-connect-cards {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap:
+    10px;
+}
+
+
+.bravo-home-connect-card {
+
+  padding:
+    16px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.09);
+
+  border-radius:
+    var(--bravo-radius-md);
+
+  background:
+    rgba(255, 255, 255, 0.045);
+}
+
+
+.bravo-home-connect-card-icon {
+
+  width:
+    35px;
+
+  height:
+    35px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  margin-bottom:
+    9px;
+
+  border-radius:
+    10px;
+
+  background:
+    rgba(255, 255, 255, 0.08);
+
+  color:
+    var(--bravo-gold-500);
+}
+
+
+.bravo-home-connect-card strong {
+
+  display:
+    block;
+
+  margin-bottom:
+    3px;
+
+  color:
+    var(--bravo-white);
+
+  font-size:
+    0.75rem;
+}
+
+
+.bravo-home-connect-card small {
+
+  color:
+    rgba(255, 255, 255, 0.43);
+
+  font-size:
+    0.61rem;
+
+  line-height:
+    1.5;
+}
+
+
+/* ============================================================
+   12. TESTIMONIALS
+============================================================ */
+
+.bravo-home-testimonials {
+
+  background:
+    var(--bravo-white);
+}
+
+
+.bravo-home-testimonial-grid {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap:
+    15px;
+}
+
+
+.bravo-home-testimonial {
+
+  padding:
+    22px;
+
+  border:
+    1px solid var(--bravo-border-light);
+
+  border-radius:
+    var(--bravo-radius-lg);
+
+  background:
+    var(--bravo-surface);
+
+  transition:
+    transform var(--bravo-transition),
+    box-shadow var(--bravo-transition);
+}
+
+
+.bravo-home-testimonial:hover {
+
+  transform:
+    translateY(-4px);
+
+  box-shadow:
+    var(--bravo-shadow-sm);
+}
+
+
+.bravo-home-testimonial-stars {
+
+  display:
+    flex;
+
+  gap:
+    3px;
+
+  margin-bottom:
+    14px;
+
+  color:
+    var(--bravo-gold-500);
+
+  font-size:
+    0.66rem;
+}
+
+
+.bravo-home-testimonial-quote {
+
+  margin:
+    0 0 18px;
+
+  color:
+    var(--bravo-ink-700);
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size:
+    1rem;
+
+  line-height:
+    1.65;
+}
+
+
+.bravo-home-testimonial-user {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    9px;
+
+  padding-top:
+    14px;
+
+  border-top:
+    1px solid var(--bravo-border-light);
+}
+
+
+.bravo-home-testimonial-avatar {
+
+  width:
+    34px;
+
+  height:
+    34px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border-radius:
+    50%;
+
+  background:
+    var(--bravo-emerald-100);
+
+  color:
+    var(--bravo-emerald-700);
+
+  font-size:
+    0.68rem;
+
+  font-weight:
+    900;
+}
+
+
+.bravo-home-testimonial-user strong {
+
+  display:
+    block;
+
+  color:
+    var(--bravo-ink-800);
+
+  font-size:
+    0.72rem;
+}
+
+
+.bravo-home-testimonial-user small {
+
+  color:
+    var(--bravo-ink-400);
+
+  font-size:
+    0.60rem;
+}
+
+
+/* ============================================================
+   13. FINAL CTA
+============================================================ */
+
+.bravo-home-cta {
+
+  padding:
+    0 0 var(--bravo-section-space);
+
+  background:
+    var(--bravo-white);
+}
+
+
+.bravo-home-cta-panel {
+
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+  padding:
+    clamp(40px, 7vw, 75px);
+
+  border-radius:
+    var(--bravo-radius-xl);
+
+  background:
+    linear-gradient(
+      120deg,
+      var(--bravo-forest-900),
+      var(--bravo-forest-700)
+    );
+
+  text-align:
+    center;
+
+  box-shadow:
+    var(--bravo-shadow-lg);
+}
+
+
+.bravo-home-cta-panel::before {
+
+  content:
+    "";
+
+  position:
+    absolute;
+
+  width:
+    330px;
+
+  height:
+    330px;
+
+  top:
+    -200px;
+
+  left:
+    -120px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius:
+    50%;
+}
+
+
+.bravo-home-cta-panel::after {
+
+  content:
+    "";
+
+  position:
+    absolute;
+
+  width:
+    260px;
+
+  height:
+    260px;
+
+  right:
+    -100px;
+
+  bottom:
+    -170px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius:
+    50%;
+}
+
+
+.bravo-home-cta-content {
+
+  position:
+    relative;
+
+  z-index:
+    2;
+
+  max-width:
+    730px;
+
+  margin:
+    0 auto;
+}
+
+
+.bravo-home-cta-content h2 {
+
+  margin:
+    0 0 13px;
+
+  color:
+    var(--bravo-white);
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(2rem, 4vw, 3.4rem);
+}
+
+
+.bravo-home-cta-content p {
+
+  max-width:
+    600px;
+
+  margin:
+    0 auto 25px;
+
+  color:
+    rgba(255, 255, 255, 0.62);
+
+  font-size:
+    0.88rem;
+}
+
+
+.bravo-home-cta-actions {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    9px;
+}
+
+
+.bravo-home-cta-primary {
+
+  min-height:
+    47px;
+
+  padding:
+    0 19px;
+
+  border-radius:
+    var(--bravo-radius-pill);
+
+  background:
+    var(--bravo-gold-500);
+
+  color:
+    var(--bravo-forest-950);
+
+  font-size:
+    0.79rem;
+
+  font-weight:
+    900;
+
+  text-decoration:
+    none;
+}
+
+
+.bravo-home-cta-primary:hover {
+
+  color:
+    var(--bravo-forest-950);
+
+  background:
+    #E0B766;
+
+  transform:
+    translateY(-2px);
+}
+
+
+.bravo-home-cta-secondary {
+
+  min-height:
+    47px;
+
+  padding:
+    0 19px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.18);
+
+  border-radius:
+    var(--bravo-radius-pill);
+
+  background:
+    transparent;
+
+  color:
+    var(--bravo-white);
+
+  font-size:
+    0.79rem;
+
+  font-weight:
+    800;
+
+  text-decoration:
+    none;
+}
+
+
+.bravo-home-cta-secondary:hover {
+
+  color:
+    var(--bravo-white);
+
+  background:
+    rgba(255, 255, 255, 0.08);
+}
+
+
+/* ============================================================
+   14. LEGACY HOMEPAGE COMPATIBILITY
+============================================================ */
+
+/*
+   Existing homepage classes are kept visually safe here.
+   These can be progressively replaced when the homepage
+   view itself is rebuilt.
+*/
+
+
+.home-container {
+
+  width:
+    min(
+      calc(100% - 40px),
+      var(--bravo-container)
+    );
+
+  margin:
+    0 auto;
+}
+
+
+.featured-section {
+
+  padding:
+    var(--bravo-section-space) 0;
+
+  background:
+    var(--bravo-sand-50);
+}
+
+
+.featured-grid {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(240px, 1fr)
+    );
+
+  gap:
+    18px;
+}
+
+
+.feature-card {
+
+  overflow:
+    hidden;
+
+  border:
+    1px solid var(--bravo-border-light);
+
+  border-radius:
+    var(--bravo-radius-lg);
+
+  background:
+    var(--bravo-white);
+
+  box-shadow:
+    var(--bravo-shadow-xs);
+
+  transition:
+    transform var(--bravo-transition),
+    box-shadow var(--bravo-transition);
+}
+
+
+.feature-card:hover {
+
+  transform:
+    translateY(-5px);
+
+  box-shadow:
+    var(--bravo-shadow-md);
+}
+
+
+.feature-card img {
+
+  width:
+    100%;
+
+  height:
+    210px;
+
+  object-fit:
+    cover;
+}
+
+
+.feature-card-content {
+
+  padding:
+    18px;
+}
+
+
+.feature-card-content h3 {
+
+  margin:
+    0 0 7px;
+
+  font-size:
+    1.05rem;
+}
+
+
+.feature-card-content p {
+
+  margin:
+    0;
+
+  color:
+    var(--bravo-ink-500);
+
+  font-size:
+    0.75rem;
+}
+
+
+/* ============================================================
+   15. HOMEPAGE RESPONSIVE — 1100px
+============================================================ */
+
+@media (max-width: 1100px) {
+
+  .bravo-home-hero-grid {
+
+    grid-template-columns:
+      1fr
+      0.8fr;
+
+    gap:
+      45px;
+  }
+
+
+  .bravo-home-hero-title {
+
+    font-size:
+      clamp(3rem, 6vw, 5rem);
+  }
+
+
+  .bravo-home-experience-grid {
+
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+
+  .bravo-home-map-grid {
+
+    grid-template-columns:
+      0.85fr
+      1.15fr;
+  }
 
 }
 
-.chatbot-pulse{
 
-position:absolute;
+/* ============================================================
+   16. HOMEPAGE RESPONSIVE — 991px
+============================================================ */
 
-width:72px;
+@media (max-width: 991.98px) {
 
-height:72px;
+  .bravo-home-hero {
 
-border-radius:50%;
+    min-height:
+      auto;
+  }
 
-background:#198754;
 
-opacity:.35;
+  .bravo-home-hero-content {
 
-animation:pulseChat 2s infinite;
+    padding:
+      90px 0 145px;
+  }
+
+
+  .bravo-home-hero-grid {
+
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .bravo-home-hero-copy {
+
+    max-width:
+      760px;
+  }
+
+
+  .bravo-home-search-panel {
+
+    max-width:
+      570px;
+  }
+
+
+  .bravo-home-hero-stats-inner {
+
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+
+  .bravo-home-hero-stat:nth-child(2) {
+
+    border-right:
+      0;
+  }
+
+
+  .bravo-home-hero-stat:nth-child(-n + 2) {
+
+    border-bottom:
+      1px solid rgba(255, 255, 255, 0.10);
+  }
+
+
+  .bravo-home-smart-grid {
+
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .bravo-home-smart-copy {
+
+    max-width:
+      700px;
+  }
+
+
+  .bravo-home-smart-visual {
+
+    min-height:
+      440px;
+  }
+
+
+  .bravo-home-map-grid {
+
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .bravo-home-map-copy {
+
+    max-width:
+      700px;
+  }
+
+
+  .bravo-home-culture-grid {
+
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .bravo-home-culture-feature {
+
+    min-height:
+      430px;
+  }
+
+
+  .bravo-home-culture-feature img {
+
+    min-height:
+      430px;
+  }
+
+
+  .bravo-home-eco-grid {
+
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .bravo-home-eco-copy {
+
+    padding:
+      0;
+  }
+
+
+  .bravo-home-stay-grid {
+
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+
+  .bravo-home-connect-grid {
+
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .bravo-home-testimonial-grid {
+
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
 
 }
 
-@keyframes pulseChat{
 
-0%{
+/* ============================================================
+   17. HOMEPAGE RESPONSIVE — 767px
+============================================================ */
 
-transform:scale(1);
+@media (max-width: 767.98px) {
 
-opacity:.5;
+  .bravo-home-hero-content {
+
+    padding:
+      70px 0 125px;
+  }
+
+
+  .bravo-home-hero-title {
+
+    font-size:
+      clamp(2.7rem, 13vw, 4.3rem);
+  }
+
+
+  .bravo-home-hero-description {
+
+    font-size:
+      0.90rem;
+
+    line-height:
+      1.65;
+  }
+
+
+  .bravo-home-hero-actions {
+
+    align-items:
+      stretch;
+
+    flex-direction:
+      column;
+  }
+
+
+  .bravo-home-hero-primary,
+  .bravo-home-hero-secondary {
+
+    width:
+      100%;
+  }
+
+
+  .bravo-home-hero-stats {
+
+    position:
+      absolute;
+  }
+
+
+  .bravo-home-hero-stat {
+
+    min-height:
+      72px;
+
+    justify-content:
+      flex-start;
+
+    padding:
+      10px 14px;
+  }
+
+
+  .bravo-home-hero-stat strong {
+
+    font-size:
+      0.76rem;
+  }
+
+
+  .bravo-home-hero-stat small {
+
+    font-size:
+      0.56rem;
+  }
+
+
+  .bravo-home-trust-inner {
+
+    align-items:
+      flex-start;
+
+    flex-direction:
+      column;
+
+    gap:
+      9px;
+  }
+
+
+  .bravo-home-trust-items {
+
+    justify-content:
+      flex-start;
+
+    gap:
+      9px 14px;
+  }
+
+
+  .bravo-home-destination-grid {
+
+    grid-template-columns:
+      1fr;
+
+    grid-template-rows:
+      repeat(4, 230px);
+  }
+
+
+  .bravo-home-destination-card:first-child {
+
+    grid-row:
+      auto;
+  }
+
+
+  .bravo-home-destination-card {
+
+    min-height:
+      230px;
+  }
+
+
+  .bravo-home-smart-features {
+
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .bravo-home-smart-visual {
+
+    min-height:
+      390px;
+  }
+
+
+  .bravo-home-smart-image {
+
+    width:
+      100%;
+
+    border-radius:
+      23px;
+  }
+
+
+  .bravo-home-smart-floating-card {
+
+    right:
+      10px;
+
+    bottom:
+      15px;
+
+    width:
+      190px;
+  }
+
+
+  .bravo-home-experience-grid {
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+    gap:
+      9px;
+  }
+
+
+  .bravo-home-experience-card {
+
+    min-height:
+      200px;
+  }
+
+
+  .bravo-home-map-frame {
+
+    min-height:
+      390px;
+  }
+
+
+  .bravo-home-culture-list {
+
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .bravo-home-culture-card {
+
+    min-height:
+      auto;
+  }
+
+
+  .bravo-home-eco-visual {
+
+    min-height:
+      390px;
+  }
+
+
+  .bravo-home-eco-visual img {
+
+    min-height:
+      390px;
+  }
+
+
+  .bravo-home-stay-grid {
+
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .bravo-home-connect-cards {
+
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .bravo-home-testimonial-grid {
+
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .bravo-home-cta-panel {
+
+    padding:
+      42px 20px;
+  }
+
+
+  .bravo-home-cta-actions {
+
+    align-items:
+      stretch;
+
+    flex-direction:
+      column;
+  }
+
+
+  .bravo-home-cta-primary,
+  .bravo-home-cta-secondary {
+
+    width:
+      100%;
+  }
 
 }
 
-70%{
 
-transform:scale(1.7);
+/* ============================================================
+   18. HOMEPAGE RESPONSIVE — 480px
+============================================================ */
 
-opacity:0;
+@media (max-width: 480px) {
+
+  .bravo-home-hero {
+
+    min-height:
+      690px;
+  }
+
+
+  .bravo-home-hero-content {
+
+    padding:
+      55px 0 155px;
+  }
+
+
+  .bravo-home-hero-title {
+
+    font-size:
+      2.65rem;
+  }
+
+
+  .bravo-home-search-panel {
+
+    padding:
+      13px;
+  }
+
+
+  .bravo-home-hero-stats-inner {
+
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+
+  .bravo-home-hero-stat {
+
+    gap:
+      7px;
+
+    padding:
+      9px;
+  }
+
+
+  .bravo-home-hero-stat-icon {
+
+    width:
+      28px;
+
+    height:
+      28px;
+
+    font-size:
+      0.64rem;
+  }
+
+
+  .bravo-home-hero-stat strong {
+
+    font-size:
+      0.68rem;
+  }
+
+
+  .bravo-home-hero-stat small {
+
+    font-size:
+      0.51rem;
+  }
+
+
+  .bravo-home-destination-grid {
+
+    grid-template-rows:
+      repeat(4, 210px);
+  }
+
+
+  .bravo-home-experience-grid {
+
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .bravo-home-experience-card {
+
+    min-height:
+      220px;
+  }
+
+
+  .bravo-home-smart-visual {
+
+    min-height:
+      330px;
+  }
+
+
+  .bravo-home-smart-floating-card {
+
+    width:
+      170px;
+
+    padding:
+      12px;
+  }
+
+
+  .bravo-home-map-frame {
+
+    min-height:
+      330px;
+  }
+
+
+  .bravo-home-culture-feature,
+  .bravo-home-culture-feature img {
+
+    min-height:
+      350px;
+  }
+
+
+  .bravo-home-culture-feature-content {
+
+    right:
+      18px;
+
+    bottom:
+      18px;
+
+    left:
+      18px;
+  }
+
+
+  .bravo-home-culture-feature-content h3 {
+
+    font-size:
+      1.55rem;
+  }
+
+
+  .bravo-home-eco-visual,
+  .bravo-home-eco-visual img {
+
+    min-height:
+      330px;
+  }
+
+
+  .bravo-home-eco-score {
+
+    right:
+      12px;
+
+    bottom:
+      12px;
+
+    width:
+      160px;
+  }
 
 }
 
-100%{
 
-transform:scale(1);
+/* ============================================================
+   19. REDUCED MOTION
+============================================================ */
 
-opacity:0;
+@media (prefers-reduced-motion: reduce) {
 
-}
+  .bravo-home *,
+  .bravo-home *::before,
+  .bravo-home *::after {
 
-}
+    scroll-behavior:
+      auto !important;
 
-.chatbot-tooltip{
+    transition-duration:
+      0.01ms !important;
 
-position:absolute;
-
-right:90px;
-
-background:#222;
-
-color:white;
-
-padding:8px 14px;
-
-border-radius:10px;
-
-font-size:14px;
-
-white-space:nowrap;
-
-opacity:0;
-
-pointer-events:none;
-
-transition:.3s;
+    animation-duration:
+      0.01ms !important;
+  }
 
 }
 
-.floating-chatbot:hover .chatbot-tooltip{
 
-opacity:1;
+/* ============================================================
+   20. HOMEPAGE VISIBILITY + FINAL VISUAL CORRECTIONS
+   ------------------------------------------------------------
+   Purpose:
+   - Keep homepage content visible even if reveal JS is delayed.
+   - Improve hero text contrast.
+   - Fix section heading hierarchy.
+   - Improve destination card readability.
+   - Prevent text from looking like unstyled/default content.
+   - Improve alignment and spacing without changing functionality.
+============================================================ */
+
+
+/* ============================================================
+   20.1 SAFE CONTENT VISIBILITY
+   ------------------------------------------------------------
+   The homepage must remain readable even if IntersectionObserver
+   is delayed, unavailable, or the JS loads after the CSS.
+============================================================ */
+
+.bravo-home .bravo-reveal {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+
+/* ============================================================
+   20.2 MAIN HOMEPAGE SECTION SYSTEM
+============================================================ */
+
+.bravo-home .bravo-section {
+  position: relative;
+  padding: clamp(64px, 8vw, 105px) 0;
+}
+
+.bravo-home .bravo-container {
+  width: min(
+    calc(100% - 40px),
+    var(--bravo-container, 1180px)
+  );
+  margin-inline: auto;
+}
+
+
+/* ============================================================
+   20.3 SECTION HEADER
+============================================================ */
+
+.bravo-home .bravo-section-header {
+  width: min(100%, 760px);
+  margin: 0 auto 42px;
+}
+
+.bravo-home .bravo-section-header.center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.bravo-home .bravo-section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  min-height: 32px;
+  padding: 7px 12px;
+
+  border: 1px solid rgba(25, 91, 65, 0.14);
+  border-radius: 999px;
+
+  background: #edf6f0;
+  color: #176044;
+
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 1;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.bravo-home .bravo-section-badge i {
+  color: #c7963d;
+}
+
+.bravo-home .bravo-section-title {
+  max-width: 820px;
+
+  margin: 14px 0 10px;
+
+  color: #173b2d;
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(2rem, 4vw, 3.35rem);
+
+  font-weight: 600;
+  line-height: 1.08;
+
+  letter-spacing: -0.025em;
+}
+
+.bravo-home .bravo-section-description {
+  max-width: 700px;
+
+  margin: 0;
+
+  color: #64756d;
+
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+.bravo-home .bravo-section-header.center
+.bravo-section-description {
+  margin-inline: auto;
+}
+
+
+/* ============================================================
+   20.4 HERO — STRONGER TEXT CONTRAST
+============================================================ */
+
+.bravo-home .bravo-home-hero::before {
+  z-index: -3;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(5, 25, 17, 0.94) 0%,
+      rgba(5, 25, 17, 0.82) 35%,
+      rgba(5, 25, 17, 0.48) 65%,
+      rgba(5, 25, 17, 0.30) 100%
+    );
+}
+
+.bravo-home .bravo-home-hero::after {
+  z-index: -2;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(4, 24, 16, 0.18) 0%,
+      rgba(4, 24, 16, 0.08) 42%,
+      rgba(4, 24, 16, 0.78) 100%
+    );
+}
+
+
+/* ============================================================
+   20.5 HERO CONTENT PANEL
+============================================================ */
+
+.bravo-home .bravo-home-hero-copy {
+  position: relative;
+  z-index: 5;
+
+  max-width: 720px;
+}
+
+.bravo-home .bravo-home-hero-eyebrow {
+  background: rgba(7, 35, 24, 0.72);
+  border-color: rgba(255, 255, 255, 0.22);
+
+  color: #f4f8f5;
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.bravo-home .bravo-home-hero-title {
+  color: #ffffff !important;
+
+  text-shadow:
+    0 3px 20px rgba(0, 0, 0, 0.34);
+}
+
+.bravo-home .bravo-home-hero-title span {
+  color: #f0cb72 !important;
+}
+
+.bravo-home .bravo-home-hero-description {
+  color: rgba(255, 255, 255, 0.90) !important;
+
+  text-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.28);
+}
+
+
+/* ============================================================
+   20.6 HERO SEARCH PANEL
+============================================================ */
+
+.bravo-home .bravo-home-search-panel {
+  position: relative;
+  z-index: 5;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.20);
+
+  background:
+    rgba(8, 38, 27, 0.86);
+
+  box-shadow:
+    0 25px 65px rgba(0, 0, 0, 0.30);
+
+  backdrop-filter: blur(16px);
+}
+
+.bravo-home .bravo-home-search-panel-header strong {
+  color: #ffffff !important;
+  font-size: 0.95rem;
+}
+
+.bravo-home .bravo-home-search-panel-header small {
+  color: rgba(255, 255, 255, 0.72) !important;
+  line-height: 1.5;
+}
+
+.bravo-home .bravo-home-search-suggestion {
+  color: rgba(255, 255, 255, 0.82);
+
+  background:
+    rgba(255, 255, 255, 0.09);
+
+  border-color:
+    rgba(255, 255, 255, 0.18);
+
+  cursor: pointer;
+
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.bravo-home .bravo-home-search-suggestion:hover {
+  color: #ffffff;
+
+  background:
+    rgba(255, 255, 255, 0.16);
+
+  transform: translateY(-1px);
+}
+
+
+/* ============================================================
+   20.7 HERO BUTTONS
+============================================================ */
+
+.bravo-home .bravo-home-hero-primary,
+.bravo-home .bravo-home-hero-secondary {
+  position: relative;
+  z-index: 6;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  min-height: 50px;
+}
+
+.bravo-home .bravo-home-hero-primary {
+  color: #123d2d !important;
+  background: #ffffff !important;
+}
+
+.bravo-home .bravo-home-hero-secondary {
+  color: #ffffff !important;
+
+  background:
+    rgba(8, 42, 29, 0.58) !important;
+}
+
+
+/* ============================================================
+   20.8 HERO STATS
+============================================================ */
+
+.bravo-home .bravo-home-hero-stats {
+  background:
+    rgba(4, 25, 17, 0.82);
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.14);
+
+  backdrop-filter:
+    blur(12px);
+}
+
+.bravo-home .bravo-home-hero-stat strong {
+  color: #ffffff !important;
+  font-size: 0.92rem;
+}
+
+.bravo-home .bravo-home-hero-stat small {
+  color: rgba(255, 255, 255, 0.68) !important;
+}
+
+
+/* ============================================================
+   20.9 TRUST STRIP
+============================================================ */
+
+.bravo-home .bravo-home-trust {
+  position: relative;
+  z-index: 4;
+
+  background: #ffffff;
+}
+
+.bravo-home .bravo-home-trust-label {
+  color: #557066;
+}
+
+.bravo-home .bravo-home-trust-item {
+  color: #314d42;
+}
+
+
+/* ============================================================
+   20.10 DESTINATION CARDS
+============================================================ */
+
+.bravo-home .bravo-home-destination-card {
+  position: relative;
+  isolation: isolate;
+
+  min-height: 250px;
+
+  box-shadow:
+    0 10px 30px rgba(16, 53, 39, 0.08);
+
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.bravo-home .bravo-home-destination-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 18px 42px rgba(16, 53, 39, 0.16);
+}
+
+.bravo-home .bravo-home-destination-card::before {
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(3, 20, 13, 0.04) 10%,
+      rgba(3, 20, 13, 0.12) 35%,
+      rgba(3, 20, 13, 0.90) 100%
+    );
+}
+
+.bravo-home .bravo-home-destination-content {
+  z-index: 4;
+
+  right: 22px;
+  bottom: 22px;
+  left: 22px;
+}
+
+.bravo-home .bravo-home-destination-category {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.bravo-home .bravo-home-destination-content h3 {
+  margin-bottom: 7px;
+
+  color: #ffffff !important;
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(1.25rem, 2vw, 1.75rem);
+
+  font-weight: 600;
+  line-height: 1.15;
+
+  text-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.32);
+}
+
+.bravo-home .bravo-home-destination-content p {
+  max-width: 500px;
+
+  color:
+    rgba(255, 255, 255, 0.82) !important;
+
+  font-size: 0.74rem;
+  line-height: 1.6;
+}
+
+.bravo-home .bravo-home-destination-arrow {
+  opacity: 1;
+
+  background:
+    rgba(4, 28, 19, 0.58);
+
+  border-color:
+    rgba(255, 255, 255, 0.25);
+
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+
+/* ============================================================
+   20.11 SMART TOURISM SECTION
+============================================================ */
+
+.bravo-home .bravo-home-smart {
+  color: #ffffff;
+}
+
+.bravo-home .bravo-home-smart .bravo-section-title {
+  color: #ffffff !important;
+}
+
+.bravo-home .bravo-home-smart .bravo-section-description {
+  color:
+    rgba(255, 255, 255, 0.76) !important;
+}
+
+.bravo-home .bravo-home-smart-copy {
+  max-width: 620px;
+}
+
+
+/* ============================================================
+   20.12 EXPERIENCE CARDS
+============================================================ */
+
+.bravo-home .bravo-home-experience-card {
+  min-height: 260px;
+
+  box-shadow:
+    0 10px 30px rgba(16, 53, 39, 0.10);
+}
+
+.bravo-home .bravo-home-experience-card::after {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(4, 22, 15, 0.05) 10%,
+      rgba(4, 22, 15, 0.88) 100%
+    );
+}
+
+.bravo-home .bravo-home-experience-content h3 {
+  color: #ffffff !important;
+
+  font-size: 1.08rem;
+  line-height: 1.25;
+}
+
+.bravo-home .bravo-home-experience-content p {
+  color:
+    rgba(255, 255, 255, 0.78) !important;
+
+  line-height: 1.55;
+}
+
+
+/* ============================================================
+   20.13 MAP SECTION
+============================================================ */
+
+.bravo-home .bravo-home-map-point {
+  min-height: 52px;
+
+  background: #ffffff;
+
+  color: #29453a;
+}
+
+.bravo-home .bravo-home-map-point strong,
+.bravo-home .bravo-home-map-point span {
+  line-height: 1.35;
+}
+
+
+/* ============================================================
+   20.14 CULTURE CARDS
+============================================================ */
+
+.bravo-home .bravo-home-culture-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  min-height: 232px;
+
+  color: #1d3e31;
+
+  text-decoration: none;
+}
+
+.bravo-home .bravo-home-culture-card h3 {
+  color: #193d2f !important;
+
+  font-size: 1.02rem;
+  line-height: 1.3;
+}
+
+.bravo-home .bravo-home-culture-card p {
+  color: #63756d !important;
+
+  font-size: 0.72rem;
+  line-height: 1.65;
+}
+
+
+/* ============================================================
+   20.15 ECO TOURISM
+============================================================ */
+
+.bravo-home .bravo-home-eco-item strong {
+  color: #1d4032 !important;
+}
+
+.bravo-home .bravo-home-eco-item p {
+  color: #64766d !important;
+}
+
+
+/* ============================================================
+   20.16 HOTEL CARDS
+============================================================ */
+
+.bravo-home .bravo-home-stay-card {
+  text-decoration: none;
+
+  color: inherit;
+}
+
+.bravo-home .bravo-home-stay-body h3 {
+  color: #1d4032 !important;
+
+  font-size: 1.05rem;
+  line-height: 1.3;
+}
+
+.bravo-home .bravo-home-stay-location {
+  color: #64766d !important;
+}
+
+
+/* ============================================================
+   20.17 CONNECT / SMART CARDS
+============================================================ */
+
+.bravo-home .bravo-home-connect-card strong {
+  color: #ffffff !important;
+}
+
+.bravo-home .bravo-home-connect-card small {
+  display: block;
+
+  color:
+    rgba(255, 255, 255, 0.70) !important;
+
+  line-height: 1.55;
+}
+
+
+/* ============================================================
+   20.18 LATEST UPDATES
+============================================================ */
+
+.bravo-home .bravo-home-update-list {
+  display: grid;
+  gap: 12px;
+
+  width: min(100%, 900px);
+  margin-inline: auto;
+}
+
+.bravo-home .bravo-home-update-item {
+  display: grid;
+
+  grid-template-columns: 46px minmax(0, 1fr);
+
+  align-items: start;
+
+  gap: 14px;
+
+  padding: 18px 20px;
+
+  border:
+    1px solid #e5ebe7;
+
+  border-radius:
+    16px;
+
+  background:
+    #ffffff;
+
+  box-shadow:
+    0 6px 20px rgba(20, 56, 42, 0.05);
+}
+
+.bravo-home .bravo-home-update-icon {
+  width: 46px;
+  height: 46px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 13px;
+
+  background:
+    #edf6f0;
+
+  color:
+    #176044;
+}
+
+.bravo-home .bravo-home-update-item span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #7a8b83;
+
+  font-size: 0.64rem;
+  font-weight: 800;
+
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.bravo-home .bravo-home-update-item h3 {
+  margin: 0 0 5px;
+
+  color: #193d2f !important;
+
+  font-size:
+    clamp(0.95rem, 1.5vw, 1.08rem);
+
+  line-height: 1.4;
+}
+
+.bravo-home .bravo-home-update-item small {
+  color: #7a8a82 !important;
+
+  font-size: 0.68rem;
+}
+
+
+/* ============================================================
+   20.19 CTA
+============================================================ */
+
+.bravo-home .bravo-home-cta-content h2 {
+  color: #ffffff !important;
+}
+
+.bravo-home .bravo-home-cta-content p {
+  color:
+    rgba(255, 255, 255, 0.78) !important;
+
+  line-height: 1.7;
+}
+
+
+/* ============================================================
+   20.20 FOCUS STATES
+============================================================ */
+
+.bravo-home a:focus-visible,
+.bravo-home button:focus-visible,
+.bravo-home input:focus-visible,
+.bravo-home select:focus-visible {
+  outline:
+    3px solid #e0b766;
+
+  outline-offset:
+    3px;
+}
+
+
+/* ============================================================
+   20.21 MOBILE ALIGNMENT
+============================================================ */
+
+@media (max-width: 767.98px) {
+
+  .bravo-home .bravo-container {
+    width:
+      min(
+        calc(100% - 28px),
+        var(--bravo-container, 1180px)
+      );
+  }
+
+  .bravo-home .bravo-section {
+    padding:
+      58px 0;
+  }
+
+  .bravo-home .bravo-section-header {
+    margin-bottom: 28px;
+  }
+
+  .bravo-home .bravo-section-title {
+    font-size: 2rem;
+  }
+
+  .bravo-home .bravo-section-description {
+    font-size: 0.86rem;
+    line-height: 1.65;
+  }
+
+  .bravo-home .bravo-home-hero-copy {
+    max-width: 100%;
+  }
+
+  .bravo-home .bravo-home-hero-title {
+    font-size:
+      clamp(2.8rem, 14vw, 4.2rem);
+
+    line-height: 0.98;
+  }
+
+  .bravo-home .bravo-home-hero-description {
+    max-width: 100%;
+
+    font-size: 0.92rem;
+  }
+
+  .bravo-home .bravo-home-search-panel {
+    width: 100%;
+  }
+
+  .bravo-home .bravo-home-destination-content {
+    right: 17px;
+    bottom: 17px;
+    left: 17px;
+  }
+
+  .bravo-home .bravo-home-destination-content h3 {
+    font-size: 1.35rem;
+  }
+
+  .bravo-home .bravo-home-destination-content p {
+    font-size: 0.70rem;
+  }
+
+  .bravo-home .bravo-home-update-item {
+    grid-template-columns: 40px minmax(0, 1fr);
+
+    padding: 15px;
+  }
+
+  .bravo-home .bravo-home-update-icon {
+    width: 40px;
+    height: 40px;
+  }
 
 }
 
-@media(max-width:768px){
 
-.floating-chatbot{
+/* ============================================================
+   20.22 REDUCED MOTION
+============================================================ */
 
-width:60px;
+@media (prefers-reduced-motion: reduce) {
 
-height:60px;
+  .bravo-home .bravo-reveal,
+  .bravo-home .bravo-reveal.is-visible {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
 
-font-size:28px;
-
-bottom:20px;
-
-right:20px;
-
-}
-
-.chatbot-pulse{
-
-width:60px;
-
-height:60px;
-
-}
-
-.chatbot-tooltip{
-
-display:none;
+  .bravo-home *,
+  .bravo-home *::before,
+  .bravo-home *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
 
 }
 
-}
-/*========================================*/
-/* SMART DASHBOARD */
-/*========================================*/
+/* ============================================================
+   20. FINAL HOMEPAGE VISUAL CORRECTIONS
+   ------------------------------------------------------------
+   Fixes:
+   - invisible reveal content
+   - weak text contrast
+   - Smart Tourism white-background issue
+   - inconsistent section hierarchy
+   - Latest Updates structure
+   - image-card typography
+   - spacing/alignment
+============================================================ */
 
-.dashboard-card{
 
-background:white;
+/* ============================================================
+   HOMEPAGE ROOT
+============================================================ */
 
-border-radius:24px;
-
-padding:35px;
-
-text-align:center;
-
-box-shadow:0 12px 35px rgba(0,0,0,.08);
-
-transition:.35s;
-
-height:100%;
-
-}
-
-.dashboard-card:hover{
-
-transform:translateY(-10px);
-
+.bravo-home {
+  width: 100%;
+  overflow: clip;
 }
 
-.dashboard-icon{
 
-width:80px;
+/* ============================================================
+   REVEAL SAFETY
+   ------------------------------------------------------------
+   Important homepage content must never remain invisible if
+   the optional reveal script is delayed, cached, or unavailable.
+============================================================ */
 
-height:80px;
+.bravo-home .bravo-reveal {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
 
-border-radius:50%;
 
-margin:auto;
+/* ============================================================
+   HERO — FINAL CONTRAST
+============================================================ */
 
-display:flex;
+.bravo-home .bravo-home-hero {
+  color: #ffffff;
+}
 
-justify-content:center;
+.bravo-home .bravo-home-hero-copy {
+  position: relative;
+  z-index: 4;
+}
 
-align-items:center;
+.bravo-home .bravo-home-hero-eyebrow {
+  color: rgba(255, 255, 255, 0.94);
+}
 
-font-size:38px;
+.bravo-home .bravo-home-hero-title {
+  color: #ffffff !important;
+  text-shadow:
+    0 2px 18px rgba(0, 0, 0, 0.18);
+}
 
-background:linear-gradient(135deg,#198754,#0d6efd);
+.bravo-home .bravo-home-hero-title span {
+  color: #f0ca73 !important;
+}
 
-color:white;
+.bravo-home .bravo-home-hero-description {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
 
-margin-bottom:20px;
+.bravo-home .bravo-home-hero-primary {
+  color: #0a3022 !important;
+}
+
+.bravo-home .bravo-home-hero-secondary {
+  color: #ffffff !important;
+}
+
+
+/* ============================================================
+   SECTION HEADINGS
+============================================================ */
+
+.bravo-home .bravo-section-header {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 780px;
+  margin-bottom: 34px;
+}
+
+.bravo-home .bravo-section-header.center {
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
+
+.bravo-home .bravo-section-title {
+  margin-top: 0;
+  line-height: 1.08;
+}
+
+.bravo-home .bravo-section-description {
+  max-width: 680px;
+  line-height: 1.7;
+}
+
+.bravo-home .bravo-section-header.center
+.bravo-section-description {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+/* ============================================================
+   FEATURED DESTINATIONS
+============================================================ */
+
+.bravo-home .bravo-home-destination-grid {
+  align-items: stretch;
+}
+
+.bravo-home .bravo-home-destination-card {
+  display: block;
+  min-width: 0;
+}
+
+.bravo-home .bravo-home-destination-content {
+  right: 22px;
+  bottom: 20px;
+  left: 22px;
+}
+
+.bravo-home .bravo-home-destination-content h3 {
+  margin-bottom: 6px;
+  color: #ffffff !important;
+  line-height: 1.12;
+  text-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.28);
+}
+
+.bravo-home .bravo-home-destination-content p {
+  max-width: 40ch;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.82) !important;
+  line-height: 1.55;
+}
+
+.bravo-home .bravo-home-destination-category {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
+
+/* ============================================================
+   EXPERIENCE CARDS
+============================================================ */
+
+.bravo-home .bravo-home-experience-card {
+  display: block;
+}
+
+.bravo-home .bravo-home-experience-content {
+  right: 18px;
+  bottom: 18px;
+  left: 18px;
+}
+
+.bravo-home .bravo-home-experience-content h3 {
+  color: #ffffff !important;
+  line-height: 1.2;
+}
+
+.bravo-home .bravo-home-experience-content p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.76) !important;
+  line-height: 1.5;
+}
+
+
+/* ============================================================
+   SMART TOURISM / AI PLANNER
+   ------------------------------------------------------------
+   This is the most important correction from the screenshots.
+============================================================ */
+
+.bravo-home .bravo-home-smart {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  padding-top:
+    var(--bravo-section-space);
+
+  padding-bottom:
+    var(--bravo-section-space);
+
+  background:
+    var(--bravo-forest-900) !important;
+
+  color:
+    rgba(255, 255, 255, 0.76) !important;
+}
+
+
+/* Make sure the section remains visually behind its content */
+
+.bravo-home .bravo-home-smart::before,
+.bravo-home .bravo-home-smart::after {
+  pointer-events: none;
+}
+
+.bravo-home .bravo-home-smart .bravo-container {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* Smart Tourism heading */
+
+.bravo-home .bravo-home-smart
+.bravo-section-title {
+  margin: 0 0 14px;
+  color: #ffffff !important;
+  line-height: 1.08;
+}
+
+
+/* Smart Tourism paragraph */
+
+.bravo-home .bravo-home-smart
+.bravo-section-description {
+  max-width: 620px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.70) !important;
+  line-height: 1.72;
+}
+
+
+/* Smart Tourism badge */
+
+.bravo-home .bravo-home-smart
+.bravo-section-badge {
+  margin-bottom: 18px;
+}
+
+
+/* AI planner layout */
+
+.bravo-home .bravo-home-smart-grid {
+  min-height: 520px;
+  align-items: center;
+}
+
+
+/* Smart Tourism visual */
+
+.bravo-home .bravo-home-smart-visual {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* Smart Tourism image */
+
+.bravo-home .bravo-home-smart-image {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* Smart Tourism floating card */
+
+.bravo-home .bravo-home-smart-floating-card {
+  z-index: 5;
+}
+
+
+/* ============================================================
+   SMART TOURISM CAPABILITY PANEL
+============================================================ */
+
+.bravo-home .bravo-home-connect-panel {
+  position: relative;
+  z-index: 2;
+}
+
+.bravo-home .bravo-home-connect-grid {
+  align-items: center;
+}
+
+.bravo-home .bravo-home-connect-cards {
+  align-content: center;
+}
+
+.bravo-home .bravo-home-connect-card {
+  min-width: 0;
+}
+
+.bravo-home .bravo-home-connect-card strong {
+  color: #ffffff !important;
+}
+
+.bravo-home .bravo-home-connect-card small {
+  color: rgba(255, 255, 255, 0.58) !important;
+}
+
+
+/* ============================================================
+   WHAT TO SEE / CULTURE
+============================================================ */
+
+.bravo-home .bravo-home-culture-grid {
+  align-items: stretch;
+}
+
+.bravo-home .bravo-home-culture-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.bravo-home .bravo-home-culture-card h3 {
+  margin: 0 0 7px;
+  line-height: 1.2;
+}
+
+.bravo-home .bravo-home-culture-card p {
+  margin: 0;
+  line-height: 1.55;
+}
+
+
+/* ============================================================
+   LATEST UPDATES
+   ------------------------------------------------------------
+   Turns the plain list into a structured tourism-update grid.
+============================================================ */
+
+.bravo-home .bravo-home-testimonials {
+  background:
+    var(--bravo-surface-muted);
+}
+
+
+.bravo-home .bravo-home-update-list {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+
+.bravo-home .bravo-home-update-item {
+  display: grid;
+
+  grid-template-columns:
+    48px minmax(0, 1fr);
+
+  align-items: start;
+
+  gap: 15px;
+
+  min-width: 0;
+
+  padding: 20px;
+
+  border:
+    1px solid var(--bravo-border-light);
+
+  border-radius:
+    var(--bravo-radius-lg);
+
+  background:
+    var(--bravo-white);
+
+  box-shadow:
+    var(--bravo-shadow-xs);
+
+  transition:
+    transform var(--bravo-transition),
+    box-shadow var(--bravo-transition),
+    border-color var(--bravo-transition);
+}
+
+
+.bravo-home .bravo-home-update-item:hover {
+  transform:
+    translateY(-3px);
+
+  border-color:
+    var(--bravo-border);
+
+  box-shadow:
+    var(--bravo-shadow-sm);
+}
+
+
+.bravo-home .bravo-home-update-icon {
+  width: 48px;
+  height: 48px;
+
+  display: grid;
+
+  place-items: center;
+
+  flex-shrink: 0;
+
+  border-radius:
+    14px;
+
+  background:
+    var(--bravo-emerald-100);
+
+  color:
+    var(--bravo-emerald-700);
+
+  font-size:
+    1rem;
+}
+
+
+.bravo-home .bravo-home-update-item
+> div:last-child {
+  min-width: 0;
+}
+
+
+.bravo-home .bravo-home-update-item
+> div:last-child > span {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color:
+    var(--bravo-emerald-700);
+
+  font-size:
+    0.64rem;
+
+  font-weight:
+    850;
+
+  letter-spacing:
+    0.10em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.bravo-home .bravo-home-update-item h3 {
+  margin:
+    0 0 9px;
+
+  color:
+    var(--bravo-forest-900) !important;
+
+  font-size:
+    1rem;
+
+  font-weight:
+    800;
+
+  line-height:
+    1.35;
+}
+
+
+.bravo-home .bravo-home-update-item small {
+  display: block;
+
+  color:
+    var(--bravo-ink-400);
+
+  font-size:
+    0.68rem;
+
+  line-height:
+    1.4;
+}
+
+
+/* ============================================================
+   DESTINATION / STAY CARDS
+============================================================ */
+
+.bravo-home .bravo-home-stay-grid {
+  align-items: stretch;
+}
+
+.bravo-home .bravo-home-stay-card {
+  min-width: 0;
+}
+
+.bravo-home .bravo-home-stay-body h3 {
+  line-height: 1.2;
+}
+
+.bravo-home .bravo-home-stay-location {
+  line-height: 1.4;
+}
+
+.bravo-home .bravo-home-stay-meta {
+  align-items: center;
+}
+
+
+/* ============================================================
+   GENERAL HOMEPAGE LINK RESET
+============================================================ */
+
+.bravo-home a {
+  text-decoration: none;
+}
+
+.bravo-home a:hover {
+  text-decoration: none;
+}
+
+
+/* ============================================================
+   RESPONSIVE — TABLET
+============================================================ */
+
+@media (max-width: 991.98px) {
+
+  .bravo-home .bravo-home-update-list {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .bravo-home .bravo-home-smart-grid {
+    min-height:
+      auto;
+  }
+
+
+  .bravo-home .bravo-home-smart {
+    padding-top:
+      70px;
+
+    padding-bottom:
+      70px;
+  }
 
 }
 
-.dashboard-card h2{
 
-font-size:40px;
+/* ============================================================
+   RESPONSIVE — MOBILE
+============================================================ */
 
-font-weight:700;
+@media (max-width: 767.98px) {
 
-color:#198754;
+  .bravo-home .bravo-home-update-item {
+    grid-template-columns:
+      42px minmax(0, 1fr);
 
-margin-bottom:10px;
+    gap:
+      12px;
 
-}
+    padding:
+      16px;
+  }
 
-.dashboard-card p{
 
-font-size:18px;
+  .bravo-home .bravo-home-update-icon {
+    width:
+      42px;
 
-color:#666;
+    height:
+      42px;
 
-margin:0;
+    border-radius:
+      12px;
+  }
 
-}
-/*========================================*/
-/* FEATURED EXPERIENCES */
-/*========================================*/
 
-.experience-card{
+  .bravo-home .bravo-home-update-item h3 {
+    font-size:
+      0.90rem;
+  }
 
-position:relative;
 
-overflow:hidden;
+  .bravo-home .bravo-home-smart {
+    padding-top:
+      62px;
 
-border-radius:24px;
+    padding-bottom:
+      62px;
+  }
 
-height:320px;
 
-cursor:pointer;
-
-box-shadow:0 15px 40px rgba(0,0,0,.12);
-
-}
-
-.experience-card img{
-
-width:100%;
-
-height:100%;
-
-object-fit:cover;
-
-transition:.6s;
-
-}
-
-.experience-card:hover img{
-
-transform:scale(1.12);
+  .bravo-home .bravo-home-smart
+  .bravo-section-description {
+    line-height:
+      1.65;
+  }
 
 }
 
-.experience-overlay{
 
-position:absolute;
+/* ============================================================
+   REDUCED MOTION
+============================================================ */
 
-inset:0;
+@media (prefers-reduced-motion: reduce) {
 
-display:flex;
+  .bravo-home .bravo-reveal,
+  .bravo-home .bravo-home-update-item {
 
-flex-direction:column;
+    transform:
+      none !important;
 
-justify-content:flex-end;
-
-padding:30px;
-
-background:linear-gradient(
-to top,
-rgba(0,0,0,.75),
-rgba(0,0,0,.15)
-);
-
-color:white;
+    transition:
+      none !important;
+  }
 
 }
 
-.experience-overlay h3{
+/* ============================================================
+   SMART TOURISM — LEFT CONTENT VISIBILITY FIX ONLY
+   ============================================================ */
 
-margin-bottom:18px;
-
-font-size:28px;
-
-font-weight:700;
-
-}
-/*========================================*/
-/* PREMIUM FOOTER */
-/*========================================*/
-
-.premium-footer{
-
-background:#0f3d2e;
-
-color:white;
-
-padding:70px 0 30px;
-
-margin-top:80px;
-
+.bravo-home-smart .bravo-home-smart-copy {
+  position: relative;
+  z-index: 2;
+  color: var(--bravo-forest-900, #123b2a);
 }
 
-.premium-footer h3,
 
-.premium-footer h5{
+/* Heading */
 
-margin-bottom:20px;
-
-font-weight:700;
-
+.bravo-home-smart .bravo-home-smart-copy .bravo-section-title {
+  color: #123b2a !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
-.premium-footer p{
 
-line-height:1.8;
+/* Description */
 
-color:#ddd;
-
+.bravo-home-smart .bravo-home-smart-copy .bravo-section-description {
+  color: #62746b !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
-.premium-footer ul{
 
-padding:0;
+/* Feature cards */
 
-list-style:none;
-
+.bravo-home-smart .bravo-home-smart-feature {
+  color: #123b2a !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
-.premium-footer li{
 
-margin-bottom:12px;
-
+.bravo-home-smart .bravo-home-smart-feature strong {
+  color: #123b2a !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
-.premium-footer a{
 
-color:#ddd;
-
-text-decoration:none;
-
-transition:.3s;
-
+.bravo-home-smart .bravo-home-smart-feature small {
+  color: #6b7c74 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
-.premium-footer a:hover{
 
-color:#8cffb0;
+/* Feature icons */
 
+.bravo-home-smart .bravo-home-smart-feature-icon {
+  color: #236044 !important;
+  background: #edf6ef !important;
+  border-color: rgba(35, 96, 68, 0.12) !important;
 }
 
-.social-icons{
 
-display:flex;
+/* Smart section button */
 
-gap:15px;
-
-margin-top:20px;
-
+.bravo-home-smart .bravo-home-smart-copy .bravo-btn {
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
-.social-icons a{
 
-width:45px;
+/* Reveal system fallback:
+   ensure this section does not remain invisible */
 
-height:45px;
-
-border-radius:50%;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-background:#198754;
-
-font-size:20px;
-
+.bravo-home-smart .bravo-home-smart-copy.bravo-reveal,
+.bravo-home-smart .bravo-home-smart-copy .bravo-reveal {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
 }
 
-.social-icons a:hover{
 
-transform:translateY(-4px);
+/* Keep the badge visible */
 
-background:#20c997;
-
+.bravo-home-smart .bravo-section-badge {
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
-.premium-footer input{
+/* ============================================================
+   HOMEPAGE — TWO SECTION VISUAL FIX
+   1. Smart Tourism / AI Planner
+   2. Final CTA
+   ============================================================ */
 
-border-radius:15px;
 
-height:50px;
+/* ============================================================
+   01. SMART TOURISM / AI PLANNER
+   ============================================================ */
 
+.bravo-home .bravo-home-smart {
+
+  position:
+    relative;
+
+  isolation:
+    isolate;
+
+  overflow:
+    hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0b3928 0%,
+      #123f2e 52%,
+      #1b5a40 100%
+    ) !important;
+
+  color:
+    rgba(255,255,255,0.78) !important;
+
+  padding-top:
+    72px !important;
+
+  padding-bottom:
+    72px !important;
 }
 
-.premium-footer hr{
 
-margin:40px 0;
+/* keep decorative shapes behind the content */
 
-border-color:rgba(255,255,255,.15);
+.bravo-home .bravo-home-smart::before,
+.bravo-home .bravo-home-smart::after {
 
-}
-/*========================================*/
-/* GLOBAL SEARCH */
-/*========================================*/
-
-.hero-search{
-
-max-width:750px;
-
-margin:auto;
-
-position:relative;
+  pointer-events:
+    none;
 
 }
 
-.hero-search input{
 
-height:65px;
+.bravo-home .bravo-home-smart .bravo-container {
 
-border-radius:18px;
+  position:
+    relative;
 
-font-size:18px;
-
-padding:0 22px;
-
-box-shadow:0 12px 35px rgba(0,0,0,.18);
-
-border:none;
+  z-index:
+    3;
 
 }
 
-#searchSuggestions{
 
-position:absolute;
+/* heading */
 
-left:0;
+.bravo-home .bravo-home-smart
+.bravo-section-title {
 
-right:0;
+  color:
+    #ffffff !important;
 
-top:72px;
+  opacity:
+    1 !important;
 
-background:white;
-
-border-radius:18px;
-
-overflow:hidden;
-
-box-shadow:0 20px 45px rgba(0,0,0,.15);
-
-display:none;
-
-z-index:1000;
+  visibility:
+    visible !important;
 
 }
 
-.search-item{
 
-padding:16px 20px;
+/* description */
 
-cursor:pointer;
+.bravo-home .bravo-home-smart
+.bravo-section-description {
 
-transition:.25s;
+  color:
+    rgba(255,255,255,0.74) !important;
+
+  opacity:
+    1 !important;
+
+  visibility:
+    visible !important;
 
 }
 
-.search-item:hover{
 
-background:#198754;
+/* feature cards */
 
-color:white;
+.bravo-home .bravo-home-smart-feature {
+
+  color:
+    #ffffff !important;
+
+  border-color:
+    rgba(255,255,255,0.12) !important;
+
+  background:
+    rgba(255,255,255,0.055) !important;
+
+  opacity:
+    1 !important;
+
+  visibility:
+    visible !important;
+
+}
+
+
+.bravo-home .bravo-home-smart-feature:hover {
+
+  background:
+    rgba(255,255,255,0.10) !important;
+
+}
+
+
+.bravo-home .bravo-home-smart-feature strong {
+
+  color:
+    #ffffff !important;
+
+}
+
+
+.bravo-home .bravo-home-smart-feature small {
+
+  color:
+    rgba(255,255,255,0.62) !important;
+
+}
+
+
+.bravo-home .bravo-home-smart-feature-icon {
+
+  background:
+    rgba(255,255,255,0.08) !important;
+
+  color:
+    #e0b766 !important;
+
+}
+
+
+/* badge */
+
+.bravo-home .bravo-home-smart
+.bravo-section-badge {
+
+  color:
+    #d8eadf !important;
+
+  background:
+    rgba(255,255,255,0.08) !important;
+
+  border-color:
+    rgba(255,255,255,0.16) !important;
+
+  opacity:
+    1 !important;
+
+  visibility:
+    visible !important;
+
+}
+
+
+/* planner button */
+
+.bravo-home .bravo-home-smart
+.bravo-btn-primary {
+
+  opacity:
+    1 !important;
+
+  visibility:
+    visible !important;
+
+}
+
+
+/* smart visual */
+
+.bravo-home .bravo-home-smart-visual {
+
+  position:
+    relative;
+
+  z-index:
+    4;
+
+  min-height:
+    500px;
+
+  opacity:
+    1 !important;
+
+  visibility:
+    visible !important;
+
+}
+
+
+/* image */
+
+.bravo-home .bravo-home-smart-image {
+
+  position:
+    relative;
+
+  z-index:
+    2;
+
+  transform:
+    rotate(0deg) !important;
+
+}
+
+
+/* floating card */
+
+.bravo-home .bravo-home-smart-floating-card {
+
+  z-index:
+    6;
+
+  opacity:
+    1 !important;
+
+  visibility:
+    visible !important;
+
+}
+
+
+/* ============================================================
+   02. FINAL CTA
+   ============================================================ */
+
+.bravo-home .bravo-home-cta {
+
+  background:
+    #ffffff !important;
+
+}
+
+
+.bravo-home .bravo-home-cta-panel {
+
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+  background:
+    linear-gradient(
+      120deg,
+      #0d3928 0%,
+      #17533a 55%,
+      #236044 100%
+    ) !important;
+
+  color:
+    #ffffff !important;
+
+  opacity:
+    1 !important;
+
+  visibility:
+    visible !important;
+
+}
+
+
+/* CTA decorative circles */
+
+.bravo-home .bravo-home-cta-panel::before,
+.bravo-home .bravo-home-cta-panel::after {
+
+  pointer-events:
+    none;
+
+}
+
+
+/* CTA content */
+
+.bravo-home .bravo-home-cta-content {
+
+  position:
+    relative;
+
+  z-index:
+    4;
+
+  opacity:
+    1 !important;
+
+  visibility:
+    visible !important;
+
+  transform:
+    none !important;
+
+}
+
+
+/* CTA badge */
+
+.bravo-home .bravo-home-cta-content
+.bravo-section-badge {
+
+  opacity:
+    1 !important;
+
+  visibility:
+    visible !important;
+
+}
+
+
+/* CTA heading */
+
+.bravo-home .bravo-home-cta-content h2 {
+
+  color:
+    #ffffff !important;
+
+  opacity:
+    1 !important;
+
+  visibility:
+    visible !important;
+
+}
+
+
+/* CTA paragraph */
+
+.bravo-home .bravo-home-cta-content p {
+
+  color:
+    rgba(255,255,255,0.72) !important;
+
+  opacity:
+    1 !important;
+
+  visibility:
+    visible !important;
+
+}
+
+
+/* CTA buttons */
+
+.bravo-home .bravo-home-cta-actions {
+
+  opacity:
+    1 !important;
+
+  visibility:
+    visible !important;
+
+}
+
+
+.bravo-home .bravo-home-cta-primary {
+
+  background:
+    #d8ae5d !important;
+
+  color:
+    #103927 !important;
+
+}
+
+
+.bravo-home .bravo-home-cta-primary:hover {
+
+  background:
+    #e5bf72 !important;
+
+  color:
+    #103927 !important;
+
+}
+
+
+.bravo-home .bravo-home-cta-secondary {
+
+  border-color:
+    rgba(255,255,255,0.24) !important;
+
+  background:
+    rgba(255,255,255,0.07) !important;
+
+  color:
+    #ffffff !important;
+
+}
+
+
+.bravo-home .bravo-home-cta-secondary:hover {
+
+  background:
+    rgba(255,255,255,0.13) !important;
+
+  color:
+    #ffffff !important;
+
+}
+
+
+/* ============================================================
+   DESKTOP — REDUCE EXCESSIVE VERTICAL EMPTY SPACE
+   ============================================================ */
+
+@media (min-width: 992px) {
+
+  .bravo-home .bravo-home-smart-grid {
+
+    min-height:
+      0 !important;
+
+  }
+
+
+  .bravo-home .bravo-home-smart-visual {
+
+    min-height:
+      460px;
+
+  }
+
+
+  .bravo-home .bravo-home-smart {
+
+    padding-top:
+      64px !important;
+
+    padding-bottom:
+      64px !important;
+
+  }
+
+
+  .bravo-home .bravo-home-cta-panel {
+
+    padding:
+      58px 55px !important;
+
+  }
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 991.98px) {
+
+  .bravo-home .bravo-home-smart {
+
+    padding-top:
+      58px !important;
+
+    padding-bottom:
+      58px !important;
+
+  }
+
+
+  .bravo-home .bravo-home-smart-visual {
+
+    min-height:
+      390px;
+
+  }
+
+
+  .bravo-home .bravo-home-cta-panel {
+
+    padding:
+      48px 24px !important;
+
+  }
+
+}
+
+
+/* ============================================================
+   SMALL MOBILE
+   ============================================================ */
+
+@media (max-width: 520px) {
+
+  .bravo-home .bravo-home-smart {
+
+    padding-top:
+      45px !important;
+
+    padding-bottom:
+      45px !important;
+
+  }
+
+
+  .bravo-home .bravo-home-smart-visual {
+
+    min-height:
+      330px;
+
+  }
+
+
+  .bravo-home .bravo-home-cta-panel {
+
+    padding:
+      40px 18px !important;
+
+  }
+
+}
+/* ============================================================
+   FINAL CTA — PREMIUM COMPACT VERSION
+   Only affects the homepage final CTA
+============================================================ */
+
+.bravo-home .bravo-home-cta {
+  padding:
+    0 0 58px !important;
+
+  background:
+    #ffffff !important;
+}
+
+
+/* Main panel */
+
+.bravo-home .bravo-home-cta-panel {
+  position:
+    relative;
+
+  min-height:
+    360px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  overflow:
+    hidden;
+
+  padding:
+    48px 42px !important;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.08);
+
+  border-radius:
+    28px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0b3928 0%,
+      #124b36 52%,
+      #236044 100%
+    ) !important;
+
+  box-shadow:
+    0 24px 60px
+    rgba(13, 57, 40, 0.16);
+
+  text-align:
+    center;
+}
+
+
+/* Decorative circle */
+
+.bravo-home .bravo-home-cta-panel::before {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  width:
+    420px;
+
+  height:
+    420px;
+
+  top:
+    -285px;
+
+  right:
+    -90px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.09);
+
+  border-radius:
+    50%;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  pointer-events:
+    none;
+}
+
+
+/* Second decorative circle */
+
+.bravo-home .bravo-home-cta-panel::after {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  width:
+    260px;
+
+  height:
+    260px;
+
+  bottom:
+    -185px;
+
+  left:
+    -90px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.08);
+
+  border-radius:
+    50%;
+
+  pointer-events:
+    none;
+}
+
+
+/* Content */
+
+.bravo-home .bravo-home-cta-content {
+  position:
+    relative;
+
+  z-index:
+    3;
+
+  max-width:
+    720px;
+
+  margin:
+    0 auto;
+
+  text-align:
+    center;
+
+  opacity:
+    1 !important;
+
+  visibility:
+    visible !important;
+
+  transform:
+    none !important;
+}
+
+
+/* Badge */
+
+.bravo-home .bravo-home-cta-content
+.bravo-section-badge {
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  margin-bottom:
+    20px;
+
+  padding:
+    8px 14px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.17);
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(255, 255, 255, 0.08);
+
+  color:
+    #e5eee8 !important;
+
+  font-size:
+    0.68rem;
+
+  font-weight:
+    850;
+
+  letter-spacing:
+    0.09em;
+
+  text-transform:
+    uppercase;
+
+  backdrop-filter:
+    blur(8px);
+}
+
+
+/* Heading */
+
+.bravo-home .bravo-home-cta-content h2 {
+  margin:
+    0 0 14px;
+
+  color:
+    #ffffff !important;
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(2.4rem, 4.5vw, 4rem);
+
+  line-height:
+    1.05;
+
+  letter-spacing:
+    -0.025em;
+
+  text-shadow:
+    0 4px 20px
+    rgba(0, 0, 0, 0.16);
+}
+
+
+/* Paragraph */
+
+.bravo-home .bravo-home-cta-content p {
+  max-width:
+    620px;
+
+  margin:
+    0 auto 28px;
+
+  color:
+    rgba(255, 255, 255, 0.72) !important;
+
+  font-size:
+    0.94rem;
+
+  line-height:
+    1.7;
+}
+
+
+/* Buttons */
+
+.bravo-home .bravo-home-cta-actions {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    11px;
+
+  flex-wrap:
+    wrap;
+}
+
+
+.bravo-home .bravo-home-cta-primary,
+.bravo-home .bravo-home-cta-secondary {
+  min-height:
+    48px;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    8px;
+
+  padding:
+    0 19px;
+
+  border-radius:
+    13px;
+
+  font-size:
+    0.78rem;
+
+  font-weight:
+    850;
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+
+/* Primary */
+
+.bravo-home .bravo-home-cta-primary {
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.10);
+
+  background:
+    #d9b15f !important;
+
+  color:
+    #103927 !important;
+
+  box-shadow:
+    0 9px 22px
+    rgba(0, 0, 0, 0.14);
+}
+
+
+.bravo-home .bravo-home-cta-primary:hover {
+  transform:
+    translateY(-2px);
+
+  background:
+    #e5bf72 !important;
+
+  color:
+    #103927 !important;
+
+  box-shadow:
+    0 13px 28px
+    rgba(0, 0, 0, 0.18);
+}
+
+
+/* Secondary */
+
+.bravo-home .bravo-home-cta-secondary {
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.22);
+
+  background:
+    rgba(255, 255, 255, 0.06) !important;
+
+  color:
+    #ffffff !important;
+}
+
+
+.bravo-home .bravo-home-cta-secondary:hover {
+  transform:
+    translateY(-2px);
+
+  background:
+    rgba(255, 255, 255, 0.12) !important;
+
+  color:
+    #ffffff !important;
+}
+
+
+/* ============================================================
+   DESKTOP — KEEP CTA COMPACT
+============================================================ */
+
+@media (min-width: 992px) {
+
+  .bravo-home .bravo-home-cta-panel {
+    min-height:
+      350px;
+
+    padding:
+      46px 50px !important;
+  }
+
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 767.98px) {
+
+  .bravo-home .bravo-home-cta {
+    padding-bottom:
+      40px !important;
+  }
+
+
+  .bravo-home .bravo-home-cta-panel {
+    min-height:
+      330px;
+
+    padding:
+      40px 22px !important;
+
+    border-radius:
+      22px;
+  }
+
+
+  .bravo-home .bravo-home-cta-content h2 {
+    font-size:
+      2.35rem;
+  }
+
+
+  .bravo-home .bravo-home-cta-content p {
+    font-size:
+      0.84rem;
+
+    line-height:
+      1.6;
+  }
+
+
+  .bravo-home .bravo-home-cta-actions {
+    flex-direction:
+      column;
+
+    width:
+      100%;
+  }
+
+
+  .bravo-home .bravo-home-cta-primary,
+  .bravo-home .bravo-home-cta-secondary {
+    width:
+      100%;
+  }
 
 }

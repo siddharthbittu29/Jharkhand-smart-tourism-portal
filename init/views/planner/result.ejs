@@ -1,56 +1,102 @@
-<link rel="stylesheet" href="/css/planner.css">
+<!-- =========================================================
+     JHARKHAND TOURISM — AI TRAVEL PLAN RESULT
+     File: init/views/planner/result.ejs
+     
+     This file is intentionally kept as the composition layer.
+     Each major Planner feature lives inside its own reusable
+     partial so the page remains maintainable and scalable.
+========================================================= -->
 
-<div class="container-fluid px-4 py-4">
+<div class="jt-planner-result-page">
 
-    <!-- ================= HERO ================= -->
+    <!-- =========================
+         HERO / TRIP OVERVIEW
+    ========================== -->
 
     <%- include("partials/hero") %>
 
-    <!-- =============== DASHBOARD ============== -->
+
+    <!-- =========================
+         TRIP DASHBOARD
+    ========================== -->
 
     <%- include("partials/dashboard") %>
 
-    <!-- =============== TIMELINE =============== -->
+
+    <!-- =========================
+         DAY-BY-DAY TIMELINE
+    ========================== -->
 
     <%- include("partials/timeline") %>
 
-    <!-- ================ HOTELS ================ -->
+
+    <!-- =========================
+         HOTEL RECOMMENDATIONS
+    ========================== -->
 
     <%- include("partials/hotels") %>
 
-    <!-- ===== WEATHER & TRAVEL INTELLIGENCE ==== -->
+
+    <!-- =========================
+         WEATHER & TRAVEL INTELLIGENCE
+    ========================== -->
 
     <%- include("partials/weather") %>
 
-    <!-- ========= AI RECOMMENDATION ============ -->
+
+    <!-- =========================
+         AI RECOMMENDATION
+    ========================== -->
 
     <%- include("partials/aiRecommendation") %>
 
-    <!-- =========== BUDGET ANALYTICS =========== -->
+
+    <!-- =========================
+         BUDGET ANALYTICS
+    ========================== -->
 
     <%- include("partials/budget") %>
 
-    <!-- ============ PACKING LIST ============== -->
+
+    <!-- =========================
+         PACKING LIST
+    ========================== -->
 
     <%- include("partials/packing") %>
 
-    <!-- ======== DESTINATION HIGHLIGHTS ======== -->
+
+    <!-- =========================
+         DESTINATION HIGHLIGHTS
+    ========================== -->
 
     <%- include("partials/highlights") %>
 
-    <!-- ============ TRAVEL TIPS ============== -->
+
+    <!-- =========================
+         TRAVEL TIPS
+    ========================== -->
 
     <%- include("partials/travelTips") %>
 
-    <!-- ============ AI INSIGHTS ============== -->
+
+    <!-- =========================
+         AI TRIP INSIGHTS
+    ========================== -->
 
     <%- include("partials/insights") %>
 
-    <!-- ========== INTERACTIVE MAP ============ -->
+
+    <!-- =========================
+         INTERACTIVE TRIP MAP
+    ========================== -->
 
     <%- include("partials/map") %>
 
-    <!-- ========= ACTION CENTER ============== -->
+
+    <!-- =========================
+         ACTION CENTER
+         PDF / REPORT ACTIONS
+    ========================== -->
 
     <%- include("partials/pdfButton") %>
 

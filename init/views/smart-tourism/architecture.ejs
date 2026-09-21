@@ -1,234 +1,1064 @@
 <%- include('./partials/nav') %>
 
-<section class="py-4">
-  <div class="container">
-    <h1 class="display-6 fw-semibold mb-3">Implementation Architecture + System Flow</h1>
-    <p class="text-muted mb-4">
-      High-level view of modules, data flow, and integrations for the Smart Tourism platform.
-    </p>
-
-    <!-- Architecture blocks -->
-    <div class="row g-4">
-      <div class="col-md-6 col-lg-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body">
-            <h5 class="fw-semibold mb-2">Frontend (Web + Mobile)</h5>
-            <ul class="mb-0 small text-muted">
-              <li>Public site (EJS / React option ready)</li>
-              <li>Search, filters, itinerary, bookings</li>
-              <li>Accessibility, i18n (EN/HI)</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body">
-            <h5 class="fw-semibold mb-2">Backend API (Express)</h5>
-            <ul class="mb-0 small text-muted">
-              <li>Auth (JWT), rate limits</li>
-              <li>Bookings, passes, reviews</li>
-              <li>Partner onboarding & KYC</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body">
-            <h5 class="fw-semibold mb-2">Data Layer</h5>
-            <ul class="mb-0 small text-muted">
-              <li>PostgreSQL (core records)</li>
-              <li>Redis (sessions, cache)</li>
-              <li>Object storage (images/UGC)</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body">
-            <h5 class="fw-semibold mb-2">Integrations</h5>
-            <ul class="mb-0 small text-muted">
-              <li>Payments (UPI/cards)</li>
-              <li>SMS/Email/WhatsApp alerts</li>
-              <li>Maps & Weather APIs</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body">
-            <h5 class="fw-semibold mb-2">Admin Console</h5>
-            <ul class="mb-0 small text-muted">
-              <li>Content management</li>
-              <li>Inventory & pricing</li>
-              <li>Dashboards & reports</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body">
-            <h5 class="fw-semibold mb-2">Security & Ops</h5>
-            <ul class="mb-0 small text-muted">
-              <li>HTTPS, CSP, audit logs</li>
-              <li>Backups & monitoring</li>
-              <li>CI/CD & env configs</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- System Flow -->
-    <div class="card shadow-sm mt-4">
-      <div class="card-body">
-        <h3 class="h6 fw-semibold mb-3">System Flow (Happy Path)</h3>
-        <ol class="small text-muted mb-0">
-          <li>User browses destinations → selects experience</li>
-          <li>Checks availability → price quoted from API</li>
-          <li>Authenticates (OTP/JWT) → pays via gateway</li>
-          <li>Booking stored in DB → e-ticket/QR generated</li>
-          <li>At site: QR validated → access granted</li>
-          <li>Post-trip: rating & review → dashboard updated</li>
-        </ol>
-      </div>
-    </div>
-  </div>
-</section>
-
-<%- include('../partials/scripts') %>
-
-
-
-
-
-
-
-
-<!-- L1: High-level blocks -->
-    <div class="row g-3">
-      <div class="col-md-6 col-lg-3">
-        <div class="arch-card h-100">
-          <div class="arch-title">Channel Layer</div>
-          <ul class="mb-0 small">
-            <li>Web (Next.js / SSR)</li>
-            <li>Mobile (PWA)</li>
-            <li>Kiosk & QR Trails</li>
-            <li>Admin Console</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-3">
-        <div class="arch-card h-100">
-          <div class="arch-title">API Gateway</div>
-          <ul class="mb-0 small">
-            <li>Auth & Rate Limit</li>
-            <li>Routing / BFF</li>
-            <li>Observability</li>
-            <li>Versioning</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-3">
-        <div class="arch-card h-100">
-          <div class="arch-title">Services</div>
-          <ul class="mb-0 small">
-            <li>Catalog (Places/Events)</li>
-            <li>Booking & Payments</li>
-            <li>User/Reviews/UGC</li>
-            <li>Alerts & SOS</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-3">
-        <div class="arch-card h-100">
-          <div class="arch-title">Data Layer</div>
-          <ul class="mb-0 small">
-            <li>Postgres (OLTP)</li>
-            <li>Redis (Cache)</li>
-            <li>Blob (Images/Docs)</li>
-            <li>Warehouse + BI</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- L2: System Flow -->
-    <h2 class="h5 fw-semibold mt-4 mb-2">System Flow (Request Lifecycle)</h2>
-    <div class="flow">
-      <div class="flow-step">User</div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-step">Web / PWA</div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-step">API Gateway</div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-step">Service (e.g., Booking)</div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-step">DB / Cache / Files</div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-step">Events → Analytics</div>
-    </div>
-
-    <!-- Non-functional -->
-    <div class="row g-3 mt-1">
-      <div class="col-lg-6">
-        <div class="arch-card h-100">
-          <div class="arch-title">Security & Compliance</div>
-          <ul class="small mb-0">
-            <li>OAuth / SSO, role-based access (citizen, partner, admin)</li>
-            <li>Input validation, content moderation, audit logs</li>
-            <li>Backups, encryption at rest & in transit</li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="arch-card h-100">
-          <div class="arch-title">Ops & Observability</div>
-          <ul class="small mb-0">
-            <li>Central logging, metrics, tracing</li>
-            <li>Blue/green deployments, rollbacks</li>
-            <li>Autoscaling & CDN caching for media</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- CTA Navigation -->
-    <div class="text-center mt-4">
-      <a href="/smart-tourism/journey" class="btn btn-outline-primary me-2">← Back to Slide 5</a>
-      <a href="/smart-tourism/architecture" class="btn btn-primary">Current Slide ✓</a>
-    </div>
-  </div>
-</section>
-
-<%- include('../partials/scripts') %>
-
 <style>
-  .arch-card{
-    border:1px solid #e5e7eb;border-radius:14px;background:#fff;padding:1rem 1rem;
-    box-shadow:0 2px 10px rgba(0,0,0,.05)
+  .jt-architecture-page {
+    --arch-deep: #123b2a;
+    --arch-green: #23724a;
+    --arch-soft: #edf6ef;
+    --arch-earth: #9f7440;
+    --arch-cream: #f8f5ed;
+    --arch-text: #304038;
+    --arch-muted: #6d7871;
+    --arch-border: rgba(18, 59, 42, 0.11);
+    --arch-shadow: 0 18px 46px rgba(18, 59, 42, 0.08);
+
+    min-height: 100%;
+    padding-bottom: 76px;
+    background:
+      linear-gradient(
+        180deg,
+        #f8f5ed 0,
+        #ffffff 300px,
+        #ffffff 100%
+      );
   }
-  .arch-title{font-weight:700;margin-bottom:.5rem}
-  .flow{
-    display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;
-    background:#f8fafc;border:1px solid #e5e7eb;border-radius:14px;padding:12px 14px
+
+  .jt-architecture-hero {
+    padding: 72px 0 48px;
   }
-  .flow-step{
-    padding:.4rem .7rem;border-radius:10px;border:1px solid #dbe3ef;background:#fff;font-weight:600
+
+  .jt-architecture-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 15px;
+    color: var(--arch-earth);
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
   }
-  .flow-arrow{font-size:1.25rem;opacity:.7}
+
+  .jt-architecture-eyebrow i {
+    color: var(--arch-green);
+  }
+
+  .jt-architecture-hero h1 {
+    max-width: 950px;
+    margin: 0;
+    color: var(--arch-deep);
+    font-size: clamp(2.2rem, 4.7vw, 4.15rem);
+    line-height: 1.04;
+    letter-spacing: -0.04em;
+    font-weight: 800;
+  }
+
+  .jt-architecture-hero p {
+    max-width: 790px;
+    margin: 19px 0 0;
+    color: var(--arch-muted);
+    line-height: 1.8;
+    font-size: 0.98rem;
+  }
+
+  .jt-architecture-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 24px;
+    max-width: 850px;
+    padding: 16px 18px;
+    border: 1px solid rgba(159,116,64,0.18);
+    border-radius: 16px;
+    background: #fbf7ef;
+    color: #6c604d;
+    font-size: 0.8rem;
+    line-height: 1.65;
+  }
+
+  .jt-architecture-note i {
+    margin-top: 2px;
+    color: var(--arch-earth);
+  }
+
+  .jt-architecture-section {
+    margin-top: 28px;
+  }
+
+  .jt-architecture-heading {
+    margin-bottom: 25px;
+  }
+
+  .jt-architecture-kicker {
+    margin-bottom: 9px;
+    color: var(--arch-earth);
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .jt-architecture-heading h2 {
+    margin: 0;
+    color: var(--arch-deep);
+    font-size: clamp(1.8rem, 3vw, 2.7rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+  }
+
+  .jt-architecture-heading p {
+    max-width: 760px;
+    margin: 11px 0 0;
+    color: var(--arch-muted);
+    line-height: 1.72;
+    font-size: 0.89rem;
+  }
+
+  .jt-architecture-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 17px;
+  }
+
+  .jt-architecture-card {
+    position: relative;
+    min-height: 245px;
+    padding: 24px;
+    border: 1px solid var(--arch-border);
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0 10px 30px rgba(18,59,42,0.055);
+    overflow: hidden;
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .jt-architecture-card::after {
+    content: "";
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: rgba(35,114,74,0.045);
+    pointer-events: none;
+  }
+
+  .jt-architecture-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(35,114,74,0.18);
+    box-shadow: 0 18px 42px rgba(18,59,42,0.09);
+  }
+
+  .jt-architecture-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 49px;
+    height: 49px;
+    margin-bottom: 18px;
+    border-radius: 14px;
+    background: var(--arch-soft);
+    color: var(--arch-green);
+    font-size: 1.08rem;
+  }
+
+  .jt-architecture-card h3 {
+    margin: 0 0 7px;
+    color: var(--arch-deep);
+    font-size: 1.03rem;
+    font-weight: 800;
+  }
+
+  .jt-architecture-card > p {
+    margin: 0 0 15px;
+    color: var(--arch-muted);
+    font-size: 0.8rem;
+    line-height: 1.65;
+  }
+
+  .jt-architecture-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .jt-architecture-list li {
+    position: relative;
+    padding-left: 17px;
+    margin-bottom: 8px;
+    color: #516058;
+    font-size: 0.77rem;
+    line-height: 1.5;
+  }
+
+  .jt-architecture-list li::before {
+    content: "";
+    position: absolute;
+    top: 0.55em;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--arch-green);
+  }
+
+  .jt-architecture-flow {
+    padding: 28px;
+    border-radius: 22px;
+    background: var(--arch-deep);
+    color: #fff;
+    box-shadow: var(--arch-shadow);
+  }
+
+  .jt-architecture-flow-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 25px;
+    margin-bottom: 25px;
+  }
+
+  .jt-architecture-flow-head h2 {
+    margin: 0;
+    color: #fff;
+    font-size: 1.35rem;
+    font-weight: 800;
+  }
+
+  .jt-architecture-flow-head p {
+    max-width: 620px;
+    margin: 7px 0 0;
+    color: rgba(255,255,255,0.68);
+    font-size: 0.82rem;
+    line-height: 1.65;
+  }
+
+  .jt-architecture-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 11px;
+    border: 1px solid rgba(255,255,255,0.13);
+    border-radius: 999px;
+    color: rgba(255,255,255,0.8);
+    font-size: 0.72rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .jt-architecture-status i {
+    color: #8fd0a5;
+  }
+
+  .jt-architecture-flow-track {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  .jt-architecture-flow-item {
+    min-height: 91px;
+    padding: 14px 12px;
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 14px;
+    background: rgba(255,255,255,0.045);
+    text-align: center;
+  }
+
+  .jt-architecture-flow-item i {
+    display: inline-block;
+    margin-bottom: 9px;
+    color: #d8bd85;
+    font-size: 0.95rem;
+  }
+
+  .jt-architecture-flow-item strong {
+    display: block;
+    color: #fff;
+    font-size: 0.72rem;
+    line-height: 1.35;
+  }
+
+  .jt-architecture-flow-item span {
+    display: block;
+    margin-top: 4px;
+    color: rgba(255,255,255,0.52);
+    font-size: 0.64rem;
+    line-height: 1.35;
+  }
+
+  .jt-architecture-flow-arrow {
+    display: grid;
+    place-items: center;
+    color: rgba(255,255,255,0.35);
+    font-size: 0.72rem;
+  }
+
+  .jt-architecture-integrations {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 18px;
+  }
+
+  .jt-architecture-panel {
+    height: 100%;
+    padding: 24px;
+    border: 1px solid var(--arch-border);
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0 9px 28px rgba(18,59,42,0.045);
+  }
+
+  .jt-architecture-panel h3 {
+    margin: 0 0 8px;
+    color: var(--arch-deep);
+    font-size: 1.08rem;
+    font-weight: 800;
+  }
+
+  .jt-architecture-panel > p {
+    margin: 0 0 18px;
+    color: var(--arch-muted);
+    font-size: 0.81rem;
+    line-height: 1.65;
+  }
+
+  .jt-architecture-chip-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .jt-architecture-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 10px;
+    border: 1px solid #dce6df;
+    border-radius: 10px;
+    background: #fbfdfb;
+    color: var(--arch-deep);
+    font-size: 0.73rem;
+    font-weight: 700;
+  }
+
+  .jt-architecture-chip i {
+    color: var(--arch-green);
+  }
+
+  .jt-architecture-security {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .jt-architecture-security-item {
+    padding: 14px;
+    border-radius: 13px;
+    background: var(--arch-cream);
+  }
+
+  .jt-architecture-security-item strong {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--arch-deep);
+    font-size: 0.76rem;
+  }
+
+  .jt-architecture-security-item span {
+    display: block;
+    color: #6f7973;
+    font-size: 0.69rem;
+    line-height: 1.5;
+  }
+
+  .jt-architecture-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    margin-top: 20px;
+    padding: 24px 27px;
+    border-radius: 20px;
+    background: var(--arch-cream);
+    border: 1px solid rgba(159,116,64,0.12);
+  }
+
+  .jt-architecture-cta h3 {
+    margin: 0 0 6px;
+    color: var(--arch-deep);
+    font-size: 1.12rem;
+    font-weight: 800;
+  }
+
+  .jt-architecture-cta p {
+    margin: 0;
+    max-width: 700px;
+    color: var(--arch-muted);
+    font-size: 0.8rem;
+    line-height: 1.65;
+  }
+
+  .jt-architecture-cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    flex: 0 0 auto;
+  }
+
+  .jt-architecture-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 43px;
+    padding: 0 15px;
+    border-radius: 11px;
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 800;
+    transition:
+      transform 160ms ease,
+      background 160ms ease;
+  }
+
+  .jt-architecture-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .jt-architecture-btn-light {
+    background: var(--arch-deep);
+    color: #fff;
+  }
+
+  .jt-architecture-btn-light:hover {
+    color: #fff;
+    background: #0d3022;
+  }
+
+  .jt-architecture-btn-outline {
+    border: 1px solid rgba(18,59,42,0.15);
+    background: #fff;
+    color: var(--arch-deep);
+  }
+
+  .jt-architecture-btn-outline:hover {
+    color: var(--arch-deep);
+    background: #f3f7f4;
+  }
+
+  @media (max-width: 1199.98px) {
+    .jt-architecture-flow-track {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .jt-architecture-flow-arrow {
+      display: none;
+    }
+  }
+
+  @media (max-width: 991.98px) {
+    .jt-architecture-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .jt-architecture-integrations {
+      grid-template-columns: 1fr;
+    }
+
+    .jt-architecture-flow-head {
+      flex-direction: column;
+    }
+
+    .jt-architecture-status {
+      white-space: normal;
+    }
+
+    .jt-architecture-cta {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    .jt-architecture-hero {
+      padding: 58px 0 38px;
+    }
+
+    .jt-architecture-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .jt-architecture-flow {
+      padding: 22px;
+    }
+
+    .jt-architecture-flow-track {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .jt-architecture-security {
+      grid-template-columns: 1fr;
+    }
+
+    .jt-architecture-panel {
+      padding: 21px;
+    }
+
+    .jt-architecture-cta {
+      padding: 22px;
+    }
+
+    .jt-architecture-cta-actions {
+      width: 100%;
+    }
+
+    .jt-architecture-btn {
+      flex: 1 1 100%;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    .jt-architecture-hero h1 {
+      font-size: 2.2rem;
+    }
+
+    .jt-architecture-flow-track {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .jt-architecture-card,
+    .jt-architecture-btn {
+      transition: none !important;
+    }
+  }
 </style>
 
+<section class="jt-architecture-page">
 
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+
+  <section class="jt-architecture-hero">
+
+    <div class="container">
+
+      <div class="jt-architecture-eyebrow">
+        <i class="fa-solid fa-diagram-project"></i>
+        Smart Tourism · Architecture
+      </div>
+
+      <h1>
+        A connected platform architecture for discovery, planning and travel.
+      </h1>
+
+      <p>
+        This view describes the architecture of the current Jharkhand Tourism
+        platform — how the browser experience connects to Express routes,
+        tourism services, MongoDB data, AI capabilities, maps and generated
+        travel resources.
+      </p>
+
+      <div class="jt-architecture-note">
+        <i class="fa-solid fa-circle-info"></i>
+
+        <div>
+          <strong>Architecture note:</strong>
+          this diagram reflects the current implementation. It does not
+          present future technologies such as a separate mobile application,
+          payment gateway or unrelated database systems as already deployed.
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <div class="container">
+
+    <!-- ===================================================
+         ARCHITECTURE LAYERS
+    ==================================================== -->
+
+    <section class="jt-architecture-section">
+
+      <div class="jt-architecture-heading">
+
+        <div class="jt-architecture-kicker">
+          Platform layers
+        </div>
+
+        <h2>
+          Six layers working together.
+        </h2>
+
+        <p>
+          The current application is modular: presentation, routing, business
+          services, data, AI and supporting integrations each have a clear role.
+        </p>
+
+      </div>
+
+      <div class="jt-architecture-grid">
+
+        <!-- Presentation -->
+        <article class="jt-architecture-card">
+
+          <div class="jt-architecture-icon">
+            <i class="fa-solid fa-window-maximize"></i>
+          </div>
+
+          <h3>
+            Presentation Layer
+          </h3>
+
+          <p>
+            The visitor-facing interface rendered through EJS and shared
+            layout/partial components.
+          </p>
+
+          <ul class="jt-architecture-list">
+            <li>EJS views</li>
+            <li>Shared navbar, footer and smart-tourism partials</li>
+            <li>Responsive CSS and JavaScript</li>
+            <li>Bootstrap and Font Awesome support</li>
+          </ul>
+
+        </article>
+
+        <!-- Application -->
+        <article class="jt-architecture-card">
+
+          <div class="jt-architecture-icon">
+            <i class="fa-solid fa-server"></i>
+          </div>
+
+          <h3>
+            Express Application Layer
+          </h3>
+
+          <p>
+            The Node.js/Express server owns HTTP requests, route mounting,
+            middleware and view rendering.
+          </p>
+
+          <ul class="jt-architecture-list">
+            <li>Express routes</li>
+            <li>Cookie and request middleware</li>
+            <li>JWT authentication flow</li>
+            <li>Central application entry point</li>
+          </ul>
+
+        </article>
+
+        <!-- Domain services -->
+        <article class="jt-architecture-card">
+
+          <div class="jt-architecture-icon">
+            <i class="fa-solid fa-gears"></i>
+          </div>
+
+          <h3>
+            Tourism Service Layer
+          </h3>
+
+          <p>
+            Reusable services perform itinerary, hotel, budget, weather,
+            highlights, tips and AI recommendation logic.
+          </p>
+
+          <ul class="jt-architecture-list">
+            <li>Itinerary generation</li>
+            <li>Hotel recommendations</li>
+            <li>Trip cost analysis</li>
+            <li>Travel insights and tips</li>
+          </ul>
+
+        </article>
+
+        <!-- Data -->
+        <article class="jt-architecture-card">
+
+          <div class="jt-architecture-icon">
+            <i class="fa-solid fa-database"></i>
+          </div>
+
+          <h3>
+            Data Layer
+          </h3>
+
+          <p>
+            MongoDB and Mongoose provide persistence for portal entities and
+            application data.
+          </p>
+
+          <ul class="jt-architecture-list">
+            <li>Places / destinations</li>
+            <li>Hotels and tourism records</li>
+            <li>Users and authentication data</li>
+            <li>Wishlist, feedback and likes</li>
+          </ul>
+
+        </article>
+
+        <!-- AI -->
+        <article class="jt-architecture-card">
+
+          <div class="jt-architecture-icon">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+          </div>
+
+          <h3>
+            AI Layer
+          </h3>
+
+          <p>
+            AI capabilities enhance trip planning and conversational tourism
+            assistance while deterministic services provide reliable fallback
+            behavior.
+          </p>
+
+          <ul class="jt-architecture-list">
+            <li>AI Trip Planner</li>
+            <li>AI recommendation service</li>
+            <li>Tourism chatbot</li>
+            <li>Graceful fallback when AI is unavailable</li>
+          </ul>
+
+        </article>
+
+        <!-- Integrations -->
+        <article class="jt-architecture-card">
+
+          <div class="jt-architecture-icon">
+            <i class="fa-solid fa-plug"></i>
+          </div>
+
+          <h3>
+            Supporting Integrations
+          </h3>
+
+          <p>
+            Supporting libraries and services extend the core portal with
+            interactive maps, geographic lookup and downloadable reports.
+          </p>
+
+          <ul class="jt-architecture-list">
+            <li>Leaflet + OpenStreetMap map layer</li>
+            <li>Geocoding for journey mapping</li>
+            <li>PDFKit travel reports</li>
+            <li>Photo Sphere Viewer for heritage experiences</li>
+          </ul>
+
+        </article>
+
+      </div>
+
+    </section>
+
+    <!-- ===================================================
+         REQUEST FLOW
+    ==================================================== -->
+
+    <section class="jt-architecture-section">
+
+      <div class="jt-architecture-flow">
+
+        <div class="jt-architecture-flow-head">
+
+          <div>
+
+            <h2>
+              Request lifecycle
+            </h2>
+
+            <p>
+              A typical tourism interaction travels through the browser,
+              Express routing, the relevant business service and supporting
+              data/integration layers before returning the final response.
+            </p>
+
+          </div>
+
+          <div class="jt-architecture-status">
+            <i class="fa-solid fa-circle-check"></i>
+            Current implementation flow
+          </div>
+
+        </div>
+
+        <div class="jt-architecture-flow-track">
+
+          <div class="jt-architecture-flow-item">
+            <i class="fa-solid fa-user"></i>
+            <strong>Visitor</strong>
+            <span>Searches, plans or explores</span>
+          </div>
+
+          <div class="jt-architecture-flow-arrow">
+            →
+          </div>
+
+          <div class="jt-architecture-flow-item">
+            <i class="fa-solid fa-display"></i>
+            <strong>Browser UI</strong>
+            <span>EJS + CSS + JS</span>
+          </div>
+
+          <div class="jt-architecture-flow-arrow">
+            →
+          </div>
+
+          <div class="jt-architecture-flow-item">
+            <i class="fa-solid fa-server"></i>
+            <strong>Express Route</strong>
+            <span>HTTP request handling</span>
+          </div>
+
+          <div class="jt-architecture-flow-arrow">
+            →
+          </div>
+
+          <div class="jt-architecture-flow-item">
+            <i class="fa-solid fa-gears"></i>
+            <strong>Service Logic</strong>
+            <span>Planner / hotels / AI</span>
+          </div>
+
+          <div class="jt-architecture-flow-arrow">
+            →
+          </div>
+
+          <div class="jt-architecture-flow-item">
+            <i class="fa-solid fa-database"></i>
+            <strong>Data</strong>
+            <span>MongoDB / Mongoose</span>
+          </div>
+
+          <div class="jt-architecture-flow-arrow">
+            →
+          </div>
+
+          <div class="jt-architecture-flow-item">
+            <i class="fa-solid fa-plug"></i>
+            <strong>Integrations</strong>
+            <span>Maps / AI / PDF</span>
+          </div>
+
+          <div class="jt-architecture-flow-arrow">
+            →
+          </div>
+
+          <div class="jt-architecture-flow-item">
+            <i class="fa-solid fa-window-restore"></i>
+            <strong>Response</strong>
+            <span>Rendered page or JSON</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ===================================================
+         CURRENT CAPABILITIES
+    ==================================================== -->
+
+    <section class="jt-architecture-section">
+
+      <div class="jt-architecture-heading">
+
+        <div class="jt-architecture-kicker">
+          Connected capabilities
+        </div>
+
+        <h2>
+          What the architecture currently supports.
+        </h2>
+
+      </div>
+
+      <div class="jt-architecture-integrations">
+
+        <article class="jt-architecture-panel">
+
+          <h3>
+            Portal modules
+          </h3>
+
+          <p>
+            These are the application-level modules currently connected to
+            the shared tourism platform.
+          </p>
+
+          <div class="jt-architecture-chip-grid">
+
+            <span class="jt-architecture-chip">
+              <i class="fa-solid fa-location-dot"></i>
+              Destinations
+            </span>
+
+            <span class="jt-architecture-chip">
+              <i class="fa-solid fa-hotel"></i>
+              Hotels
+            </span>
+
+            <span class="jt-architecture-chip">
+              <i class="fa-solid fa-route"></i>
+              AI Trip Planner
+            </span>
+
+            <span class="jt-architecture-chip">
+              <i class="fa-solid fa-map"></i>
+              Interactive Map
+            </span>
+
+            <span class="jt-architecture-chip">
+              <i class="fa-solid fa-heart"></i>
+              Wishlist
+            </span>
+
+            <span class="jt-architecture-chip">
+              <i class="fa-solid fa-thumbs-up"></i>
+              Likes
+            </span>
+
+            <span class="jt-architecture-chip">
+              <i class="fa-solid fa-comment-dots"></i>
+              Feedback
+            </span>
+
+            <span class="jt-architecture-chip">
+              <i class="fa-solid fa-download"></i>
+              Resources
+            </span>
+
+            <span class="jt-architecture-chip">
+              <i class="fa-solid fa-comments"></i>
+              AI Chatbot
+            </span>
+
+            <span class="jt-architecture-chip">
+              <i class="fa-solid fa-vr-cardboard"></i>
+              Heritage View
+            </span>
+
+            <span class="jt-architecture-chip">
+              <i class="fa-solid fa-leaf"></i>
+              Eco Insights
+            </span>
+
+            <span class="jt-architecture-chip">
+              <i class="fa-solid fa-calendar-days"></i>
+              Festivals
+            </span>
+
+          </div>
+
+        </article>
+
+        <article class="jt-architecture-panel">
+
+          <h3>
+            Security & resilience
+          </h3>
+
+          <p>
+            The current platform also uses several application-level controls
+            to keep requests, sessions and generated experiences safer.
+          </p>
+
+          <div class="jt-architecture-security">
+
+            <div class="jt-architecture-security-item">
+              <strong>JWT authentication</strong>
+              <span>
+                Protected dashboard and wishlist actions use token verification.
+              </span>
+            </div>
+
+            <div class="jt-architecture-security-item">
+              <strong>HTTP-only cookies</strong>
+              <span>
+                Authentication tokens are stored in HTTP-only cookies.
+              </span>
+            </div>
+
+            <div class="jt-architecture-security-item">
+              <strong>Input validation</strong>
+              <span>
+                Planner and tourism forms validate user-provided values.
+              </span>
+            </div>
+
+            <div class="jt-architecture-security-item">
+              <strong>AI fallback handling</strong>
+              <span>
+                Planner and chatbot flows can continue with local logic when AI fails.
+              </span>
+            </div>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+    <!-- ===================================================
+         NAVIGATION CTA
+    ==================================================== -->
+
+    <section class="jt-architecture-cta">
+
+      <div>
+
+        <h3>
+          Architecture is the foundation — experiences are the destination.
+        </h3>
+
+        <p>
+          Continue through Smart Tourism to explore the visitor-facing
+          capabilities built on top of this platform structure.
+        </p>
+
+      </div>
+
+      <div class="jt-architecture-cta-actions">
+
+        <a
+          href="/smart-tourism/journey"
+          class="jt-architecture-btn jt-architecture-btn-outline"
+        >
+          <i class="fa-solid fa-arrow-left"></i>
+          Journey
+        </a>
+
+        <a
+          href="/smart-tourism"
+          class="jt-architecture-btn jt-architecture-btn-light"
+        >
+          Explore Smart Tourism
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</section>
+
+<%- include('../partials/scripts') %>

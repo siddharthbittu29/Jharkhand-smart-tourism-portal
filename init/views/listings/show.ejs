@@ -1,37 +1,1005 @@
+<%
+  /*
+   * ============================================================
+   * JHARKHAND TOURISM
+   * LISTING DETAIL
+   *
+   * File:
+   * init/views/listings/show.ejs
+   *
+   * Existing variables preserved:
+   * - mode
+   * - listing
+   * ============================================================
+   */
 
-<% if (mode === 'show') { %>
-<article class="detail">
-<img src="<%= listing.image || 'https://placehold.co/800x500' %>" alt="<%= listing.title %>">
-<div>
-<h1><%= listing.title %></h1>
-<p class="muted"><%= listing.location %> — <strong>₹<%= listing.price %></strong></p>
-<p><%= listing.description || 'No description provided.' %></p>
-<div class="actions">
-<a class="btn" href="/listings/<%= listing._id %>/edit">Edit</a>
-<form method="POST" action="/listings/<%= listing._id %>?_method=DELETE" onsubmit="return confirm('Delete this listing?');">
-<button class="btn danger" type="submit">Delete</button>
-</form>
-</div>
-</div>
-</article>
-<% } %>
+  const currentListing =
+    typeof listing !== "undefined" && listing
+      ? listing
+      : {};
+
+  const listingImage =
+    currentListing.image &&
+    typeof currentListing.image === "string" &&
+    currentListing.image.trim()
+      ? currentListing.image.trim()
+      : "/images/placeholder.jpg";
+%>
 
 
-<% if (mode === 'new' || mode === 'edit') { %>
-<h1><%= mode === 'new' ? 'Create Listing' : 'Edit Listing' %></h1>
-<form method="POST" action="<%= mode === 'new' ? '/listings' : ('/listings/' + listing._id + '?_method=PUT') %>">
-<label>Title<input name="title" value="<%= listing.title || '' %>" required></label>
-<label>Location<input name="location" value="<%= listing.location || '' %>" required></label>
-<label>Price<input name="price" type="number" min="0" step="1" value="<%= listing.price || '' %>" required></label>
-<label>Image URL<input name="image" value="<%= listing.image || '' %>"></label>
-<label>Description<textarea name="description" rows="5"><%= listing.description || '' %></textarea></label>
-<label>Category
-<select name="category">
-<% ['Adventure','Pilgrimage','Nature','City','Heritage','Other'].forEach(c => { %>
-<option value="<%= c %>" <%= listing.category === c ? 'selected' : '' %>><%= c %></option>
-<% }) %>
-</select>
-</label>
-<button class="btn" type="submit"><%= mode === 'new' ? 'Create' : 'Update' %></button>
-</form>
-<% } %>
+<style>
+  /* ============================================================
+     LISTING DETAIL
+  ============================================================ */
+
+  .jt-listing-show {
+    --jt-deep: #123b2a;
+    --jt-deep-2: #0d3022;
+    --jt-green: #26724a;
+    --jt-green-soft: #edf6ef;
+    --jt-earth: #a17746;
+    --jt-cream: #f7f4ec;
+    --jt-ink: #19352a;
+    --jt-muted: #6b7770;
+    --jt-line: rgba(18,59,42,0.11);
+
+    min-height:
+      100vh;
+
+    background:
+      linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #f7faf8 100%
+      );
+
+    color:
+      var(--jt-ink);
+  }
+
+
+  .jt-listing-show-shell {
+    width:
+      min(1160px, calc(100% - 36px));
+
+    margin:
+      0 auto;
+  }
+
+
+  /* ============================================================
+     TOP BAR
+  ============================================================ */
+
+  .jt-listing-show-top {
+    padding:
+      34px 0 17px;
+  }
+
+
+  .jt-listing-show-back {
+    display:
+      inline-flex;
+
+    align-items:
+      center;
+
+    gap:
+      7px;
+
+    color:
+      var(--jt-green);
+
+    text-decoration:
+      none;
+
+    font-size:
+      0.73rem;
+
+    font-weight:
+      900;
+  }
+
+
+  .jt-listing-show-back:hover {
+    color:
+      var(--jt-deep);
+
+    text-decoration:
+      none;
+  }
+
+
+  /* ============================================================
+     MAIN CARD
+  ============================================================ */
+
+  .jt-listing-show-card {
+    display:
+      grid;
+
+    grid-template-columns:
+      minmax(0,1.08fr)
+      minmax(0,0.92fr);
+
+    gap:
+      28px;
+
+    padding:
+      25px;
+
+    border:
+      1px solid
+      var(--jt-line);
+
+    border-radius:
+      23px;
+
+    background:
+      #ffffff;
+
+    box-shadow:
+      0 16px 45px
+      rgba(18,59,42,0.08);
+  }
+
+
+  /* ============================================================
+     IMAGE
+  ============================================================ */
+
+  .jt-listing-show-image-wrap {
+    position:
+      relative;
+
+    min-height:
+      480px;
+
+    overflow:
+      hidden;
+
+    border-radius:
+      18px;
+
+    background:
+      #e7eee8;
+  }
+
+
+  .jt-listing-show-image {
+    width:
+      100%;
+
+    height:
+      100%;
+
+    display:
+      block;
+
+    object-fit:
+      cover;
+  }
+
+
+  .jt-listing-show-image-label {
+    position:
+      absolute;
+
+    left:
+      15px;
+
+    top:
+      15px;
+
+    display:
+      inline-flex;
+
+    align-items:
+      center;
+
+    gap:
+      7px;
+
+    padding:
+      8px 10px;
+
+    border:
+      1px solid
+      rgba(255,255,255,0.16);
+
+    border-radius:
+      999px;
+
+    background:
+      rgba(6,30,20,0.62);
+
+    color:
+      #ffffff;
+
+    backdrop-filter:
+      blur(7px);
+
+    font-size:
+      0.65rem;
+
+    font-weight:
+      900;
+  }
+
+
+  /* ============================================================
+     CONTENT
+  ============================================================ */
+
+  .jt-listing-show-copy {
+    display:
+      flex;
+
+    flex-direction:
+      column;
+
+    justify-content:
+      center;
+
+    padding:
+      6px 7px;
+  }
+
+
+  .jt-listing-show-kicker {
+    color:
+      var(--jt-green);
+
+    font-size:
+      0.65rem;
+
+    font-weight:
+      900;
+
+    letter-spacing:
+      0.14em;
+
+    text-transform:
+      uppercase;
+  }
+
+
+  .jt-listing-show-category {
+    display:
+      inline-flex;
+
+    align-self:
+      flex-start;
+
+    align-items:
+      center;
+
+    gap:
+      7px;
+
+    margin-top:
+      11px;
+
+    padding:
+      8px 10px;
+
+    border-radius:
+      999px;
+
+    background:
+      var(--jt-green-soft);
+
+    color:
+      var(--jt-green);
+
+    font-size:
+      0.64rem;
+
+    font-weight:
+      900;
+
+    text-transform:
+      uppercase;
+
+    letter-spacing:
+      0.05em;
+  }
+
+
+  .jt-listing-show-title {
+    max-width:
+      560px;
+
+    margin:
+      16px 0 0;
+
+    color:
+      var(--jt-deep);
+
+    font-size:
+      clamp(2rem,4vw,3.5rem);
+
+    line-height:
+      1.02;
+
+    font-weight:
+      900;
+
+    letter-spacing:
+      -0.045em;
+  }
+
+
+  .jt-listing-show-meta {
+    display:
+      flex;
+
+    flex-wrap:
+      wrap;
+
+    gap:
+      9px 17px;
+
+    margin-top:
+      17px;
+  }
+
+
+  .jt-listing-show-meta-item {
+    display:
+      inline-flex;
+
+    align-items:
+      center;
+
+    gap:
+      6px;
+
+    color:
+      var(--jt-muted);
+
+    font-size:
+      0.76rem;
+
+    font-weight:
+      700;
+  }
+
+
+  .jt-listing-show-meta-item i {
+    color:
+      var(--jt-green);
+  }
+
+
+  .jt-listing-show-price {
+    margin:
+      22px 0 0;
+
+    color:
+      var(--jt-deep);
+
+    font-size:
+      1.65rem;
+
+    font-weight:
+      900;
+  }
+
+
+  .jt-listing-show-description {
+    max-width:
+      600px;
+
+    margin:
+      17px 0 0;
+
+    color:
+      var(--jt-muted);
+
+    font-size:
+      0.87rem;
+
+    line-height:
+      1.82;
+  }
+
+
+  /* ============================================================
+     ACTIONS
+  ============================================================ */
+
+  .jt-listing-show-actions {
+    display:
+      flex;
+
+    flex-wrap:
+      wrap;
+
+    gap:
+      9px;
+
+    margin-top:
+      26px;
+  }
+
+
+  .jt-listing-show-btn {
+    display:
+      inline-flex;
+
+    align-items:
+      center;
+
+    justify-content:
+      center;
+
+    gap:
+      7px;
+
+    min-height:
+      43px;
+
+    padding:
+      10px 14px;
+
+    border:
+      0;
+
+    border-radius:
+      11px;
+
+    text-decoration:
+      none;
+
+    font-size:
+      0.72rem;
+
+    font-weight:
+      900;
+
+    cursor:
+      pointer;
+  }
+
+
+  .jt-listing-show-btn.primary {
+    background:
+      var(--jt-deep);
+
+    color:
+      #ffffff;
+  }
+
+
+  .jt-listing-show-btn.primary:hover {
+    background:
+      var(--jt-deep-2);
+
+    color:
+      #ffffff;
+
+    text-decoration:
+      none;
+  }
+
+
+  .jt-listing-show-btn.secondary {
+    border:
+      1px solid
+      var(--jt-line);
+
+    background:
+      #ffffff;
+
+    color:
+      var(--jt-deep);
+  }
+
+
+  .jt-listing-show-btn.secondary:hover {
+    background:
+      var(--jt-green-soft);
+
+    color:
+      var(--jt-deep);
+
+    text-decoration:
+      none;
+  }
+
+
+  .jt-listing-show-btn.danger {
+    background:
+      #fff1ef;
+
+    color:
+      #a33d31;
+  }
+
+
+  .jt-listing-show-btn.danger:hover {
+    background:
+      #fde5e2;
+
+    color:
+      #8f3127;
+  }
+
+
+  /* ============================================================
+     MANAGEMENT NOTE
+  ============================================================ */
+
+  .jt-listing-show-note {
+    display:
+      flex;
+
+    align-items:
+      flex-start;
+
+    gap:
+      10px;
+
+    margin-top:
+      20px;
+
+    padding:
+      14px 15px;
+
+    border:
+      1px solid
+      rgba(161,119,70,0.17);
+
+    border-radius:
+      13px;
+
+    background:
+      #fbf7ee;
+
+    color:
+      #756247;
+
+    font-size:
+      0.72rem;
+
+    line-height:
+      1.65;
+  }
+
+
+  .jt-listing-show-note i {
+    margin-top:
+      2px;
+
+    color:
+      var(--jt-earth);
+  }
+
+
+  /* ============================================================
+     EMPTY / MISSING LISTING
+  ============================================================ */
+
+  .jt-listing-show-empty {
+    padding:
+      65px 25px;
+
+    text-align:
+      center;
+
+    border:
+      1px dashed
+      rgba(38,114,74,0.2);
+
+    border-radius:
+      20px;
+
+    background:
+      #f8fbf8;
+  }
+
+
+  .jt-listing-show-empty-icon {
+    width:
+      56px;
+
+    height:
+      56px;
+
+    display:
+      grid;
+
+    place-items:
+      center;
+
+    margin:
+      0 auto 15px;
+
+    border-radius:
+      16px;
+
+    background:
+      var(--jt-green-soft);
+
+    color:
+      var(--jt-green);
+
+    font-size:
+      1.15rem;
+  }
+
+
+  .jt-listing-show-empty h2 {
+    margin:
+      0;
+
+    color:
+      var(--jt-deep);
+
+    font-size:
+      1.3rem;
+
+    font-weight:
+      900;
+  }
+
+
+  .jt-listing-show-empty p {
+    margin:
+      8px auto 18px;
+
+    color:
+      var(--jt-muted);
+
+    font-size:
+      0.8rem;
+  }
+
+
+  /* ============================================================
+     RESPONSIVE
+  ============================================================ */
+
+  @media (max-width: 900px) {
+
+    .jt-listing-show-card {
+      grid-template-columns:
+        1fr;
+    }
+
+
+    .jt-listing-show-image-wrap {
+      min-height:
+        380px;
+    }
+
+  }
+
+
+  @media (max-width: 600px) {
+
+    .jt-listing-show-shell {
+      width:
+        min(100% - 22px, 1160px);
+    }
+
+
+    .jt-listing-show-top {
+      padding:
+        25px 0 14px;
+    }
+
+
+    .jt-listing-show-card {
+      padding:
+        15px;
+
+      border-radius:
+        19px;
+    }
+
+
+    .jt-listing-show-image-wrap {
+      min-height:
+        280px;
+
+      border-radius:
+        15px;
+    }
+
+
+    .jt-listing-show-title {
+      font-size:
+        2.15rem;
+    }
+
+
+    .jt-listing-show-copy {
+      padding:
+        3px;
+    }
+
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+
+    .jt-listing-show-btn {
+      transition:
+        none !important;
+    }
+
+  }
+</style>
+
+
+<main class="jt-listing-show">
+
+  <div class="jt-listing-show-shell">
+
+    <!-- ========================================================
+         BACK
+    ========================================================= -->
+
+    <div class="jt-listing-show-top">
+
+      <a
+        href="/listings"
+        class="jt-listing-show-back"
+      >
+
+        <i
+          class="fa-solid fa-arrow-left"
+          aria-hidden="true"
+        ></i>
+
+        Back to tour packages
+
+      </a>
+
+    </div>
+
+
+    <% if (
+      mode === "show" &&
+      currentListing &&
+      currentListing._id
+    ) { %>
+
+      <!-- ======================================================
+           DETAIL
+      ======================================================= -->
+
+      <article class="jt-listing-show-card">
+
+        <!-- IMAGE -->
+
+        <div class="jt-listing-show-image-wrap">
+
+          <img
+            src="<%= listingImage %>"
+            alt="<%= currentListing.title || 'Tour package' %>"
+            class="jt-listing-show-image"
+            onerror="this.onerror=null;this.src='/images/placeholder.jpg';"
+          >
+
+
+          <span class="jt-listing-show-image-label">
+
+            <i
+              class="fa-solid fa-location-dot"
+              aria-hidden="true"
+            ></i>
+
+            Jharkhand Tourism
+
+          </span>
+
+        </div>
+
+
+        <!-- COPY -->
+
+        <div class="jt-listing-show-copy">
+
+          <div class="jt-listing-show-kicker">
+            Tour package
+          </div>
+
+
+          <% if (currentListing.category) { %>
+
+            <span class="jt-listing-show-category">
+
+              <i
+                class="fa-solid fa-tag"
+                aria-hidden="true"
+              ></i>
+
+              <%= currentListing.category %>
+
+            </span>
+
+          <% } %>
+
+
+          <h1 class="jt-listing-show-title">
+
+            <%= currentListing.title || "Tour Package" %>
+
+          </h1>
+
+
+          <div class="jt-listing-show-meta">
+
+            <span class="jt-listing-show-meta-item">
+
+              <i
+                class="fa-solid fa-location-dot"
+                aria-hidden="true"
+              ></i>
+
+              <%= currentListing.location || "Jharkhand" %>
+
+            </span>
+
+
+            <span class="jt-listing-show-meta-item">
+
+              <i
+                class="fa-solid fa-indian-rupee-sign"
+                aria-hidden="true"
+              ></i>
+
+              Package price
+
+            </span>
+
+          </div>
+
+
+          <div class="jt-listing-show-price">
+
+            ₹<%= currentListing.price || 0 %>
+
+          </div>
+
+
+          <p class="jt-listing-show-description">
+
+            <%= currentListing.description ||
+                "No description provided." %>
+
+          </p>
+
+
+          <!-- ==================================================
+               ACTIONS
+          =================================================== -->
+
+          <div class="jt-listing-show-actions">
+
+            <a
+              class="jt-listing-show-btn secondary"
+              href="/listings"
+            >
+
+              <i
+                class="fa-solid fa-grid-2"
+                aria-hidden="true"
+              ></i>
+
+              All packages
+
+            </a>
+
+
+            <a
+              class="jt-listing-show-btn primary"
+              href="/listings/<%= currentListing._id %>/edit"
+            >
+
+              <i
+                class="fa-solid fa-pen"
+                aria-hidden="true"
+              ></i>
+
+              Edit
+
+            </a>
+
+
+            <form
+              method="POST"
+              action="/listings/<%= currentListing._id %>?_method=DELETE"
+              onsubmit="return confirm('Delete this listing?');"
+              style="display:inline;"
+            >
+
+              <button
+                class="jt-listing-show-btn danger"
+                type="submit"
+              >
+
+                <i
+                  class="fa-solid fa-trash"
+                  aria-hidden="true"
+                ></i>
+
+                Delete
+
+              </button>
+
+            </form>
+
+          </div>
+
+
+          <div class="jt-listing-show-note">
+
+            <i
+              class="fa-solid fa-circle-info"
+              aria-hidden="true"
+            ></i>
+
+            <span>
+              Listing management actions are available from this
+              detail page. Delete operations require confirmation.
+            </span>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+    <% } else { %>
+
+      <!-- ======================================================
+           MISSING LISTING
+      ======================================================= -->
+
+      <section class="jt-listing-show-empty">
+
+        <div class="jt-listing-show-empty-icon">
+
+          <i
+            class="fa-regular fa-compass"
+            aria-hidden="true"
+          ></i>
+
+        </div>
+
+
+        <h2>
+          Listing not found
+        </h2>
+
+
+        <p>
+          The requested tour package could not be displayed.
+        </p>
+
+
+        <a
+          href="/listings"
+          class="jt-listing-show-btn primary"
+        >
+
+          <i
+            class="fa-solid fa-arrow-left"
+            aria-hidden="true"
+          ></i>
+
+          Return to listings
+
+        </a>
+
+      </section>
+
+    <% } %>
+
+  </div>
+
+</main>

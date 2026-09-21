@@ -1,26 +1,196 @@
-<nav class="bg-light border-bottom">
-  <div class="container py-2 d-flex flex-wrap gap-2">
-    <%
-      const base = '/smart-tourism';
-      const links = [
-        ['Overview', ''],
-        ['Objectives', '/objectives'],
-        ['Features', '/features'],
-        ['User Journey', '/journey'],
-        ['Architecture', '/architecture'],
-        ['Core Features', '/core-features']   // ✅ SLIDE 7 ADDED HERE
-      ];
-    %>
+<%
+/*
+ * ============================================================
+ * JHARKHAND TOURISM
+ * SMART TOURISM — SHARED NAVIGATION PARTIAL
+ * File: init/views/partials/smart/nav.ejs
+ * ============================================================
+ */
 
-    <% links.forEach(([label, suffix]) => {
-         const href = base + suffix;
-         const active =
-           currentPath === href ? 'btn-primary' : 'btn-outline-primary';
-    %>
-      <a class="btn btn-sm <%= active %>" href="<%= href %>">
-        <%= label %>
+const smartNavPath =
+  typeof currentPath !== "undefined"
+    ? currentPath
+    : "";
+
+const smartNavItems = [
+  {
+    label: "Overview",
+    href: "/smart-tourism",
+    icon: "fa-compass"
+  },
+  {
+    label: "Objectives",
+    href: "/smart-tourism/objectives",
+    icon: "fa-bullseye"
+  },
+  {
+    label: "Features",
+    href: "/smart-tourism/features",
+    icon: "fa-layer-group"
+  },
+  {
+    label: "User Journey",
+    href: "/smart-tourism/journey",
+    icon: "fa-route"
+  },
+  {
+    label: "Architecture",
+    href: "/smart-tourism/architecture",
+    icon: "fa-diagram-project"
+  },
+  {
+    label: "Core Features",
+    href: "/smart-tourism/core-features",
+    icon: "fa-cubes-stacked"
+  }
+];
+
+const smartNavActive = (href) =>
+  smartNavPath === href;
+%>
+
+
+<!-- ============================================================
+     SHARED SMART TOURISM STYLES
+============================================================ -->
+
+<link
+  rel="stylesheet"
+  href="/css/smart-tourism.css?v=2"
+>
+
+
+<!-- ============================================================
+     SMART TOURISM SECTION NAVIGATION
+============================================================ -->
+
+<nav
+  class="jt-smart-subnav"
+  aria-label="Smart Tourism navigation"
+>
+
+  <div class="jt-smart-subnav-inner">
+
+
+    <!-- ========================================================
+         SECTION LABEL
+    ========================================================= -->
+
+    <span
+      class="jt-st-badge dark"
+      aria-label="Smart Tourism section"
+    >
+
+      <i
+        class="fa-solid fa-microchip"
+        aria-hidden="true">
+      </i>
+
+      Smart Tourism
+
+    </span>
+
+
+    <!-- ========================================================
+         NAVIGATION ITEMS
+    ========================================================= -->
+
+    <% smartNavItems.forEach((item) => { %>
+
+      <a
+        href="<%= item.href %>"
+        class="<%= smartNavActive(item.href) ? 'active' : '' %>"
+        <%= smartNavActive(item.href)
+          ? 'aria-current="page"'
+          : ''
+        %>
+      >
+
+        <i
+          class="fa-solid <%= item.icon %>"
+          aria-hidden="true">
+        </i>
+
+        <span>
+          <%= item.label %>
+        </span>
+
       </a>
-    <% }) %>
+
+    <% }); %>
+
+
   </div>
+
 </nav>
 
+
+<script>
+(() => {
+
+  "use strict";
+
+
+  /*
+   * ----------------------------------------------------------
+   * Ensure the current section is visible on mobile.
+   * ----------------------------------------------------------
+   */
+
+  const nav =
+    document.querySelector(
+      ".jt-smart-subnav-inner"
+    );
+
+
+  if (!nav) {
+    return;
+  }
+
+
+  const active =
+    nav.querySelector(
+      "a.active"
+    );
+
+
+  if (!active) {
+    return;
+  }
+
+
+  const isMobile =
+    window.matchMedia &&
+    window.matchMedia(
+      "(max-width: 760px)"
+    ).matches;
+
+
+  if (!isMobile) {
+    return;
+  }
+
+
+  const reducedMotion =
+    window.matchMedia &&
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+
+  window.requestAnimationFrame(() => {
+
+    active.scrollIntoView({
+      behavior:
+        reducedMotion
+          ? "auto"
+          : "smooth",
+
+      block: "nearest",
+      inline: "center"
+    });
+
+  });
+
+})();
+</script>

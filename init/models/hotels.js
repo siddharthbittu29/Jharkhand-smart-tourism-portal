@@ -1,26 +1,30 @@
 // init/models/hotels.js
-// NOTE: This is a static dataset exported as a module (used by the router).
-// Hotel names are taken from public listings for Jharkhand (Ranchi/Deoghar/Jamshedpur etc).
-// Verify / replace official images by visiting the hotel website — I left source comments.
+// Static hotel dataset used by the hotel routes/services.
 //
-// Sources (examples):
-// - Ranchi hotel lists (Tripadvisor / MakeMyTrip / Expedia). :contentReference[oaicite:1]{index=1}
-// - Deoghar hotels near Baidyanath Dham (MakeMyTrip / Goibibo / Tripadvisor). :contentReference[oaicite:2]{index=2}
-// - Jamshedpur hotels lists (Tripadvisor / MakeMyTrip). :contentReference[oaicite:3]{index=3}
-// - JTDC properties (official). :contentReference[oaicite:4]{index=4}
+// IMPORTANT:
+// - This is NOT a Mongoose model.
+// - Keep the existing field names because the hotel router/views/services
+//   depend on them.
+// - Hotel records are kept as data objects so they can be consumed directly.
 
-module.exports = [
+const hotels = [
   {
     id: "h-radisson-ranchi",
     name: "Radisson Blu Hotel Ranchi",
     district: "Ranchi",
     address: "Lalpur, Ranchi, Jharkhand",
-    image: "/images/hotels/radisson.jpg", 
+    image: "/images/hotels/radisson.jpg",
     rating: 4.4,
     price_from: 5200,
     availability: "Available",
     room_types: ["Standard", "Deluxe", "Suite"],
-    amenities: ["WiFi", "Parking", "AC", "Restaurant", "Fitness Center"],
+    amenities: [
+      "WiFi",
+      "Parking",
+      "AC",
+      "Restaurant",
+      "Fitness Center",
+    ],
     checkin: "14:00",
     checkout: "11:00",
     map: "https://www.google.com/maps?q=Radisson+Blu+Ranchi",
@@ -28,18 +32,25 @@ module.exports = [
     nearest_airport: "Birsa Munda Airport (Ranchi)",
     nearest_station: "Ranchi Junction",
     distance_from_place_km: 7,
-    nearby_place: "Ranchi Lake"
+    nearby_place: "Ranchi Lake",
   },
+
   {
     id: "h-lemon-tree-ranchi",
     name: "Lemon Tree Hotel Ranchi",
     district: "Ranchi",
     address: "C-1, Bariatu Road, Hinoo, Ranchi",
-    price_from: 3600,
     image: "/images/hotels/lemon-tree.jpg",
+    rating: 4.0,
+    price_from: 3600,
     availability: "Few Rooms Left",
     room_types: ["Standard", "Deluxe"],
-    amenities: ["WiFi","AC","Parking","Restaurant"],
+    amenities: [
+      "WiFi",
+      "AC",
+      "Parking",
+      "Restaurant",
+    ],
     checkin: "14:00",
     checkout: "12:00",
     map: "https://www.google.com/maps?q=Lemon+Tree+Hotel+Ranchi",
@@ -47,8 +58,9 @@ module.exports = [
     nearest_airport: "Birsa Munda Airport (Ranchi)",
     nearest_station: "Ranchi Junction",
     distance_from_place_km: 6,
-    nearby_place: "Tagore Hill"
+    nearby_place: "Tagore Hill",
   },
+
   {
     id: "h-prabhat-vihar-netarhat",
     name: "Prabhat Vihar (JTDC), Netarhat",
@@ -59,7 +71,11 @@ module.exports = [
     price_from: 2500,
     availability: "Available",
     room_types: ["Standard", "Deluxe"],
-    amenities: ["Parking","Restaurant","Family Rooms"],
+    amenities: [
+      "Parking",
+      "Restaurant",
+      "Family Rooms",
+    ],
     checkin: "12:00",
     checkout: "11:00",
     map: "https://www.google.com/maps?q=Prabhat+Vihar+Netarhat",
@@ -67,19 +83,24 @@ module.exports = [
     nearest_airport: "Ranchi (approx 150 km)",
     nearest_station: "Latehar Railway Station",
     distance_from_place_km: 3,
-    nearby_place: "Netarhat"
+    nearby_place: "Netarhat",
   },
+
   {
     id: "h-van-vihar-betla",
     name: "Van Vihar (JTDC), Betla",
     district: "Palamu",
     address: "Betla, Palamu District, Jharkhand",
     image: "/images/hotels/van-vihar.jpg",
-   rating: 4.0,
+    rating: 4.0,
     price_from: 2200,
     availability: "Available",
-    room_types: ["Standard","Family"],
-    amenities: ["WiFi","Restaurant","Parking"],
+    room_types: ["Standard", "Family"],
+    amenities: [
+      "WiFi",
+      "Restaurant",
+      "Parking",
+    ],
     checkin: "12:00",
     checkout: "11:00",
     map: "https://www.google.com/maps?q=Van+Vihar+Betla",
@@ -87,18 +108,25 @@ module.exports = [
     nearest_airport: "Ranchi (approx 180 km)",
     nearest_station: "Medininagar (Daltonganj)",
     distance_from_place_km: 6,
-    nearby_place: "Betla National Park"
+    nearby_place: "Betla National Park",
   },
+
   {
     id: "h-marutinandan-deoghar",
     name: "The Marutinandan Grand, Deoghar",
     district: "Deoghar",
     address: "Near Baba Baidyanath Dham, Deoghar",
-    image: "/images/hotels/deoghar.jpg",    rating: 4.3,
+    image: "/images/hotels/deoghar.jpg",
+    rating: 4.3,
     price_from: 2800,
     availability: "Available",
-    room_types: ["Standard","Deluxe","Suite"],
-    amenities: ["WiFi","AC","Restaurant","Parking"],
+    room_types: ["Standard", "Deluxe", "Suite"],
+    amenities: [
+      "WiFi",
+      "AC",
+      "Restaurant",
+      "Parking",
+    ],
     checkin: "14:00",
     checkout: "12:00",
     map: "https://www.google.com/maps?q=Marutinandan+Grand+Deoghar",
@@ -106,19 +134,25 @@ module.exports = [
     nearest_airport: "Deoghar Airport (recently opened)",
     nearest_station: "Deoghar Railway Station",
     distance_from_place_km: 1.5,
-    nearby_place: "Baidyanath Dham (Deoghar)"
+    nearby_place: "Baidyanath Dham (Deoghar)",
   },
+
   {
     id: "h-deoghar-residency",
     name: "Hotel Deoghar Residency",
     district: "Deoghar",
     address: "Near Baba Dham, Danki Road, Deoghar",
-    image: "https://images.unsplash.com/photo-1501426026826-31c667bdf23d?auto=format&fit=crop&w=1600&q=80",
+    image:
+      "https://images.unsplash.com/photo-1501426026826-31c667bdf23d?auto=format&fit=crop&w=1600&q=80",
     rating: 4.0,
     price_from: 2100,
     availability: "Available",
-    room_types: ["Standard","Deluxe"],
-    amenities: ["WiFi","Parking","Restaurant"],
+    room_types: ["Standard", "Deluxe"],
+    amenities: [
+      "WiFi",
+      "Parking",
+      "Restaurant",
+    ],
     checkin: "12:00",
     checkout: "11:00",
     map: "https://www.google.com/maps?q=Hotel+Deoghar+Residency",
@@ -126,19 +160,27 @@ module.exports = [
     nearest_airport: "Deoghar Airport",
     nearest_station: "Deoghar Railway Station",
     distance_from_place_km: 2,
-    nearby_place: "Baidyanath Dham (Deoghar)"
+    nearby_place: "Baidyanath Dham (Deoghar)",
   },
+
   {
     id: "h-vivanta-jamshedpur",
     name: "Vivanta Jamshedpur (Taj)",
     district: "Jamshedpur",
     address: "East Singhbhum, Bistupur Road, Jamshedpur",
-    image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1600&q=80",
+    image:
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1600&q=80",
     rating: 4.5,
     price_from: 6200,
     availability: "Few Rooms Left",
-    room_types: ["Deluxe","Suite"],
-    amenities: ["WiFi","AC","Restaurant","Pool","Fitness Center"],
+    room_types: ["Deluxe", "Suite"],
+    amenities: [
+      "WiFi",
+      "AC",
+      "Restaurant",
+      "Pool",
+      "Fitness Center",
+    ],
     checkin: "14:00",
     checkout: "11:00",
     map: "https://www.google.com/maps?q=Vivanta+Jamshedpur",
@@ -146,19 +188,25 @@ module.exports = [
     nearest_airport: "Jamshedpur Airport (Dumka is nearest commercial)",
     nearest_station: "Tatanagar Junction",
     distance_from_place_km: 6,
-    nearby_place: "Tata Steel Zoological Park"
+    nearby_place: "Tata Steel Zoological Park",
   },
+
   {
     id: "h-hotel-rajrappa",
     name: "Hotel Rajrappa (near Rajrappa Temple area - sample name)",
     district: "Ramgarh",
     address: "Rajrappa area, Ramgarh",
-    image: "https://images.unsplash.com/photo-1499346030926-9a72daac6c63?auto=format&fit=crop&w=1600&q=80",
+    image:
+      "https://images.unsplash.com/photo-1499346030926-9a72daac6c63?auto=format&fit=crop&w=1600&q=80",
     rating: 4.0,
     price_from: 1800,
     availability: "Available",
-    room_types: ["Standard","Deluxe"],
-    amenities: ["WiFi","Parking","Restaurant"],
+    room_types: ["Standard", "Deluxe"],
+    amenities: [
+      "WiFi",
+      "Parking",
+      "Restaurant",
+    ],
     checkin: "12:00",
     checkout: "11:00",
     map: "https://www.google.com/maps?q=Rajrappa+hotel",
@@ -166,7 +214,8 @@ module.exports = [
     nearest_airport: "Ranchi Airport",
     nearest_station: "Ramgarh/ Ranchi (border region)",
     distance_from_place_km: 3,
-    nearby_place: "Rajrappa Temple"
+    nearby_place: "Rajrappa Temple",
   },
-  // ... you can add more entries here following same shape.
 ];
+
+module.exports = hotels;

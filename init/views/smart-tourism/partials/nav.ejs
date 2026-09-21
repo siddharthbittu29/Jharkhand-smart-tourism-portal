@@ -1,88 +1,1013 @@
 <%
-// Tabs config
-const base = '/smart-tourism';
-const tabs = [
-  { href: `${base}`,             text: 'Overview' },
-  { href: `${base}/objectives`,  text: 'Objectives' },
-  { href: `${base}/features`,    text: 'Features' },
-  { href: `${base}/journey`,     text: 'User Journey' },
-  { href: `${base}/architecture`,text: 'Architecture' },
-  { href: `${base}/core-features`, text: 'Core Features' }  // ✅ SLIDE 7 ADDED HERE
-  ];
+/*
+ * ============================================================
+ * JHARKHAND TOURISM — PREMIUM SMART TOURISM NAV
+ * File:
+ * init/views/smart-tourism/partials/nav.ejs
+ *
+ * Purpose:
+ * - One and only one Smart Tourism section navigation
+ * - Premium visual navigation
+ * - Preserves all existing routes
+ * - Preserves active state
+ * - Responsive horizontal navigation
+ * - No separate duplicate mobile navigation
+ * ============================================================
+ */
+
+const smartBase = "/smart-tourism";
+
+const smartPath =
+  typeof currentPath !== "undefined"
+    ? currentPath
+    : "";
+
+const smartTabs = [
+  {
+    href: smartBase,
+    label: "Overview",
+    number: "01",
+    icon: "fa-compass",
+    description: "Platform vision"
+  },
+  {
+    href: `${smartBase}/objectives`,
+    label: "Objectives",
+    number: "02",
+    icon: "fa-bullseye",
+    description: "Goals & outcomes"
+  },
+  {
+    href: `${smartBase}/features`,
+    label: "Features",
+    number: "03",
+    icon: "fa-layer-group",
+    description: "Platform capabilities"
+  },
+  {
+    href: `${smartBase}/journey`,
+    label: "User Journey",
+    number: "04",
+    icon: "fa-route",
+    description: "Traveller experience"
+  },
+  {
+    href: `${smartBase}/architecture`,
+    label: "Architecture",
+    number: "05",
+    icon: "fa-diagram-project",
+    description: "System foundation"
+  },
+  {
+    href: `${smartBase}/core-features`,
+    label: "Core Features",
+    number: "06",
+    icon: "fa-cubes-stacked",
+    description: "Interactive experiences"
+  }
+];
+
+const smartIsActive = (href) => {
+  return (
+    smartPath === href ||
+    smartPath === `${href}/`
+  );
+};
+
+const activeTab =
+  smartTabs.find((tab) =>
+    smartIsActive(tab.href)
+  ) || smartTabs[0];
 %>
 
-<div class="container pt-3">
-  <ul class="nav gap-2 smart-tabs">
-    <% tabs.forEach(t => { 
-         const active = (currentPath === t.href) ? 'active' : ''; %>
-      <li class="nav-item">
-        <a class="btn btn-outline-secondary <%= active %>" href="<%= t.href %>"><%= t.text %></a>
-      </li>
-    <% }) %>
-  </ul>
-</div>
 
 <style>
- :root{
-  --clr-deep:#1B4332;--clr-green:#2D6A4F;--clr-mint:#95D5B2;--clr-beige:#F5EDD8;--clr-beige-2:#EFE7CF;--clr-ink:#0B1D16;--clr-white:#fff;
-  --radius:16px;--shadow-sm:0 6px 16px rgb(0 0 0 / 12%);--shadow-lg:0 24px 48px rgb(0 0 0 / 20%);
-  --transition:280ms cubic-bezier(.2,.8,.2,1)
-}
-*{box-sizing:border-box}
-body{background:var(--clr-beige);color:var(--clr-ink);font-family:Poppins,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
-.frame-16x9{aspect-ratio:16/9;position:relative;width:min(1200px,96vw);margin:2rem auto;border-radius:20px;overflow:hidden;background:linear-gradient(180deg, rgb(0 0 0 / 25%), rgb(0 0 0 / 25%));box-shadow:var(--shadow-lg)}
-.bg-photo{position:absolute;inset:0;background:url("/smart/images/netarhat.jpg") center/cover no-repeat fixed;filter:saturate(.9) contrast(1.1) brightness(.85);transform:translateZ(0)}
-.overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgb(17 35 28 / 65%), rgb(17 35 28 / 35%)), radial-gradient(1200px 600px at 80% 0%, rgb(149 213 178 / 15%), transparent 60%)}
-@media (prefers-reduced-motion:no-preference){.frame-16x9:hover .bg-photo{transform:scale(1.03);transition:transform var(--transition)}}
-.slide-header{position:relative;z-index:2;padding:clamp(20px,3.5vw,36px);color:var(--clr-white);text-shadow:0 2px 10px rgb(0 0 0 / 50%)}
-.slide-header h1{margin:0 0 .25rem;font-weight:700;letter-spacing:.2px;font-size:clamp(28px,3.2vw,40px)}
-.caption{margin:0;font-size:clamp(14px,1.6vw,16px);opacity:.95}
-.feature-grid{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,18px);padding:0 clamp(16px,3vw,28px) clamp(16px,3vw,28px)}
-@media (max-width:980px){.frame-16x9{aspect-ratio:auto;height:auto}.feature-grid{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:640px){.feature-grid{grid-template-columns:1fr}}
-.card{background:linear-gradient(180deg, rgb(255 255 255 / 88%), rgb(255 255 255 / 92%));border:1px solid rgb(27 67 50 / 12%);border-radius:var(--radius);overflow:clip;box-shadow:var(--shadow-sm);display:flex;flex-direction:column}
-.card-trigger{all:unset;cursor:pointer;display:grid;grid-template-columns:56px 1fr auto;align-items:center;gap:14px;padding:16px}
-.card-trigger:focus-visible{outline:3px solid var(--clr-mint);outline-offset:2px;border-radius:calc(var(--radius) - 2px)}
-.icon{width:44px;height:44px;filter:drop-shadow(0 2px 3px rgb(0 0 0 / 12%))}
-.card-text h2{margin:0 0 4px;font-size:18px;color:var(--clr-deep)}
-.card-text p{margin:0;color:#2a2a2a;font-size:14px}
-.card:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgb(0 0 0 / 16%);transition:transform var(--transition),box-shadow var(--transition)}
-.micro-anim{width:20px;height:20px;border-radius:50%;background:radial-gradient(circle at 30% 30%, var(--clr-mint), var(--clr-green));opacity:.75;transform:translateZ(0) scale(1)}
-@media (prefers-reduced-motion:no-preference){.card:hover .micro-anim{animation:floaty 1.6s ease-in-out infinite alternate}}
-@keyframes floaty{from{transform:translateY(-2px) scale(1);filter:brightness(1)}to{transform:translateY(3px) scale(1.08);filter:brightness(1.15)}}
-.card-panel{display:none;border-top:1px solid rgb(27 67 50 / 12%);background:linear-gradient(180deg, var(--clr-beige-2), #fff)}
-.card.expanded .card-panel{display:block}
-.demo{padding:14px 16px 18px}
-.btn{appearance:none;border:none;cursor:pointer;background:var(--clr-green);color:#fff;font-weight:600;padding:10px 14px;border-radius:12px;box-shadow:0 6px 14px rgb(45 106 79 / 25%)}
-.btn:hover{background:#276047}
-.btn:focus-visible{outline:3px solid var(--clr-mint);outline-offset:2px}
-.btn.icon{width:40px;height:40px;padding:0;border-radius:12px;font-size:20px}
-.input,.select{width:100%;max-width:420px;padding:10px 12px;border-radius:12px;border:1px solid rgb(27 67 50 / 24%);background:#fff}
-.label{display:block;margin-bottom:6px;font-weight:600;color:var(--clr-deep)}
-.list{margin:8px 0 0;padding-left:16px}
-.itinerary{margin:0 0 10px;padding-left:18px}
-.itinerary li{margin:6px 0}
-.map-shell{position:relative;border-radius:14px;overflow:hidden;border:1px solid rgb(27 67 50 / 20%);background:#e8efe9;height:220px}
-.map-viewport{width:100%;height:100%;transform-origin:center center;background:linear-gradient(90deg, rgb(255 255 255 / 30%), transparent)}
-.tile-grid{position:absolute;inset:0;background-image:linear-gradient(#cfded4 1px, transparent 1px),linear-gradient(90deg, #cfded4 1px, transparent 1px);background-size:40px 40px,40px 40px;opacity:.8}
-.map-pin{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--clr-deep);box-shadow:0 0 0 4px rgb(149 213 178 / 55%)}
-.meter{width:100%;max-width:520px;height:16px;border-radius:999px;overflow:hidden;background:linear-gradient(180deg,#e7efe8,#d8e7da);border:1px solid rgb(27 67 50 / 20%)}
-.meter-fill{height:100%;background:linear-gradient(90deg,var(--clr-mint),var(--clr-green));width:0%}
-@media (prefers-reduced-motion:no-preference){.meter-fill{transition:width 900ms ease}}
-.eco-readout{margin:8px 0;font-weight:700;color:var(--clr-deep)}
-.arvr-shell{position:relative;max-width:560px;border-radius:14px;overflow:hidden;border:1px solid rgb(27 67 50 / 20%)}
-.arvr-base,.arvr-overlay{display:block;width:100%;height:auto;object-fit:cover}
-.arvr-overlay{position:absolute;inset:0;clip-path:inset(0 50% 0 0);pointer-events:none}
-.range{width:100%;margin-top:10px}
-.hint{margin:6px 0 0;font-size:12px;color:#345;opacity:.9}
-@media (prefers-reduced-motion:reduce){
-  .frame-16x9:hover .bg-photo,.card:hover{transform:none!important}
-  .micro-anim,.meter-fill{animation:none!important;transition:none!important}
-}
+  /* ============================================================
+     SMART TOURISM — PREMIUM LOCAL NAVIGATION
+  ============================================================ */
 
+  .jt-smart-section-nav {
+    width: 100%;
+    padding: 14px 0 18px;
+
+    background:
+      linear-gradient(
+        180deg,
+        #f6f8f4 0%,
+        #ffffff 100%
+      );
+
+    border-bottom:
+      1px solid
+      rgba(18, 60, 43, 0.08);
+
+    position: relative;
+    z-index: 30;
+  }
+
+
+  .jt-smart-section-inner {
+    width:
+      min(1280px, calc(100% - 32px));
+
+    margin:
+      0 auto;
+  }
+
+
+  /* ============================================================
+     SECTION HEADER
+  ============================================================ */
+
+  .jt-smart-section-head {
+    display:
+      flex;
+
+    align-items:
+      center;
+
+    justify-content:
+      space-between;
+
+    gap:
+      22px;
+
+    margin-bottom:
+      11px;
+  }
+
+
+  .jt-smart-section-brand {
+    display:
+      flex;
+
+    align-items:
+      center;
+
+    gap:
+      12px;
+
+    min-width:
+      0;
+  }
+
+
+  .jt-smart-section-logo {
+    width:
+      42px;
+
+    height:
+      42px;
+
+    flex:
+      0 0 42px;
+
+    display:
+      grid;
+
+    place-items:
+      center;
+
+    border-radius:
+      13px;
+
+    background:
+      #0d3d2b;
+
+    color:
+      #f2d27a;
+
+    box-shadow:
+      0 7px 18px
+      rgba(13, 61, 43, 0.16);
+  }
+
+
+  .jt-smart-section-logo i {
+    font-size:
+      17px;
+  }
+
+
+  .jt-smart-section-copy {
+    min-width:
+      0;
+  }
+
+
+  .jt-smart-section-eyebrow {
+    display:
+      flex;
+
+    align-items:
+      center;
+
+    gap:
+      7px;
+
+    color:
+      #668073;
+
+    font-size:
+      9px;
+
+    font-weight:
+      900;
+
+    letter-spacing:
+      0.13em;
+
+    line-height:
+      1.2;
+
+    text-transform:
+      uppercase;
+  }
+
+
+  .jt-smart-section-eyebrow::before {
+    content:
+      "";
+
+    width:
+      6px;
+
+    height:
+      6px;
+
+    flex:
+      0 0 6px;
+
+    border-radius:
+      50%;
+
+    background:
+      #3d8b60;
+
+    box-shadow:
+      0 0 0 4px
+      rgba(61, 139, 96, 0.10);
+  }
+
+
+  .jt-smart-section-title {
+    margin:
+      2px 0 0;
+
+    color:
+      #123c2b;
+
+    font-size:
+      17px;
+
+    line-height:
+      1.15;
+
+    font-weight:
+      900;
+
+    letter-spacing:
+      -0.02em;
+  }
+
+
+  .jt-smart-section-subtitle {
+    margin:
+      3px 0 0;
+
+    color:
+      #708079;
+
+    font-size:
+      10px;
+
+    line-height:
+      1.35;
+  }
+
+
+  .jt-smart-section-meta {
+    flex:
+      0 0 auto;
+
+    display:
+      inline-flex;
+
+    align-items:
+      center;
+
+    gap:
+      8px;
+
+    padding:
+      8px 11px;
+
+    border:
+      1px solid
+      rgba(18, 60, 43, 0.10);
+
+    border-radius:
+      999px;
+
+    background:
+      #ffffff;
+
+    color:
+      #60746a;
+
+    font-size:
+      10px;
+
+    font-weight:
+      800;
+
+    white-space:
+      nowrap;
+  }
+
+
+  .jt-smart-section-meta strong {
+    color:
+      #123c2b;
+  }
+
+
+  /* ============================================================
+     NAVIGATION STRIP
+  ============================================================ */
+
+  .jt-smart-section-tabs-wrap {
+    overflow:
+      hidden;
+
+    border:
+      1px solid
+      rgba(18, 60, 43, 0.10);
+
+    border-radius:
+      16px;
+
+    background:
+      #ffffff;
+
+    box-shadow:
+      0 8px 24px
+      rgba(18, 60, 43, 0.07);
+  }
+
+
+  .jt-smart-section-tabs {
+    display:
+      grid;
+
+    grid-template-columns:
+      repeat(6, minmax(0, 1fr));
+
+    min-width:
+      0;
+  }
+
+
+  /* ============================================================
+     INDIVIDUAL TAB
+  ============================================================ */
+
+  .jt-smart-section-tab {
+    position:
+      relative;
+
+    display:
+      flex;
+
+    align-items:
+      center;
+
+    gap:
+      10px;
+
+    min-width:
+      0;
+
+    padding:
+      12px 12px;
+
+    border-right:
+      1px solid
+      rgba(18, 60, 43, 0.07);
+
+    background:
+      #ffffff;
+
+    color:
+      #52645d;
+
+    text-decoration:
+      none;
+
+    transition:
+      background 180ms ease,
+      color 180ms ease,
+      transform 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+
+  .jt-smart-section-tab:last-child {
+    border-right:
+      0;
+  }
+
+
+  .jt-smart-section-tab:hover {
+    background:
+      #f5f9f5;
+
+    color:
+      #123c2b;
+
+    text-decoration:
+      none;
+  }
+
+
+  .jt-smart-section-tab::after {
+    content:
+      "";
+
+    position:
+      absolute;
+
+    left:
+      12px;
+
+    right:
+      12px;
+
+    bottom:
+      0;
+
+    height:
+      3px;
+
+    border-radius:
+      3px 3px 0 0;
+
+    background:
+      transparent;
+
+    transition:
+      background 180ms ease;
+  }
+
+
+  /* ============================================================
+     TAB ICON
+  ============================================================ */
+
+  .jt-smart-section-tab-icon {
+    position:
+      relative;
+
+    width:
+      34px;
+
+    height:
+      34px;
+
+    flex:
+      0 0 34px;
+
+    display:
+      grid;
+
+    place-items:
+      center;
+
+    border:
+      1px solid
+      rgba(35, 96, 68, 0.10);
+
+    border-radius:
+      10px;
+
+    background:
+      #f1f6f2;
+
+    color:
+      #236044;
+
+    transition:
+      background 180ms ease,
+      color 180ms ease,
+      border-color 180ms ease;
+  }
+
+
+  .jt-smart-section-tab-icon i {
+    font-size:
+      13px;
+  }
+
+
+  /* ============================================================
+     TAB CONTENT
+  ============================================================ */
+
+  .jt-smart-section-tab-copy {
+    min-width:
+      0;
+
+    display:
+      flex;
+
+    flex-direction:
+      column;
+
+    gap:
+      2px;
+  }
+
+
+  .jt-smart-section-tab-top {
+    display:
+      flex;
+
+    align-items:
+      center;
+
+    gap:
+      6px;
+
+    min-width:
+      0;
+  }
+
+
+  .jt-smart-section-tab-number {
+    flex:
+      0 0 auto;
+
+    color:
+      #9aaa9f;
+
+    font-size:
+      8px;
+
+    font-weight:
+      900;
+
+    letter-spacing:
+      0.08em;
+  }
+
+
+  .jt-smart-section-tab-label {
+    overflow:
+      hidden;
+
+    color:
+      inherit;
+
+    font-size:
+      11px;
+
+    font-weight:
+      900;
+
+    line-height:
+      1.2;
+
+    text-overflow:
+      ellipsis;
+
+    white-space:
+      nowrap;
+  }
+
+
+  .jt-smart-section-tab-description {
+    overflow:
+      hidden;
+
+    color:
+      #829089;
+
+    font-size:
+      9px;
+
+    line-height:
+      1.3;
+
+    text-overflow:
+      ellipsis;
+
+    white-space:
+      nowrap;
+  }
+
+
+  /* ============================================================
+     ACTIVE TAB
+  ============================================================ */
+
+  .jt-smart-section-tab.active {
+    background:
+      #eef6f0;
+
+    color:
+      #0f3b29;
+
+    box-shadow:
+      inset 0 -1px 0
+      rgba(35, 96, 68, 0.04);
+  }
+
+
+  .jt-smart-section-tab.active::after {
+    background:
+      #236044;
+  }
+
+
+  .jt-smart-section-tab.active
+    .jt-smart-section-tab-icon {
+    border-color:
+      rgba(35, 96, 68, 0.16);
+
+    background:
+      #236044;
+
+    color:
+      #ffffff;
+  }
+
+
+  .jt-smart-section-tab.active
+    .jt-smart-section-tab-number {
+    color:
+      #4a7b60;
+  }
+
+
+  .jt-smart-section-tab.active
+    .jt-smart-section-tab-description {
+    color:
+      #5c7667;
+  }
+
+
+  .jt-smart-section-tab:focus-visible {
+    outline:
+      3px solid
+      rgba(167, 216, 187, 0.65);
+
+    outline-offset:
+      -3px;
+  }
+
+
+  /* ============================================================
+     RESPONSIVE TABLET
+  ============================================================ */
+
+  @media (max-width: 1100px) {
+
+    .jt-smart-section-tabs {
+      display:
+        flex;
+
+      overflow-x:
+        auto;
+
+      scrollbar-width:
+        thin;
+    }
+
+
+    .jt-smart-section-tab {
+      flex:
+        0 0 190px;
+    }
+
+
+    .jt-smart-section-tab:last-child {
+      border-right:
+        1px solid
+        rgba(18, 60, 43, 0.07);
+    }
+  }
+
+
+  /* ============================================================
+     RESPONSIVE MOBILE
+  ============================================================ */
+
+  @media (max-width: 720px) {
+
+    .jt-smart-section-inner {
+      width:
+        min(
+          100% - 20px,
+          1280px
+        );
+    }
+
+
+    .jt-smart-section-head {
+      align-items:
+        flex-start;
+
+      margin-bottom:
+        9px;
+    }
+
+
+    .jt-smart-section-subtitle {
+      display:
+        none;
+    }
+
+
+    .jt-smart-section-meta {
+      padding:
+        7px 9px;
+
+      font-size:
+        9px;
+    }
+
+
+    .jt-smart-section-tabs-wrap {
+      border-radius:
+        14px;
+    }
+
+
+    .jt-smart-section-tab {
+      flex:
+        0 0 175px;
+
+      padding:
+        11px 11px;
+    }
+
+
+    .jt-smart-section-tab-icon {
+      width:
+        32px;
+
+      height:
+        32px;
+
+      flex-basis:
+        32px;
+    }
+  }
+
+
+  /* ============================================================
+     SMALL MOBILE
+  ============================================================ */
+
+  @media (max-width: 460px) {
+
+    .jt-smart-section-logo {
+      width:
+        38px;
+
+      height:
+        38px;
+
+      flex-basis:
+        38px;
+    }
+
+
+    .jt-smart-section-title {
+      font-size:
+        15px;
+    }
+
+
+    .jt-smart-section-meta {
+      display:
+        none;
+    }
+
+
+    .jt-smart-section-tab {
+      flex-basis:
+        165px;
+    }
+  }
+
+
+  /* ============================================================
+     REDUCED MOTION
+  ============================================================ */
+
+  @media (prefers-reduced-motion: reduce) {
+
+    .jt-smart-section-tab,
+    .jt-smart-section-tab-icon,
+    .jt-smart-section-tab::after {
+      transition:
+        none !important;
+    }
+  }
 </style>
 
 
+<!-- ============================================================
+     SINGLE SMART TOURISM SECTION NAVIGATION
+============================================================ -->
+
+<nav
+  class="jt-smart-section-nav"
+  aria-label="Smart Tourism navigation"
+>
+
+  <div class="jt-smart-section-inner">
+
+    <!-- ======================================================
+         SECTION HEADER
+    ======================================================= -->
+
+    <div class="jt-smart-section-head">
+
+      <a
+        href="/smart-tourism"
+        class="jt-smart-section-brand"
+        aria-label="Smart Tourism overview"
+      >
+
+        <span
+          class="jt-smart-section-logo"
+          aria-hidden="true"
+        >
+          <i class="fa-solid fa-compass"></i>
+        </span>
+
+        <span class="jt-smart-section-copy">
+
+          <span class="jt-smart-section-eyebrow">
+            Smart Tourism Platform
+          </span>
+
+          <span class="jt-smart-section-title">
+            Smart Tourism
+          </span>
+
+          <span class="jt-smart-section-subtitle">
+            Explore the intelligent travel ecosystem for Jharkhand
+          </span>
+
+        </span>
+
+      </a>
 
 
+      <span class="jt-smart-section-meta">
+        <strong>06</strong>
+        <span>Modules</span>
+      </span>
 
+    </div>
+
+
+    <!-- ======================================================
+         NAVIGATION TABS
+    ======================================================= -->
+
+    <div
+      class="jt-smart-section-tabs-wrap"
+    >
+
+      <div
+        class="jt-smart-section-tabs"
+        role="list"
+        aria-label="Smart Tourism modules"
+      >
+
+        <% smartTabs.forEach((tab) => { %>
+
+          <a
+            href="<%= tab.href %>"
+            class="jt-smart-section-tab <%= smartIsActive(tab.href) ? 'active' : '' %>"
+            role="listitem"
+            <%= smartIsActive(tab.href)
+              ? 'aria-current="page"'
+              : '' %>
+          >
+
+            <span
+              class="jt-smart-section-tab-icon"
+              aria-hidden="true"
+            >
+              <i
+                class="fa-solid <%= tab.icon %>"
+              ></i>
+            </span>
+
+
+            <span
+              class="jt-smart-section-tab-copy"
+            >
+
+              <span
+                class="jt-smart-section-tab-top"
+              >
+
+                <span
+                  class="jt-smart-section-tab-number"
+                  aria-hidden="true"
+                >
+                  <%= tab.number %>
+                </span>
+
+                <span
+                  class="jt-smart-section-tab-label"
+                >
+                  <%= tab.label %>
+                </span>
+
+              </span>
+
+
+              <span
+                class="jt-smart-section-tab-description"
+              >
+                <%= tab.description %>
+              </span>
+
+            </span>
+
+          </a>
+
+        <% }) %>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</nav>
+
+
+<script>
+(() => {
+  "use strict";
+
+  /*
+   * Keep the active module visible on
+   * tablet and mobile horizontal scrolling.
+   */
+
+  const nav =
+    document.querySelector(
+      ".jt-smart-section-tabs"
+    );
+
+  if (!nav) {
+    return;
+  }
+
+  const active =
+    nav.querySelector(
+      "a.active"
+    );
+
+  if (!active) {
+    return;
+  }
+
+  const isOverflowing =
+    nav.scrollWidth >
+    nav.clientWidth;
+
+  if (!isOverflowing) {
+    return;
+  }
+
+  const reducedMotion =
+    window.matchMedia &&
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+  window.requestAnimationFrame(() => {
+
+    active.scrollIntoView({
+      block: "nearest",
+      inline: "center",
+      behavior:
+        reducedMotion
+          ? "auto"
+          : "smooth"
+    });
+
+  });
+
+})();
+</script>

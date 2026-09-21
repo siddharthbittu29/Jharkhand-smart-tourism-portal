@@ -1,127 +1,228 @@
-<!-- ========================================= -->
-<!-- AI JOURNEY TIMELINE -->
-<!-- ========================================= -->
+<!-- =========================================================
+     JHARKHAND TOURISM — AI JOURNEY TIMELINE
+========================================================= -->
 
-<section id="timeline" class="timeline-section">
+<section id="timeline" class="timeline-section" aria-labelledby="timeline-title">
 
     <div class="section-heading">
 
         <span class="section-badge">
-
-            🗺 Journey Planner
-
+            <i class="fa-solid fa-route" aria-hidden="true"></i>
+            AI Journey Planner
         </span>
 
-        <h2>
-
-            AI Generated Travel Timeline
-
+        <h2 id="timeline-title">
+            Your day-by-day journey
         </h2>
 
         <p>
-
-            Follow your complete day-by-day itinerary planned by AI.
-
+            Follow your personalized itinerary with destinations,
+            estimated costs and practical travel details for each day.
         </p>
 
     </div>
 
-    <% itinerary.forEach((item,index)=>{ %>
 
-    <div class="timeline-item">
+    <% if (Array.isArray(itinerary) && itinerary.length) { %>
 
-        <div class="timeline-left">
+        <div class="timeline-list">
 
-            <div class="timeline-circle">
+            <% itinerary.forEach((item, index) => { 
 
-                <%= item.day || (index+1) %>
+                const dayNumber = item && typeof item === "object"
+                    ? (item.day || (index + 1))
+                    : (index + 1);
 
-            </div>
+                const placeName = item && typeof item === "object"
+                    ? (item.place || "Jharkhand destination")
+                    : String(item || "Jharkhand destination");
 
-            <% if(index != itinerary.length-1){ %>
+                const imageUrl = item && typeof item === "object"
+                    ? item.image
+                    : "";
 
-            <div class="timeline-line"></div>
+                const description = item && typeof item === "object"
+                    ? item.description
+                    : "";
 
-            <% } %>
+                const dayCost = item && typeof item === "object"
+                    ? item.cost
+                    : "";
+
+            %>
+
+                <article class="timeline-item">
+
+                    <!-- =====================================
+                         TIMELINE MARKER
+                    ====================================== -->
+
+                    <div class="timeline-left" aria-hidden="true">
+
+                        <div class="timeline-circle">
+                            <span>
+                                <%= dayNumber %>
+                            </span>
+                        </div>
+
+                        <% if (index !== itinerary.length - 1) { %>
+                            <div class="timeline-line"></div>
+                        <% } %>
+
+                    </div>
+
+
+                    <!-- =====================================
+                         JOURNEY CARD
+                    ====================================== -->
+
+                    <div class="timeline-card">
+
+                        <!-- Destination Image -->
+
+                        <div class="timeline-image">
+
+                            <% if (imageUrl) { %>
+
+                                <img
+                                    src="<%= imageUrl %>"
+                                    alt="<%= placeName %>"
+                                    loading="<%= index === 0 ? 'eager' : 'lazy' %>"
+                                    decoding="async"
+                                    onerror="this.style.display='none'; this.parentElement.classList.add('timeline-image-fallback');"
+                                >
+
+                                <div
+                                    class="timeline-image-fallback-content"
+                                    aria-hidden="true"
+                                >
+                                    <i class="fa-solid fa-mountain-sun"></i>
+                                </div>
+
+                            <% } else { %>
+
+                                <div class="timeline-image-placeholder">
+                                    <i class="fa-solid fa-mountain-sun" aria-hidden="true"></i>
+                                    <span>Jharkhand</span>
+                                </div>
+
+                            <% } %>
+
+                            <span class="timeline-day-label">
+                                Day <%= dayNumber %>
+                            </span>
+
+                        </div>
+
+
+                        <!-- Journey Information -->
+
+                        <div class="timeline-content">
+
+                            <div class="timeline-top">
+
+                                <div>
+
+                                    <span class="timeline-kicker">
+                                        <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+                                        Day <%= dayNumber %>
+                                    </span>
+
+                                    <h3>
+                                        <%= placeName %>
+                                    </h3>
+
+                                </div>
+
+
+                                <% if (dayCost !== undefined && dayCost !== null && dayCost !== "") { %>
+
+                                    <span class="timeline-price">
+
+                                        <i
+                                            class="fa-solid fa-indian-rupee-sign"
+                                            aria-hidden="true">
+                                        </i>
+
+                                        <%= Number(dayCost) === Number(dayCost)
+                                            ? Number(dayCost).toLocaleString("en-IN")
+                                            : dayCost %>
+
+                                    </span>
+
+                                <% } %>
+
+                            </div>
+
+
+                            <% if (description) { %>
+
+                                <p class="timeline-description">
+                                    <%= description %>
+                                </p>
+
+                            <% } %>
+
+
+                            <!-- Journey Attributes -->
+
+                            <div class="timeline-tags">
+
+                                <span>
+                                    <i class="fa-solid fa-leaf" aria-hidden="true"></i>
+                                    Eco Friendly
+                                </span>
+
+                                <span>
+                                    <i class="fa-solid fa-camera" aria-hidden="true"></i>
+                                    Photography
+                                </span>
+
+                                <span>
+                                    <i class="fa-solid fa-road" aria-hidden="true"></i>
+                                    Easy Access
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            <% }) %>
 
         </div>
 
-        <div class="timeline-card">
+    <% } else { %>
 
-            <div class="timeline-image">
+        <!-- =====================================
+             EMPTY ITINERARY STATE
+        ====================================== -->
 
-                <img
+        <div class="planner-empty-state">
 
-                    src="<%= item.image %>"
-
-                    alt="<%= item.place %>"
-
-                >
-
+            <div class="planner-empty-icon" aria-hidden="true">
+                <i class="fa-solid fa-route"></i>
             </div>
 
-            <div class="timeline-content">
+            <h3>
+                Your journey timeline is unavailable
+            </h3>
 
-                <div class="timeline-top">
+            <p>
+                We couldn't generate the day-by-day itinerary right now.
+                Please try generating the travel plan again.
+            </p>
 
-                    <h3>
-
-                        Day <%= item.day || (index+1) %>
-
-                    </h3>
-
-                    <span class="timeline-price">
-
-                        ₹ <%= item.cost || "-" %>
-
-                    </span>
-
-                </div>
-
-                <h4>
-
-                    <%= item.place || item %>
-
-                </h4>
-
-                <% if(item.description){ %>
-
-                <p>
-
-                    <%= item.description %>
-
-                </p>
-
-                <% } %>
-
-                <div class="timeline-tags">
-
-                    <span>
-
-                        🌱 Eco Friendly
-
-                    </span>
-
-                    <span>
-
-                        📸 Photography
-
-                    </span>
-
-                    <span>
-
-                        🚗 Easy Access
-
-                    </span>
-
-                </div>
-
-            </div>
+            <a href="/planner" class="hero-btn">
+                <i class="fa-solid fa-rotate-right" aria-hidden="true"></i>
+                Create New Plan
+            </a>
 
         </div>
 
-    </div>
-
-    <% }) %>
+    <% } %>
 
 </section>

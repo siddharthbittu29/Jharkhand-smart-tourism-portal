@@ -1,0 +1,1196 @@
+/* =========================================================
+   JHARKHAND TOURISM — HOTEL DETAIL
+   Premium accommodation detail experience
+   ========================================================= */
+
+:root {
+  --hotel-detail-green: #12372a;
+  --hotel-detail-green-dark: #0b241b;
+  --hotel-detail-green-soft: #eaf3ee;
+
+  --hotel-detail-gold: #c9a34e;
+  --hotel-detail-gold-soft: #f7f0df;
+
+  --hotel-detail-cream: #f7f5ef;
+  --hotel-detail-white: #ffffff;
+  --hotel-detail-surface: #fbfaf7;
+
+  --hotel-detail-text: #17211c;
+  --hotel-detail-muted: #68746e;
+  --hotel-detail-border: #e1e6e2;
+
+  --hotel-detail-success: #28734f;
+  --hotel-detail-danger: #a94442;
+
+  --hotel-detail-shadow-sm:
+    0 8px 24px rgba(18, 55, 42, 0.07);
+
+  --hotel-detail-shadow:
+    0 18px 48px rgba(18, 55, 42, 0.11);
+
+  --hotel-detail-shadow-hover:
+    0 24px 60px rgba(18, 55, 42, 0.15);
+
+  --hotel-detail-radius: 18px;
+  --hotel-detail-radius-lg: 26px;
+  --hotel-detail-container: 1240px;
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.jt-hotel-detail-page {
+  min-height: 100vh;
+  background:
+    linear-gradient(
+      180deg,
+      var(--hotel-detail-cream) 0,
+      var(--hotel-detail-cream) 420px,
+      #ffffff 850px,
+      #ffffff 100%
+    );
+  color: var(--hotel-detail-text);
+}
+
+.jt-hotel-detail-container {
+  width: min(100% - 40px, var(--hotel-detail-container));
+  margin-inline: auto;
+}
+
+
+/* =========================================================
+   TOP NAVIGATION
+   ========================================================= */
+
+.jt-hotel-detail-top {
+  position: relative;
+  z-index: 5;
+  border-bottom: 1px solid rgba(18, 55, 42, 0.07);
+  background: rgba(247, 245, 239, 0.94);
+}
+
+.jt-hotel-detail-top .jt-hotel-detail-container {
+  min-height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.jt-hotel-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--hotel-detail-green);
+  font-size: 0.8rem;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.jt-hotel-back i {
+  transition: transform 160ms ease;
+}
+
+.jt-hotel-back:hover {
+  color: var(--hotel-detail-green-dark);
+}
+
+.jt-hotel-back:hover i {
+  transform: translateX(-3px);
+}
+
+.jt-hotel-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  color: var(--hotel-detail-muted);
+  font-size: 0.73rem;
+}
+
+.jt-hotel-breadcrumb a {
+  color: var(--hotel-detail-muted);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.jt-hotel-breadcrumb a:hover {
+  color: var(--hotel-detail-green);
+}
+
+.jt-hotel-breadcrumb i {
+  color: #a3aca7;
+  font-size: 0.58rem;
+}
+
+.jt-hotel-breadcrumb span {
+  max-width: 230px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.jt-hotel-detail-hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--hotel-detail-green-dark);
+}
+
+.jt-hotel-detail-hero-image {
+  position: relative;
+  min-height: 510px;
+}
+
+.jt-hotel-detail-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.jt-hotel-detail-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(6, 25, 18, 0.90) 0%,
+      rgba(8, 32, 23, 0.68) 46%,
+      rgba(8, 32, 23, 0.24) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(4, 19, 14, 0.78) 0%,
+      transparent 58%
+    );
+}
+
+.jt-hotel-detail-hero-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 70px 0;
+}
+
+.jt-hotel-detail-hero-copy {
+  max-width: 850px;
+  color: #ffffff;
+}
+
+.jt-hotel-detail-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 17px;
+  padding: 7px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.19);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.09);
+  color: #f1dfac;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+
+.jt-hotel-detail-eyebrow i {
+  font-size: 0.68rem;
+}
+
+.jt-hotel-detail-hero h1 {
+  max-width: 900px;
+  margin: 0;
+  color: #ffffff;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2.6rem, 6vw, 5.4rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+}
+
+.jt-hotel-detail-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 21px;
+}
+
+.jt-hotel-detail-meta > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 34px;
+  padding: 0 11px;
+  border: 1px solid rgba(255, 255, 255, 0.17);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 0.76rem;
+  font-weight: 750;
+  backdrop-filter: blur(7px);
+}
+
+.jt-hotel-detail-meta i {
+  color: #e5c875;
+}
+
+.jt-hotel-detail-meta .jt-hotel-detail-rating {
+  color: #ffffff;
+}
+
+.jt-hotel-detail-meta .jt-hotel-detail-rating i {
+  color: var(--hotel-detail-gold);
+}
+
+
+/* =========================================================
+   CONTENT LAYOUT
+   ========================================================= */
+
+.jt-hotel-detail-content {
+  padding: 62px 0 95px;
+}
+
+.jt-hotel-detail-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 350px;
+  align-items: start;
+  gap: 30px;
+}
+
+.jt-hotel-detail-main {
+  display: grid;
+  gap: 24px;
+  min-width: 0;
+}
+
+.jt-hotel-detail-sidebar {
+  position: sticky;
+  top: 90px;
+  display: grid;
+  gap: 18px;
+}
+
+
+/* =========================================================
+   COMMON CONTENT CARD
+   ========================================================= */
+
+.jt-hotel-detail-card {
+  padding: 31px;
+  border: 1px solid var(--hotel-detail-border);
+  border-radius: var(--hotel-detail-radius);
+  background: var(--hotel-detail-white);
+  box-shadow: var(--hotel-detail-shadow-sm);
+}
+
+.jt-hotel-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.jt-hotel-section-icon {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 45px;
+  height: 45px;
+  border-radius: 13px;
+  background: var(--hotel-detail-green-soft);
+  color: var(--hotel-detail-green);
+}
+
+.jt-hotel-section-icon i {
+  font-size: 0.95rem;
+}
+
+.jt-hotel-section-kicker {
+  margin: 0 0 3px;
+  color: var(--hotel-detail-gold);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.jt-hotel-section-heading h2 {
+  margin: 0;
+  color: var(--hotel-detail-green);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.75rem;
+  line-height: 1.15;
+}
+
+.jt-hotel-description {
+  margin: 0;
+  color: var(--hotel-detail-muted);
+  font-size: 0.96rem;
+  line-height: 1.9;
+}
+
+
+/* =========================================================
+   ADDRESS
+   ========================================================= */
+
+.jt-hotel-address-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  margin-bottom: 20px;
+  padding: 15px 16px;
+  border: 1px solid #dfe8e2;
+  border-radius: 13px;
+  background: var(--hotel-detail-surface);
+}
+
+.jt-hotel-address-box > i {
+  flex: 0 0 auto;
+  margin-top: 3px;
+  color: var(--hotel-detail-gold);
+}
+
+.jt-hotel-address-box strong,
+.jt-hotel-address-box span {
+  display: block;
+}
+
+.jt-hotel-address-box strong {
+  margin-bottom: 3px;
+  color: var(--hotel-detail-green);
+  font-size: 0.85rem;
+}
+
+.jt-hotel-address-box span {
+  color: var(--hotel-detail-muted);
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   MAP
+   ========================================================= */
+
+.jt-hotel-map {
+  position: relative;
+  min-height: 350px;
+  overflow: hidden;
+  border-radius: 15px;
+  background: #e9eeeb;
+}
+
+.jt-hotel-map iframe {
+  display: block;
+  width: 100%;
+  height: 350px;
+  border: 0;
+}
+
+.jt-hotel-map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 13px;
+  color: var(--hotel-detail-green);
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.jt-hotel-map-link i:last-child {
+  font-size: 0.65rem;
+}
+
+.jt-hotel-map-link:hover {
+  color: var(--hotel-detail-gold);
+}
+
+
+/* =========================================================
+   BOOKING CARD
+   ========================================================= */
+
+.jt-hotel-booking-card {
+  padding: 23px;
+  border: 1px solid rgba(18, 55, 42, 0.08);
+  border-radius: var(--hotel-detail-radius);
+  background: #ffffff;
+  box-shadow: var(--hotel-detail-shadow);
+}
+
+.jt-hotel-booking-label {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--hotel-detail-muted);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.jt-hotel-booking-price {
+  color: var(--hotel-detail-green);
+  font-size: 1.8rem;
+  font-weight: 950;
+  line-height: 1.15;
+}
+
+.jt-hotel-booking-price small {
+  color: var(--hotel-detail-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.jt-hotel-availability-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 20px 0;
+  padding: 13px;
+  border: 1px solid #dce9e1;
+  border-radius: 12px;
+  background: #f4faf6;
+}
+
+.jt-hotel-availability-dot {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: #3f9868;
+  box-shadow: 0 0 0 4px rgba(63, 152, 104, 0.12);
+}
+
+.jt-hotel-availability-box strong,
+.jt-hotel-availability-box small {
+  display: block;
+}
+
+.jt-hotel-availability-box strong {
+  color: var(--hotel-detail-success);
+  font-size: 0.77rem;
+}
+
+.jt-hotel-availability-box small {
+  margin-top: 2px;
+  color: var(--hotel-detail-muted);
+  font-size: 0.68rem;
+}
+
+.jt-hotel-booking-actions {
+  display: grid;
+  gap: 9px;
+}
+
+.jt-hotel-primary-action,
+.jt-hotel-secondary-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 45px;
+  padding: 0 14px;
+  border-radius: 11px;
+  font: inherit;
+  font-size: 0.79rem;
+  font-weight: 850;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.jt-hotel-primary-action {
+  border: 1px solid var(--hotel-detail-green);
+  background: var(--hotel-detail-green);
+  color: #ffffff;
+}
+
+.jt-hotel-primary-action:hover {
+  border-color: var(--hotel-detail-green-dark);
+  background: var(--hotel-detail-green-dark);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.jt-hotel-secondary-action {
+  border: 1px solid var(--hotel-detail-border);
+  background: #ffffff;
+  color: var(--hotel-detail-green);
+}
+
+.jt-hotel-secondary-action:hover {
+  border-color: var(--hotel-detail-green);
+  background: var(--hotel-detail-green-soft);
+}
+
+.jt-hotel-secondary-action.is-active {
+  border-color: rgba(169, 68, 66, 0.25);
+  background: #fff5f4;
+  color: var(--hotel-detail-danger);
+}
+
+
+/* =========================================================
+   QUICK INFORMATION
+   ========================================================= */
+
+.jt-hotel-quick-card {
+  padding: 22px;
+  border: 1px solid var(--hotel-detail-border);
+  border-radius: var(--hotel-detail-radius);
+  background: #ffffff;
+  box-shadow: var(--hotel-detail-shadow-sm);
+}
+
+.jt-hotel-sidebar-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  color: var(--hotel-detail-green);
+  font-size: 0.87rem;
+  font-weight: 900;
+}
+
+.jt-hotel-sidebar-heading i {
+  color: var(--hotel-detail-gold);
+}
+
+.jt-hotel-quick-list {
+  border-top: 1px solid var(--hotel-detail-border);
+}
+
+.jt-hotel-quick-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--hotel-detail-border);
+}
+
+.jt-hotel-quick-item:last-child {
+  border-bottom: 0;
+}
+
+.jt-hotel-quick-item span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--hotel-detail-muted);
+  font-size: 0.73rem;
+}
+
+.jt-hotel-quick-item span i {
+  width: 14px;
+  color: var(--hotel-detail-gold);
+  text-align: center;
+}
+
+.jt-hotel-quick-item strong {
+  color: var(--hotel-detail-green);
+  font-size: 0.75rem;
+  text-align: right;
+}
+
+
+/* =========================================================
+   PLANNER CARD
+   ========================================================= */
+
+.jt-hotel-planner-card {
+  position: relative;
+  overflow: hidden;
+  padding: 25px;
+  border-radius: var(--hotel-detail-radius);
+  background: var(--hotel-detail-green);
+  color: #ffffff;
+}
+
+.jt-hotel-planner-card::after {
+  content: "";
+  position: absolute;
+  right: -90px;
+  bottom: -120px;
+  width: 270px;
+  height: 270px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 50%;
+}
+
+.jt-hotel-planner-icon {
+  position: relative;
+  z-index: 1;
+  display: inline-grid;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  margin-bottom: 17px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.10);
+  color: #e4ca80;
+}
+
+.jt-hotel-planner-kicker {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 6px;
+  color: #e4ca80;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.jt-hotel-planner-card h3 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: #ffffff;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.35rem;
+  line-height: 1.25;
+}
+
+.jt-hotel-planner-card > p:not(.jt-hotel-planner-kicker) {
+  position: relative;
+  z-index: 1;
+  margin: 10px 0 17px;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.78rem;
+  line-height: 1.65;
+}
+
+.jt-hotel-planner-card > a {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff;
+  font-size: 0.77rem;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.jt-hotel-planner-card > a:hover {
+  color: #e4ca80;
+}
+
+
+/* =========================================================
+   NEARBY HOTELS
+   ========================================================= */
+
+.jt-hotel-nearby {
+  padding-top: 7px;
+}
+
+.jt-hotel-nearby .jt-hotel-section-heading {
+  margin-bottom: 18px;
+}
+
+.jt-hotel-nearby-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.jt-nearby-hotel-card {
+  display: grid;
+  grid-template-columns: 125px minmax(0, 1fr);
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--hotel-detail-border);
+  border-radius: 15px;
+  background: #ffffff;
+  color: inherit;
+  text-decoration: none;
+  box-shadow: var(--hotel-detail-shadow-sm);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.jt-nearby-hotel-card:hover {
+  border-color: rgba(18, 55, 42, 0.16);
+  box-shadow: var(--hotel-detail-shadow-hover);
+  transform: translateY(-3px);
+}
+
+.jt-nearby-hotel-image {
+  min-height: 170px;
+  overflow: hidden;
+  background: var(--hotel-detail-green-soft);
+}
+
+.jt-nearby-hotel-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 300ms ease;
+}
+
+.jt-nearby-hotel-card:hover .jt-nearby-hotel-image img {
+  transform: scale(1.04);
+}
+
+.jt-nearby-hotel-body {
+  min-width: 0;
+  padding: 17px;
+}
+
+.jt-nearby-hotel-location {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 7px;
+  color: var(--hotel-detail-muted);
+  font-size: 0.67rem;
+  font-weight: 800;
+}
+
+.jt-nearby-hotel-location i {
+  color: var(--hotel-detail-gold);
+}
+
+.jt-nearby-hotel-body h3 {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  color: var(--hotel-detail-green);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.05rem;
+  line-height: 1.3;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.jt-nearby-hotel-rating,
+.jt-nearby-hotel-price {
+  display: block;
+  margin-top: 9px;
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.jt-nearby-hotel-rating {
+  color: var(--hotel-detail-green);
+}
+
+.jt-nearby-hotel-rating i {
+  color: var(--hotel-detail-gold);
+}
+
+.jt-nearby-hotel-price {
+  color: var(--hotel-detail-muted);
+}
+
+
+/* =========================================================
+   BOTTOM CTA
+   ========================================================= */
+
+.jt-hotel-bottom-cta {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  margin-top: 70px;
+  padding: 34px 38px;
+  border-radius: var(--hotel-detail-radius-lg);
+  background: var(--hotel-detail-green);
+  color: #ffffff;
+}
+
+.jt-hotel-bottom-cta::after {
+  content: "";
+  position: absolute;
+  right: -110px;
+  bottom: -170px;
+  width: 360px;
+  height: 360px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+}
+
+.jt-hotel-bottom-cta-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.jt-hotel-bottom-icon {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.10);
+  color: #e4ca80;
+}
+
+.jt-hotel-bottom-cta-content p {
+  margin: 0 0 3px;
+  color: #e4ca80;
+  font-size: 0.67rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.jt-hotel-bottom-cta-content h2 {
+  margin: 0;
+  color: #ffffff;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.45rem;
+}
+
+.jt-hotel-bottom-btn {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 17px;
+  border-radius: 10px;
+  background: #ffffff;
+  color: var(--hotel-detail-green);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.jt-hotel-bottom-btn:hover {
+  color: var(--hotel-detail-green-dark);
+  box-shadow: 0 9px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET
+   ========================================================= */
+
+@media (max-width: 1050px) {
+  .jt-hotel-detail-layout {
+    grid-template-columns: minmax(0, 1fr) 310px;
+    gap: 22px;
+  }
+
+  .jt-hotel-detail-hero-image {
+    min-height: 470px;
+  }
+
+  .jt-nearby-hotel-card {
+    grid-template-columns: 105px minmax(0, 1fr);
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE — SMALL TABLET
+   ========================================================= */
+
+@media (max-width: 850px) {
+  .jt-hotel-detail-container {
+    width: min(100% - 28px, var(--hotel-detail-container));
+  }
+
+  .jt-hotel-detail-top .jt-hotel-detail-container {
+    min-height: 56px;
+  }
+
+  .jt-hotel-breadcrumb {
+    display: none;
+  }
+
+  .jt-hotel-detail-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .jt-hotel-detail-sidebar {
+    position: static;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .jt-hotel-booking-card {
+    grid-column: 1 / -1;
+  }
+
+  .jt-hotel-planner-card {
+    min-height: 100%;
+  }
+
+  .jt-hotel-detail-hero-image {
+    min-height: 450px;
+  }
+
+  .jt-hotel-detail-hero-content {
+    padding: 52px 0;
+  }
+
+  .jt-hotel-bottom-cta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .jt-hotel-bottom-btn {
+    width: 100%;
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+   ========================================================= */
+
+@media (max-width: 620px) {
+  .jt-hotel-detail-container {
+    width: min(100% - 22px, var(--hotel-detail-container));
+  }
+
+  .jt-hotel-detail-content {
+    padding: 40px 0 65px;
+  }
+
+  .jt-hotel-detail-hero-image {
+    min-height: 430px;
+  }
+
+  .jt-hotel-detail-hero-overlay {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(6, 25, 18, 0.90),
+        rgba(8, 32, 23, 0.52)
+      ),
+      linear-gradient(
+        0deg,
+        rgba(4, 19, 14, 0.86),
+        transparent 65%
+      );
+  }
+
+  .jt-hotel-detail-hero-content {
+    padding: 38px 0 45px;
+  }
+
+  .jt-hotel-detail-eyebrow {
+    margin-bottom: 13px;
+  }
+
+  .jt-hotel-detail-hero h1 {
+    font-size: 2.65rem;
+  }
+
+  .jt-hotel-detail-meta {
+    gap: 7px;
+    margin-top: 16px;
+  }
+
+  .jt-hotel-detail-meta > span {
+    font-size: 0.69rem;
+  }
+
+  .jt-hotel-detail-card {
+    padding: 23px 18px;
+    border-radius: 15px;
+  }
+
+  .jt-hotel-section-heading {
+    margin-bottom: 18px;
+  }
+
+  .jt-hotel-section-heading h2 {
+    font-size: 1.48rem;
+  }
+
+  .jt-hotel-description {
+    font-size: 0.89rem;
+    line-height: 1.8;
+  }
+
+  .jt-hotel-map,
+  .jt-hotel-map iframe {
+    min-height: 280px;
+    height: 280px;
+  }
+
+  .jt-hotel-detail-sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .jt-hotel-booking-card {
+    grid-column: auto;
+  }
+
+  .jt-hotel-nearby-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .jt-nearby-hotel-card {
+    grid-template-columns: 115px minmax(0, 1fr);
+  }
+
+  .jt-nearby-hotel-image {
+    min-height: 155px;
+  }
+
+  .jt-hotel-bottom-cta {
+    margin-top: 45px;
+    padding: 26px 21px;
+    border-radius: 19px;
+  }
+
+  .jt-hotel-bottom-cta-content {
+    align-items: flex-start;
+  }
+
+  .jt-hotel-bottom-cta-content h2 {
+    font-size: 1.2rem;
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE — SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 420px) {
+  .jt-hotel-detail-top .jt-hotel-detail-container {
+    min-height: 52px;
+  }
+
+  .jt-hotel-back span {
+    font-size: 0.74rem;
+  }
+
+  .jt-hotel-detail-hero-image {
+    min-height: 400px;
+  }
+
+  .jt-hotel-detail-hero h1 {
+    font-size: 2.25rem;
+  }
+
+  .jt-hotel-detail-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .jt-hotel-detail-meta > span {
+    justify-content: center;
+  }
+
+  .jt-hotel-detail-meta > span:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .jt-hotel-address-box {
+    padding: 13px;
+  }
+
+  .jt-nearby-hotel-card {
+    grid-template-columns: 100px minmax(0, 1fr);
+  }
+
+  .jt-nearby-hotel-body {
+    padding: 13px;
+  }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+.jt-hotel-detail-page
+  a:focus-visible,
+.jt-hotel-detail-page
+  button:focus-visible {
+  outline: 3px solid rgba(201, 163, 78, 0.55);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jt-hotel-back i,
+  .jt-hotel-primary-action,
+  .jt-hotel-secondary-action,
+  .jt-nearby-hotel-card,
+  .jt-nearby-hotel-image img,
+  .jt-hotel-bottom-btn {
+    transition: none;
+  }
+
+  .jt-hotel-back:hover i,
+  .jt-hotel-primary-action:hover,
+  .jt-nearby-hotel-card:hover,
+  .jt-nearby-hotel-card:hover .jt-nearby-hotel-image img,
+  .jt-hotel-bottom-btn:hover {
+    transform: none;
+  }
+}
+
+
+/* =========================================================
+   PRINT
+   ========================================================= */
+
+@media print {
+  .jt-hotel-detail-top {
+    display: none;
+  }
+
+  .jt-hotel-detail-hero-image {
+    min-height: 300px;
+  }
+
+  .jt-hotel-detail-sidebar {
+    position: static;
+  }
+
+  .jt-hotel-planner-card,
+  .jt-hotel-bottom-cta {
+    display: none;
+  }
+
+  .jt-hotel-detail-card,
+  .jt-hotel-quick-card,
+  .jt-hotel-booking-card {
+    box-shadow: none;
+  }
+}

@@ -1,56 +1,260 @@
-<div class="brand text-center mb-4">
-  <img
-    src="/images/jharkhand_tourism_logo_final.png"
-    alt="Jharkhand Tourism"
-    style="height:90px;"
-  >
+<main class="jt-auth-page">
 
-  <h2 class="mt-3 fw-bold text-success">
-    Welcome Back
-  </h2>
+  <!-- =====================================================
+       VISUAL PANEL
+       ===================================================== -->
 
-  <p class="text-muted">
-    Login to continue your tourism journey
-  </p>
-</div>
+  <section class="jt-auth-visual">
 
-<form method="POST" action="/auth/login">
+    <div class="jt-auth-visual-image"></div>
 
-  <div class="mb-3">
-    <label class="form-label">Email Address</label>
-    <input
-      type="email"
-      name="email"
-      class="form-control"
-      required
-    >
-  </div>
+    <div class="jt-auth-visual-overlay"></div>
 
-  <div class="mb-3">
-    <label class="form-label">Password</label>
-    <input
-      type="password"
-      name="password"
-      class="form-control"
-      required
-    >
-  </div>
+    <div class="jt-auth-visual-content">
 
-  <button
-    type="submit"
-    class="btn btn-tourism w-100"
-  >
-    Login
-  </button>
+      <a
+        href="/"
+        class="jt-auth-brand"
+        aria-label="Jharkhand Tourism home"
+      >
 
-</form>
+        <img
+          src="/images/jharkhand_tourism_logo_final.png"
+          alt="Jharkhand Tourism"
+        >
 
-<div class="text-center mt-4">
+      </a>
 
-  Don't have an account?
+      <span class="jt-auth-eyebrow">
+        JHARKHAND TOURISM
+      </span>
 
-  <a href="/auth/register">
-    Create Account
-  </a>
+      <h1>
+        Your journey
+        <em>starts here.</em>
+      </h1>
 
-</div>
+      <p>
+        Discover destinations, culture, nature and experiences
+        across Jharkhand.
+      </p>
+
+      <div class="jt-auth-visual-meta">
+
+        <span>
+          <i class="fa-solid fa-leaf"></i>
+          Nature
+        </span>
+
+        <span>
+          <i class="fa-solid fa-landmark"></i>
+          Heritage
+        </span>
+
+        <span>
+          <i class="fa-solid fa-route"></i>
+          Explore
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       LOGIN PANEL
+       ===================================================== -->
+
+  <section class="jt-auth-form-panel">
+
+    <div class="jt-auth-form-container">
+
+      <div class="jt-auth-mobile-brand">
+
+        <a
+          href="/"
+          aria-label="Jharkhand Tourism home"
+        >
+
+          <img
+            src="/images/jharkhand_tourism_logo_final.png"
+            alt="Jharkhand Tourism"
+          >
+
+        </a>
+
+      </div>
+
+
+      <!-- Heading -->
+
+      <div class="jt-auth-heading">
+
+        <span class="jt-auth-kicker">
+          WELCOME BACK
+        </span>
+
+        <h2>
+          Continue your journey.
+        </h2>
+
+        <p>
+          Sign in to access your Jharkhand Tourism account
+          and continue exploring.
+        </p>
+
+      </div>
+
+
+      <!-- Login form -->
+
+      <form
+        method="POST"
+        action="/auth/login"
+        class="jt-auth-form"
+      >
+
+        <div class="jt-auth-field">
+
+          <label for="loginEmail">
+            Email address
+          </label>
+
+          <div class="jt-auth-input-wrap">
+
+            <i
+              class="fa-regular fa-envelope"
+              aria-hidden="true"
+            ></i>
+
+            <input
+              type="email"
+              id="loginEmail"
+              name="email"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="jt-auth-field">
+
+          <div class="jt-auth-label-row">
+
+            <label for="loginPassword">
+              Password
+            </label>
+
+          </div>
+
+          <div class="jt-auth-input-wrap">
+
+            <i
+              class="fa-solid fa-lock"
+              aria-hidden="true"
+            ></i>
+
+            <input
+              type="password"
+              id="loginPassword"
+              name="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            >
+
+            <button
+              type="button"
+              class="jt-auth-password-toggle"
+              data-password-target="loginPassword"
+              aria-label="Show password"
+            >
+              <i class="fa-regular fa-eye"></i>
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="jt-auth-submit"
+        >
+
+          <span>
+            Sign in
+          </span>
+
+          <i
+            class="fa-solid fa-arrow-right"
+            aria-hidden="true"
+          ></i>
+
+        </button>
+
+      </form>
+
+
+      <!-- Registration link -->
+
+      <div class="jt-auth-switch">
+
+        <span>
+          Don't have an account?
+        </span>
+
+        <a href="/auth/register">
+          Create an account
+          <i
+            class="fa-solid fa-arrow-up-right-from-square"
+            aria-hidden="true"
+          ></i>
+        </a>
+
+      </div>
+
+
+      <!-- Security note -->
+
+      <div class="jt-auth-security">
+
+        <i
+          class="fa-solid fa-shield-halved"
+          aria-hidden="true"
+        ></i>
+
+        <span>
+          Your account is protected by secure authentication.
+        </span>
+
+      </div>
+
+
+      <!-- Back to website -->
+
+      <a
+        href="/"
+        class="jt-auth-back"
+      >
+
+        <i
+          class="fa-solid fa-arrow-left"
+          aria-hidden="true"
+        ></i>
+
+        Back to Jharkhand Tourism
+
+      </a>
+
+    </div>
+
+  </section>
+
+</main>

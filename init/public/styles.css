@@ -1,246 +1,1766 @@
-/* General Styling */
+/* ============================================================
+   JHARKHAND TOURISM — GLOBAL DESIGN SYSTEM
+   File: init/public/styles.css
+   Premium tourism + government credibility + modern product UI
+============================================================ */
+
+/* ============================================================
+   01. DESIGN TOKENS
+============================================================ */
+
+:root {
+  --jt-forest-950: #071e15;
+  --jt-forest-900: #0a2a1e;
+  --jt-forest-850: #0d3425;
+  --jt-forest-800: #10402d;
+  --jt-forest-700: #18543a;
+  --jt-forest-600: #226a49;
+
+  --jt-emerald-800: #176044;
+  --jt-emerald-700: #1f7551;
+  --jt-emerald-600: #2b8a60;
+  --jt-emerald-500: #3e9670;
+  --jt-emerald-100: #e4f2ea;
+  --jt-emerald-50: #f2f8f4;
+
+  --jt-earth-800: #67491f;
+  --jt-earth-700: #825d2b;
+  --jt-earth-600: #9b7137;
+
+  --jt-gold-600: #b88632;
+  --jt-gold-500: #d6a756;
+  --jt-gold-400: #e2be76;
+  --jt-gold-200: #f1deb0;
+  --jt-gold-100: #f8eed5;
+
+  --jt-white: #ffffff;
+
+  --jt-surface: #ffffff;
+  --jt-surface-soft: #f9faf7;
+  --jt-surface-muted: #f3f5f1;
+
+  --jt-sand-50: #f8f5ed;
+  --jt-sand-100: #f1ece0;
+  --jt-sand-200: #e7dfd0;
+
+  --jt-ink-950: #142019;
+  --jt-ink-900: #1c2922;
+  --jt-ink-800: #26352d;
+  --jt-ink-700: #34443b;
+  --jt-ink-600: #4a5a51;
+  --jt-ink-500: #64736a;
+  --jt-ink-400: #89958e;
+  --jt-ink-300: #aeb8b2;
+
+  --jt-border: #dde4de;
+  --jt-border-light: #e9ede9;
+  --jt-border-dark: #c9d3cc;
+
+  --jt-success: #26804f;
+  --jt-success-soft: #e8f5ed;
+
+  --jt-warning: #a56a16;
+  --jt-warning-soft: #fff4dd;
+
+  --jt-danger: #b63a3a;
+  --jt-danger-soft: #fbeaea;
+
+  --jt-info: #286a8a;
+  --jt-info-soft: #e9f4f8;
+
+  --jt-container: 1240px;
+  --jt-section-space: clamp(68px, 8vw, 112px);
+  --jt-navbar-height: 76px;
+
+  --jt-radius-xs: 6px;
+  --jt-radius-sm: 9px;
+  --jt-radius-md: 13px;
+  --jt-radius-lg: 18px;
+  --jt-radius-xl: 26px;
+  --jt-radius-2xl: 32px;
+  --jt-radius-pill: 999px;
+
+  --jt-shadow-xs: 0 2px 8px rgba(14, 39, 27, 0.05);
+  --jt-shadow-sm: 0 5px 18px rgba(14, 39, 27, 0.07);
+  --jt-shadow-md: 0 12px 32px rgba(14, 39, 27, 0.1);
+  --jt-shadow-lg: 0 22px 55px rgba(14, 39, 27, 0.14);
+  --jt-shadow-xl: 0 30px 80px rgba(7, 30, 21, 0.18);
+
+  --jt-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --jt-transition-fast: 160ms var(--jt-ease);
+  --jt-transition: 260ms var(--jt-ease);
+  --jt-transition-slow: 450ms var(--jt-ease);
+}
+
+
+/* ============================================================
+   02. GLOBAL RESET
+============================================================ */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 92px;
+}
+
 body {
-  background-color: #F5F0E1; /* light greenish background for nature feel */
-  color: #2d3748; /* dark text for contrast */
+  margin: 0;
+  background: var(--jt-surface);
+  color: var(--jt-ink-800);
+  font-family:
+    "DM Sans",
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Header Section - Hero Section */
-.hero {
-  background-color: #c6f6d5; /* light green gradient */
-  color: #2f855a; /* dark green for text */
-  padding: 80px 20px;
-  border-radius: 20px;
-  text-align: center;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-.hero h1 {
-  font-size: 36px;
-  font-weight: bold;
+img {
+  max-width: 100%;
+  vertical-align: middle;
 }
 
-.hero p {
-  font-size: 18px;
-  margin-top: 20px;
+button,
+input,
+select,
+textarea {
+  font: inherit;
 }
 
-/* Grid Layout for Listings */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 20px;
-  margin-top: 30px;
+button {
+  cursor: pointer;
 }
 
-/* Card Styling */
-.card {
-  background-color: #fff;
-  border-radius: 10px;
-  border: 1px solid #edf2f7; /* subtle border */
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  text-decoration: none;
+a {
+  color: inherit;
+  transition:
+    color var(--jt-transition-fast),
+    background-color var(--jt-transition-fast),
+    border-color var(--jt-transition-fast),
+    transform var(--jt-transition-fast),
+    box-shadow var(--jt-transition-fast);
 }
 
-.card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
+::selection {
+  background: var(--jt-gold-200);
+  color: var(--jt-forest-950);
 }
 
-.card-body {
-  padding: 15px;
-  background-color: #e6fffa; /* subtle light green background */
-}
 
-.card-body h3 {
-  font-size: 22px;
-  color: #2f855a;
-  margin-bottom: 8px;
-}
+/* ============================================================
+   03. ACCESSIBILITY
+============================================================ */
 
-.card-body p {
-  font-size: 14px;
-  color: #4a5568;
-}
-
-.card-body .eco-tag {
-  background-color: #2f855a; /* green eco tag */
-  color: #fff;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-}
-
-/* Filter Section */
-.filters {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 30px;
-}
-
-.filters select,
-.filters input {
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid #cbd5e1;
-}
-
-.filters button {
+.jt-skip-link {
+  position: fixed;
+  top: -100px;
+  left: 18px;
+  z-index: 99999;
   padding: 10px 16px;
-  border-radius: 8px;
-  background-color: #38a169; /* eco-green button */
-  color: white;
-  border: none;
+  border-radius: var(--jt-radius-md);
+  background: var(--jt-forest-950);
+  color: var(--jt-white);
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: var(--jt-shadow-lg);
 }
 
-.filters button:hover {
-  background-color: #2f855a;
+.jt-skip-link:focus {
+  top: 18px;
+  color: var(--jt-white);
 }
 
-/* Footer Styling */
-.footer {
+:focus-visible {
+  outline: 3px solid rgba(214, 167, 86, 0.72);
+  outline-offset: 3px;
+}
+
+
+/* ============================================================
+   04. CONTAINERS
+============================================================ */
+
+.jt-container {
+  width: min(calc(100% - 40px), var(--jt-container));
+  margin-inline: auto;
+}
+
+.jt-container-fluid {
+  width: min(calc(100% - 32px), 1440px);
+  margin-inline: auto;
+}
+
+
+/* ============================================================
+   05. TYPOGRAPHY
+============================================================ */
+
+.jt-display {
+  margin: 0;
+  color: var(--jt-forest-900);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2.3rem, 5vw, 4.8rem);
+  font-weight: 600;
+  line-height: 1.03;
+  letter-spacing: -0.04em;
+}
+
+.jt-heading-1 {
+  margin: 0;
+  color: var(--jt-forest-900);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+.jt-heading-2 {
+  margin: 0;
+  color: var(--jt-forest-900);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.65rem, 3vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+.jt-heading-3 {
+  margin: 0;
+  color: var(--jt-ink-900);
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.jt-text-muted {
+  color: var(--jt-ink-500);
+}
+
+.jt-text-small {
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+
+/* ============================================================
+   06. SECTIONS
+============================================================ */
+
+.jt-section {
+  padding-block: var(--jt-section-space);
+}
+
+.jt-section-soft {
+  background: var(--jt-surface-soft);
+}
+
+.jt-section-sand {
+  background: var(--jt-sand-50);
+}
+
+.jt-section-dark {
+  background: var(--jt-forest-900);
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.jt-section-header {
+  max-width: 760px;
+  margin-bottom: 38px;
+}
+
+.jt-section-header.center {
+  margin-inline: auto;
   text-align: center;
-  padding: 20px;
-  background-color: #e6f4ea;
-  color: #2f855a;
 }
 
-.muted {
-  color: #4a5568;
-}
-.btn {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #38a169;
-  color: white;
-  text-decoration: none;
-  border-radius: 8px;
-}
-
-
-
-.navbar {
-  background: linear-gradient(90deg, #0b5726 0%, #0b6d39 100%);
+.jt-section-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 12px;
+  color: var(--jt-emerald-700);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
 }
 
-.navbar .brand-logo {
-  height: 58px;
-  padding: 3px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0px 2px 8px rgba(0,0,0,0.28);
-}
-.footer {
-  letter-spacing: 0.3px;
-  line-height: 1.45;
-}
-.footer span {
-  letter-spacing: 0.2px;
-}
-.footer a {
-  color: #ffffff;
-  text-decoration: underline;
-}
-.footer a:hover {
-  color: #e0e0e0;
-}
-.btn:hover {
-  background-color: #2f855a;
-}
-.btn:active {
-  background-color: #276749;
-}
-.btn:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.5);
-}
-.btn-secondary {
-  background-color: #4a5568;
-}
-.btn-secondary:hover {
-  background-color: #2d3748;
-}
-.hotel-card:hover {
-  transform: translateY(-4px);
-  transition: 0.3s;
-  box-shadow: 0px 6px 16px rgba(0,0,0,0.2);
-}
-.hotel-card {
-  transition: 0.3s;
-} 
-
-
-/* Smart Tourism minimal tweaks */
-.timeline, .timeline-flow { scroll-margin-top: 80px; }
-
-
-
-/* Slide switch hover */
-.btn-outline-primary {
-  transition: transform .15s ease, box-shadow .15s ease;
-}
-.btn-outline-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(13,110,253,.25);
+.jt-section-kicker i {
+  color: var(--jt-gold-600);
 }
 
-/* Smart Tourism button on home page */.smart-tourism-btn {
-  display: inline-block;
-  padding: 12px 28px;
-  border-radius: 50px;
-  background: #0d6efd;
-  color: #fff;
+.jt-section-title {
+  margin: 0 0 13px;
+  color: var(--jt-forest-900);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.jt-section-description {
+  max-width: 680px;
+  margin: 0;
+  color: var(--jt-ink-500);
+  font-size: 0.92rem;
+  line-height: 1.75;
+}
+
+
+/* ============================================================
+   07. BADGES
+============================================================ */
+
+.jt-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  padding: 5px 10px;
+  border: 1px solid transparent;
+  border-radius: var(--jt-radius-pill);
+  font-size: 0.63rem;
+  font-weight: 900;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.jt-badge-green {
+  border-color: #cde5d5;
+  background: var(--jt-emerald-100);
+  color: var(--jt-emerald-800);
+}
+
+.jt-badge-gold {
+  border-color: #e8d5a9;
+  background: var(--jt-gold-100);
+  color: var(--jt-earth-800);
+}
+
+.jt-badge-dark {
+  border-color: rgba(255, 255, 255, 0.13);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.82);
+}
+
+
+/* ============================================================
+   08. BUTTONS
+============================================================ */
+
+.jt-btn {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 17px;
+  border: 1px solid transparent;
+  border-radius: var(--jt-radius-pill);
+  font-size: 0.76rem;
+  font-weight: 900;
+  line-height: 1;
   text-decoration: none;
-  transition: all 0.25s ease;
-  border: 2px solid transparent;
+  transition:
+    transform var(--jt-transition-fast),
+    box-shadow var(--jt-transition-fast),
+    background-color var(--jt-transition-fast),
+    border-color var(--jt-transition-fast);
 }
 
-.smart-tourism-btn:hover {
-  background: #ffffff;
-  color: #0d6efd;
-  border-color: #0d6efd;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 18px rgba(13, 110, 253, 0.35);
+.jt-btn:hover {
+  transform: translateY(-2px);
+  text-decoration: none;
 }
 
-/* smart tourism style  */
-.home-btn {
-  display: inline-block;
-  padding: 12px 28px;
-  border-radius: 50px;
-  border: #0b6d39;
-  background: #0d6efd;
-  color: #fff;
+.jt-btn-primary {
+  background: var(--jt-forest-800);
+  color: var(--jt-white);
+  box-shadow: 0 8px 20px rgba(16, 64, 45, 0.16);
+}
+
+.jt-btn-primary:hover {
+  background: var(--jt-forest-700);
+  color: var(--jt-white);
+  box-shadow: 0 12px 27px rgba(16, 64, 45, 0.22);
+}
+
+.jt-btn-secondary {
+  border-color: var(--jt-border);
+  background: var(--jt-white);
+  color: var(--jt-forest-800);
+}
+
+.jt-btn-secondary:hover {
+  border-color: var(--jt-emerald-500);
+  color: var(--jt-forest-800);
+  box-shadow: var(--jt-shadow-sm);
+}
+
+.jt-btn-accent {
+  background: var(--jt-gold-500);
+  color: var(--jt-forest-950);
+  box-shadow: 0 8px 20px rgba(184, 134, 50, 0.16);
+}
+
+.jt-btn-accent:hover {
+  background: var(--jt-gold-400);
+  color: var(--jt-forest-950);
+}
+
+.jt-btn-light {
+  background: var(--jt-white);
+  color: var(--jt-forest-900);
+}
+
+.jt-btn-light:hover {
+  color: var(--jt-forest-900);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.14);
+}
+
+.jt-btn-sm {
+  min-height: 38px;
+  padding-inline: 13px;
+  font-size: 0.68rem;
+}
+
+.jt-btn-lg {
+  min-height: 52px;
+  padding-inline: 21px;
+  font-size: 0.82rem;
+}
+
+
+/* ============================================================
+   09. UTILITY BAR
+============================================================ */
+
+.jt-utility-bar {
+  position: relative;
+  z-index: 1100;
+  min-height: 34px;
+  background: var(--jt-forest-950);
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.62rem;
+}
+
+.jt-utility-inner {
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.jt-utility-left,
+.jt-utility-right {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.jt-utility-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.jt-utility-item i {
+  color: var(--jt-gold-500);
+}
+
+.jt-utility-divider {
+  width: 1px;
+  height: 13px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.jt-utility-right a {
+  color: rgba(255, 255, 255, 0.58);
+  text-decoration: none;
+}
+
+.jt-utility-right a:hover {
+  color: var(--jt-white);
+}
+
+
+/* ============================================================
+   10. MAIN NAVIGATION
+============================================================ */
+
+.jt-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1090;
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid rgba(221, 228, 222, 0.78);
+  transition:
+    box-shadow var(--jt-transition),
+    background-color var(--jt-transition);
+}
+
+.jt-navbar.is-scrolled {
+  background: rgba(255, 255, 255, 0.985);
+  box-shadow: 0 8px 30px rgba(10, 42, 30, 0.08);
+}
+
+.jt-navbar-inner {
+  min-height: var(--jt-navbar-height);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+
+/* Brand */
+
+.jt-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  color: var(--jt-forest-900);
+  text-decoration: none;
+}
+
+.jt-brand:hover {
+  color: var(--jt-forest-900);
+  text-decoration: none;
+}
+
+.jt-brand-mark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: var(--jt-forest-900);
+  color: var(--jt-gold-500);
+  box-shadow: 0 7px 18px rgba(7, 30, 21, 0.16);
+}
+
+.jt-brand-mark i {
+  font-size: 1rem;
+}
+
+.jt-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.jt-brand-text strong {
+  font-size: 0.82rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+}
+
+.jt-brand-text small {
+  margin-top: 4px;
+  color: var(--jt-ink-500);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 0.7rem;
   font-weight: 600;
-  text-decoration: none;
-  border: 2px solid transparent;
-  transition: all .25s ease;
+  letter-spacing: 0.08em;
 }
 
-.home-btn:hover {
-  background: #ffffff;
-  color: #0d6efd;
-    border: #0b6d39;
-  border-color: #0dfd6d;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 18px rgba(13, 110, 253, 0.35);
+
+/* Navigation */
+
+.jt-navbar-menu {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 3px;
 }
 
-.tour-card {
+.jt-nav-link {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 9px;
+  border: 0;
   border-radius: 10px;
+  background: transparent;
+  color: var(--jt-ink-600);
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.jt-nav-link:hover {
+  background: var(--jt-emerald-50);
+  color: var(--jt-forest-800);
+}
+
+.jt-nav-link.active {
+  background: var(--jt-emerald-100);
+  color: var(--jt-forest-800);
+}
+
+.jt-nav-link > i:first-child {
+  color: var(--jt-emerald-600);
+  font-size: 0.68rem;
+}
+
+
+/* Dropdown */
+
+.jt-nav-dropdown {
+  position: relative;
+}
+
+.jt-nav-dropdown-toggle {
+  cursor: pointer;
+}
+
+.jt-dropdown-chevron {
+  margin-left: 2px;
+  color: var(--jt-ink-400) !important;
+  font-size: 0.52rem !important;
+  transition: transform var(--jt-transition-fast);
+}
+
+.jt-nav-dropdown.is-open .jt-dropdown-chevron {
+  transform: rotate(180deg);
+}
+
+.jt-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 9px);
+  left: 0;
+  width: 235px;
+  padding: 7px;
+  border: 1px solid var(--jt-border-light);
+  border-radius: 15px;
+  background: var(--jt-white);
+  box-shadow: var(--jt-shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-5px);
+  transition:
+    opacity var(--jt-transition-fast),
+    visibility var(--jt-transition-fast),
+    transform var(--jt-transition-fast);
+}
+
+.jt-nav-dropdown.is-open .jt-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.jt-dropdown-menu a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  color: var(--jt-ink-700);
+  text-decoration: none;
+}
+
+.jt-dropdown-menu a:hover {
+  background: var(--jt-emerald-50);
+  color: var(--jt-forest-800);
+}
+
+.jt-dropdown-menu a > i {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: var(--jt-emerald-100);
+  color: var(--jt-emerald-700);
+  font-size: 0.65rem;
+}
+
+.jt-dropdown-menu a span {
+  display: flex;
+  flex-direction: column;
+}
+
+.jt-dropdown-menu strong {
+  font-size: 0.7rem;
+}
+
+.jt-dropdown-menu small {
+  margin-top: 2px;
+  color: var(--jt-ink-400);
+  font-size: 0.59rem;
+}
+
+
+/* Search */
+
+.jt-nav-search {
+  width: 39px;
+  height: 39px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--jt-border);
+  border-radius: 11px;
+  color: var(--jt-ink-600);
+  text-decoration: none;
+}
+
+.jt-nav-search:hover {
+  border-color: var(--jt-emerald-500);
+  background: var(--jt-emerald-50);
+  color: var(--jt-forest-800);
+}
+
+
+/* AI */
+
+.jt-ai-button {
+  min-height: 43px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 11px 5px 6px;
+  border: 1px solid #d8e7de;
+  border-radius: 13px;
+  background: var(--jt-emerald-50);
+  color: var(--jt-forest-800);
+  text-decoration: none;
+}
+
+.jt-ai-button:hover {
+  border-color: var(--jt-emerald-500);
+  background: var(--jt-emerald-100);
+  color: var(--jt-forest-800);
+  transform: translateY(-1px);
+}
+
+.jt-ai-icon {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: var(--jt-forest-800);
+  color: var(--jt-gold-500);
+  font-size: 0.68rem;
+}
+
+.jt-ai-label {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.jt-ai-label strong {
+  font-size: 0.67rem;
+}
+
+.jt-ai-label small {
+  margin-top: 3px;
+  color: var(--jt-ink-400);
+  font-size: 0.53rem;
+}
+
+
+/* Authentication */
+
+.jt-user-menu {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.jt-login-link {
+  padding: 8px;
+  color: var(--jt-ink-600);
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.jt-login-link:hover {
+  color: var(--jt-forest-800);
+}
+
+.jt-wishlist-link {
+  width: 35px;
+  height: 35px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  color: var(--jt-ink-500);
+  text-decoration: none;
+}
+
+.jt-wishlist-link:hover {
+  background: #fbecf0;
+  color: #a43e58;
+}
+
+.jt-get-started {
+  min-height: 39px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 13px;
+  border-radius: var(--jt-radius-pill);
+  background: var(--jt-forest-800);
+  color: var(--jt-white);
+  font-size: 0.67rem;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.jt-get-started:hover {
+  background: var(--jt-forest-700);
+  color: var(--jt-white);
+  transform: translateY(-1px);
+}
+
+
+/* Mobile toggle */
+
+.jt-mobile-toggle {
+  width: 42px;
+  height: 42px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--jt-border);
+  border-radius: 11px;
+  background: var(--jt-white);
+  color: var(--jt-forest-800);
+}
+
+
+/* ============================================================
+   11. FOOTER
+============================================================ */
+
+.jt-footer {
+  padding: 62px 0 0;
+  background: var(--jt-forest-950);
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.jt-footer-main {
+  display: grid;
+  grid-template-columns: 1.55fr 0.75fr 0.85fr 0.95fr;
+  gap: 55px;
+  padding-bottom: 45px;
+}
+
+.jt-footer-brand {
+  max-width: 370px;
+}
+
+.jt-footer-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--jt-white);
+  text-decoration: none;
+}
+
+.jt-footer-logo:hover {
+  color: var(--jt-white);
+}
+
+.jt-footer-logo-mark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--jt-gold-500);
+}
+
+.jt-footer-logo > span:last-child {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.jt-footer-logo strong {
+  font-size: 0.83rem;
+  letter-spacing: 0.08em;
+}
+
+.jt-footer-logo small {
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.48);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 0.69rem;
+}
+
+.jt-footer-description {
+  margin: 19px 0;
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 0.73rem;
+  line-height: 1.75;
+}
+
+.jt-footer-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 0.61rem;
+}
+
+.jt-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #65bd87;
+  box-shadow: 0 0 0 4px rgba(101, 189, 135, 0.1);
+}
+
+.jt-footer-socials {
+  display: flex;
+  gap: 7px;
+  margin-top: 18px;
+}
+
+.jt-footer-socials a {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 9px;
+  color: rgba(255, 255, 255, 0.52);
+  text-decoration: none;
+}
+
+.jt-footer-socials a:hover {
+  border-color: rgba(214, 167, 86, 0.4);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--jt-gold-500);
+}
+
+.jt-footer-column h2 {
+  margin: 4px 0 17px;
+  color: var(--jt-white);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+.jt-footer-column ul {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jt-footer-column a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.46);
+  font-size: 0.68rem;
+  text-decoration: none;
+}
+
+.jt-footer-column a i {
+  color: rgba(214, 167, 86, 0.55);
+  font-size: 0.48rem;
+}
+
+.jt-footer-column a:hover {
+  color: var(--jt-white);
+  transform: translateX(2px);
+}
+
+
+/* Footer CTA */
+
+.jt-footer-cta {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 17px;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.jt-footer-cta-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 11px;
+  background: rgba(214, 167, 86, 0.11);
+  color: var(--jt-gold-500);
+}
+
+.jt-footer-cta-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.jt-footer-cta-copy span {
+  color: rgba(255, 255, 255, 0.38);
+  font-size: 0.57rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.jt-footer-cta-copy strong {
+  margin-top: 3px;
+  color: var(--jt-white);
+  font-size: 0.8rem;
+}
+
+.jt-footer-cta-button {
+  min-height: 39px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 14px;
+  border-radius: var(--jt-radius-pill);
+  background: var(--jt-gold-500);
+  color: var(--jt-forest-950);
+  font-size: 0.66rem;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.jt-footer-cta-button:hover {
+  background: var(--jt-gold-400);
+  color: var(--jt-forest-950);
+  transform: translateY(-1px);
+}
+
+
+/* Footer bottom */
+
+.jt-footer-bottom {
+  min-height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 35px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.34);
+  font-size: 0.59rem;
+}
+
+.jt-footer-legal {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.jt-footer-legal a {
+  color: rgba(255, 255, 255, 0.4);
+  text-decoration: none;
+}
+
+.jt-footer-legal a:hover {
+  color: var(--jt-white);
+}
+
+.jt-footer-tagline i {
+  color: #c96b72;
+  margin: 0 2px;
+}
+
+
+/* ============================================================
+   12. HOMEPAGE UTILITY / ANNOUNCEMENT
+   Temporary compatibility with the current homepage.
+============================================================ */
+
+.bravo-home-official-strip,
+.bravo-home-announcement {
+  position: relative;
+  z-index: 1;
+}
+
+.bravo-home-official-strip {
+  background: var(--jt-white);
+  border-bottom: 1px solid var(--jt-border-light);
+}
+
+.bravo-home-official-inner {
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.bravo-home-official-left,
+.bravo-home-official-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bravo-home-official-label {
+  color: var(--jt-forest-800);
+  font-size: 0.62rem;
+  font-weight: 900;
+}
+
+.bravo-home-official-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--jt-ink-500);
+  font-size: 0.6rem;
+  text-decoration: none;
+}
+
+.bravo-home-official-link:hover {
+  color: var(--jt-forest-800);
+}
+
+.bravo-home-official-link i {
+  color: var(--jt-emerald-600);
+}
+
+.bravo-home-official-divider {
+  width: 1px;
+  height: 14px;
+  background: var(--jt-border);
+}
+
+.bravo-home-language-form {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--jt-ink-500);
+}
+
+.bravo-home-language-form i {
+  color: var(--jt-emerald-600);
+  font-size: 0.68rem;
+}
+
+.bravo-home-language-form select {
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--jt-ink-600);
+  font-size: 0.6rem;
+  font-weight: 700;
+}
+
+.bravo-home-announcement {
+  background: var(--jt-forest-900);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.bravo-home-announcement-inner {
+  min-height: 35px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.tour-card img {
-  height: 220px;
-  object-fit: cover;
+.bravo-home-announcement-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  padding-right: 12px;
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--jt-gold-500);
+  font-size: 0.6rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
-.tour-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+.bravo-home-announcement-track {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.bravo-home-announcement-content {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: max-content;
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 0.59rem;
+}
+
+
+/* ============================================================
+   13. GENERIC CARDS
+============================================================ */
+
+.jt-card {
+  border: 1px solid var(--jt-border-light);
+  border-radius: var(--jt-radius-lg);
+  background: var(--jt-white);
+  box-shadow: var(--jt-shadow-xs);
+  transition:
+    transform var(--jt-transition),
+    box-shadow var(--jt-transition),
+    border-color var(--jt-transition);
+}
+
+.jt-card:hover {
+  border-color: var(--jt-border);
+  transform: translateY(-3px);
+  box-shadow: var(--jt-shadow-md);
+}
+
+.jt-card-body {
+  padding: 20px;
+}
+
+
+/* ============================================================
+   14. FORMS
+============================================================ */
+
+.jt-form-group {
+  margin-bottom: 16px;
+}
+
+.jt-form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--jt-ink-700);
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.jt-form-control {
+  width: 100%;
+  min-height: 44px;
+  padding: 9px 12px;
+  border: 1px solid var(--jt-border);
+  border-radius: var(--jt-radius-sm);
+  outline: none;
+  background: var(--jt-white);
+  color: var(--jt-ink-800);
+  font-size: 0.76rem;
+  transition:
+    border-color var(--jt-transition-fast),
+    box-shadow var(--jt-transition-fast);
+}
+
+.jt-form-control:hover {
+  border-color: var(--jt-border-dark);
+}
+
+.jt-form-control:focus {
+  border-color: var(--jt-emerald-500);
+  box-shadow: 0 0 0 3px rgba(62, 150, 112, 0.1);
+}
+
+.jt-form-control::placeholder {
+  color: var(--jt-ink-300);
+}
+
+
+/* ============================================================
+   15. ALERTS
+============================================================ */
+
+.jt-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid transparent;
+  border-radius: var(--jt-radius-md);
+  font-size: 0.73rem;
+  line-height: 1.5;
+}
+
+.jt-alert-success {
+  border-color: #cde5d5;
+  background: var(--jt-success-soft);
+  color: #246640;
+}
+
+.jt-alert-warning {
+  border-color: #ecd8ac;
+  background: var(--jt-warning-soft);
+  color: #795316;
+}
+
+.jt-alert-danger {
+  border-color: #eacaca;
+  background: var(--jt-danger-soft);
+  color: #8b3030;
+}
+
+.jt-alert-info {
+  border-color: #cde1e8;
+  background: var(--jt-info-soft);
+  color: #245d76;
+}
+
+
+/* ============================================================
+   16. EMPTY / LOADING STATES
+============================================================ */
+
+.jt-state {
+  display: grid;
+  place-items: center;
+  min-height: 240px;
+  padding: 30px;
+  border: 1px dashed var(--jt-border);
+  border-radius: var(--jt-radius-lg);
+  background: var(--jt-surface-soft);
+  text-align: center;
+}
+
+.jt-state-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 12px;
+  border-radius: 14px;
+  background: var(--jt-emerald-100);
+  color: var(--jt-emerald-700);
+}
+
+.jt-state h3 {
+  margin: 0 0 5px;
+  color: var(--jt-ink-800);
+  font-size: 0.95rem;
+}
+
+.jt-state p {
+  max-width: 480px;
+  margin: 0;
+  color: var(--jt-ink-500);
+  font-size: 0.7rem;
+}
+
+
+/* ============================================================
+   17. LOADING SPINNER
+============================================================ */
+
+.jt-spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--jt-border);
+  border-top-color: var(--jt-emerald-600);
+  border-radius: 50%;
+  animation: jtSpin 700ms linear infinite;
+}
+
+@keyframes jtSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* ============================================================
+   18. REVEAL ANIMATION
+============================================================ */
+
+.jt-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 550ms var(--jt-ease),
+    transform 550ms var(--jt-ease);
+}
+
+.jt-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ============================================================
+   19. FLOATING CHATBOT
+============================================================ */
+
+.jt-floating-chat {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1050;
+  width: 49px;
+  height: 49px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  background: var(--jt-forest-800);
+  color: var(--jt-white);
+  box-shadow: var(--jt-shadow-lg);
+  text-decoration: none;
+}
+
+.jt-floating-chat:hover {
+  background: var(--jt-forest-700);
+  color: var(--jt-white);
+  transform: translateY(-3px);
+}
+
+.jt-floating-chat i {
+  color: var(--jt-gold-500);
+}
+
+
+/* ============================================================
+   20. BOOTSTRAP COMPATIBILITY
+============================================================ */
+
+.btn-primary {
+  --bs-btn-bg: var(--jt-forest-800);
+  --bs-btn-border-color: var(--jt-forest-800);
+  --bs-btn-hover-bg: var(--jt-forest-700);
+  --bs-btn-hover-border-color: var(--jt-forest-700);
+}
+
+.text-success {
+  color: var(--jt-success) !important;
+}
+
+.bg-success {
+  background-color: var(--jt-forest-700) !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--jt-emerald-500);
+  box-shadow: 0 0 0 0.2rem rgba(62, 150, 112, 0.12);
+}
+
+
+/* ============================================================
+   21. RESPONSIVE — 1200px
+============================================================ */
+
+@media (max-width: 1200px) {
+  .jt-navbar-menu {
+    gap: 0;
+  }
+
+  .jt-nav-link {
+    padding-inline: 7px;
+    font-size: 0.66rem;
+  }
+
+  .jt-ai-label {
+    display: none;
+  }
+
+  .jt-ai-button {
+    padding: 5px;
+  }
+}
+
+
+/* ============================================================
+   22. RESPONSIVE — 992px
+============================================================ */
+
+@media (max-width: 991.98px) {
+  .jt-navbar-inner {
+    min-height: 68px;
+  }
+
+  .jt-mobile-toggle {
+    display: inline-flex;
+    margin-left: auto;
+  }
+
+  .jt-navbar-menu {
+    position: absolute;
+    top: calc(100% + 1px);
+    right: 20px;
+    left: 20px;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 3px;
+    max-height: calc(100vh - 90px);
+    padding: 9px;
+    overflow-y: auto;
+    border: 1px solid var(--jt-border-light);
+    border-radius: 16px;
+    background: var(--jt-white);
+    box-shadow: var(--jt-shadow-lg);
+  }
+
+  .jt-navbar-menu.is-open {
+    display: flex;
+  }
+
+  .jt-nav-link {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 0 12px;
+  }
+
+  .jt-nav-dropdown {
+    width: 100%;
+  }
+
+  .jt-nav-dropdown-toggle {
+    width: 100%;
+  }
+
+  .jt-dropdown-menu {
+    position: static;
+    width: 100%;
+    margin-top: 2px;
+    padding: 4px;
+    border: 0;
+    border-radius: 10px;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    display: none;
+  }
+
+  .jt-nav-dropdown.is-open .jt-dropdown-menu {
+    display: block;
+  }
+
+  .jt-nav-search {
+    width: 100%;
+    justify-content: flex-start;
+    padding-inline: 12px;
+  }
+
+  .jt-ai-button {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 7px;
+  }
+
+  .jt-ai-label {
+    display: flex;
+  }
+
+  .jt-user-menu {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    padding-top: 4px;
+    border-top: 1px solid var(--jt-border-light);
+  }
+
+  .jt-login-link {
+    padding: 10px 12px;
+  }
+
+  .jt-wishlist-link {
+    display: none;
+  }
+
+  .jt-get-started {
+    justify-content: center;
+  }
+
+  .jt-footer-main {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 38px;
+  }
+
+  .jt-footer-brand {
+    grid-column: 1 / -1;
+    max-width: 600px;
+  }
+}
+
+
+/* ============================================================
+   23. RESPONSIVE — 767px
+============================================================ */
+
+@media (max-width: 767.98px) {
+  .jt-container {
+    width: min(calc(100% - 28px), var(--jt-container));
+  }
+
+  .jt-utility-left {
+    display: none;
+  }
+
+  .jt-utility-inner {
+    justify-content: center;
+  }
+
+  .jt-utility-right {
+    gap: 16px;
+  }
+
+  .jt-home-official-inner,
+  .bravo-home-official-inner {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+    padding-block: 8px;
+  }
+
+  .bravo-home-official-left,
+  .bravo-home-official-right {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .bravo-home-announcement-inner {
+    min-height: 38px;
+  }
+
+  .jt-footer {
+    padding-top: 45px;
+  }
+
+  .jt-footer-main {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding-bottom: 32px;
+  }
+
+  .jt-footer-brand {
+    grid-column: auto;
+  }
+
+  .jt-footer-cta {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .jt-footer-cta-copy {
+    min-width: 180px;
+  }
+
+  .jt-footer-cta-button {
+    width: 100%;
+  }
+
+  .jt-footer-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    padding-block: 18px;
+  }
+}
+
+
+/* ============================================================
+   24. RESPONSIVE — 480px
+============================================================ */
+
+@media (max-width: 480px) {
+  .jt-container {
+    width: calc(100% - 22px);
+  }
+
+  .jt-brand-mark {
+    width: 38px;
+    height: 38px;
+  }
+
+  .jt-brand-text strong {
+    font-size: 0.73rem;
+  }
+
+  .jt-brand-text small {
+    font-size: 0.62rem;
+  }
+
+  .jt-footer-socials {
+    margin-top: 15px;
+  }
+
+  .jt-footer-legal {
+    flex-wrap: wrap;
+  }
+
+  .jt-floating-chat {
+    right: 13px;
+    bottom: 13px;
+    width: 45px;
+    height: 45px;
+  }
+}
+
+
+/* ============================================================
+   25. MOBILE MENU SCROLL LOCK
+   Added for the new navbar JavaScript.
+============================================================ */
+
+body.jt-menu-open {
+  overflow: hidden;
+}
+
+
+/* ============================================================
+   26. REDUCED MOTION
+============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* ============================================================
+   27. PRINT
+============================================================ */
+
+@media print {
+  .jt-utility-bar,
+  .jt-navbar,
+  .jt-floating-chat {
+    display: none !important;
+  }
+
+  .jt-footer {
+    background: white;
+    color: black;
+  }
 }

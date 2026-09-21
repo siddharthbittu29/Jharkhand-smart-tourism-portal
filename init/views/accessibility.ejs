@@ -1,3 +1,743 @@
-<h1>Accessibility</h1>
-<p>Keyboard navigation and high contrast supported.</p>
-<a href="/">Back Home</a>
+<style>
+  /* ============================================================
+     JHARKHAND TOURISM — ACCESSIBILITY
+  ============================================================ */
+
+  .jt-accessibility-page {
+    --jt-deep: #0d3928;
+    --jt-green: #236044;
+    --jt-green-2: #2f7a56;
+    --jt-soft: #eef6f0;
+    --jt-ink: #19342a;
+    --jt-muted: #66776f;
+    --jt-line: rgba(18,60,43,0.11);
+
+    min-height:
+      calc(100vh - 180px);
+
+    padding:
+      54px 20px 72px;
+
+    background:
+      linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #f6f9f5 100%
+      );
+
+    color:
+      var(--jt-ink);
+  }
+
+  .jt-accessibility-shell {
+    width:
+      min(1000px, 100%);
+
+    margin:
+      0 auto;
+  }
+
+  /* ============================================================
+     HERO
+  ============================================================ */
+
+  .jt-accessibility-hero {
+    position:
+      relative;
+
+    overflow:
+      hidden;
+
+    padding:
+      34px;
+
+    border:
+      1px solid
+      rgba(35,96,68,0.12);
+
+    border-radius:
+      24px;
+
+    background:
+      linear-gradient(
+        135deg,
+        #0d3928,
+        #1d5d42
+      );
+
+    color:
+      #ffffff;
+
+    box-shadow:
+      0 20px 48px
+      rgba(13,57,40,0.14);
+  }
+
+  .jt-accessibility-hero::after {
+    content:
+      "";
+
+    position:
+      absolute;
+
+    width:
+      250px;
+
+    height:
+      250px;
+
+    right:
+      -90px;
+
+    top:
+      -90px;
+
+    border:
+      1px solid
+      rgba(255,255,255,0.10);
+
+    border-radius:
+      50%;
+  }
+
+  .jt-accessibility-icon {
+    position:
+      relative;
+
+    z-index:
+      1;
+
+    width:
+      48px;
+
+    height:
+      48px;
+
+    display:
+      grid;
+
+    place-items:
+      center;
+
+    border-radius:
+      14px;
+
+    background:
+      rgba(255,255,255,0.09);
+
+    color:
+      #c6e5cf;
+
+    font-size:
+      18px;
+  }
+
+  .jt-accessibility-kicker {
+    position:
+      relative;
+
+    z-index:
+      1;
+
+    display:
+      block;
+
+    margin-top:
+      15px;
+
+    color:
+      #b9dfc5;
+
+    font-size:
+      9px;
+
+    font-weight:
+      900;
+
+    letter-spacing:
+      0.13em;
+
+    text-transform:
+      uppercase;
+  }
+
+  .jt-accessibility-hero h1 {
+    position:
+      relative;
+
+    z-index:
+      1;
+
+    margin:
+      6px 0 0;
+
+    color:
+      #ffffff;
+
+    font-size:
+      clamp(32px, 5vw, 47px);
+
+    line-height:
+      1.04;
+
+    font-weight:
+      900;
+
+    letter-spacing:
+      -0.04em;
+  }
+
+  .jt-accessibility-hero p {
+    position:
+      relative;
+
+    z-index:
+      1;
+
+    max-width:
+      680px;
+
+    margin:
+      12px 0 0;
+
+    color:
+      rgba(255,255,255,0.76);
+
+    font-size:
+      13px;
+
+    line-height:
+      1.65;
+  }
+
+  /* ============================================================
+     FEATURE GRID
+  ============================================================ */
+
+  .jt-accessibility-grid {
+    display:
+      grid;
+
+    grid-template-columns:
+      repeat(2, minmax(0,1fr));
+
+    gap:
+      14px;
+
+    margin-top:
+      16px;
+  }
+
+  .jt-accessibility-card {
+    padding:
+      22px;
+
+    border:
+      1px solid
+      var(--jt-line);
+
+    border-radius:
+      19px;
+
+    background:
+      #ffffff;
+
+    box-shadow:
+      0 12px 30px
+      rgba(13,57,40,0.07);
+  }
+
+  .jt-accessibility-card-icon {
+    width:
+      40px;
+
+    height:
+      40px;
+
+    display:
+      grid;
+
+    place-items:
+      center;
+
+    border-radius:
+      11px;
+
+    background:
+      var(--jt-soft);
+
+    color:
+      var(--jt-green);
+
+    font-size:
+      14px;
+  }
+
+  .jt-accessibility-card h2 {
+    margin:
+      13px 0 0;
+
+    color:
+      var(--jt-deep);
+
+    font-size:
+      16px;
+
+    font-weight:
+      900;
+  }
+
+  .jt-accessibility-card p {
+    margin:
+      7px 0 0;
+
+    color:
+      var(--jt-muted);
+
+    font-size:
+      11px;
+
+    line-height:
+      1.65;
+  }
+
+  .jt-accessibility-card ul {
+    margin:
+      11px 0 0;
+
+    padding-left:
+      18px;
+
+    color:
+      var(--jt-muted);
+
+    font-size:
+      10px;
+
+    line-height:
+      1.75;
+  }
+
+  .jt-accessibility-card li::marker {
+    color:
+      var(--jt-green);
+  }
+
+  /* ============================================================
+     PRINCIPLE STRIP
+  ============================================================ */
+
+  .jt-accessibility-principles {
+    display:
+      grid;
+
+    grid-template-columns:
+      repeat(3, minmax(0,1fr));
+
+    gap:
+      10px;
+
+    margin-top:
+      16px;
+  }
+
+  .jt-accessibility-principle {
+    padding:
+      15px;
+
+    border:
+      1px solid
+      rgba(35,96,68,0.10);
+
+    border-radius:
+      15px;
+
+    background:
+      #edf6ef;
+  }
+
+  .jt-accessibility-principle strong {
+    display:
+      block;
+
+    color:
+      var(--jt-deep);
+
+    font-size:
+      11px;
+  }
+
+  .jt-accessibility-principle span {
+    display:
+      block;
+
+    margin-top:
+      4px;
+
+    color:
+      var(--jt-muted);
+
+    font-size:
+      9px;
+
+    line-height:
+      1.5;
+  }
+
+  /* ============================================================
+     CTA
+  ============================================================ */
+
+  .jt-accessibility-actions {
+    display:
+      flex;
+
+    flex-wrap:
+      wrap;
+
+    gap:
+      9px;
+
+    margin-top:
+      18px;
+  }
+
+  .jt-accessibility-link {
+    display:
+      inline-flex;
+
+    align-items:
+      center;
+
+    gap:
+      8px;
+
+    min-height:
+      42px;
+
+    padding:
+      10px 14px;
+
+    border-radius:
+      11px;
+
+    background:
+      var(--jt-green);
+
+    color:
+      #ffffff;
+
+    text-decoration:
+      none;
+
+    font-size:
+      10px;
+
+    font-weight:
+      900;
+  }
+
+  .jt-accessibility-link.secondary {
+    background:
+      #eef4ef;
+
+    color:
+      var(--jt-green);
+
+    border:
+      1px solid
+      rgba(35,96,68,0.12);
+  }
+
+  .jt-accessibility-link:hover {
+    background:
+      var(--jt-green-2);
+
+    color:
+      #ffffff;
+
+    text-decoration:
+      none;
+  }
+
+  .jt-accessibility-link.secondary:hover {
+    background:
+      #e5eee7;
+
+    color:
+      var(--jt-green);
+  }
+
+  /* ============================================================
+     RESPONSIVE
+  ============================================================ */
+
+  @media (max-width: 720px) {
+    .jt-accessibility-page {
+      padding:
+        36px 11px 58px;
+    }
+
+    .jt-accessibility-hero {
+      padding:
+        24px;
+    }
+
+    .jt-accessibility-grid,
+    .jt-accessibility-principles {
+      grid-template-columns:
+        1fr;
+    }
+
+    .jt-accessibility-actions {
+      flex-direction:
+        column;
+    }
+
+    .jt-accessibility-link {
+      justify-content:
+        center;
+    }
+  }
+</style>
+
+
+<main
+  class="jt-accessibility-page"
+  aria-labelledby="accessibilityTitle"
+>
+
+  <div class="jt-accessibility-shell">
+
+    <!-- ========================================================
+         HERO
+    ========================================================= -->
+
+    <section class="jt-accessibility-hero">
+
+      <div
+        class="jt-accessibility-icon"
+        aria-hidden="true"
+      >
+        <i
+          class="fa-solid fa-universal-access"
+        ></i>
+      </div>
+
+
+      <span class="jt-accessibility-kicker">
+        Inclusive access
+      </span>
+
+
+      <h1
+        id="accessibilityTitle"
+      >
+        Accessibility
+      </h1>
+
+
+      <p>
+        Jharkhand Tourism is designed to support accessible
+        navigation and clearer interaction across the portal.
+        Keyboard navigation and high contrast are supported.
+      </p>
+
+    </section>
+
+
+    <!-- ========================================================
+         ACCESSIBILITY FEATURES
+    ========================================================= -->
+
+    <section
+      class="jt-accessibility-grid"
+      aria-label="Accessibility features"
+    >
+
+      <article class="jt-accessibility-card">
+
+        <div
+          class="jt-accessibility-card-icon"
+          aria-hidden="true"
+        >
+          <i class="fa-solid fa-keyboard"></i>
+        </div>
+
+        <h2>
+          Keyboard navigation
+        </h2>
+
+        <p>
+          Interactive controls are designed to remain usable
+          without requiring a mouse.
+        </p>
+
+        <ul>
+          <li>Visible focus states</li>
+          <li>Keyboard-accessible controls</li>
+          <li>Skip-to-content support</li>
+          <li>Escape handling for interactive overlays</li>
+        </ul>
+
+      </article>
+
+
+      <article class="jt-accessibility-card">
+
+        <div
+          class="jt-accessibility-card-icon"
+          aria-hidden="true"
+        >
+          <i class="fa-solid fa-circle-half-stroke"></i>
+        </div>
+
+        <h2>
+          Contrast & readability
+        </h2>
+
+        <p>
+          The portal uses strong text/background separation
+          and accessible control states throughout the interface.
+        </p>
+
+        <ul>
+          <li>Readable body text</li>
+          <li>Clear button states</li>
+          <li>Visible focus indicators</li>
+          <li>High-contrast navigation surfaces</li>
+        </ul>
+
+      </article>
+
+
+      <article class="jt-accessibility-card">
+
+        <div
+          class="jt-accessibility-card-icon"
+          aria-hidden="true"
+        >
+          <i class="fa-solid fa-images"></i>
+        </div>
+
+        <h2>
+          Image alternatives
+        </h2>
+
+        <p>
+          Destination imagery is accompanied by descriptive
+          alternative text where appropriate.
+        </p>
+
+      </article>
+
+
+      <article class="jt-accessibility-card">
+
+        <div
+          class="jt-accessibility-card-icon"
+          aria-hidden="true"
+        >
+          <i class="fa-solid fa-mobile-screen-button"></i>
+        </div>
+
+        <h2>
+          Responsive access
+        </h2>
+
+        <p>
+          The interface is structured to remain usable across
+          desktop, tablet and mobile screen sizes.
+        </p>
+
+      </article>
+
+    </section>
+
+
+    <!-- ========================================================
+         PRINCIPLES
+    ========================================================= -->
+
+    <section
+      class="jt-accessibility-principles"
+      aria-label="Accessibility principles"
+    >
+
+      <div class="jt-accessibility-principle">
+
+        <strong>
+          Semantic structure
+        </strong>
+
+        <span>
+          Clear headings, sections and meaningful links.
+        </span>
+
+      </div>
+
+
+      <div class="jt-accessibility-principle">
+
+        <strong>
+          Clear interaction
+        </strong>
+
+        <span>
+          Buttons and controls communicate their purpose.
+        </span>
+
+      </div>
+
+
+      <div class="jt-accessibility-principle">
+
+        <strong>
+          Reduced motion
+        </strong>
+
+        <span>
+          Interfaces account for users who prefer reduced motion.
+        </span>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================================
+         ACTIONS
+    ========================================================= -->
+
+    <div class="jt-accessibility-actions">
+
+      <a
+        href="/"
+        class="jt-accessibility-link"
+      >
+        <i
+          class="fa-solid fa-house"
+          aria-hidden="true"
+        ></i>
+
+        Back Home
+      </a>
+
+
+      <a
+        href="/places"
+        class="jt-accessibility-link secondary"
+      >
+        Explore Places
+
+        <i
+          class="fa-solid fa-arrow-right"
+          aria-hidden="true"
+        ></i>
+      </a>
+
+    </div>
+
+  </div>
+
+</main>

@@ -1,83 +1,814 @@
 <%- include('./partials/nav') %>
 
-
-
-
-<section class="py-4">
-  <div class="container">
-
-    <h1 class="display-6 fw-semibold mb-2">Smart Tourism Platform – Key Features</h1>
-    <p class="text-muted mb-4">
-      A unified digital ecosystem designed to make travel planning, discovery, booking, and support seamless across Jharkhand.
-    </p>
-
-    <!-- Features Grid -->
-    <div class="row g-4">
-
-      <% [
-        ["Destination Discovery","Browse curated lists, map-based search, filters for heritage, eco, cultural, spiritual & adventure tourism.","bi-map"],
-        ["Smart Travel Pass","Buy a single pass for multiple destinations/events. Digital QR code for access and discounts.","bi-qr-code-scan"],
-        ["Online Bookings","Hotels, Homestays, Events, Guides & Transfers — all in one streamlined booking interface.","bi-credit-card-2-front"],
-        ["Local Experiences","Authentic local experiences, nature walks, artisan visits, trekking routes & cultural performances.","bi-people"],
-        ["Real-time Alerts","Weather, road conditions, festival schedules, crowd density & safety notifications.","bi-bell"],
-        ["Multilingual Support","Full platform available in English + Hindi + regional guidance voice prompts.","bi-translate"],
-        ["SOS & Helpdesk","One-tap emergency support, verified operators, lost assistance, grievance tracking.","bi-shield-check"],
-        ["UGC & Reviews","Travelers share photos, stories, ratings. Builds trust and increases engagement.","bi-stars"]
-      ].forEach(([title,desc,icon]) => { %>
-
-      <div class="col-md-6 col-lg-4">
-        <div class="feature-card p-4 h-100 shadow-sm">
-          <div class="icon-badge mb-3">
-            <i class="bi <%= icon %>"></i>
-          </div>
-          <h5 class="fw-semibold mb-2"><%= title %></h5>
-          <p class="mb-0 text-muted"><%= desc %></p>
-        </div>
-      </div>
-
-      <% }) %>
-
-    </div>
-
-    <!-- CTA Navigation -->
-    <div class="text-center mt-5">
-      <a href="/smart-tourism/objectives" class="btn btn-outline-primary me-2">← Back to Slide 3</a>
-      <a href="/smart-tourism/features" class="btn btn-primary">Current Slide ✓</a>
-    </div>
-
-  </div>
-</section>
-
-<%- include('../partials/scripts') %>
-
 <style>
-  .feature-card {
-    border-radius: 16px;
-    background: linear-gradient(135deg, #ffffff, #f9fafc);
-    transition: all .25s ease;
+  .jt-smart-features-page {
+    --sf-deep: #123b2a;
+    --sf-green: #23724a;
+    --sf-soft: #edf6ef;
+    --sf-earth: #9f7440;
+    --sf-cream: #f8f5ed;
+    --sf-text: #304038;
+    --sf-muted: #6d7871;
+    --sf-border: rgba(18, 59, 42, 0.11);
+    --sf-shadow: 0 18px 46px rgba(18, 59, 42, 0.075);
+
+    min-height: 100%;
+    padding-bottom: 78px;
+    background:
+      linear-gradient(
+        180deg,
+        #f8f5ed 0,
+        #ffffff 320px,
+        #ffffff 100%
+      );
   }
-  .feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,.15);
+
+  .jt-smart-features-hero {
+    padding: 74px 0 50px;
   }
-  .icon-badge {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
+
+  .jt-smart-features-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 16px;
+    color: var(--sf-earth);
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .jt-smart-features-eyebrow i {
+    color: var(--sf-green);
+  }
+
+  .jt-smart-features-hero h1 {
+    max-width: 920px;
+    margin: 0;
+    color: var(--sf-deep);
+    font-size: clamp(2.3rem, 5vw, 4.35rem);
+    line-height: 1.04;
+    letter-spacing: -0.045em;
+    font-weight: 800;
+  }
+
+  .jt-smart-features-hero p {
+    max-width: 790px;
+    margin: 20px 0 0;
+    color: var(--sf-muted);
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .jt-smart-features-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 25px;
+  }
+
+  .jt-smart-features-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 12px;
+    border: 1px solid var(--sf-border);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--sf-deep);
+    font-size: 0.77rem;
+    font-weight: 700;
+  }
+
+  .jt-smart-features-pill i {
+    color: var(--sf-green);
+  }
+
+  .jt-smart-features-section {
+    margin-top: 28px;
+  }
+
+  .jt-smart-features-heading {
+    max-width: 760px;
+    margin-bottom: 28px;
+  }
+
+  .jt-smart-features-kicker {
+    margin-bottom: 9px;
+    color: var(--sf-earth);
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .jt-smart-features-heading h2 {
+    margin: 0;
+    color: var(--sf-deep);
+    font-size: clamp(1.9rem, 3vw, 2.8rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+  }
+
+  .jt-smart-features-heading p {
+    margin: 11px 0 0;
+    color: var(--sf-muted);
+    font-size: 0.9rem;
+    line-height: 1.75;
+  }
+
+  .jt-smart-features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .jt-smart-feature-card {
+    position: relative;
+    min-height: 245px;
+    padding: 23px;
+    border: 1px solid var(--sf-border);
+    border-radius: 19px;
+    background: #fff;
+    box-shadow: 0 9px 27px rgba(18, 59, 42, 0.045);
+    overflow: hidden;
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .jt-smart-feature-card::after {
+    content: "";
+    position: absolute;
+    top: -55px;
+    right: -55px;
+    width: 135px;
+    height: 135px;
+    border-radius: 50%;
+    background: rgba(35,114,74,0.045);
+    pointer-events: none;
+  }
+
+  .jt-smart-feature-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(35,114,74,0.2);
+    box-shadow: var(--sf-shadow);
+  }
+
+  .jt-smart-feature-icon {
+    display: grid;
+    place-items: center;
+    width: 49px;
+    height: 49px;
+    margin-bottom: 18px;
+    border-radius: 14px;
+    background: var(--sf-soft);
+    color: var(--sf-green);
+    font-size: 1.05rem;
+  }
+
+  .jt-smart-feature-card h3 {
+    margin: 0 0 7px;
+    color: var(--sf-deep);
+    font-size: 1rem;
+    line-height: 1.3;
+    font-weight: 800;
+  }
+
+  .jt-smart-feature-card p {
+    margin: 0;
+    color: var(--sf-muted);
+    font-size: 0.79rem;
+    line-height: 1.68;
+  }
+
+  .jt-smart-feature-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 18px;
+    padding: 7px 9px;
+    border-radius: 999px;
+    background: var(--sf-cream);
+    color: var(--sf-earth);
+    font-size: 0.67rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .jt-smart-feature-tag i {
+    font-size: 0.62rem;
+  }
+
+  .jt-smart-features-highlight {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 18px;
+    margin-top: 30px;
+  }
+
+  .jt-smart-features-highlight-panel {
+    padding: 28px;
+    border-radius: 22px;
+    background: var(--sf-deep);
+    color: #fff;
+    box-shadow: var(--sf-shadow);
+  }
+
+  .jt-smart-features-highlight-panel h2 {
+    margin: 0 0 9px;
+    color: #fff;
+    font-size: 1.42rem;
+    font-weight: 800;
+  }
+
+  .jt-smart-features-highlight-panel > p {
+    max-width: 680px;
+    margin: 0 0 22px;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.84rem;
+    line-height: 1.72;
+  }
+
+  .jt-smart-feature-flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+  }
+
+  .jt-smart-feature-flow-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 11px;
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: 10px;
+    background: rgba(255,255,255,0.045);
+    color: rgba(255,255,255,0.84);
+    font-size: 0.73rem;
+    font-weight: 700;
+  }
+
+  .jt-smart-feature-flow-item i {
+    color: #d8bd85;
+  }
+
+  .jt-smart-features-side {
+    padding: 28px;
+    border: 1px solid var(--sf-border);
+    border-radius: 22px;
+    background: #fff;
+    box-shadow: 0 9px 27px rgba(18,59,42,0.045);
+  }
+
+  .jt-smart-features-side h3 {
+    margin: 0 0 8px;
+    color: var(--sf-deep);
+    font-size: 1.16rem;
+    font-weight: 800;
+  }
+
+  .jt-smart-features-side p {
+    margin: 0 0 18px;
+    color: var(--sf-muted);
+    font-size: 0.81rem;
+    line-height: 1.7;
+  }
+
+  .jt-smart-features-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 11px;
+    color: #56635b;
+    font-size: 0.76rem;
+    line-height: 1.55;
+  }
+
+  .jt-smart-features-check i {
+    margin-top: 2px;
+    color: var(--sf-green);
+  }
+
+  .jt-smart-features-nav {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-top: 35px;
+  }
+
+  .jt-smart-features-btn {
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
-    background: #e9f4ff;
-    color: #007bff;
-    font-size: 1.6rem;
+    gap: 8px;
+    min-height: 45px;
+    padding: 0 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 800;
+    transition:
+      transform 160ms ease,
+      background 160ms ease,
+      border-color 160ms ease;
+  }
+
+  .jt-smart-features-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .jt-smart-features-btn-outline {
+    border: 1px solid var(--sf-border);
+    background: #fff;
+    color: var(--sf-deep);
+  }
+
+  .jt-smart-features-btn-outline:hover {
+    border-color: var(--sf-green);
+    color: var(--sf-green);
+  }
+
+  .jt-smart-features-btn-primary {
+    background: var(--sf-deep);
+    color: #fff;
+  }
+
+  .jt-smart-features-btn-primary:hover {
+    background: #0d3022;
+    color: #fff;
+  }
+
+  @media (max-width: 1199.98px) {
+    .jt-smart-features-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 991.98px) {
+    .jt-smart-features-highlight {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    .jt-smart-features-hero {
+      padding: 57px 0 38px;
+    }
+
+    .jt-smart-features-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .jt-smart-features-highlight-panel,
+    .jt-smart-features-side {
+      padding: 22px;
+    }
+
+    .jt-smart-features-nav {
+      flex-direction: column;
+    }
+
+    .jt-smart-features-btn {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    .jt-smart-features-hero h1 {
+      font-size: 2.25rem;
+    }
+
+    .jt-smart-features-meta {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .jt-smart-feature-card,
+    .jt-smart-features-btn {
+      transition: none !important;
+    }
   }
 </style>
 
+<section class="jt-smart-features-page">
 
-<div class="text-center mt-5">
-  <a href="/smart-tourism/objectives" class="btn btn-outline-primary me-2">← Back to Slide 2</a>
-  <a href="/smart-tourism/journey" class="btn btn-primary">Next: Slide 5 – User Journey →</a>
-</div>
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
 
-<link rel="stylesheet" href="/smart/css/slide7-arvr.css">
-<script src="/smart/js/slide7-arvr.js" defer></script>
+  <section class="jt-smart-features-hero">
+
+    <div class="container">
+
+      <div class="jt-smart-features-eyebrow">
+        <i class="fa-solid fa-microchip"></i>
+        Smart Tourism · Platform Capabilities
+      </div>
+
+      <h1>
+        A smarter way to discover, plan and experience Jharkhand.
+      </h1>
+
+      <p>
+        Smart Tourism brings together digital discovery, intelligent trip
+        planning, maps, culture, sustainability and traveller assistance
+        into one connected tourism experience.
+      </p>
+
+      <div class="jt-smart-features-meta">
+
+        <span class="jt-smart-features-pill">
+          <i class="fa-solid fa-location-dot"></i>
+          Destination discovery
+        </span>
+
+        <span class="jt-smart-features-pill">
+          <i class="fa-solid fa-route"></i>
+          Intelligent planning
+        </span>
+
+        <span class="jt-smart-features-pill">
+          <i class="fa-solid fa-map-location-dot"></i>
+          Smart mapping
+        </span>
+
+        <span class="jt-smart-features-pill">
+          <i class="fa-solid fa-leaf"></i>
+          Sustainable travel
+        </span>
+
+        <span class="jt-smart-features-pill">
+          <i class="fa-solid fa-landmark"></i>
+          Culture & heritage
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <div class="container">
+
+    <!-- ===================================================
+         CAPABILITIES
+    ==================================================== -->
+
+    <section class="jt-smart-features-section">
+
+      <div class="jt-smart-features-heading">
+
+        <div class="jt-smart-features-kicker">
+          Capability map
+        </div>
+
+        <h2>
+          Designed around the traveller, not the tool.
+        </h2>
+
+        <p>
+          The capability set combines existing tourism functionality with
+          the broader Smart Tourism vision for a richer digital journey.
+        </p>
+
+      </div>
+
+      <div class="jt-smart-features-grid">
+
+        <!-- 1 -->
+        <article class="jt-smart-feature-card">
+
+          <div class="jt-smart-feature-icon">
+            <i class="fa-solid fa-map"></i>
+          </div>
+
+          <h3>
+            Destination Discovery
+          </h3>
+
+          <p>
+            Explore destinations through structured listings, categories,
+            districts, destination details and location-aware discovery.
+          </p>
+
+          <span class="jt-smart-feature-tag">
+            <i class="fa-solid fa-compass"></i>
+            Discover
+          </span>
+
+        </article>
+
+        <!-- 2 -->
+        <article class="jt-smart-feature-card">
+
+          <div class="jt-smart-feature-icon">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+          </div>
+
+          <h3>
+            AI Trip Planning
+          </h3>
+
+          <p>
+            Build an itinerary around a destination preference, trip
+            duration and budget with supporting travel insights.
+          </p>
+
+          <span class="jt-smart-feature-tag">
+            <i class="fa-solid fa-robot"></i>
+            Intelligent
+          </span>
+
+        </article>
+
+        <!-- 3 -->
+        <article class="jt-smart-feature-card">
+
+          <div class="jt-smart-feature-icon">
+            <i class="fa-solid fa-map-location-dot"></i>
+          </div>
+
+          <h3>
+            Interactive Smart Map
+          </h3>
+
+          <p>
+            View itinerary destinations and recommended stays spatially,
+            helping travellers understand their journey on a map.
+          </p>
+
+          <span class="jt-smart-feature-tag">
+            <i class="fa-solid fa-location-crosshairs"></i>
+            Navigate
+          </span>
+
+        </article>
+
+        <!-- 4 -->
+        <article class="jt-smart-feature-card">
+
+          <div class="jt-smart-feature-icon">
+            <i class="fa-solid fa-landmark"></i>
+          </div>
+
+          <h3>
+            Cultural Hub
+          </h3>
+
+          <p>
+            Bring festivals, heritage, local traditions and cultural
+            storytelling closer to the visitor journey.
+          </p>
+
+          <span class="jt-smart-feature-tag">
+            <i class="fa-solid fa-drum"></i>
+            Culture
+          </span>
+
+        </article>
+
+        <!-- 5 -->
+        <article class="jt-smart-feature-card">
+
+          <div class="jt-smart-feature-icon">
+            <i class="fa-solid fa-seedling"></i>
+          </div>
+
+          <h3>
+            EcoScore & Sustainability
+          </h3>
+
+          <p>
+            Make responsible tourism visible through sustainability guidance,
+            eco-oriented insights and low-impact travel choices.
+          </p>
+
+          <span class="jt-smart-feature-tag">
+            <i class="fa-solid fa-leaf"></i>
+            Responsible
+          </span>
+
+        </article>
+
+        <!-- 6 -->
+        <article class="jt-smart-feature-card">
+
+          <div class="jt-smart-feature-icon">
+            <i class="fa-solid fa-vr-cardboard"></i>
+          </div>
+
+          <h3>
+            AR/VR Heritage View
+          </h3>
+
+          <p>
+            Provide immersive visual previews for cultural and heritage
+            experiences through panoramic viewing.
+          </p>
+
+          <span class="jt-smart-feature-tag">
+            <i class="fa-solid fa-panorama"></i>
+            Immersive
+          </span>
+
+        </article>
+
+        <!-- 7 -->
+        <article class="jt-smart-feature-card">
+
+          <div class="jt-smart-feature-icon">
+            <i class="fa-solid fa-hotel"></i>
+          </div>
+
+          <h3>
+            Stay Discovery
+          </h3>
+
+          <p>
+            Connect destination planning with hotel search, filtering,
+            hotel details and accommodation recommendations.
+          </p>
+
+          <span class="jt-smart-feature-tag">
+            <i class="fa-solid fa-bed"></i>
+            Stay
+          </span>
+
+        </article>
+
+        <!-- 8 -->
+        <article class="jt-smart-feature-card">
+
+          <div class="jt-smart-feature-icon">
+            <i class="fa-solid fa-comments"></i>
+          </div>
+
+          <h3>
+            Tourist Assistance
+          </h3>
+
+          <p>
+            Use the AI tourism chatbot and connected help-oriented features
+            to make information easier to access during planning.
+          </p>
+
+          <span class="jt-smart-feature-tag">
+            <i class="fa-solid fa-headset"></i>
+            Assist
+          </span>
+
+        </article>
+
+      </div>
+
+    </section>
+
+    <!-- ===================================================
+         CONNECTED EXPERIENCE
+    ==================================================== -->
+
+    <section class="jt-smart-features-section">
+
+      <div class="jt-smart-features-highlight">
+
+        <article class="jt-smart-features-highlight-panel">
+
+          <h2>
+            One connected tourism journey.
+          </h2>
+
+          <p>
+            The value of Smart Tourism comes from connecting capabilities:
+            discovery can lead into planning, planning into stays and maps,
+            and the journey into cultural and sustainability experiences.
+          </p>
+
+          <div class="jt-smart-feature-flow">
+
+            <span class="jt-smart-feature-flow-item">
+              <i class="fa-solid fa-compass"></i>
+              Discover
+            </span>
+
+            <span class="jt-smart-feature-flow-item">
+              <i class="fa-solid fa-arrow-right"></i>
+            </span>
+
+            <span class="jt-smart-feature-flow-item">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              Plan
+            </span>
+
+            <span class="jt-smart-feature-flow-item">
+              <i class="fa-solid fa-arrow-right"></i>
+            </span>
+
+            <span class="jt-smart-feature-flow-item">
+              <i class="fa-solid fa-hotel"></i>
+              Stay
+            </span>
+
+            <span class="jt-smart-feature-flow-item">
+              <i class="fa-solid fa-arrow-right"></i>
+            </span>
+
+            <span class="jt-smart-feature-flow-item">
+              <i class="fa-solid fa-map"></i>
+              Navigate
+            </span>
+
+            <span class="jt-smart-feature-flow-item">
+              <i class="fa-solid fa-arrow-right"></i>
+            </span>
+
+            <span class="jt-smart-feature-flow-item">
+              <i class="fa-solid fa-leaf"></i>
+              Experience
+            </span>
+
+          </div>
+
+        </article>
+
+        <aside class="jt-smart-features-side">
+
+          <h3>
+            Built around useful interaction.
+          </h3>
+
+          <p>
+            Smart Tourism features are intended to support actual visitor
+            decisions rather than simply add more interface elements.
+          </p>
+
+          <div class="jt-smart-features-check">
+            <i class="fa-solid fa-check-circle"></i>
+            <span>
+              Clear discovery pathways from homepage to destination pages.
+            </span>
+          </div>
+
+          <div class="jt-smart-features-check">
+            <i class="fa-solid fa-check-circle"></i>
+            <span>
+              AI planning backed by deterministic tourism services and fallback behaviour.
+            </span>
+          </div>
+
+          <div class="jt-smart-features-check">
+            <i class="fa-solid fa-check-circle"></i>
+            <span>
+              Accommodation and mapping integrated into the wider journey.
+            </span>
+          </div>
+
+          <div class="jt-smart-features-check">
+            <i class="fa-solid fa-check-circle"></i>
+            <span>
+              Responsive and accessible interface patterns across devices.
+            </span>
+          </div>
+
+        </aside>
+
+      </div>
+
+    </section>
+
+    <!-- ===================================================
+         NAVIGATION
+    ==================================================== -->
+
+    <div class="jt-smart-features-nav">
+
+      <a
+        href="/smart-tourism/objectives"
+        class="jt-smart-features-btn jt-smart-features-btn-outline"
+      >
+        <i class="fa-solid fa-arrow-left"></i>
+        Objectives & Vision
+      </a>
+
+      <a
+        href="/smart-tourism/journey"
+        class="jt-smart-features-btn jt-smart-features-btn-primary"
+      >
+        Continue to User Journey
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+<%- include('../partials/scripts') %>

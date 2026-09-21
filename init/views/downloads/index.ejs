@@ -1,0 +1,566 @@
+<%
+/*
+ * ============================================================
+ * JHARKHAND TOURISM
+ * RESOURCES & DOWNLOADS
+ * File: init/views/downloads/index.ejs
+ * ============================================================
+ */
+
+const pageTitle =
+  typeof title !== "undefined" && title
+    ? title
+    : "Resources & Downloads";
+
+
+const resources = [
+  {
+    slug: "guide",
+    title: "Jharkhand Tourism Guide",
+    description:
+      "A practical reference for discovering destinations, planning experiences and exploring Jharkhand.",
+    icon: "fa-book-open",
+    tag: "Travel Guide",
+    action: "/downloads/guide"
+  },
+  {
+    slug: "festival-calendar",
+    title: "Festival Calendar",
+    description:
+      "A convenient cultural reference for exploring festivals, traditions and seasonal experiences.",
+    icon: "fa-calendar-days",
+    tag: "Culture",
+    action: "/downloads/festival-calendar"
+  },
+  {
+    slug: "trek-checklist",
+    title: "Trek Checklist",
+    description:
+      "A simple preparation checklist for outdoor journeys, trekking and nature-focused travel.",
+    icon: "fa-person-hiking",
+    tag: "Adventure",
+    action: "/downloads/trek-checklist"
+  }
+];
+%>
+
+
+<link
+  rel="stylesheet"
+  href="/css/downloads.css?v=1"
+>
+
+
+<main
+  class="jt-downloads-page"
+  aria-labelledby="downloadsTitle"
+>
+
+
+  <!-- ==========================================================
+       HERO
+  =========================================================== -->
+
+  <section class="jt-downloads-hero">
+
+    <div class="jt-downloads-shell">
+
+      <div class="jt-downloads-hero-grid">
+
+
+        <div class="jt-downloads-hero-content">
+
+          <span class="jt-downloads-eyebrow">
+
+            <i
+              class="fa-solid fa-folder-open"
+              aria-hidden="true">
+            </i>
+
+            Resources
+          </span>
+
+
+          <h1 id="downloadsTitle">
+            Useful resources for the journey ahead.
+          </h1>
+
+
+          <p>
+            Access travel guides, cultural references and practical
+            preparation resources designed to complement your Jharkhand
+            Tourism experience.
+          </p>
+
+
+          <div class="jt-downloads-hero-actions">
+
+            <a
+              href="/places"
+              class="jt-downloads-btn primary"
+            >
+
+              <i
+                class="fa-solid fa-location-dot"
+                aria-hidden="true">
+              </i>
+
+              Explore destinations
+
+            </a>
+
+
+            <a
+              href="/planner"
+              class="jt-downloads-btn secondary"
+            >
+
+              <i
+                class="fa-solid fa-route"
+                aria-hidden="true">
+              </i>
+
+              Plan your journey
+
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <div class="jt-downloads-hero-panel">
+
+          <div class="jt-downloads-hero-panel-top">
+
+            <span>
+              RESOURCE LIBRARY
+            </span>
+
+            <i
+              class="fa-solid fa-download"
+              aria-hidden="true">
+            </i>
+
+          </div>
+
+
+          <div class="jt-downloads-hero-stack">
+
+            <div class="jt-downloads-hero-item">
+
+              <span class="icon">
+                <i class="fa-solid fa-book"></i>
+              </span>
+
+              <span>
+                Travel information
+              </span>
+
+            </div>
+
+
+            <div class="jt-downloads-hero-item">
+
+              <span class="icon">
+                <i class="fa-solid fa-drum"></i>
+              </span>
+
+              <span>
+                Cultural references
+              </span>
+
+            </div>
+
+
+            <div class="jt-downloads-hero-item">
+
+              <span class="icon">
+                <i class="fa-solid fa-mountain-sun"></i>
+              </span>
+
+              <span>
+                Outdoor preparation
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==========================================================
+       RESOURCE LIBRARY
+  =========================================================== -->
+
+  <section class="jt-downloads-section">
+
+    <div class="jt-downloads-shell">
+
+
+      <div class="jt-downloads-heading">
+
+        <span class="jt-downloads-kicker">
+          Download Centre
+        </span>
+
+
+        <h2>
+          Keep the essentials close.
+        </h2>
+
+
+        <p>
+          Choose a resource below. Each download is connected to the
+          existing server-side download functionality.
+        </p>
+
+      </div>
+
+
+      <div class="jt-downloads-grid">
+
+        <% resources.forEach((resource) => { %>
+
+          <article class="jt-download-card">
+
+
+            <div class="jt-download-card-top">
+
+              <span class="jt-download-icon">
+
+                <i
+                  class="fa-solid <%= resource.icon %>"
+                  aria-hidden="true">
+                </i>
+
+              </span>
+
+
+              <span class="jt-download-tag">
+                <%= resource.tag %>
+              </span>
+
+            </div>
+
+
+            <h3>
+              <%= resource.title %>
+            </h3>
+
+
+            <p>
+              <%= resource.description %>
+            </p>
+
+
+            <div class="jt-download-card-footer">
+
+              <span class="jt-download-type">
+
+                <i
+                  class="fa-regular fa-file-lines"
+                  aria-hidden="true">
+                </i>
+
+                Resource download
+
+              </span>
+
+
+              <a
+                href="<%= resource.action %>"
+                class="jt-download-link"
+                aria-label="Download <%= resource.title %>"
+              >
+
+                Download
+
+                <i
+                  class="fa-solid fa-arrow-down"
+                  aria-hidden="true">
+                </i>
+
+              </a>
+
+            </div>
+
+          </article>
+
+        <% }); %>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==========================================================
+       HOW TO USE
+  =========================================================== -->
+
+  <section class="jt-downloads-section soft">
+
+    <div class="jt-downloads-shell">
+
+
+      <div class="jt-downloads-heading">
+
+        <span class="jt-downloads-kicker">
+          Simple & Useful
+        </span>
+
+
+        <h2>
+          Designed to support your trip.
+        </h2>
+
+
+        <p>
+          Use the resources alongside the destination explorer and
+          Smart Tourism tools for a more organised journey.
+        </p>
+
+      </div>
+
+
+      <div class="jt-downloads-steps">
+
+
+        <article class="jt-download-step">
+
+          <span class="step-number">
+            01
+          </span>
+
+
+          <div class="step-icon">
+            <i
+              class="fa-solid fa-magnifying-glass"
+              aria-hidden="true">
+            </i>
+          </div>
+
+
+          <h3>
+            Discover
+          </h3>
+
+
+          <p>
+            Explore destinations, experiences and places to stay
+            before downloading the resources most relevant to you.
+          </p>
+
+        </article>
+
+
+        <article class="jt-download-step">
+
+          <span class="step-number">
+            02
+          </span>
+
+
+          <div class="step-icon">
+            <i
+              class="fa-solid fa-download"
+              aria-hidden="true">
+            </i>
+          </div>
+
+
+          <h3>
+            Save
+          </h3>
+
+
+          <p>
+            Download a useful reference so important planning
+            information is easier to keep available during your trip.
+          </p>
+
+        </article>
+
+
+        <article class="jt-download-step">
+
+          <span class="step-number">
+            03
+          </span>
+
+
+          <div class="step-icon">
+            <i
+              class="fa-solid fa-route"
+              aria-hidden="true">
+            </i>
+          </div>
+
+
+          <h3>
+            Travel
+          </h3>
+
+
+          <p>
+            Use the resource together with the planner, destinations,
+            maps and other tourism services on the platform.
+          </p>
+
+        </article>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==========================================================
+       SMART TOURISM CONNECTION
+  =========================================================== -->
+
+  <section class="jt-downloads-smart">
+
+    <div class="jt-downloads-shell">
+
+      <div class="jt-downloads-smart-box">
+
+
+        <div class="jt-downloads-smart-copy">
+
+          <span class="jt-downloads-smart-kicker">
+
+            <i
+              class="fa-solid fa-microchip"
+              aria-hidden="true">
+            </i>
+
+            Smart Tourism
+
+          </span>
+
+
+          <h2>
+            Resources are only one part of the journey.
+          </h2>
+
+
+          <p>
+            Combine the resource library with intelligent trip planning,
+            destination discovery, accommodation search and visitor
+            assistance.
+          </p>
+
+        </div>
+
+
+        <div class="jt-downloads-smart-actions">
+
+          <a
+            href="/smart-tourism"
+            class="jt-downloads-btn primary"
+          >
+
+            Smart Tourism
+
+            <i
+              class="fa-solid fa-arrow-right"
+              aria-hidden="true">
+            </i>
+
+          </a>
+
+
+          <a
+            href="/chatbot"
+            class="jt-downloads-btn secondary"
+          >
+
+            Ask the assistant
+
+            <i
+              class="fa-solid fa-comments"
+              aria-hidden="true">
+            </i>
+
+          </a>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==========================================================
+       FINAL CTA
+  =========================================================== -->
+
+  <section class="jt-downloads-final">
+
+    <div class="jt-downloads-shell">
+
+      <div class="jt-downloads-final-box">
+
+        <div>
+
+          <span class="jt-downloads-final-label">
+            KEEP EXPLORING
+          </span>
+
+
+          <h2>
+            Your next Jharkhand experience starts here.
+          </h2>
+
+
+          <p>
+            Explore destinations, discover culture and build a
+            journey that fits your plans.
+          </p>
+
+        </div>
+
+
+        <div class="jt-downloads-final-actions">
+
+          <a
+            href="/places"
+            class="jt-downloads-btn primary"
+          >
+            Explore destinations
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+
+
+          <a
+            href="/planner"
+            class="jt-downloads-btn secondary"
+          >
+            Plan my journey
+            <i class="fa-solid fa-route"></i>
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
